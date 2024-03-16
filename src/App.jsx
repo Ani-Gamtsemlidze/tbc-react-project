@@ -8,6 +8,7 @@ import item1 from "../src/images/products/item-1.jpg"
 import item2 from "../src/images/products/item-2.jpg"
 import item3 from "../src/images/products/item-3.jpg"
 import item4 from "../src/images/products/item-4.jpg"
+import item5 from "../src/images/products/item-5.jpg"
 
 
 function App() {
@@ -23,27 +24,27 @@ function App() {
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
       img={item1} />
-      <Products title="sunglasses" description="Experience unparalleled audio quality and freedom 
+      <Products title="Sunglasses" description="Experience unparalleled audio quality and freedom 
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
       img={item2}  />
-      <Products title="sunglasses" description="Experience unparalleled audio quality and freedom 
+      <Products title="Shoes" description="Experience unparalleled audio quality and freedom 
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
       img={item3}  />
-      <Products title="sunglasses" description="Experience unparalleled audio quality and freedom 
+      <Products title="Pepsiko" description="Experience unparalleled audio quality and freedom 
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
       img={item4}  />
-      <Products title="sunglasses" description="Experience unparalleled audio quality and freedom 
+      <Products title="Shoes" description="Experience unparalleled audio quality and freedom 
+      with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
+      these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
+      img={item5}  />
+      <Products title="Sunglasses" description="Experience unparalleled audio quality and freedom 
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
       img={item4}  />
-      <Products title="sunglasses" description="Experience unparalleled audio quality and freedom 
-      with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
-      these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
-      img={item4}  />
-      <Products title="sunglasses" description="Experience unparalleled audio quality and freedom 
+      <Products title="Sunglasses" description="Experience unparalleled audio quality and freedom 
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
       img={item4}  />

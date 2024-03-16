@@ -1,11 +1,11 @@
-function Navigation ({variant}) {
+function Navigation () {
     return (  
           <nav>
-        <ul className={`  ${variant === "footer" ? "" : "flex" } mr-8 my-3	`}>
+        <ul className= "flex mr-8 my-3"	>
           <li>
             <a
               href="#"
-              className="mr-4 text-white hover:border-b  hover:border-white 	"
+              className={'mr-4 text-white hover:border-b'}
             >
               Home
             </a>
