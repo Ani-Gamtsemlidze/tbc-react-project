@@ -1,15 +1,11 @@
+import Navigation from "./Navigation";
+
 function Footer() {
   return (
-    <footer className="flex justify-between bg-green-800">
-      <div className="flex flex-col m-8">
-        <a href="#" className="text-white text-sm">
-          წესები და პირობები
-        </a>
-        <a href="#" className="text-white text-sm mt-2">
-          კონფიდენციალურობის პოლიტიკა
-        </a>
-      </div>
-      <form action="/submit" className="m-8">
+    <footer className="flex justify-between items-center bg-gray-900 p-8">
+      <div className="flex items-center">
+      <Navigation variant="footer" />
+      <form action="/submit" className="">
         <label htmlFor="subscribe" className="text-white">
           Subscribe to our Newsletter:
         </label>
@@ -26,6 +22,19 @@ function Footer() {
           </button>
         </div>
       </form>
+
+
+      </div>
+      <div className="flex flex-col ">
+        <a href="#" className="text-white text-sm">
+          Terms and Conditions
+        </a>
+        <a href="#" className="text-white text-sm mt-2">
+          Privacy Policy
+        </a>
+      </div>
+
+
     </footer>
   );
 }
