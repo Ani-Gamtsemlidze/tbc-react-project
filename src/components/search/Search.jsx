@@ -4,7 +4,7 @@ function Search() {
   return (
     <form className="flex items-center justify-center bg-gray-950 py-4  ">
         <input
-          className="transition rounded-full cursor-pointer w-56 p-2 pl-8 bg-gray-200 text-white placeholder-gray-500 focus:w-64 focus:outline-none text-gray-950 "
+          className="transition rounded-full cursor-pointer w-56 p-2 pl-8 bg-gray-200 placeholder-gray-500 focus:w-64 focus:outline-none text-gray-950 "
           id="search"
           type="text"
           placeholder="Search"
