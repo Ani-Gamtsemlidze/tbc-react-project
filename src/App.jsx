@@ -13,12 +13,12 @@ import item4 from "../src/images/products/item-4.jpg"
 function App() {
   return (
     
-    <div className="flex min-h-screen flex-col ">
+    <div className="flex min-h-screen flex-col justify-between ">
+      <div>
       <Header />
       <Search />
-
-      <div className="flex flex-1 max-h-96 overflow-y-scroll justify-start bg-slate-500 flex-wrap">
-
+      </div>
+      <div className=" products flex flex-1 overflow-y-scroll justify-start bg-slate-500 flex-wrap px-8">
       <Products title="Headphones" description="Experience unparalleled audio quality and freedom 
       with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
       these premium headphones deliver immersive sound, exceptional comfort, and convenient wireless connectivity."
