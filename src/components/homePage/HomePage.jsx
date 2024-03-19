@@ -14,11 +14,7 @@ import item5 from "../../images/products/item-5.jpg"
 
 function HomePage() {
   return (
-<div className="flex min-h-screen flex-col justify-between ">
-<div>
-<Header />
-<Search />
-</div>
+<>
 <div className=" products flex flex-1 overflow-y-scroll justify-start bg-slate-500 flex-wrap px-8">
 <Products title="Headphones" description="Experience unparalleled audio quality and freedom 
 with the SoundWave Pro Wireless Headphones. Designed for music enthusiasts and audiophiles, 
@@ -50,8 +46,7 @@ these premium headphones deliver immersive sound, exceptional comfort, and conve
 img={item4}  />
 
 </div>
-<Footer />
-</div>  )
+</>  )
 }
 
 export default HomePage

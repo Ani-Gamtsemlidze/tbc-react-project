@@ -5,36 +5,32 @@ function Navigation () {
           <nav>
         <ul className= "flex mr-8 my-3"	>
           <li>
-            <a
-              href="#"
+          <Link to="/"
               className={'mr-4 text-white hover:border-b'}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+          <Link to="/"
               className="mr-4 text-white hover:border-b hover:border-white	"
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+          <Link to="/"
               className="mr-4 text-white hover:border-b hover:border-white"
             >
               Product
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link to="/"
               className="mr-4 text-white hover:border-b hover:border-white 	"
             >
               Blog
-            </a>
+            </Link>
           </li>
           <li>
             <Link
