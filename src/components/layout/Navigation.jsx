@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Navigation () {
     return (  
           <nav>
@@ -33,6 +35,14 @@ function Navigation () {
             >
               Blog
             </a>
+          </li>
+          <li>
+            <Link
+              to="/contact"
+              className="mr-4 text-white hover:border-b hover:border-white 	"
+            >
+              Contact
+            </Link>
           </li>
         </ul>
       </nav>
