@@ -1,10 +1,7 @@
 
 import React from 'react'
-import Header from '../layout/Header'
-import Search from '../search/Search'
+
 import Products from '../products/Products'
-import Footer from '../layout/Footer'
-  
 
 import item1 from "../../images/products/item-1.jpg"
 import item2 from "../../images/products/item-2.jpg"
