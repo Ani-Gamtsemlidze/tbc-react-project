@@ -1,47 +1,20 @@
 import { Link } from "react-router-dom";
 
 function Navigation () {
+  const navigation = [{title:"Home", href:"home"}, {title:"Profile", href:"profile"},
+   {title:"Contact", href:"contact"}, {title:"Blog", href:"blog"}]
     return (  
-          <nav>
-        <ul className= "flex mr-8 my-3"	>
-          <li>
-          <Link to="/"
-              className={'mr-4 text-white hover:border-b'}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-          <Link to="/"
-              className="mr-4 text-white hover:border-b hover:border-white	"
-            >
-              About
-            </Link>
-          </li>
-          <li>
-          <Link to="/"
-              className="mr-4 text-white hover:border-b hover:border-white"
-            >
-              Product
-            </Link>
-          </li>
-          <li>
-            <Link to="/"
-              className="mr-4 text-white hover:border-b hover:border-white 	"
-            >
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              className="mr-4 text-white hover:border-b hover:border-white 	"
-            >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
+<nav>
+  <ul className="flex mr-8 my-3">
+    {navigation.map((list) => (
+      <li key={list.href}>
+        <Link className="mr-4 text-white hover:border-b hover:border-white" 
+        to={`/${list.href}`}>{list.title}</Link>
+      </li>
+    ))}
+  </ul>
+</nav>
+
     );
 }
 
