@@ -9,7 +9,6 @@ function Profile() {
       email: "johndoe@example.com"
     }
 
-
     return (
       <section className='flex flex-1 bg-gray-100 justify-center p-4'>
         <div className='bg-gray-200 p-4 '>
