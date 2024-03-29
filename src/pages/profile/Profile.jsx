@@ -10,8 +10,8 @@ function Profile() {
     }
 
     return (
-      <section className='flex flex-1 bg-gray-100 justify-center p-4'>
-        <div className='bg-gray-200 p-4 '>
+      <section className='flex flex-1 bg-gray-200 justify-center p-4'>
+        <div className='bg-gray-100 p-4 '>
 
         <div >Name
           <p className='text-base ml-4'>{userProfile.name}</p> 
@@ -24,6 +24,7 @@ function Profile() {
         </div>
         </div>
         <div className='flex flex-col bg-cyan-600 w-96 p-4 gap-2' >
+
           <label htmlFor='password'>New Password</label>
           <input className='py-2 pl-2 bg-cyan-500 text-white outline-none' id='password' type='password' placeholder='New Password' />
           <label htmlFor='confirmPassword'>Confirm New Password</label>

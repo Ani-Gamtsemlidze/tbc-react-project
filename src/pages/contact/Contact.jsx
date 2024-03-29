@@ -10,10 +10,10 @@ import websiteIcon from "../../images/contact/website.png"
 
 function Contact() {
   return (
-    <div className='bg-gray-100 flex flex-1 p-8 justify-center'>
+    <div className='bg-gray-200 flex flex-1 p-8 justify-center'>
 
     <form action='/submit-form'>
-        <div className=' bg-gray-200 p-8  w-[550px]'>
+        <div className=' bg-gray-100 p-8  w-[550px]'>
     <h1 className='text-xl font-medium'>Send Us a Message</h1>
     <ContactForm type="input" label="Full Name" placeholder="Name" id="fullName"  />
     <ContactForm type="input" label="Email Address" placeholder="Email" id="Email"  />

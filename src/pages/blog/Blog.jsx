@@ -3,9 +3,9 @@ import blogData from '../../blogData.json';
 
 function Blog() {
   return (
-    <div className=' flex flex-1 flex-wrap p-4 justify-start bg-slate-500 '>
+    <div className=' flex flex-1 flex-wrap p-4 justify-start bg-gray-200 '>
         {blogData.map((blog) => (   
-            <div key={blog.id} className=' border-2 flex flex-col grow-0 shrink-0 basis-[22%] m-4 px-6  rounded '>
+            <div key={blog.id} className=' border-2 border-gray-900 flex flex-col grow-0 shrink-0 basis-[22%] m-4 px-6  rounded '>
                 <img className='w-96 h-40 object-cover my-4' src={blog.imageSrc} />
                 <div className='min-h-16'>
 
@@ -21,7 +21,7 @@ function Blog() {
                 <span>{blog.publishDate}</span>
                 </div>
 
-                <button className='my-8 border w-36 mx-auto p-2 hover:bg-white  transition'>View More</button>
+                <button className='my-4 border bg-slate-900 text-white w-36 mx-auto p-2'>View More</button>
             </div>
 
         ))}
