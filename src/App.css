@@ -16,12 +16,3 @@
 .products {
   max-height: 439px;
 }
-
-input::placeholder {
-  color: rgb(182, 182, 182);
-  font-size: 15px;
-}
-
-input[type="password"]::placeholder {
-  color:#fff
-}

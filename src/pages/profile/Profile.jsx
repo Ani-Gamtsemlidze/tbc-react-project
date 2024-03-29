@@ -1,38 +1,26 @@
-import React from 'react'
+  import React from 'react'
+import ProfileForm from './ProfileForm';
 
-function Profile() {
-  const userProfile = 
+  function Profile() {
+    const inputData = [
+      {type:"text", id:"username", placeholder:"Username"},
+      {type:"text", id:"surname", placeholder:"Surname"},
+      {type:"text", id:"email", placeholder:"Email"},
+      {type:"password", id:"password", placeholder:"New Password"},
+      {type:"password", id:"confirmPassword", placeholder:"Confirm New Password"},
+    ]
 
-    {
-      name: "John",
-      surname: "Doe",
-      email: "johndoe@example.com"
-    }
+      return (
+        <section className='flex flex-1 bg-gray-200 justify-center p-4'>
+          <form className='flex flex-col bg-cyan-600 w-96 p-4 gap-2' >
+            {inputData.map((input) => (
+             <ProfileForm  key={input.id} type={input.type} id={input.id} placeholder={input.placeholder} />
+            ))}
 
-    return (
-      <section className='flex flex-1 bg-gray-200 justify-center p-4'>
-        <div className='bg-gray-100 p-4 '>
+          <button className=' hover:bg-slate-300 bg-slate-200 transition px-4 py-2  mx-auto mt-8' type='submit'>Save Changes</button>
+          </form>
+        </section>
+      );
+  }
 
-        <div >Name
-          <p className='text-base ml-4'>{userProfile.name}</p> 
-        </div>
-        <div>Surname
-        <p className='text-base ml-4'>{userProfile.surname}</p>
-        </div>
-        <div>Email
-          <p className='text-base ml-4'>{userProfile.email}</p>
-        </div>
-        </div>
-        <div className='flex flex-col bg-cyan-600 w-96 p-4 gap-2' >
-
-          <label htmlFor='password'>New Password</label>
-          <input className='py-2 pl-2 bg-cyan-500 text-white outline-none' id='password' type='password' placeholder='New Password' />
-          <label htmlFor='confirmPassword'>Confirm New Password</label>
-          <input className='py-2 pl-2 bg-cyan-500 text-white outline-none'  id='confirmPassword' type='password' placeholder='Confirm New Password'  />
-          <button className=' hover:bg-slate-300 bg-slate-200 transition px-4 py-2 w-38 mx-auto mt-6 rounded' type='submit'>Save Changes</button>
-        </div>
-      </section>
-    );
-}
-
-export default Profile
+  export default Profile
