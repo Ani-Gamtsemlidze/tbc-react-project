@@ -4,12 +4,12 @@ import Footer from './Footer'
 import Header from './Header'
 import Search from '../search/Search'
 
-function RootLayout() {
+function RootLayout({onSort}) {
   return (
 <div className="flex min-h-screen flex-col justify-between ">
       <div>
           <Header />
-          <Search  />
+          <Search  onSort={onSort} />
       </div>
     <Outlet />
           <Footer />

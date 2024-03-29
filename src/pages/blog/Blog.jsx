@@ -6,7 +6,7 @@ function Blog() {
     <div className=' flex flex-1 flex-wrap p-4 justify-start bg-gray-200 '>
         {blogData.map((blog) => (   
             <div key={blog.id} className=' border-2 border-gray-900 flex flex-col grow-0 shrink-0 basis-[22%] m-4 px-6  rounded '>
-                <img className='w-96 h-40 object-cover my-4' src={blog.imageSrc} />
+                <img className='w-96 h-40 object-cover my-4' src={blog.imageSrc} alt={blog.title} />
                 <div className='min-h-16'>
 
                 <h1 className='text-lg text-left'>{blog.title}</h1>

@@ -1,16 +1,6 @@
 import searchIcon from "../../images/search.png"
-import { productsData } from "../../data/productsData";
-import { useState } from "react";
 
-function Search() {
-
-  const [itemsData, setItemsData] = useState(productsData)
-
-  const handleSort = () => {
-    const sortedItems = [...itemsData].sort((a,b) => a.price - b.price)
-       setItemsData(sortedItems)
-  }
-  console.log(itemsData)
+function Search({onSort}) {
 
   return (
     <div className="flex items-center justify-center bg-gray-100 py-4  ">
@@ -27,7 +17,7 @@ function Search() {
         </label>
     </form> 
         <button className="transition justify-center w-16 h-8 text-md rounded-full   ml-4 bg-gray-500 text-white"
-         onClick={handleSort}
+         onClick={onSort}
         >Sort</button>
     </div>
     );
