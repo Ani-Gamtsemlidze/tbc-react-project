@@ -1,40 +1,73 @@
-import React, { useState } from "react";
-import "./App.css"
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Contact from "./pages/contact/Contact";
-import HomePage from "./pages/homePage/HomePage";
-import RootLayout from "./components/layout/RootLayout";
-import Profile from "./pages/profile/Profile";
-import Blog from "./pages/blog/Blog";
-import { productsData } from "./data/productsData";
+  import React, { useCallback, useState } from "react";
+  import "./App.css"
+  import { BrowserRouter, Route, Routes } from "react-router-dom";
+  import Contact from "./pages/contact/Contact";
+  import HomePage from "./pages/homePage/HomePage";
+  import RootLayout from "./components/layout/RootLayout";
+  import Profile from "./pages/profile/Profile";
+  import Blog from "./pages/blog/Blog";
+  import { productsData } from "./data/productsData";
+
+  function App() {
+
+    const [itemsData, setItemsData] = useState(productsData)
+
+    const [isSorted, setIsSorted] = useState(false)
+    const [searchItem, setSearchItem] = useState("")
+
+    const handleSort = () => {
+      setIsSorted(!isSorted)
+
+      isSorted ? setItemsData(productsData) 
+      : setItemsData((prevData) => [...prevData].sort((a,b) => a.price - b.price))
+
+    }
 
 
+      const debounce = (func, delay) => {
+        let timerId;
+        return (...args) => {
+          clearTimeout(timerId)
+          timerId = setTimeout(() => {
+            console.log(args);
 
-function App() {
+            func(...args)}, delay )
+        }
+      }
 
-  const [itemsData, setItemsData] = useState(productsData)
-  const [isSorted, setIsSorted] = useState(false)
+      const onInput = useCallback(
+        debounce((searchQuery) => {
+          const priceSearch = parseFloat(searchQuery);
+          const filtered = productsData.filter((item) =>
+            Object.values(item).some((value) =>
+              typeof value === "string"
+                ? value.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+                : !isNaN(priceSearch) && item.price === priceSearch
+            )
+          );
+          setItemsData(filtered);
+        }, 2000),
+        []
+      );
 
-  const handleSort = () => {
-    setIsSorted(!isSorted)
+    const handleSearch = (e) => {
+      const searchQuery = e.target.value
+      setSearchItem(searchQuery)
+      onInput(searchQuery)
+    }
 
-    isSorted ? setItemsData(productsData) 
-    : setItemsData((prevData) => [...prevData].sort((a,b) => a.price - b.price))
+    return (
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RootLayout  />}>
+            <Route path="/" element={<HomePage itemsData={itemsData}  onSort={handleSort} searchItem={searchItem} onSearch={handleSearch} />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="contact" element={<Contact />} />
+        </Route>
+      </Routes>
+      </BrowserRouter>
+    );
+  }   
 
-  }
-
-  return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<RootLayout onSort={handleSort} />}>
-          <Route path="/" element={<HomePage itemsData={itemsData} />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="contact" element={<Contact />} />
-      </Route>
-    </Routes>
-    </BrowserRouter>
-  );
-}   
-
-export default App;
+  export default App;

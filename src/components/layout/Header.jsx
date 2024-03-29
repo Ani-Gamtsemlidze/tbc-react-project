@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/X-Logo.png";
 import Navigation from "./Navigation";
+import Search from "../search/Search";
 function Header() {
   return (
+    <>
+    
     <header className="flex  justify-between items-center  bg-gray-900">
       <Link to="/">
       <img
@@ -13,6 +16,7 @@ function Header() {
       </Link>
     <Navigation />
      </header>
+    </>
   );
 }
 
