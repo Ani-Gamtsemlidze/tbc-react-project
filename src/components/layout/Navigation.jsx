@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
 function Navigation () {
-  const navigation = [{title:"Home", href:"home"}, {title:"Profile", href:"profile"},
+  const navigation = [{title:"Home", href:""}, {title:"Profile", href:"profile"},
    {title:"Contact", href:"contact"}, {title:"Blog", href:"blog"}]
+   
     return (  
 <nav>
   <ul className="flex mr-8 my-3">

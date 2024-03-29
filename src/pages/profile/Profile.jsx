@@ -2,6 +2,7 @@
 import ProfileForm from './ProfileForm';
 
   function Profile() {
+    
     const inputData = [
       {type:"text", id:"username", placeholder:"Username"},
       {type:"text", id:"surname", placeholder:"Surname"},

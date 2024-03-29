@@ -7,13 +7,13 @@ import Search from '../search/Search'
 function RootLayout() {
   return (
 <div className="flex min-h-screen flex-col justify-between ">
-<div>
-    <Header />
-<Search />
-</div>
-<Outlet />
-<Footer />
-</div>
+      <div>
+          <Header />
+          <Search  />
+      </div>
+    <Outlet />
+          <Footer />
+  </div>
   )
 }
 
