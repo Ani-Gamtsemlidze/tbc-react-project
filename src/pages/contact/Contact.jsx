@@ -27,10 +27,10 @@ function Contact() {
     </form>
     <div className="bg-cyan-600 p-8">
       <h1 className='text-xl font-medium'>Contact Us</h1>
-        <CompanyContact image={locationIcon} info="Suite 293 95409 Grimes Crossing"/>
-        <CompanyContact image={phoneIcon} info="638 891 206 "/>
-        <CompanyContact image={websiteIcon} info="www.web-site. com"/>
-        <CompanyContact image={emailIcon} info="pas-uwufuba91@mail.com"/>
+        <CompanyContact image={locationIcon} companyInfo="Suite 293 95409 Grimes Crossing"/>
+        <CompanyContact image={phoneIcon} companyInfo="638 891 206 "/>
+        <CompanyContact image={websiteIcon} companyInfo="www.web-site. com"/>
+        <CompanyContact image={emailIcon} companyInfo="pas-uwufuba91@mail.com"/>
     </div>
     </div>
     
