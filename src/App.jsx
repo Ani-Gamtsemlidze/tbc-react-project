@@ -1,6 +1,6 @@
   import React, { useCallback, useState } from "react";
-  import "./App.css"
   import { BrowserRouter, Route, Routes } from "react-router-dom";
+  import "./App.css"
   import Contact from "./pages/contact/Contact";
   import HomePage from "./pages/homePage/HomePage";
   import RootLayout from "./components/layout/RootLayout";
@@ -20,8 +20,12 @@
 
     const handleSort = () => {
       setIsSorted(!isSorted)
-      isSorted ? setItemsData(isFiltered ? filteredItems : productsData) 
-      : setItemsData((prevData) => [...prevData].sort((a,b) => a.price - b.price))
+       if(isSorted) {
+        setItemsData(isFiltered ? filteredItems : productsData) 
+       } else {
+        const sortedItems = [...itemsData].sort((a,b) => a.price - b.price)
+        setItemsData(sortedItems)
+       }
     }
 
       const debounce = (func, delay) => {
@@ -29,14 +33,13 @@
         return (...args) => {
           clearTimeout(timerId)
           timerId = setTimeout(() => {
-
             func(...args)}, delay )
         }
       }
 
-      const onInput = useCallback(
+      const debounceSearch = useCallback(
         debounce((searchQuery) => {
-          const priceSearch = parseFloat(searchQuery);
+          const priceSearch = Number(searchQuery);
           
           const filtered = productsData.filter((item) =>
             Object.values(item).some((value) =>
@@ -45,7 +48,8 @@
                 : !isNaN(priceSearch) && item.price === priceSearch
             )
           );
-          setFilteredItems(filtered)
+
+          setFilteredItems(filtered)  
           setIsFiltered(true)
           setItemsData(filtered);
         }, 500),
@@ -53,9 +57,9 @@
       );
 
     const handleSearch = (e) => {
-      const searchQuery = e.target.value
-      setSearchItem(searchQuery)
-      onInput(searchQuery)
+      const searchQuery = e.target.value;
+      setSearchItem(searchQuery);
+      debounceSearch(searchQuery);
     }
 
     return (
