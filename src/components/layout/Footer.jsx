@@ -2,7 +2,7 @@ import Navigation from "./Navigation";
 
 function Footer() {
   return (
-    <footer className="flex  justify-between items-center bg-gray-900 p-8">
+    <footer className="flex  justify-between items-center bg-gray-900 p-4">
       <div className="">
       <Navigation />
       <form action="/submit" className="">
