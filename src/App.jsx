@@ -11,25 +11,24 @@
   function App() {
 
     const [itemsData, setItemsData] = useState(productsData)
+    const [filteredItems, setFilteredItems] = useState([])
 
+    const [isFiltered, setIsFiltered] = useState(false)
     const [isSorted, setIsSorted] = useState(false)
+    
     const [searchItem, setSearchItem] = useState("")
 
     const handleSort = () => {
       setIsSorted(!isSorted)
-
-      isSorted ? setItemsData(productsData) 
+      isSorted ? setItemsData(isFiltered ? filteredItems : productsData) 
       : setItemsData((prevData) => [...prevData].sort((a,b) => a.price - b.price))
-
     }
 
-
       const debounce = (func, delay) => {
-        let timerId;
+        let timerId;  
         return (...args) => {
           clearTimeout(timerId)
           timerId = setTimeout(() => {
-            console.log(args);
 
             func(...args)}, delay )
         }
@@ -38,6 +37,7 @@
       const onInput = useCallback(
         debounce((searchQuery) => {
           const priceSearch = parseFloat(searchQuery);
+          
           const filtered = productsData.filter((item) =>
             Object.values(item).some((value) =>
               typeof value === "string"
@@ -45,8 +45,10 @@
                 : !isNaN(priceSearch) && item.price === priceSearch
             )
           );
+          setFilteredItems(filtered)
+          setIsFiltered(true)
           setItemsData(filtered);
-        }, 2000),
+        }, 500),
         []
       );
 
