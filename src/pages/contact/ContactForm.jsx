@@ -13,7 +13,7 @@ function ContactForm({type,label,id,placeholder}) {
         placeholder={placeholder}
         required      /> 
         }
-        {type === "textarea" && <textarea id={id} className='bg-transparent border border-gray-400 outline-none text-black mt-2'  name='message'></textarea>}
+        {type === "textarea" && <textarea id={id}  className='bg-transparent border border-gray-400 outline-none text-black mt-2'  name='message'></textarea>}
 
 
  </div>

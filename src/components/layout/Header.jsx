@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/X-Logo.png";
 import Navigation from "./Navigation";
-import Search from "../search/Search";
 function Header() {
   return (
     <>
