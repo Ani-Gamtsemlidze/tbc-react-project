@@ -8,9 +8,9 @@ export default function Contact() {
         <form action='/submit-form'>
             <div className=' bg-gray-100 p-8  w-[550px]'>
         <h1 className='text-xl font-medium'>Send Us a Message</h1>
-        <ContactForm type="input" label="Full Name" placeholder="Name" id="fullName"  />
-        <ContactForm type="input" label="Email Address" placeholder="Email" id="Email"  />
-        <ContactForm type="input"  label="Subject" placeholder="Subject" id="subject"  />
+        <ContactForm type="text" label="Full Name" placeholder="Name" id="fullName"  />
+        <ContactForm type="text" label="Email Address" placeholder="Email" id="Email"  />
+        <ContactForm type="text"  label="Subject" placeholder="Subject" id="subject"  />
         <ContactForm type="textarea" label="Message" id="textarea"  />
     
         <button className="bg-gray-800 hover:bg-gray-900 transition text-white px-4 py-2 rounded w-36 mt-4 ml-4" type="submit">
