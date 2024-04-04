@@ -61,11 +61,18 @@ export default function Home() {
   return (
     <>
     <Search onSort={handleSort} searchItem={searchItem} onSearch={handleSearch}  />
-    <div className=" max-h-[408px] flex flex-1 overflow-y-scroll justify-start bg-gray-200 flex-wrap p-8">
-    {itemsData.map((product) => (
-      <Products key={product.id} title={product.title} description={product.description} price={product.price} img={product.img} />
+
+      <div className="flex flex-1 flex-col bg-gray-200 ">
+        <div className="mt-4">
+           <h1 className="text-center text-2xl">PRODUCTS</h1>
+        </div>
+      <div className="px-8 max-h-[360px] flex  overflow-y-scroll justify-start  flex-wrap">
+
+        {itemsData.map((product) => (
+            <Products key={product.id} title={product.title} description={product.description} price={product.price} img={product.img} />
     ))}
-  </div>
+      </div>
+    </div>
     </>
 
   );

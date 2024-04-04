@@ -16,6 +16,10 @@
   }
 }
 
+/* .parent{
+  min-height: calc(100vh - 224px);
+} */
+
 /* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
