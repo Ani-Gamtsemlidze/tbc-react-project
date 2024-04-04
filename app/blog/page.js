@@ -2,35 +2,45 @@ import blogData from "../../data/blogData.json"
 import Image from "next/image";
 export default function Blog() {
     return (
-        <div className=' flex flex-1 flex-wrap p-4 justify-start bg-gray-200 '>
+        <div className="flex flex-col bg-gray-200 ">
+            <div className="mt-4">
+
+        <h1 className="text-center text-2xl">BLOGS</h1>
+            </div>
+        
+        <div className=' flex flex-wrap justify-start  '>
+
         {blogData.map((blog) => (   
-            <div key={blog.id} className=' border-2 border-gray-900 flex flex-col grow-0 shrink-0 basis-[22%] m-4 px-6  rounded '>
+            <div key={blog.id} className='  flex flex-col grow-0 shrink-0 basis-[22%] ml-8 my-8 '>
                    
-                <Image   className='my-4'
-                    src="/images/products/item-1.jpg"
+                <Image className='w-full h-36 object-cover rounded'
+                    src={blog.imageSrc}
                     alt={blog.title}
                     width={384}
                     height={160}
-                    style={{ objectFit: "cover" }} />
-                <div className='min-h-16'>
+                     />
+                    
+                <div className='my-4'>
 
-                <h1 className='text-lg text-left'>{blog.title}</h1>
+<span className="text-gray-500">{blog.publishDate}</span>
+</div>
+                <div className=''>
+
+                <h1 className='text-lg text-left font-bold'>{blog.title}</h1>
                 </div>
-                <div className='min-h-32 mt-2'>
+                <div className=' my-4'>
 
-                <p className='mb-4'>{blog.description}</p>
+                <p className=''>{blog.description}</p>
                 </div>
 
-                <div className='min-h-16'>
 
-                <span>{blog.publishDate}</span>
-                </div>
-
-                <button className='my-4 border bg-slate-900 text-white w-36 mx-auto p-2'>View More</button>
-            </div>
+                <button className=' mr-4 w-24 bg-transparent'>READ MORE</button>
+            </div>  
 
         ))}
     </div>
+
+        </div>
     );
 }
 
