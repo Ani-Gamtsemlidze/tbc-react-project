@@ -39,8 +39,13 @@
   border-radius: 5px; 
 }
 
+.active {
+  border-bottom: 1px solid white;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
