@@ -1,79 +1,104 @@
-"use client"
+"use client";
 import Products from "@/components/products/Products";
 import Search from "@/components/search/Search";
-import { productsData } from "@/data/productsData";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 export default function Home() {
-  const [itemsData, setItemsData] = useState(productsData)
-  const [filteredItems, setFilteredItems] = useState([])
 
-  const [isFiltered, setIsFiltered] = useState(false)
-  const [isSorted, setIsSorted] = useState(false)
-  
-  const [searchItem, setSearchItem] = useState("")
+ const [productsList, setProductsList] = useState([])
+ const [initialProductsList, setInitialProductsList] = useState([])
+//  const [filteredItems, setFilteredItems] = useState([]);
+
+  // const [isFiltered, setIsFiltered] = useState(false);
+  const [isSorted, setIsSorted] = useState(false);
+
+  // const [searchItem, setSearchItem] = useState("");
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const response = await fetch("https://dummyjson.com/products")
+      const data = await response.json()
+      
+      setProductsList(data.products)
+      setInitialProductsList(data.products)
+    }
+    fetchProducts()
+
+  },[])
 
   const handleSort = () => {
-    setIsSorted(!isSorted)
-     if(isSorted) {
-      setItemsData(isFiltered ? filteredItems : productsData) 
-     } else {
-      const sortedItems = [...itemsData].sort((a,b) => a.price - b.price)
-      setItemsData(sortedItems)
-     }
-  }
-
-    const debounce = (func, delay) => {
-      let timerId;  
-      return (...args) => {
-        clearTimeout(timerId)
-        timerId = setTimeout(() => {
-          func(...args)}, delay )
-      }
+    setIsSorted(!isSorted);
+    if (isSorted) {
+      setProductsList(initialProductsList);
+    } else {
+      const sortedItems = [...productsList].sort((a, b) => a.price - b.price);
+      setProductsList(sortedItems);
     }
+  };
 
-    const debounceSearch = useCallback(
-      debounce((searchQuery) => {
-        const priceSearch = Number(searchQuery);
-        
-        const filtered = productsData.filter((item) =>
-          Object.values(item).some((value) =>
-            typeof value === "string"
-              ? value.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-              : !isNaN(priceSearch) && item.price === priceSearch
-          )
-        );
+  // const debounce = (func, delay) => {
+  //   let timerId;
+  //   return (...args) => {
+  //     clearTimeout(timerId);
+  //     timerId = setTimeout(() => {
+  //       func(...args);
+  //     }, delay);
+  //   };
+  // };
 
-        setFilteredItems(filtered)  
-        setIsFiltered(true)
-        setItemsData(filtered);
-      }, 500),
-      []
-    );
+  // const debounceSearch = useCallback(
+  //   debounce((searchQuery) => {
+  //     const priceSearch = Number(searchQuery);
 
-  const handleSearch = (e) => {
-    const searchQuery = e.target.value;
-    setSearchItem(searchQuery);
-    debounceSearch(searchQuery);
-  }
+  //     const filtered = initialProductsList.filter((item) =>
+  //       Object.values(item).some((value) =>
+  //         typeof value === "string"
+  //           ? value
+  //               .toLocaleLowerCase()
+  //               .includes(searchQuery.toLocaleLowerCase())
+  //           : !isNaN(priceSearch) && item.price === priceSearch
+  //       )
+  //     );
 
+  //     setFilteredItems(filtered);
+  //     setIsFiltered(true);
+  //     setInitialProductsList(filtered);
+  //   }, 500),
+  //   []
+  // );
 
+  // const handleSearch = (e) => {
+  //   const searchQuery = e.target.value;
+  //   setSearchItem(searchQuery);
+  //   debounceSearch(searchQuery);
+  // };
+
+  
   return (
     <>
-    <Search onSort={handleSort} searchItem={searchItem} onSearch={handleSearch}  />
+      <Search
+        onSort={handleSort}
+        // searchItem={searchItem}
+        // onSearch={handleSearch}
+      />
 
       <div className="flex flex-1 flex-col bg-gray-200 ">
         <div className="mt-4">
-           <h1 className="text-center text-2xl">PRODUCTS</h1>
+          <h1 className="text-center text-2xl">PRODUCTS</h1>
         </div>
-      <div className="px-8 max-h-[360px] flex  overflow-y-scroll justify-start  flex-wrap">
-
-        {itemsData.map((product) => (
-            <Products key={product.id} title={product.title} description={product.description} price={product.price} img={product.img} />
-    ))}
+        <div className="px-8 max-h-[360px] flex  overflow-y-scroll justify-start  flex-wrap">
+          {productsList.map((product) => (
+            <Products
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              img={product.images[0]}
+            />
+          ))}
+        </div>
       </div>
-    </div>
     </>
-
   );
 }
