@@ -11,6 +11,7 @@ export default function Home() {
 
   // const [isFiltered, setIsFiltered] = useState(false);
   const [isSorted, setIsSorted] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   // const [searchItem, setSearchItem] = useState("");
 
