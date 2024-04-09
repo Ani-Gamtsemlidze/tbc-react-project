@@ -1,105 +1,21 @@
-"use client";
-import Products from "@/components/products/Products";
-import Search from "@/components/search/Search";
-import { useCallback, useState, useEffect } from "react";
+import HomePage from "@/components/home/HomePage";
 
-export default function Home() {
+async function getProductsData() {
+  const res = await fetch("https://dummyjson.com/products");
 
- const [productsList, setProductsList] = useState([])
- const [initialProductsList, setInitialProductsList] = useState([])
-//  const [filteredItems, setFilteredItems] = useState([]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-  // const [isFiltered, setIsFiltered] = useState(false);
-  const [isSorted, setIsSorted] = useState(false);
-  const [loading, setLoading] = useState(true)
+  return res.json();
+}
 
-  // const [searchItem, setSearchItem] = useState("");
+export default async function Home() {
+  const productsData = await getProductsData();
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const response = await fetch("https://dummyjson.com/products")
-      const data = await response.json()
-      
-      setProductsList(data.products)
-      setInitialProductsList(data.products)
-    }
-    fetchProducts()
-
-  },[])
-
-  const handleSort = () => {
-    setIsSorted(!isSorted);
-    if (isSorted) {
-      setProductsList(initialProductsList);
-    } else {
-      const sortedItems = [...productsList].sort((a, b) => a.price - b.price);
-      setProductsList(sortedItems);
-    }
-  };
-
-  // const debounce = (func, delay) => {
-  //   let timerId;
-  //   return (...args) => {
-  //     clearTimeout(timerId);
-  //     timerId = setTimeout(() => {
-  //       func(...args);
-  //     }, delay);
-  //   };
-  // };
-
-  // const debounceSearch = useCallback(
-  //   debounce((searchQuery) => {
-  //     const priceSearch = Number(searchQuery);
-
-  //     const filtered = initialProductsList.filter((item) =>
-  //       Object.values(item).some((value) =>
-  //         typeof value === "string"
-  //           ? value
-  //               .toLocaleLowerCase()
-  //               .includes(searchQuery.toLocaleLowerCase())
-  //           : !isNaN(priceSearch) && item.price === priceSearch
-  //       )
-  //     );
-
-  //     setFilteredItems(filtered);
-  //     setIsFiltered(true);
-  //     setInitialProductsList(filtered);
-  //   }, 500),
-  //   []
-  // );
-
-  // const handleSearch = (e) => {
-  //   const searchQuery = e.target.value;
-  //   setSearchItem(searchQuery);
-  //   debounceSearch(searchQuery);
-  // };
-
-  
   return (
     <>
-      <Search
-        onSort={handleSort}
-        // searchItem={searchItem}
-        // onSearch={handleSearch}
-      />
-
-      <div className="flex flex-1 flex-col bg-gray-200 ">
-        <div className="mt-4">
-          <h1 className="text-center text-2xl">PRODUCTS</h1>
-        </div>
-        <div className="px-8 max-h-[360px] flex  overflow-y-scroll justify-start  flex-wrap">
-          {productsList.map((product) => (
-            <Products
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-              img={product.images[0]}
-            />
-          ))}
-        </div>
-      </div>
+      <HomePage productsData={productsData} />
     </>
   );
 }
