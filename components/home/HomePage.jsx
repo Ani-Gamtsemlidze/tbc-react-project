@@ -16,14 +16,20 @@ export default function HomePage({ productsData }) {
 
   const handleSort = () => {
     setIsSorted(!isSorted);
-
+  
     if(isSorted) {
-      setItemsData( [...products])
+      setItemsData([...products]);
     } else {
-      const sortedItems = [...itemsData].sort((a, b) => a.price - b.price)
-      setItemsData( isFiltered ? filteredItems :  sortedItems)
+      let sortedItems;
+      if (isFiltered) {
+        sortedItems = [...filteredItems].sort((a, b) => a.price - b.price);
+      } else {
+        sortedItems = [...itemsData].sort((a, b) => a.price - b.price);
+      }
+      setItemsData(sortedItems);
     }
   };
+  
 
   const debounce = (func, delay) => {
     let timerId;
