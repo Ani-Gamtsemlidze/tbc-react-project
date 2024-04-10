@@ -6,7 +6,6 @@ import Products from "../products/Products";
 // import { useCallback, useState } from "react";
 
 export default function HomePage({productsData}) {
-    console.log(productsData)
      
     const {products } = productsData
   //   const [itemsData, setItemsData] = useState(productsData)
