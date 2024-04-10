@@ -1,79 +1,28 @@
-"use client"
-import Products from "@/components/products/Products";
-import Search from "@/components/search/Search";
-import { productsData } from "@/data/productsData";
-import { useCallback, useState } from "react";
+import HomePage from "@/components/home/HomePage";
+import { Suspense } from "react";
+import Loading from "./loading";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import Error from "./error";
 
-export default function Home() {
-  const [itemsData, setItemsData] = useState(productsData)
-  const [filteredItems, setFilteredItems] = useState([])
+async function getProductsData() {
+  const res = await fetch("https://dummyjson.com/products");
 
-  const [isFiltered, setIsFiltered] = useState(false)
-  const [isSorted, setIsSorted] = useState(false)
-  
-  const [searchItem, setSearchItem] = useState("")
-
-  const handleSort = () => {
-    setIsSorted(!isSorted)
-     if(isSorted) {
-      setItemsData(isFiltered ? filteredItems : productsData) 
-     } else {
-      const sortedItems = [...itemsData].sort((a,b) => a.price - b.price)
-      setItemsData(sortedItems)
-     }
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
   }
 
-    const debounce = (func, delay) => {
-      let timerId;  
-      return (...args) => {
-        clearTimeout(timerId)
-        timerId = setTimeout(() => {
-          func(...args)}, delay )
-      }
-    }
+  return res.json();
+}
 
-    const debounceSearch = useCallback(
-      debounce((searchQuery) => {
-        const priceSearch = Number(searchQuery);
-        
-        const filtered = productsData.filter((item) =>
-          Object.values(item).some((value) =>
-            typeof value === "string"
-              ? value.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-              : !isNaN(priceSearch) && item.price === priceSearch
-          )
-        );
-
-        setFilteredItems(filtered)  
-        setIsFiltered(true)
-        setItemsData(filtered);
-      }, 500),
-      []
-    );
-
-  const handleSearch = (e) => {
-    const searchQuery = e.target.value;
-    setSearchItem(searchQuery);
-    debounceSearch(searchQuery);
-  }
-
+export default async function Home() {
+  const productsData = await getProductsData();
 
   return (
-    <>
-    <Search onSort={handleSort} searchItem={searchItem} onSearch={handleSearch}  />
+      <ErrorBoundary fallback={<Error />}>
+    <Suspense fallback={<Loading />}>
 
-      <div className="flex flex-1 flex-col bg-gray-200 ">
-        <div className="mt-4">
-           <h1 className="text-center text-2xl">PRODUCTS</h1>
-        </div>
-      <div className="px-8 max-h-[360px] flex  overflow-y-scroll justify-start  flex-wrap">
-
-        {itemsData.map((product) => (
-            <Products key={product.id} title={product.title} description={product.description} price={product.price} img={product.img} />
-    ))}
-      </div>
-    </div>
-    </>
-
+      <HomePage productsData={productsData} />
+     </Suspense>
+      </ErrorBoundary>
   );
 }

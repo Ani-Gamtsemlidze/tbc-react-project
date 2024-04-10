@@ -1,46 +1,15 @@
-import blogData from "../../data/blogData.json"
-import Image from "next/image";
-export default function Blog() {
-    return (
-        <div className="flex flex-col bg-gray-200 ">
-            <div className="mt-4">
+import BlogPage from "@/components/blog/BlogPage";
+async function blogsData() {
+  const res = await fetch("https://dummyjson.com/recipes");
 
-        <h1 className="text-center text-2xl">BLOGS</h1>
-            </div>
-        
-        <div className=' flex flex-wrap justify-start  '>
-
-        {blogData.map((blog) => (   
-            <div key={blog.id} className='  flex flex-col grow-0 shrink-0 basis-[22%] ml-8 my-8 '>
-                   
-                <Image className='w-full h-36 object-cover rounded'
-                    src={blog.imageSrc}
-                    alt={blog.title}
-                    width={384}
-                    height={160}
-                     />
-                    
-                <div className='my-4'>
-
-<span className="text-gray-500">{blog.publishDate}</span>
-</div>
-                <div className=''>
-
-                <h1 className='text-lg text-left font-bold'>{blog.title}</h1>
-                </div>
-                <div className=' my-4'>
-
-                <p className=''>{blog.description}</p>
-                </div>
-
-
-                <button className=' mr-4 w-24 bg-transparent'>READ MORE</button>
-            </div>  
-
-        ))}
-    </div>
-
-        </div>
-    );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
 }
 
+export default async function Blog() {
+  const blogs = await blogsData();
+
+  return <BlogPage data={blogs} />;
+}
