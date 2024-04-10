@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function BlogPage({ data }) {
-  const { blogs } = data;
-  console.log(data)
+  const { recipes } = data;
+  const router = useRouter();
 
   return (
     <div className="flex flex-col bg-gray-200 ">
@@ -11,31 +13,47 @@ export default function BlogPage({ data }) {
       </div>
 
       <div className="flex flex-wrap justify-start">
-        {blogs &&
-          blogs.map((blog) => (
+        {recipes &&
+          recipes.map((recipe) => (
             <div
-              key={blog.id}
+              key={recipe.id}
               className="flex flex-col flex-grow-0 flex-shrink-0 w-[22%] ml-8 my-8"
             >
-              {/* <Image
-                className="w-full h-36 object-cover rounded"
-                src={{ href: blog.imageSrc, width: 384 }}
-                alt={blog.title}
+              <Image
+                src={recipe.image}
+                alt={recipe.name}
                 width={384}
                 height={160}
-              /> */}
+                className="w-full h-36 object-cover rounded"
+              />
 
               <div className="my-4">
-                {/* <span className="text-gray-500">{blog.publishDate}</span> */}
+                <p className="text-gray-500">
+                  {recipe.cookTimeMinutes}
+                  <span> Minutes</span>
+                </p>
               </div>
               <div className="">
-                <h1 className="text-lg text-left font-bold">{blog.name}</h1>
+                <h1 className="text-lg text-left font-bold">{recipe.name}</h1>
+              </div>
+              <div>
+                <p>{recipe.instructions[0]}</p>
               </div>
               <div className="my-4">
-                <p className="">{blog.cuisine}</p>
+                {recipe.mealType.map((meal, index) => (
+                  <span key={index}>
+                    {meal}
+                    {index !== recipe.mealType.length - 1 && ", "}
+                  </span>
+                ))}
               </div>
 
-              <button className="mr-4 w-24 bg-transparent">READ MORE</button>
+              <button
+                onClick={() => router.push(`/blog/${recipe.id}`)}
+                className="bg-slate-300 hover:bg-slate-400 rounded px-2 py-1 flex  w-28 flex-start cursor-pointer transition"
+              >
+                READ MORE
+              </button>
             </div>
           ))}
       </div>
