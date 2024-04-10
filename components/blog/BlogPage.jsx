@@ -1,11 +1,10 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function BlogPage({ data }) {
   const { recipes } = data;
-  const router = useRouter()
-  console.log(data)
+  const router = useRouter();
 
   return (
     <div className="flex flex-col bg-gray-200 ">
@@ -20,7 +19,7 @@ export default function BlogPage({ data }) {
               key={recipe.id}
               className="flex flex-col flex-grow-0 flex-shrink-0 w-[22%] ml-8 my-8"
             >
-          <Image
+              <Image
                 src={recipe.image}
                 alt={recipe.name}
                 width={384}
@@ -29,16 +28,32 @@ export default function BlogPage({ data }) {
               />
 
               <div className="my-4">
-                {/* <span className="text-gray-500">{blog.publishDate}</span> */}
+                <p className="text-gray-500">
+                  {recipe.cookTimeMinutes}
+                  <span> Minutes</span>
+                </p>
               </div>
               <div className="">
                 <h1 className="text-lg text-left font-bold">{recipe.name}</h1>
               </div>
+              <div>
+                <p>{recipe.instructions[0]}</p>
+              </div>
               <div className="my-4">
-                <p className="">{recipe.cuisine}</p>
+                {recipe.mealType.map((meal, index) => (
+                  <span key={index}>
+                    {meal}
+                    {index !== recipe.mealType.length - 1 && ", "}
+                  </span>
+                ))}
               </div>
 
-              <button onClick={() => router.push(`/blog/${recipe.id}`)} className="mr-4 w-24 bg-transparent">READ MORE</button>
+              <button
+                onClick={() => router.push(`/blog/${recipe.id}`)}
+                className="bg-slate-300 hover:bg-slate-400 rounded px-2 py-1 flex  w-28 flex-start cursor-pointer transition"
+              >
+                READ MORE
+              </button>
             </div>
           ))}
       </div>
