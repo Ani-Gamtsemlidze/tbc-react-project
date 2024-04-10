@@ -12,5 +12,8 @@ async function getBlogsData() {
 export default async function Blog() {
   const blogs = await getBlogsData();
 
-  return <BlogPage data={blogs} />;
+  return (
+<BlogPage data={blogs} />
+
+  ) 
 }
