@@ -1,7 +1,7 @@
 import InnerBlog from "@/components/blog/InnerBlog";
 import Image from "next/image";
 async function blogsInnerData({ params }) {
-  const res = await fetch(`https://dummyjson.com/recipes/${params.recipeId}`);
+  const res = await fetch(`https://dummyjson.com/recipes/${params.blogId}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
