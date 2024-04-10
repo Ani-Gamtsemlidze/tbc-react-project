@@ -16,7 +16,7 @@ export default function InnerBlog({ blogsData }) {
             <h1 className="font-bold">{blogsData.name}</h1>
             <div className="flex flex-col">
               <span className="font-bold">Ingredients: </span>
-              <div className="flex">
+              <div className="flex flex-wrap">
                 {blogsData.ingredients.map((ingredient, index) => (
                   <p key={index}>
                     {ingredient}
