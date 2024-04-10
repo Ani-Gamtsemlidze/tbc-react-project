@@ -41,7 +41,7 @@ export default function InnerBlog({ blogsData }) {
           </div>
         </div>
       ) : (
-        <p>It's Empty Data</p>
+        <p>It&apos;s Empty Data</p>
       )}
     </>
   );
