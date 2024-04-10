@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation"
 export default function Navigation() {
   const pathname = usePathname()
   console.log(pathname)
-    const navigation = [{title:"Home", href:"/"}, {title:"Profile", href:"profile"},
-    {title:"Contact", href:"contact"}, {title:"Blog", href:"blog"}]
+    const navigation = [{title:"Home", href:"/"}, {title:"Profile", href:"/profile"},
+    {title:"Contact", href:"/contact"}, {title:"Blog", href:"/blog"}]
     
      return (  
  <nav>

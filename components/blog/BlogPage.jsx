@@ -1,7 +1,10 @@
+"use client"
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function BlogPage({ data }) {
-  const { blogs } = data;
+  const { recipes } = data;
+  const router = useRouter()
   console.log(data)
 
   return (
@@ -11,31 +14,31 @@ export default function BlogPage({ data }) {
       </div>
 
       <div className="flex flex-wrap justify-start">
-        {blogs &&
-          blogs.map((blog) => (
+        {recipes &&
+          recipes.map((recipe) => (
             <div
-              key={blog.id}
+              key={recipe.id}
               className="flex flex-col flex-grow-0 flex-shrink-0 w-[22%] ml-8 my-8"
             >
-              {/* <Image
-                className="w-full h-36 object-cover rounded"
-                src={{ href: blog.imageSrc, width: 384 }}
-                alt={blog.title}
+          <Image
+                src={recipe.image}
+                alt={recipe.name}
                 width={384}
                 height={160}
-              /> */}
+                className="w-full h-36 object-cover rounded"
+              />
 
               <div className="my-4">
                 {/* <span className="text-gray-500">{blog.publishDate}</span> */}
               </div>
               <div className="">
-                <h1 className="text-lg text-left font-bold">{blog.name}</h1>
+                <h1 className="text-lg text-left font-bold">{recipe.name}</h1>
               </div>
               <div className="my-4">
-                <p className="">{blog.cuisine}</p>
+                <p className="">{recipe.cuisine}</p>
               </div>
 
-              <button className="mr-4 w-24 bg-transparent">READ MORE</button>
+              <button onClick={() => router.push(`/blog/${recipe.id}`)} className="mr-4 w-24 bg-transparent">READ MORE</button>
             </div>
           ))}
       </div>

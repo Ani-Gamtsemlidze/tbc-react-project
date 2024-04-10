@@ -1,5 +1,6 @@
 import BlogPage from "@/components/blog/BlogPage";
-async function blogsData() {
+
+async function getBlogsData() {
   const res = await fetch("https://dummyjson.com/recipes");
 
   if (!res.ok) {
@@ -9,7 +10,7 @@ async function blogsData() {
 }
 
 export default async function Blog() {
-  const blogs = await blogsData();
+  const blogs = await getBlogsData();
 
   return <BlogPage data={blogs} />;
 }
