@@ -1,8 +1,7 @@
 import HomePage from "@/components/home/HomePage";
-import { Suspense } from "react";
-import Loading from "./loading";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import Error from "./error";
+import Error from "./(dashboard)/error";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 async function getProductsData() {
   const res = await fetch("https://dummyjson.com/products");
@@ -18,11 +17,10 @@ export default async function Home() {
   const productsData = await getProductsData();
 
   return (
-      <ErrorBoundary fallback={<Error />}>
-    <Suspense fallback={<Loading />}>
-
+    <>
+      <Header />
       <HomePage productsData={productsData} />
-     </Suspense>
-      </ErrorBoundary>
+      <Footer />
+    </>
   );
 }
