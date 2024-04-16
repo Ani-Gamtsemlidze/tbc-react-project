@@ -74,5 +74,6 @@ export default function LoginForm({ handleLogin }) {
         </form>
       </div>
     </div>
+
   );
 }

@@ -1,8 +1,7 @@
 import Error from "./error";
 
 import HomePage from "@/components/home/HomePage";
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
+
 
 async function getProductsData() {
   const res = await fetch("https://dummyjson.com/products");
