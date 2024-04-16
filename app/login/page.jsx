@@ -1,32 +1,21 @@
 import { cookies } from "next/headers";
 import { AUTH_COOKIE_TOKEN } from "@/constants";
 import { redirect } from "next/navigation";
+import { login } from "../actions";
+import LoginForm from "@/components/loginForm/LoginForm";
 export default function Login() {
   const cookieStore = cookies();
 
   const cookie = cookieStore.get(AUTH_COOKIE_TOKEN);
 
-  if(cookie) {
-    return redirect("/")
+  if (cookie) {
+    return redirect("/");
   }
 
-//   const handleLogin = () => {
+  const handleLogin = async (username, password) => {
+    "use server"
+    await login(username, password);
+  };
 
-//   }
-
-  return (
-    <form>
-      <label htmlFor="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="email" />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="password"
-      />
-
-      <button>Login</button>
-    </form>
-  );
+  return <LoginForm handleLogin={handleLogin} />;
 }
