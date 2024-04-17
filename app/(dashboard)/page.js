@@ -1,4 +1,4 @@
-import Error from "./error";
+import Error from "../error";
 
 import HomePage from "@/components/home/HomePage";
 

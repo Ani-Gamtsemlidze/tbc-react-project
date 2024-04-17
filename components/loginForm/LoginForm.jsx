@@ -19,7 +19,7 @@ export default function LoginForm({ handleLogin }) {
           />
         </div>
 
-        <form className="flex flex-col items-center  bg-white w-80  rounded-b-lg	">
+        <form  autoComplete="off" className="flex flex-col items-center  bg-white w-80  rounded-b-lg	">
           <div className="mt-10 mb-2 text-center">
             <h1 className="font-bold">LOGIN</h1>
             <p>Sign In to continue access</p>
@@ -43,6 +43,7 @@ export default function LoginForm({ handleLogin }) {
             placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="off"
           />
           <label className=" relative  " htmlFor="password">
             <div className="w-4 h-4 object-cover absolute top-3 right-24">
@@ -63,6 +64,8 @@ export default function LoginForm({ handleLogin }) {
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="off"
+
           />
 
           <button

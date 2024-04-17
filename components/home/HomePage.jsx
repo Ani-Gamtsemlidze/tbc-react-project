@@ -77,10 +77,10 @@ export default function HomePage({ productsData }) {
       />
 
       <div className="flex flex-1 flex-col bg-gray-200 ">
-        <div className="mt-4">
+        <div className="my-2">
           <h1 className="text-center text-2xl">PRODUCTS</h1>
         </div>
-        <div className="px-8 max-h-[360px] flex  overflow-y-scroll justify-start  flex-wrap">
+        <div className="products-scroll px-4 flex  overflow-y-scroll justify-start  flex-wrap">
           {itemsData &&
             itemsData.map((product) => (
               <Products

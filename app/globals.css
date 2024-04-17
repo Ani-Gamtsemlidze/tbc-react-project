@@ -27,7 +27,13 @@
 }
 
 .active {
-  border-bottom: 1px solid white;
+  background-color: beige;
+  color: #000;
+  padding: 4px 10px;
+}
+
+.products-scroll {
+  max-height: calc(100vh - 285px);
 }
 
 @layer utilities {

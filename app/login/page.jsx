@@ -9,12 +9,13 @@ export default function Login() {
 
   const cookie = cookieStore.get(AUTH_COOKIE_TOKEN);
 
-  if (cookie) {
-     redirect("/");
-  }
+    if (cookie) {
+    return  redirect("/");
+    }
+  
   const handleLogin = async (username, password) => {
     "use server"
-    await login(username, password);
+    await login(username, password);    
   };
 
   return <LoginForm handleLogin={handleLogin} />;
