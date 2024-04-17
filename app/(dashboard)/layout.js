@@ -4,13 +4,13 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AUTH_COOKIE_TOKEN } from "@/constants";
 
-export default function RootLayout({ children }) {
+export default function dashboardLayout({ children }) {
 
   const cookieStore = cookies()
   const cookie = cookieStore.get(AUTH_COOKIE_TOKEN);
 
   if (!cookie?.value) {
-    redirect("/login");
+   return redirect("/login");
   }
 
   return (
