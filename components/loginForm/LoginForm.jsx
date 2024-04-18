@@ -60,7 +60,7 @@ export default function LoginForm({ handleLogin }) {
             </div>
           </label>
           <input
-            className="rounded w-60 outline-none pl-8 py-2 border transition hover:border-slate-900 "
+            className="rounded w-60  outline-none pl-8 py-2 border transition hover:border-slate-900 "
             type="password"
             id="password"
             name="password"
