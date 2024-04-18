@@ -1,8 +1,9 @@
-import { AUTH_COOKIE_TOKEN } from "@/constants";
-import { cookies } from "next/headers";
-export async function login(username, password) {
-  "use server";
+"use server";
 
+import { AUTH_COOKIE } from "@/constants";
+import { cookies } from "next/headers";
+
+export async function login(username, password) {
   const response = await fetch("https://dummyjson.com/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -17,12 +18,15 @@ export async function login(username, password) {
   const token = data.token;
   const cookieStore = cookies();
 
-  cookieStore.set(AUTH_COOKIE_TOKEN, token);
+  if (response.ok) {
+    const token = data.token;
+    const cookieStore = cookies();
+    cookieStore.set(AUTH_COOKIE, token);
+  } 
 }
 
 export async function logout() {
-  "use server";
   const cookieStore = cookies();
 
-  cookieStore.delete(AUTH_COOKIE_TOKEN);
+  cookieStore.delete(AUTH_COOKIE);
 }

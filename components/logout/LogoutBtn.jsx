@@ -2,7 +2,10 @@
 export default function LogoutBtn({ handleLogout }) {
   return (
     <div>
-      <button className="text-black bg-white px-2 py-1 rounded-lg font-bold" onClick={() => handleLogout()}>
+      <button
+        className="text-white border px-2 py-1 rounded-sm  hover:text-[#f78181] transition hover:border-[#f78181]"
+        onClick={() => handleLogout()}
+      >
         Log Out
       </button>
     </div>
