@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function LoginForm({ handleLogin }) {
-  const [email, setEmail] = useState("");
+  const [username, setName] = useState("");
   const [password, setPassword] = useState("");
   
   return (
@@ -20,12 +20,12 @@ export default function LoginForm({ handleLogin }) {
           />
         </div>
 
-        <form  autoComplete="off" className="flex flex-col items-center  bg-white w-80  rounded-b-lg	">
+        <form onClick={(e) => e.preventDefault()}  autoComplete="off" className="flex flex-col items-center  bg-white w-80  rounded-b-lg	">
           <div className="mt-10 mb-2 text-center">
             <h1 className="font-bold">LOGIN</h1>
             <p>Sign In to continue access</p>
           </div>
-          <label className="relative" htmlFor="email">
+          <label className="relative" htmlFor="username">
             <div className="w-4 h-4 object-cover absolute top-9 right-24">
               <Image
                 className=""
@@ -38,13 +38,15 @@ export default function LoginForm({ handleLogin }) {
           </label>
           <input
             className="rounded w-60 outline-none transition hover:border-slate-900 pl-8 py-2  my-6 border "
-            type="email"
-            id="email"
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            id="username"
+            name="username"
+            placeholder="username"
+            value={username}
+            spellCheck="off"
+            onChange={(e) => setName(e.target.value)}
             autoComplete="off"
+            required
           />
           <label className=" relative  " htmlFor="password">
             <div className="w-4 h-4 object-cover absolute top-3 right-24">
@@ -53,7 +55,7 @@ export default function LoginForm({ handleLogin }) {
                 src="/images/login/padlock.png"
                 width={100}
                 height={100}
-                alt="email"
+                alt="name"
               />
             </div>
           </label>
@@ -66,12 +68,13 @@ export default function LoginForm({ handleLogin }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
+            required
 
           />
 
           <button
             className="bg-[#493e57] transition  py-2 w-48 rounded my-8 text-lg hover:bg-black text-white "
-            onClick={() => handleLogin(email, password)}
+            onClick={() => handleLogin(username, password)}
           >
             Login
           </button>
