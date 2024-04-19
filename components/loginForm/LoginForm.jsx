@@ -1,12 +1,17 @@
 "use client";
 import Image from "next/image";
 
-import { useState } from "react";
+export default function LoginForm() {
+  async function onSubmit(event) {
+    event.preventDefault();
 
-export default function LoginForm({ handleLogin }) {
-  const [username, setName] = useState("");
-  const [password, setPassword] = useState("");
-  
+    const formData = new FormData(event.target);
+    const response = await fetch("/login/api", {
+      method: "POST",
+      body: formData,
+    });
+  }
+
   return (
     <div className="bg-gray-200 h-screen flex justify-center items-center ">
       <div className=" flex flex-col items-center ">
@@ -20,7 +25,11 @@ export default function LoginForm({ handleLogin }) {
           />
         </div>
 
-        <form onClick={(e) => e.preventDefault()}  autoComplete="off" className="flex flex-col items-center  bg-white w-80  rounded-b-lg	">
+        <form
+          onSubmit={onSubmit}
+          autoComplete="off"
+          className="flex flex-col items-center  bg-white w-80  rounded-b-lg	"
+        >
           <div className="mt-10 mb-2 text-center">
             <h1 className="font-bold">LOGIN</h1>
             <p>Sign In to continue access</p>
@@ -42,9 +51,7 @@ export default function LoginForm({ handleLogin }) {
             id="username"
             name="username"
             placeholder="username"
-            value={username}
             spellCheck="off"
-            onChange={(e) => setName(e.target.value)}
             autoComplete="off"
             required
           />
@@ -65,22 +72,18 @@ export default function LoginForm({ handleLogin }) {
             id="password"
             name="password"
             placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
             required
-
           />
 
           <button
             className="bg-[#493e57] transition  py-2 w-48 rounded my-8 text-lg hover:bg-black text-white "
-            onClick={() => handleLogin(username, password)}
+            type="submit"
           >
             Login
           </button>
         </form>
       </div>
     </div>
-
   );
 }

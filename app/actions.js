@@ -1,35 +1,34 @@
-"use server";
+// "use server";
 
-import { AUTH_COOKIE } from "@/constants";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+// import { AUTH_COOKIE } from "@/constants";
+// import { redirect } from "next/navigation";
+// import { cookies } from "next/headers";
 
-export async function login(username, password) {
-  const response = await fetch("https://dummyjson.com/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  });
+// export async function login(username, password) {
+//   const response = await fetch("https://dummyjson.com/auth/login", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({
+//       username,
+//       password,
+//     }),
+//   });
 
-  const data = await response.json();
-  console.log(data)
+//   const data = await response.json();
+//   console.log(data)
 
+//   const token = data.token;
+//   const cookieStore = cookies();
 
-  const token = data.token;
-  const cookieStore = cookies();
+//   if (response.ok) {
+//     cookieStore.set(AUTH_COOKIE, token);
+//     return redirect("/")
+//   }
+// }
 
-  if (response.ok) {
-    cookieStore.set(AUTH_COOKIE, token);
-    return redirect("/")
-  }
-}
+// export async function logout() {
+//   const cookieStore = cookies();
 
-export async function logout() {
-  const cookieStore = cookies();
-
-  cookieStore.delete(AUTH_COOKIE);
-  return redirect("/login");
-}
+//   cookieStore.delete(AUTH_COOKIE);
+//   return redirect("/login");
+// }
