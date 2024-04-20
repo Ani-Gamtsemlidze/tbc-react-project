@@ -1,28 +1,18 @@
-import Image from "next/image";
 function Search({ onSort, searchItem, onSearch }) {
   return (
-    <div className="flex items-center justify-center bg-gray-100 dark:bg-slate-700   py-4  ">
+    <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4 mt-2 ">
       <form>
         <input
-          className="transition rounded-full cursor-pointer w-56 p-2 pl-8 bg-gray-200 placeholder-gray-500 focus:outline-none text-gray-950 "
+          className="transition hover:bg-[#E7E8D1] hover:placeholder-[#B85042] hover:text-[#B85042]   border cursor-pointer p-2 pl-4 bg-transparent placeholder-white focus:outline-none text-white "
           id="search"
           type="text"
           value={searchItem}
           onChange={(e) => onSearch(e)}
           placeholder="Search"
         />
-        <label htmlFor="search" className="relative w-4 h-4 inline-block">
-          <Image
-            src="/images/search.png"
-            className="w-full h-full object-contain absolute top-0 right-8 cursor-pointer"
-            alt="Search Icon"
-            width={16}
-            height={16}
-          />
-        </label>
       </form>
       <button
-        className="transition justify-center w-16 h-8 text-md rounded-full   ml-4 bg-gray-500 text-white"
+        className="transition justify-center py-2 px-4 ml-2   text-md border text-white hover:bg-[#E7E8D1] hover:text-[#B85042]"
         onClick={onSort}
       >
         Sort

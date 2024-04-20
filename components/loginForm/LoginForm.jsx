@@ -35,7 +35,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-gray-200 h-screen flex justify-center items-center ">
+    <div className="bg-gray-200 dark:bg-slate-700  h-screen flex justify-center items-center ">
       <div className=" flex flex-col items-center ">
         <div className="flex mb-2">
           <ThemeSwitch />
@@ -53,11 +53,11 @@ export default function LoginForm() {
         <form
           onSubmit={FormAction}
           autoComplete="off"
-          className="flex flex-col items-center  bg-white w-80  rounded-b-lg	"
+          className="flex flex-col items-center bg-white dark:bg-slate-600 w-80  rounded-b-lg	"
         >
           <div className="mt-10 mb-2 text-center">
-            <h1 className="font-bold">LOGIN</h1>
-            <p>Sign In to continue access</p>
+            <h1 className="font-bold dark:text-white ">LOGIN</h1>
+            <p className="dark:text-white ">Sign In to continue access</p>
           </div>
           <label className="relative" htmlFor="username">
             <div className="w-4 h-4 object-cover absolute top-9 right-24">

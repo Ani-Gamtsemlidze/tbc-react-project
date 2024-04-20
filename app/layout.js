@@ -1,4 +1,3 @@
-import ThemeSwitch from "@/components/theme/ThemeSwitch";
 import "./globals.css";
 import { Providers } from "./providers";
 

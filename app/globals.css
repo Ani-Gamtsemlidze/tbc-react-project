@@ -27,11 +27,14 @@
 }
 
 .active {
-  color: #f78181;
+  /* color: #f78181;
+   */
+   border: 1px solid white;
+   padding: 2px 8px;
 }
 
 .products-scroll {
-  max-height: calc(100vh - 285px);
+  max-height: calc(100vh - 300px);
 }
 
 @layer utilities {

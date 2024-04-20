@@ -17,7 +17,7 @@ export default function Navigation() {
         {navigation.map((list) => (
           <li key={list.href}>
             <Link
-              className={`mr-4 text-dm transition rounded text-black dark:text-white hover:text-[#f78181]  ${
+              className={`text-white mr-4 text-dm transition rounded dark:text-white ${
                 pathname === list.href ? "active" : ""
               }`}
               href={list.href}
