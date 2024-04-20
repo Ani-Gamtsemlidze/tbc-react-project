@@ -6,10 +6,10 @@ import { logout } from "@/app/actions";
 import ThemeSwitch from "../theme/ThemeSwitch";
 
 export default function Header() {
-  const handleLogout = async () => {
-    "use server";
-    await logout();
-  };
+  // const handleLogout = async () => {
+  //   "use server";
+  //   await logout();
+  // };
 
   return (
     <header className="flex  justify-between items-center  bg-gray-200 dark:bg-slate-600 py-1 px-8">
@@ -28,7 +28,7 @@ export default function Header() {
       <div className="flex items-center">
         <ThemeSwitch />
 
-        <LogoutBtn handleLogout={handleLogout} />
+        <LogoutBtn />
       </div>
     </header>
   );

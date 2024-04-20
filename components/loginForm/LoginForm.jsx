@@ -1,16 +1,37 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginForm() {
-  async function onSubmit(event) {
-    event.preventDefault();
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const formData = new FormData(event.target);
-    const response = await fetch("/login/api", {
-      method: "POST",
-      body: formData,
-    });
-  }
+  const FormAction = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/login/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        router.push("/");
+      } else {
+        alert(data.error);
+      }
+    } catch (err) {
+      console.log(err.response);
+      alert("error");
+    }
+  };
 
   return (
     <div className="bg-gray-200 h-screen flex justify-center items-center ">
@@ -26,7 +47,7 @@ export default function LoginForm() {
         </div>
 
         <form
-          onSubmit={onSubmit}
+          onSubmit={FormAction}
           autoComplete="off"
           className="flex flex-col items-center  bg-white w-80  rounded-b-lg	"
         >
@@ -51,6 +72,8 @@ export default function LoginForm() {
             id="username"
             name="username"
             placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             spellCheck="off"
             autoComplete="off"
             required
@@ -72,6 +95,8 @@ export default function LoginForm() {
             id="password"
             name="password"
             placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
             required
           />
