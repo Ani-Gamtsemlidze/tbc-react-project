@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import ThemeSwitch from "../theme/ThemeSwitch";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -36,6 +37,9 @@ export default function LoginForm() {
   return (
     <div className="bg-gray-200 h-screen flex justify-center items-center ">
       <div className=" flex flex-col items-center ">
+        <div className="flex mb-2">
+          <ThemeSwitch />
+        </div>
         <div className="bg-black w-80 rounded-t-lg	 ">
           <Image
             className="mx-auto my-2"

@@ -1,33 +1,46 @@
 "use client";
-import { FiSun, FiMoon } from "react-icons/fi";
-import Image from "next/image";
+
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import ThemeUi from "./ThemeUi";
 
 export default function ThemeSwitch() {
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const { setTheme, resolvedTheme } = useTheme();
 
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted)
-    return (
-      <Image
-        src="data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNGRkZGRkYiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBoZWlnaHQ9IjIwMHB4IiB3aWR0aD0iMjAwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIyIj48L3JlY3Q+PC9zdmc+Cg=="
-        width={60}
-        height={60}
-        sizes="36x36"
-        alt="Loading Light/Dark Toggle"
-        priority={false}
-        title="Loading Light/Dark Toggle"
-      />
-    );
-
-  if (resolvedTheme === "dark") {
-    return <FiSun onClick={() => setTheme("light")} />;
+  function checkUserPreference() {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   }
 
-  if (resolvedTheme === "light") {
-    return <FiMoon onClick={() => setTheme("dark")} />;
+  useEffect(() => {
+    setMounted(true);
+    checkUserPreference();
+  }, []);
+
+  function handleTheme(newTheme) {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   }
+
+  function handleSystemTheme(newTheme) {
+    setTheme(newTheme);
+    localStorage.removeItem("theme");
+  }
+
+  return (
+    <ThemeUi
+      mounted={mounted}
+      theme={theme}
+      handleTheme={handleTheme}
+      handleSystemTheme={handleSystemTheme}
+    />
+  );
 }

@@ -12,7 +12,6 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>
-          {/* <ThemeSwitch /> */}
           <div className="flex flex-col justify-between h-screen">
             {children}
           </div>
