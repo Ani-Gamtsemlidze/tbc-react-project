@@ -10,9 +10,9 @@ export async function middleware(request) {
 
   //   }
 
-  return NextResponse.redirect(new URL("/login", request.url));
+  // return NextResponse.redirect(new URL("/login", request.url));
 }
 
-export const config = {
-  matcher: ["/", "/blog", "/products", "/contact", "/profile"],
-};
+// export const config = {
+//   matcher: ["/", "/blog", "/products", "/contact", "/profile"],
+// };

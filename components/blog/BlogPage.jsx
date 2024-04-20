@@ -7,7 +7,7 @@ export default function BlogPage({ data }) {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col bg-gray-200 ">
+    <div className="flex flex-col bg-gray-200 dark:bg-gray-700 ">
       <div className="mt-4">
         <h1 className="text-center text-2xl">BLOGS</h1>
       </div>

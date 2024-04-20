@@ -16,8 +16,8 @@ export default function HomePage({ productsData }) {
 
   const handleSort = () => {
     setIsSorted(!isSorted);
-  
-    if(isSorted) {
+
+    if (isSorted) {
       setItemsData([...products]);
     } else {
       let sortedItems;
@@ -29,7 +29,6 @@ export default function HomePage({ productsData }) {
       setItemsData(sortedItems);
     }
   };
-  
 
   const debounce = (func, delay) => {
     let timerId;
@@ -76,11 +75,13 @@ export default function HomePage({ productsData }) {
         onSearch={handleSearch}
       />
 
-      <div className="flex flex-1 flex-col bg-gray-200 ">
-        <div className="my-2">
-          <h1 className="text-center text-2xl">PRODUCTS</h1>
+      <div className="flex flex-1 flex-col bg-gray-200 dark:bg-slate-900">
+        <div className="mt-4">
+          <h1 className=" text-black dark:text-[#94a3b8] text-center text-2xl font-bold ">
+            PRODUCTS
+          </h1>
         </div>
-        <div className="products-scroll px-4 flex  overflow-y-scroll justify-start  flex-wrap">
+        <div className="products-scroll  flex  overflow-y-scroll justify-start  flex-wrap ">
           {itemsData &&
             itemsData.map((product) => (
               <Products
