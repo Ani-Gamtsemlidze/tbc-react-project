@@ -2,11 +2,10 @@ import Carousel from "../carousel/Carousel";
 
 export default function InnerProduct({ innerProductData }) {
   return (
-    <div className="h-screen  bg-gray-200 flex justify-center items-center">
+    <div className="h-screen  bg-gray-200 dark:bg-slate-500 flex justify-center items-center">
       {innerProductData && (
         <div className="flex justify-center ">
-
-          <Carousel imagesData={innerProductData}/>
+          <Carousel imagesData={innerProductData} />
           <div className="ml-6">
             <h1 className="text-black text-xl font-bold">
               {innerProductData.title}

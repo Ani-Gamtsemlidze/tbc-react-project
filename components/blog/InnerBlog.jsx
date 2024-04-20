@@ -1,10 +1,10 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export default function InnerBlog({ blogsData }) {
   return (
     <>
       {blogsData ? (
-        <div className="flex h-screen px-4 bg-gray-200 items-center">
+        <div className="flex h-screen px-4 bg-gray-200 dark:bg-slate-500 items-center">
           <Image
             src={blogsData.image}
             alt={blogsData.name}
