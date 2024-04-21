@@ -1,9 +1,11 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 export default function LogoutBtn() {
   const router = useRouter();
 
+  const t = useTranslations("Header");
   const handleLogout = async () => {
     try {
       await fetch("/login/api");
@@ -18,7 +20,7 @@ export default function LogoutBtn() {
         className="text-white border px-2 py-1 rounded-sm  hover:text-white transition dark:hover:border-[#B85042]"
         onClick={() => handleLogout()}
       >
-        Log Out
+        {t("logout")}
       </button>
     </div>
   );

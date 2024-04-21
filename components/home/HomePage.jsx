@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
 
 export default function HomePage({ productsData }) {
-  const t = useTranslations("Index");
+  const t = useTranslations("Header");
   const { products } = productsData;
   const [itemsData, setItemsData] = useState(products);
   const [isSorted, setIsSorted] = useState(false);

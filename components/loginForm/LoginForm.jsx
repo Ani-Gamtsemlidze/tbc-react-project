@@ -3,8 +3,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ThemeSwitch from "../theme/ThemeSwitch";
+import LocalSwitcher from "../langSwitcher/LocalSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function LoginForm() {
+  const t = useTranslations("Login");
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +42,7 @@ export default function LoginForm() {
       <div className=" flex flex-col items-center ">
         <div className="flex mb-2">
           <ThemeSwitch />
+          <LocalSwitcher />
         </div>
         <div className="bg-black w-80 rounded-t-lg	 ">
           <Image
@@ -56,8 +60,8 @@ export default function LoginForm() {
           className="flex flex-col items-center bg-white dark:bg-slate-600 w-80  rounded-b-lg	"
         >
           <div className="mt-10 mb-2 text-center">
-            <h1 className="font-bold dark:text-white ">LOGIN</h1>
-            <p className="dark:text-white ">Sign In to continue access</p>
+            <h1 className="font-bold dark:text-white ">{t("login")}</h1>
+            <p className="dark:text-white ">{t("signin")}</p>
           </div>
           <label className="relative" htmlFor="username">
             <div className="w-4 h-4 object-cover absolute top-9 right-24">
@@ -75,7 +79,7 @@ export default function LoginForm() {
             type="text"
             id="username"
             name="username"
-            placeholder="username"
+            placeholder={t("name")}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             spellCheck="off"
@@ -98,7 +102,7 @@ export default function LoginForm() {
             type="password"
             id="password"
             name="password"
-            placeholder="password"
+            placeholder={t("password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
@@ -109,7 +113,7 @@ export default function LoginForm() {
             className="bg-[#493e57] transition  py-2 w-48 rounded my-8 text-lg hover:bg-black text-white "
             type="submit"
           >
-            Login
+            {t("button")}
           </button>
         </form>
       </div>
