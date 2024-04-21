@@ -1,8 +1,5 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { AUTH_COOKIE } from "@/constants";
 
 export default function dashboardLayout({ children }) {
   return (
