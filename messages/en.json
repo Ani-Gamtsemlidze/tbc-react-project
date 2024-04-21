@@ -1,5 +1,12 @@
 {
     "Index": {
       "title": "Products"
+    },
+    "Navigation": {
+      "home": "Home",
+      "profile":"Profile",
+      "contact": "Contact",
+      "blog": "Blog"
     }
+    
   }

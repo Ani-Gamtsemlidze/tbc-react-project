@@ -14,7 +14,7 @@ function loginMiddleware(request) {
 const langMiddleware = createMiddleware({
   locales: ["ka", "en"],
   defaultLocale: "en",
-  localeDetection: false,
+  // localeDetection: false,
 });
 
 export default function middleware(request) {

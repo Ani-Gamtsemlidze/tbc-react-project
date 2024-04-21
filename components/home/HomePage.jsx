@@ -2,10 +2,10 @@
 import Search from "@/components/search/Search";
 import Products from "../products/Products";
 import { useCallback, useState } from "react";
-// import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export default function HomePage({ productsData }) {
-  // const { t } = useTranslations("Index");
+  const t = useTranslations("Index");
   const { products } = productsData;
   const [itemsData, setItemsData] = useState(products);
   const [isSorted, setIsSorted] = useState(false);
@@ -80,7 +80,7 @@ export default function HomePage({ productsData }) {
       <div className="flex flex-1 flex-col">
         <div className="mt-4">
           <h1 className=" text-black dark:text-[#94a3b8] text-center text-2xl font-bold ">
-            {/* {t("title")} */}
+            {t("title")}
           </h1>
         </div>
         <div className="products-scroll  flex  overflow-y-scroll justify-center flex-wrap px-10 py-4">
