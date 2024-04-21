@@ -4,23 +4,21 @@ import { cookies } from "next/headers";
 import createMiddleware from "next-intl/middleware";
 
 function loginMiddleware(request) {
-  const token = cookies(request.headers).get(AUTH_COOKIE);
+  const token = cookies(request.headers).get(AUTH_COOKIE); // Pass request headers to cookies()
 
   if (!token && !request.nextUrl.pathname.includes("login")) {
     return NextResponse.redirect(new URL("/login", request.url));
-  } else if (token && request.nextUrl.pathname.includes("login")) {
-    return NextResponse.redirect(new URL("/", request.url));
   }
 }
 
-const intlMiddleware = createMiddleware({
+const langMiddleware = createMiddleware({
   locales: ["ka", "en"],
   defaultLocale: "en",
   localeDetection: false,
 });
 
 export default function middleware(request) {
-  return loginMiddleware(request) || intlMiddleware(request);
+  return loginMiddleware(request) || langMiddleware(request);
 }
 
 export const config = {

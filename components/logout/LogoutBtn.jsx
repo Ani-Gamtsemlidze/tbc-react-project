@@ -7,7 +7,7 @@ export default function LogoutBtn() {
   const handleLogout = async () => {
     try {
       await fetch("/login/api");
-      router.push("/login");
+      router.push("/en/login");
     } catch (err) {
       console.log(err);
     }
