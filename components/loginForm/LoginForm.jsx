@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import ThemeSwitch from "../theme/ThemeSwitch";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import { useTranslations } from "next-intl";
