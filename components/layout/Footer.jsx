@@ -1,6 +1,8 @@
+import { useTranslations } from "next-intl";
 import Navigation from "./Navigation";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
   return (
     <footer className="flex  justify-between items-center bg-[#B85042]  dark:bg-slate-600 p-4">
       <div className="">
@@ -12,23 +14,23 @@ export default function Footer() {
               type="text"
               id="subscribe"
               name="subscribe"
-              placeholder="Email address"
+              placeholder={t("email")}
             />
             <button
               className="text-white dark:text-white text-sm ml-2"
               type="submit"
             >
-              Subscribe
+              {t("subscribe")}
             </button>
           </div>
         </form>
       </div>
       <div className="flex flex-col flex-end">
         <a href="#" className="text-white dark:text-white text-sm">
-          Terms and Conditions
+          {t("terms")}
         </a>
         <a href="#" className="text-white dark:text-white text-sm mt-2">
-          Privacy Policy
+          {t("policy")}
         </a>
       </div>
     </footer>

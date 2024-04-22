@@ -1,0 +1,57 @@
+{
+    "Header": {
+      "title": "Products",
+      "logout":"Log Out",
+      "search":"Search",
+      "sort": "Sort"
+    },
+    "Navigation": {
+      "home": "Home",
+      "profile":"Profile",
+      "contact": "Contact",
+      "blog": "Blog"
+    },
+    "Footer":{
+      "email":"Email address",
+      "subscribe": "Subscribe",
+      "terms":"Terms and Conditions",
+      "policy" : "Privacy Policy"
+    },
+    "Profile":{
+      "title":"User",
+      "username":"Username",
+      "surname":"Surname",
+      "email": "Email",
+      "password":"Password",
+      "confirmPass": "Confirm Password",
+      "button": "Save Changes"
+
+    },
+    "Contact":{
+      "message":"Send Us a Message",
+      "name":"Name",
+      "name-label":"Full Name",
+      "email":"Email",
+      "email-label":"Email Address",
+      "subject":"Subject",
+      "textarea":"Message",
+      "send-button":"Send Message",
+      "contact-us":"Contact Us",
+      "location":"Suite 293 95409 Grimes Crossing",
+      "phone":"638 891 206",
+      "web":"www.web-site. com",
+      "user-email":"pas-uwufuba91@mail.com"
+    },
+    "Blogs":{
+      "blogs":"BLOGS"
+    },
+    "Login":{
+      "login": "Login",
+      "signin":"Sign In to continue access ",
+      "name": "username",
+      "password":"password",
+      "button":"Login"
+
+    }
+    
+  }
