@@ -1,17 +1,26 @@
 import { NextResponse } from "next/server";
 import { AUTH_COOKIE } from "./constants";
 import { cookies } from "next/headers";
+import createMiddleware from "next-intl/middleware";
 
-export function middleware(request) {
-  const token = cookies().get(AUTH_COOKIE);
+function loginMiddleware(request) {
+  const token = cookies(request.headers).get(AUTH_COOKIE); // Pass request headers to cookies()
 
-  if (!token && request.nextUrl.pathname !== "/login") {
+  if (!token && !request.nextUrl.pathname.includes("login")) {
     return NextResponse.redirect(new URL("/login", request.url));
-  } else if (token && request.nextUrl.pathname === "/login") {
-    return NextResponse.redirect(new URL("/", request.url));
   }
 }
 
+const langMiddleware = createMiddleware({
+  locales: ["ka", "en"],
+  defaultLocale: "en",
+  // localeDetection: false,
+});
+
+export default function middleware(request) {
+  return loginMiddleware(request) || langMiddleware(request);
+}
+
 export const config = {
-  matcher: ["/", "/blog", "/profile", "/contact", "/login"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };

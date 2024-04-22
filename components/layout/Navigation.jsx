@@ -1,14 +1,16 @@
 "use client";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navigation() {
+  const t = useTranslations("Navigation");
   const pathname = usePathname();
   const navigation = [
-    { title: "Home", href: "/" },
-    { title: "Profile", href: "/profile" },
-    { title: "Contact", href: "/contact" },
-    { title: "Blog", href: "/blog" },
+    { title: t("home"), href: "/" },
+    { title: t("profile"), href: "/profile" },
+    { title: t("contact"), href: "/contact" },
+    { title: t("blog"), href: "/blog" },
   ];
 
   return (

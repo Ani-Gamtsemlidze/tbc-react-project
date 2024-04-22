@@ -3,6 +3,7 @@ import Image from "next/image";
 import Navigation from "./Navigation";
 import LogoutBtn from "../logout/LogoutBtn";
 import ThemeSwitch from "../theme/ThemeSwitch";
+import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 
 export default function Header() {
   return (
@@ -21,6 +22,7 @@ export default function Header() {
       </div>
       <div className="flex items-center">
         <ThemeSwitch />
+        <LocalSwitcher />
 
         <LogoutBtn />
       </div>

@@ -1,4 +1,7 @@
+import { useTranslations } from "next-intl";
+
 function Search({ onSort, searchItem, onSearch }) {
+  const t = useTranslations("Header");
   return (
     <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4 mt-2 ">
       <form>
@@ -8,14 +11,14 @@ function Search({ onSort, searchItem, onSearch }) {
           type="text"
           value={searchItem}
           onChange={(e) => onSearch(e)}
-          placeholder="Search"
+          placeholder={t("search")}
         />
       </form>
       <button
         className="transition justify-center py-2 px-4 ml-2   text-md border text-white hover:bg-[#E7E8D1] hover:text-[#B85042]"
         onClick={onSort}
       >
-        Sort
+        {t("sort")}
       </button>
     </div>
   );
