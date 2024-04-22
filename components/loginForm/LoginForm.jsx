@@ -9,20 +9,14 @@ import { useTranslations } from "next-intl";
 export default function LoginForm() {
   const t = useTranslations("Login");
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   const FormAction = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
 
     try {
       const response = await fetch("/login/api", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
+        body: formData,
       });
 
       const data = await response.json();
@@ -32,7 +26,6 @@ export default function LoginForm() {
         alert(data.error);
       }
     } catch (err) {
-      console.log(err.response);
       alert("error");
     }
   };
@@ -80,8 +73,8 @@ export default function LoginForm() {
             id="username"
             name="username"
             placeholder={t("name")}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            // value={username}
+            // onChange={(e) => setUsername(e.target.value)}
             spellCheck="off"
             autoComplete="off"
             required
@@ -103,8 +96,8 @@ export default function LoginForm() {
             id="password"
             name="password"
             placeholder={t("password")}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            // value={password}
+            // onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
             required
           />
