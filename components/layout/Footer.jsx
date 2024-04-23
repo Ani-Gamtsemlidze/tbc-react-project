@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="flex  justify-between items-center bg-[#B85042]  dark:bg-slate-600 p-4">
       <div className="">
         <Navigation />
-        <form action="/submit" className="">
+        <form action="/submit">
           <div className="mt-2 ">
             <input
               className="pl-2 py-1 rounded-md outline-none bg-[#E7E8D1] placeholder:text-black"

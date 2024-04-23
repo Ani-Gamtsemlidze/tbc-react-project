@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { Providers } from "./providers";
 import { notFound } from "next/navigation";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,7 +11,6 @@ export const metadata = {
 
 export default async function RootLayout({ children, params }) {
   let messages;
-  console.log(params);
   try {
     messages = (await import(`../../messages/${params.locale}.json`)).default;
   } catch (error) {

@@ -14,8 +14,8 @@ export default function Header() {
             alt="X-logo"
             className="w-6 h-6 object-contain mr-4"
             src="/images/X-Logo.png"
-            width={24}
-            height={24}
+            width={200}
+            height={200}
           />
         </Link>
         <Navigation />

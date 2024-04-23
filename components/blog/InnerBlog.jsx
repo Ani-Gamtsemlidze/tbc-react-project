@@ -8,8 +8,8 @@ export default function InnerBlog({ blogsData }) {
           <Image
             src={blogsData.image}
             alt={blogsData.name}
-            width={384}
-            height={160}
+            width={200}
+            height={200}
             className="w-96 h-96 object-cover rounded"
           />
           <div className="ml-6">

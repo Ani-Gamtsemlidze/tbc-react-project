@@ -72,8 +72,6 @@ export default function LoginForm() {
             id="username"
             name="username"
             placeholder={t("name")}
-            // value={username}
-            // onChange={(e) => setUsername(e.target.value)}
             spellCheck="off"
             autoComplete="off"
             required
@@ -95,8 +93,6 @@ export default function LoginForm() {
             id="password"
             name="password"
             placeholder={t("password")}
-            // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
             required
           />

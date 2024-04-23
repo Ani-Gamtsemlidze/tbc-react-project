@@ -1,4 +1,5 @@
 import InnerProduct from "@/components/products/InnerProduct";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateStaticParams() {
   try {
@@ -8,11 +9,9 @@ export async function generateStaticParams() {
     }
     const products = await response.json();
 
-    const staticParams = products.products.map((product) => ({
-      params: { id: `{/${product.id}}` },
+    return products.products.map((product) => ({
+      id: `{${product.id}}`,
     }));
-
-    return staticParams;
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -29,8 +28,8 @@ async function getInnerData(id) {
 }
 
 export default async function Page({ params }) {
-  const id = params.id;
-  const innerProductData = await getInnerData(id);
+  unstable_setRequestLocale(params.locale);
+  const innerProductData = await getInnerData(params.id);
 
   return <InnerProduct innerProductData={innerProductData} />;
 }

@@ -12,8 +12,8 @@ export default function Products({ title, description, img, price, id }) {
           className="w-full  h-full object-cover"
           src={img}
           alt={title}
-          width={256}
-          height={192}
+          width={200}
+          height={200}
         />
       </div>
       <div className="  px-4 dark:text-[#94a3b8]">
