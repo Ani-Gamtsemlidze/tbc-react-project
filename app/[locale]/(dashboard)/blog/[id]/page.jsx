@@ -1,12 +1,9 @@
 import InnerBlog from "@/components/blog/InnerBlog";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { getBlogsData } from "../page";
 export async function generateStaticParams() {
   try {
-    const response = await fetch("https://dummyjson.com/recipes");
-    if (!response.ok) {
-      throw new Error("Failed to fetch blogs");
-    }
-    const recipes = await response.json();
+    const recipes = await getBlogsData();
 
     const staticParams = recipes.recipes.map((blog) => ({
       id: `${blog.id}`,
@@ -19,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 async function blogsInnerData(id) {
-  // const { id } = params;
+  console.log(id);
   const res = await fetch(`https://dummyjson.com/recipes/${id}`);
 
   if (!res.ok) {
@@ -29,8 +26,9 @@ async function blogsInnerData(id) {
 }
 
 export default async function Page({ params }) {
+  const { id } = params;
   unstable_setRequestLocale(params.locale);
-  const blogsData = await blogsInnerData(params.id);
+  const blogsData = await blogsInnerData(id);
 
   return <InnerBlog blogsData={blogsData} />;
 }
