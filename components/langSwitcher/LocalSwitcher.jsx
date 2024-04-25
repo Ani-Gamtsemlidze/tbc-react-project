@@ -10,7 +10,6 @@ export default function LocalSwitcher() {
   const pathname = usePathname();
   const localActive = useLocale();
 
-  // Function to extract pathname without locale prefix
   const getPathWithoutLocale = (pathname, locale) => {
     const prefixRegex = new RegExp(`^/${locale}`);
     return pathname.replace(prefixRegex, "");
@@ -28,7 +27,7 @@ export default function LocalSwitcher() {
     <label className=" mx-4 border-l pl-4  ">
       <select
         defaultValue={localActive}
-        className="py-1 px-2 rounded bg-[#E5E7EB] outline-none  cursor-pointer"
+        className="py-1 px-2 rounded text-black  bg-[#E5E7EB] outline-none  cursor-pointer"
         onChange={onSelectChange}
         disabled={isPending}
       >

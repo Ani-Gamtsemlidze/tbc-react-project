@@ -16,7 +16,6 @@ export async function generateStaticParams() {
 }
 
 async function blogsInnerData(id) {
-  console.log(id);
   const res = await fetch(`https://dummyjson.com/recipes/${id}`);
 
   if (!res.ok) {

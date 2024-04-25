@@ -30,7 +30,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-gray-200 dark:bg-slate-700  h-screen flex justify-center items-center ">
+    <div className="bg-gray-200 dark:bg-slate-700   h-screen flex justify-center items-center ">
       <div className=" flex flex-col items-center ">
         <div className="flex mb-2">
           <ThemeSwitch />
@@ -98,7 +98,7 @@ export default function LoginForm() {
           />
 
           <button
-            className="bg-[#493e57] transition  py-2 w-48 rounded my-8 text-lg hover:bg-black text-white "
+            className="  bg-slate-700   transition  py-2 w-48 rounded my-8 text-lg hover:bg-black text-white "
             type="submit"
           >
             {t("button")}

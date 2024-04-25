@@ -42,8 +42,6 @@ export async function POST(request) {
 
 export async function GET() {
   const cookieStore = cookies();
-  console.log(cookieStore);
-
   cookieStore.delete(AUTH_COOKIE);
   return new NextResponse("done");
 }
