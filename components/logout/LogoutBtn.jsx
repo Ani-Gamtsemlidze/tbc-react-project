@@ -12,7 +12,7 @@ export default function LogoutBtn() {
         method: "GET",
       });
 
-      router.push("/en/login");
+      router.push("/login");
     } catch (err) {
       console.log(err);
     }
