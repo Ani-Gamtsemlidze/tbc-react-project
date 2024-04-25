@@ -1,6 +1,18 @@
-export default function ContactForm({ id, label, placeholder, type }) {
+interface ContactFormProps {
+  id: string;
+  label: string;
+  placeholder: string;
+  type: string;
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({
+  id,
+  label,
+  placeholder,
+  type,
+}) => {
   return (
-    <div className=" flex flex-col mt-6">
+    <div className="flex flex-col mt-6">
       <label htmlFor={id} className="text-black text-lg font-medium">
         {label}
       </label>
@@ -13,4 +25,6 @@ export default function ContactForm({ id, label, placeholder, type }) {
       />
     </div>
   );
-}
+};
+
+export default ContactForm;

@@ -1,6 +1,19 @@
 import Image from "next/image";
 
-export default function InnerBlog({ blogsData }) {
+interface BlogData {
+  name: string;
+  image: string;
+  ingredients: string[];
+  instructions: string[];
+  difficulty: string;
+  cuisine: string;
+  prepTimeMinutes: number;
+}
+
+interface Props {
+  blogsData: BlogData | null;
+}
+const InnerBlog: React.FC<Props> = ({ blogsData }) => {
   return (
     <>
       {blogsData ? (
@@ -45,4 +58,6 @@ export default function InnerBlog({ blogsData }) {
       )}
     </>
   );
-}
+};
+
+export { InnerBlog };

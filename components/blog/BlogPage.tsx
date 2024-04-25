@@ -3,7 +3,21 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export default function BlogPage({ data }) {
+interface Recipe {
+  id: string;
+  name: string;
+  image: string;
+  cookTimeMinutes: number;
+  instructions: string[];
+  mealType: string[];
+}
+
+interface BlogPageProps {
+  data: {
+    recipes: Recipe[];
+  };
+}
+export default function BlogPage({ data }: BlogPageProps) {
   const t = useTranslations("Blogs");
   const { recipes } = data;
   const router = useRouter();
