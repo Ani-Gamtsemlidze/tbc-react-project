@@ -1,19 +1,31 @@
 "use client";
-import Search from "@/components/search/Search";
-import Products from "../products/Products";
-import { useCallback, useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import Search from "../search/Search";
+import Products from "../products/Products";
 
-export default function HomePage({ productsData }) {
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  images: string[];
+}
+
+interface HomePageProps {
+  productsData: {
+    products: Product[];
+  };
+}
+
+export default function HomePage({ productsData }: HomePageProps) {
   const t = useTranslations("Header");
   const { products } = productsData;
-  const [itemsData, setItemsData] = useState(products);
+
+  const [itemsData, setItemsData] = useState<Product[]>(products);
   const [isSorted, setIsSorted] = useState(false);
-
-  const [filteredItems, setFilteredItems] = useState([]);
-
+  const [filteredItems, setFilteredItems] = useState<Product[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
-
   const [searchItem, setSearchItem] = useState("");
 
   const handleSort = () => {
@@ -32,9 +44,9 @@ export default function HomePage({ productsData }) {
     }
   };
 
-  const debounce = (func, delay) => {
-    let timerId;
-    return (...args) => {
+  const debounce = (func: Function, delay: number) => {
+    let timerId: ReturnType<typeof setTimeout>;
+    return (...args: any[]) => {
       clearTimeout(timerId);
       timerId = setTimeout(() => {
         func(...args);
@@ -43,15 +55,13 @@ export default function HomePage({ productsData }) {
   };
 
   const debounceSearch = useCallback(
-    debounce((searchQuery) => {
+    debounce((searchQuery: string) => {
       const priceSearch = Number(searchQuery);
 
       const filtered = itemsData.filter((item) =>
         Object.values(item).some((value) =>
           typeof value === "string"
-            ? value
-                .toLocaleLowerCase()
-                .includes(searchQuery.toLocaleLowerCase())
+            ? value.toLowerCase().includes(searchQuery.toLowerCase())
             : !isNaN(priceSearch) && item.price === priceSearch
         )
       );
@@ -63,12 +73,11 @@ export default function HomePage({ productsData }) {
     []
   );
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = e.target.value;
     setSearchItem(searchQuery);
     debounceSearch(searchQuery);
   };
-
   return (
     <div className="bg-[#E7E8D1] dark:bg-slate-900">
       <Search

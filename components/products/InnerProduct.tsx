@@ -1,6 +1,21 @@
-import Carousel from "../carousel/Carousel";
+import React from "react";
+import { Carousel } from "../carousel/Carousel";
 
-export default function InnerProduct({ innerProductData }) {
+interface InnerProductData {
+  title: string;
+  category: string;
+  rating: number;
+  price: number;
+  description: string;
+  thumbnail: string;
+  images: string[];
+}
+
+interface InnerProductProps {
+  innerProductData: InnerProductData;
+}
+
+const InnerProduct: React.FC<InnerProductProps> = ({ innerProductData }) => {
   return (
     <div className="h-screen  bg-gray-200 dark:bg-slate-500 flex justify-center items-center">
       {innerProductData && (
@@ -27,4 +42,6 @@ export default function InnerProduct({ innerProductData }) {
       )}
     </div>
   );
-}
+};
+
+export { InnerProduct };

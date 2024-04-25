@@ -1,42 +1,40 @@
 import Image from "next/image";
 
-export default function Carousel({ imagesData }) {
+interface ImageData {
+  thumbnail: string;
+  images: string[];
+}
+
+interface Props {
+  imagesData: ImageData;
+}
+
+const Carousel: React.FC<Props> = ({ imagesData }) => {
+  const { thumbnail, images } = imagesData;
+
   return (
     <div className="flex flex-col">
       <Image
         className="w-full h-72 object-cover mb-4"
-        text="First slide"
-        src={imagesData.thumbnail}
+        src={thumbnail}
         width={200}
         height={200}
-        alt="slide"
+        alt="thumbnail"
       />
       <div className="flex">
-        <Image
-          className="w-36 h-24 object-cover"
-          text="First slide"
-          src={imagesData.images[0]}
-          width={200}
-          height={200}
-          alt="slide"
-        />
-        <Image
-          className="w-36 h-24 object-cover mx-4"
-          text="First slide"
-          src={imagesData.images[2]}
-          width={200}
-          height={200}
-          alt="slide"
-        />
-        <Image
-          className="w-36 h-24 object-cover"
-          text="First slide"
-          src={imagesData.images[3]}
-          width={200}
-          height={200}
-          alt="slide"
-        />
+        {images.slice(0, 3).map((image, index) => (
+          <Image
+            key={index}
+            className="w-36 h-24 object-cover mx-4"
+            src={image}
+            width={200}
+            height={200}
+            alt={`slide-${index}`}
+          />
+        ))}
       </div>
     </div>
   );
-}
+};
+
+export { Carousel };

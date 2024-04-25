@@ -1,12 +1,17 @@
 "use client";
 import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
 
+interface ThemeUiProps {
+  mounted: boolean;
+  theme: string | undefined;
+  handleTheme: (newTheme: string) => void;
+  handleSystemTheme: (newTheme: string) => void;
+}
 export default function ThemeUi({
   mounted,
-  theme,
   handleTheme,
   handleSystemTheme,
-}) {
+}: ThemeUiProps) {
   return (
     <>
       {mounted && (
@@ -14,7 +19,7 @@ export default function ThemeUi({
           <button
             type="button"
             className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all mr-2 rounded flex items-center justify-center h-7 w-7"
-            aria-label={theme === "dark"}
+            aria-label="Switch to Dark Theme"
             onClick={() => handleTheme("dark")}
           >
             <FiMoon />
@@ -22,7 +27,7 @@ export default function ThemeUi({
           <button
             type="button"
             className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all mr-2  rounded flex items-center justify-center h-7 w-7"
-            aria-label={theme === "light"}
+            aria-label="Switch to Dark Theme"
             onClick={() => handleTheme("light")}
           >
             <FiSun />
@@ -30,7 +35,7 @@ export default function ThemeUi({
           <button
             type="button"
             className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all mr-2  rounded flex items-center justify-center h-7 w-7"
-            aria-label={theme === "system"}
+            aria-label="Switch to Dark Theme"
             onClick={() => handleSystemTheme("system")}
           >
             <FiMonitor />
