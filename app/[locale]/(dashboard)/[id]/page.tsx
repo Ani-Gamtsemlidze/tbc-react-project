@@ -1,5 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
-import { getProductsData } from "../page";
+// import { getProductsData } from "../page";
 import { InnerProduct } from "../../../../components/products/InnerProduct";
 
 interface Product {
@@ -12,7 +12,8 @@ interface PageParams {
 
 export async function generateStaticParams() {
   try {
-    const products = await getProductsData();
+    const res = await fetch("https://dummyjson.com/products");
+    const products = await res.json();
 
     const staticParams = products.products.map((product: Product) => ({
       id: `${product.id}`,

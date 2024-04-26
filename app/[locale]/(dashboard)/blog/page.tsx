@@ -14,5 +14,3 @@ export default async function Blog() {
 
   return <BlogPage data={blogs} />;
 }
-
-export { getBlogsData };

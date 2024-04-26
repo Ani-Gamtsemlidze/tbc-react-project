@@ -19,5 +19,3 @@ export default async function Home() {
     </>
   );
 }
-
-export { getProductsData };

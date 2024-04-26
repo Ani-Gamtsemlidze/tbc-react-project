@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
-import {  NextResponse } from "next/server";
+import {  NextRequest, NextResponse } from "next/server";
 import { AUTH_COOKIE } from "../../../../constants";
 
-export async function POST(request:Request) {
+export async function POST(request:NextRequest) {
     const formData = await request.formData();
     const username = formData.get("username");
     const password = formData.get("password");

@@ -1,17 +1,17 @@
 import { unstable_setRequestLocale } from "next-intl/server";
-import { getBlogsData } from "../page";
 import { InnerBlog } from "../../../../../components/blog/InnerBlog";
 
 interface Blog {
   id: number;
 }
+
 interface PageParams {
   params: { id: number; locale: string };
 }
 export async function generateStaticParams() {
   try {
-    const recipes = await getBlogsData();
-
+    const res = await fetch("https://dummyjson.com/recipes");
+    const recipes = await res.json();
     const staticParams = recipes.recipes.map((blog: Blog) => ({
       id: `${blog.id}`,
     }));

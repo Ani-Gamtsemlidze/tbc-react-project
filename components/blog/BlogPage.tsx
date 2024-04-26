@@ -17,6 +17,7 @@ interface BlogPageProps {
     recipes: Recipe[];
   };
 }
+
 export default function BlogPage({ data }: BlogPageProps) {
   const t = useTranslations("Blogs");
   const { recipes } = data;
@@ -49,7 +50,7 @@ export default function BlogPage({ data }: BlogPageProps) {
                   <span> Minutes</span>
                 </p>
               </div>
-              <div className="">
+              <div>
                 <h1 className="text-lg text-left font-bold">{recipe.name}</h1>
               </div>
               <div>
