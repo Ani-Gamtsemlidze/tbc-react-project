@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import ThemeUi from "./ThemeUi";
@@ -25,12 +24,12 @@ export default function ThemeSwitch() {
     checkUserPreference();
   }, []);
 
-  function handleTheme(newTheme) {
+  function handleTheme(newTheme: string) {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   }
 
-  function handleSystemTheme(newTheme) {
+  function handleSystemTheme(newTheme: string) {
     setTheme(newTheme);
     localStorage.removeItem("theme");
   }

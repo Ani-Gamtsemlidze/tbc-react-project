@@ -1,6 +1,6 @@
-import CompanyContact from "@/components/contact/CompanyContact";
-import ContactForm from "@/components/contact/ContactForm";
 import { useTranslations } from "next-intl";
+import ContactForm from "../../../../components/contact/ContactForm";
+import CompanyContact from "../../../../components/contact/CompanyContact";
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -27,7 +27,12 @@ export default function Contact() {
             placeholder={t("subject")}
             id="subject"
           />
-          <ContactForm type="textarea" label={t("textarea")} id="textarea" />
+          <ContactForm
+            type="textarea"
+            label={t("textarea")}
+            id="textarea"
+            placeholder={t("message")}
+          />
 
           <button
             className="bg-gray-800 hover:bg-gray-900 transition text-white px-4 py-2 rounded w-36 mt-4 ml-4"

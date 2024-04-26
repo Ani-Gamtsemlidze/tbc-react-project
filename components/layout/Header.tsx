@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Navigation from "./Navigation";
 import LogoutBtn from "../logout/LogoutBtn";
-import ThemeSwitch from "../theme/ThemeSwitch";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
+import ThemeSwitch from "../theme/ThemeSwitch";
 
 export default function Header() {
   return (

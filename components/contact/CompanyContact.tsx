@@ -1,5 +1,13 @@
 import Image from "next/image";
-export default function CompanyContact({ image, companyInfo }) {
+
+interface CompanyContactProps {
+  image: string;
+  companyInfo: string;
+}
+export default function CompanyContact({
+  image,
+  companyInfo,
+}: CompanyContactProps) {
   return (
     <>
       <div className="flex items-center ">

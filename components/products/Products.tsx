@@ -1,8 +1,23 @@
 "use client";
+
+interface Product {
+  title: string;
+  description: string;
+  img: string;
+  price: number;
+  id: string;
+}
+
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-export default function Products({ title, description, img, price, id }) {
+export default function Products({
+  title,
+  description,
+  img,
+  price,
+  id,
+}: Product) {
   const router = useRouter();
 
   return (

@@ -1,6 +1,13 @@
 import { useTranslations } from "next-intl";
+import { ChangeEvent } from "react";
 
-function Search({ onSort, searchItem, onSearch }) {
+interface SearchProps {
+  onSort: () => void;
+  searchItem: string;
+  onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+function Search({ onSort, searchItem, onSearch }: SearchProps) {
   const t = useTranslations("Header");
   return (
     <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4 mt-2 ">

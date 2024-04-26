@@ -4,13 +4,14 @@ import { useRouter } from "next/navigation";
 import ThemeSwitch from "../theme/ThemeSwitch";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import { useTranslations } from "next-intl";
+import { FormEvent } from "react";
 
 export default function LoginForm() {
   const t = useTranslations("Login");
   const router = useRouter();
-  const FormAction = async (e) => {
+  const FormAction = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target as HTMLFormElement);
 
     try {
       const response = await fetch("/login/api", {
@@ -72,7 +73,7 @@ export default function LoginForm() {
             id="username"
             name="username"
             placeholder={t("name")}
-            spellCheck="off"
+            spellCheck="false"
             autoComplete="off"
             required
           />

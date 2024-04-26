@@ -1,6 +1,4 @@
-import Error from "../error";
-
-import HomePage from "@/components/home/HomePage";
+import HomePage from "../../../components/home/HomePage";
 
 async function getProductsData() {
   const res = await fetch("https://dummyjson.com/products");

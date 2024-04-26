@@ -10,12 +10,12 @@ export default function LocalSwitcher() {
   const pathname = usePathname();
   const localActive = useLocale();
 
-  const getPathWithoutLocale = (pathname, locale) => {
+  const getPathWithoutLocale = (pathname: string, locale: string) => {
     const prefixRegex = new RegExp(`^/${locale}`);
     return pathname.replace(prefixRegex, "");
   };
 
-  const onSelectChange = (e) => {
+  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const nextLocale = e.target.value;
     const pathnameWithoutLocale = getPathWithoutLocale(pathname, localActive);
     startTransition(() => {

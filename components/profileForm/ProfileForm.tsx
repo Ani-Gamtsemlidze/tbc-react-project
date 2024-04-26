@@ -1,13 +1,22 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-export default function ProfileForm({ type, id, placeholder }) {
+interface ProfileFormProps {
+  type: string;
+  id: string;
+  placeholder: string;
+}
+export default function ProfileForm({
+  type,
+  id,
+  placeholder,
+}: ProfileFormProps) {
   const t = useTranslations("Profile");
 
   const [userProfile, setUserProfile] = useState("");
 
-  const handleProfile = (e) => {
+  const handleProfile = (e: ChangeEvent<HTMLInputElement>) => {
     setUserProfile(e.target.value);
   };
 
