@@ -23,7 +23,7 @@ export default function LogoutBtn() {
       <div className="flex items-center">
         <FiUser />
         <button
-          className="text-black px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
+          className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
           onClick={handleLogout}
         >
           {t("logout")}

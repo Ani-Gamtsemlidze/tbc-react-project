@@ -17,19 +17,32 @@
 }
 
 .products-scroll {
-  max-height: calc(100vh - 310px);
+  max-height: calc(100vh - 312px);
 }
 
 
-select {
-  appearance: none;
-  -webkit-appearance: none;
-  font-size: 15px;
 
-  color: #000;
-  cursor: pointer;
-}
-
-  select::-ms-expand {
-    display: none;
+  .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-color: rgb(180, 180, 180);
   }
+
+.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused {
+  border-color: rgba(0, 0, 0, 0.23);
+}
+
+.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root:hover{
+  border-color: rgb(180, 180, 180);
+
+}
+
+.MuiFormControl-root{
+  margin: 0px 20px;
+}
+
+.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(0, 0, 0, 0.23);
+}
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: black;
+}
