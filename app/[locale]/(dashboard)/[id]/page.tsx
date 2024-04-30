@@ -1,5 +1,4 @@
 import { unstable_setRequestLocale } from "next-intl/server";
-// import { getProductsData } from "../page";
 import { InnerProduct } from "../../../../components/products/InnerProduct";
 
 interface Product {

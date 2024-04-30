@@ -44,9 +44,12 @@ export default function HomePage({ productsData }: HomePageProps) {
     }
   };
 
-  const debounce = (func: Function, delay: number) => {
+  const debounce = <Args extends any[]>(
+    func: (...args: Args) => void,
+    delay: number
+  ) => {
     let timerId: ReturnType<typeof setTimeout>;
-    return (...args: any[]) => {
+    return (...args: Args) => {
       clearTimeout(timerId);
       timerId = setTimeout(() => {
         func(...args);

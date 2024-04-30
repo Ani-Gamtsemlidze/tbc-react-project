@@ -7,10 +7,10 @@ export default function Navigation() {
   const t = useTranslations("Navigation");
   const pathname = usePathname();
   const navigation = [
-    { title: t("home"), href: "/" },
-    { title: t("profile"), href: "/profile" },
-    { title: t("contact"), href: "/contact" },
-    { title: t("blog"), href: "/blog" },
+    { title: t("home"), href: `/` },
+    { title: t("profile"), href: `/profile` },
+    { title: t("contact"), href: `/contact` },
+    { title: t("blog"), href: `/blog` },
   ];
 
   return (
@@ -19,7 +19,7 @@ export default function Navigation() {
         {navigation.map((list) => (
           <li key={list.href}>
             <Link
-              className={`text-white mr-4 text-dm transition rounded dark:text-white ${
+              className={`text-[4C4C4C] mr-4 text-dm transition rounded dark:text-white text-lg ${
                 pathname === list.href ? "active" : ""
               }`}
               href={list.href}

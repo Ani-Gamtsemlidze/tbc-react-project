@@ -33,14 +33,14 @@ export default function LoginForm() {
   return (
     <div className="bg-gray-200 dark:bg-slate-700   h-screen flex justify-center items-center ">
       <div className=" flex flex-col items-center ">
-        <div className="flex mb-2">
+        <div className="flex mb-2 items-center">
           <ThemeSwitch />
           <LocalSwitcher />
         </div>
-        <div className="bg-black w-80 rounded-t-lg	 ">
+        <div className="bg-gray-100 border-b w-80 rounded-t-lg	py-2 ">
           <Image
             className="mx-auto my-2"
-            src="/images/X-Logo.png"
+            src="/images/logo.png"
             width={40}
             height={40}
             alt="logo"

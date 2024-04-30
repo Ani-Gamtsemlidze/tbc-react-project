@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import ThemeUi from "./ThemeUi";
@@ -6,32 +7,43 @@ import ThemeUi from "./ThemeUi";
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [activeItem, setActiveItem] = useState("");
 
   function checkUserPreference() {
-    if (
+    const prefersDarkMode =
       localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+      (localStorage.theme === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    setIsDarkTheme(prefersDarkMode);
+    document.documentElement.classList.toggle("dark", prefersDarkMode);
+  }
+
+  function checkClass() {
+    const darkClassName = document.querySelector(".dark");
+
+    return darkClassName;
   }
 
   useEffect(() => {
     setMounted(true);
     checkUserPreference();
-  }, []);
+  }, [checkClass]);
 
-  function handleTheme(newTheme: string) {
+  function handleTheme(newTheme: string, activeTheme: string) {
     setTheme(newTheme);
+    setActiveItem(activeTheme);
+    setIsDarkTheme(newTheme === "dark");
     localStorage.setItem("theme", newTheme);
+    localStorage.setItem("active", activeTheme);
   }
 
-  function handleSystemTheme(newTheme: string) {
+  function handleSystemTheme(newTheme: string, activeTheme: string) {
     setTheme(newTheme);
-    localStorage.removeItem("theme");
+    setActiveItem(activeTheme);
+    setIsDarkTheme(newTheme === "dark");
+    localStorage.setItem("theme", newTheme);
+    localStorage.setItem("active", activeTheme);
   }
 
   return (
@@ -39,7 +51,9 @@ export default function ThemeSwitch() {
       mounted={mounted}
       theme={theme}
       handleTheme={handleTheme}
+      activeItem={activeItem}
       handleSystemTheme={handleSystemTheme}
+      isDarkTheme={isDarkTheme}
     />
   );
 }

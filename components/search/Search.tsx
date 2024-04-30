@@ -10,7 +10,7 @@ interface SearchProps {
 function Search({ onSort, searchItem, onSearch }: SearchProps) {
   const t = useTranslations("Header");
   return (
-    <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4 mt-2 ">
+    <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4  ">
       <form>
         <input
           className="transition hover:bg-[#E7E8D1] hover:placeholder-[#B85042] hover:text-[#B85042]   border cursor-pointer p-2 pl-4 bg-transparent placeholder-white focus:outline-none text-white "

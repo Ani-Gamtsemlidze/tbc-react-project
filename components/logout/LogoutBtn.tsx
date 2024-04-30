@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { FiUser } from "react-icons/fi";
 
 export default function LogoutBtn() {
   const router = useRouter();
@@ -18,13 +19,16 @@ export default function LogoutBtn() {
     }
   };
   return (
-    <div>
-      <button
-        className="text-white border px-2 py-1 rounded-sm  hover:text-white transition dark:hover:border-[#B85042]"
-        onClick={handleLogout}
-      >
-        {t("logout")}
-      </button>
-    </div>
+    <>
+      <div className="flex items-center">
+        <FiUser />
+        <button
+          className="text-black px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
+          onClick={handleLogout}
+        >
+          {t("logout")}
+        </button>
+      </div>
+    </>
   );
 }
