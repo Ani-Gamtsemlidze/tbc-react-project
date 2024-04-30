@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { Providers } from "./providers";
 import { notFound } from "next/navigation";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export const metadata = {
   title: "Create Next App",
@@ -16,10 +17,17 @@ interface RootLayoutProps {
   };
 }
 
+const locales = ["en", "ka"];
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
   children,
   params,
 }: RootLayoutProps) {
+  unstable_setRequestLocale(params.locale);
   let messages;
   try {
     messages = (await import(`../../messages/${params.locale}.json`)).default;

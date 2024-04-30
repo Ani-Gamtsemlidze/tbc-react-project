@@ -9,7 +9,9 @@ interface PageParams {
   params: { id: number; locale: string };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({ params }: PageParams) {
+  unstable_setRequestLocale(params.locale);
+
   try {
     const res = await fetch("https://dummyjson.com/products");
     const products = await res.json();

@@ -1,7 +1,17 @@
 import { useTranslations } from "next-intl";
 import ProfileForm from "../../../../components/profileForm/ProfileForm";
 
-export default function Profile() {
+import { unstable_setRequestLocale } from "next-intl/server";
+
+interface Params {
+  params: {
+    locale: string;
+  };
+}
+
+export default function Profile({ params }: Params) {
+  unstable_setRequestLocale(params.locale);
+
   const t = useTranslations("Profile");
   const inputData = [
     { type: "text", id: "username", placeholder: t("username") },

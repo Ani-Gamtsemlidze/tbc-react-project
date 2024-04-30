@@ -1,8 +1,17 @@
 import { useTranslations } from "next-intl";
 import ContactForm from "../../../../components/contact/ContactForm";
 import CompanyContact from "../../../../components/contact/CompanyContact";
+import { unstable_setRequestLocale } from "next-intl/server";
 
-export default function Contact() {
+interface Params {
+  params: {
+    locale: string;
+  };
+}
+
+export default function Contact({ params }: Params) {
+  unstable_setRequestLocale(params.locale);
+
   const t = useTranslations("Contact");
   return (
     <div className="bg-gray-200 dark:bg-slate-500 flex flex-1 p-8 justify-center">
