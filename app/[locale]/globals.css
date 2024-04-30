@@ -12,12 +12,70 @@
 }
 
 .active {
-   border: 1px solid white;
-   padding: 4px 8px;
+  background: #4c4c4c;
+  color: white;
+  border-radius: 2px;
+
 }
 
+.dark .active {
+  background: #334255;
+  color: #E2E8F0 !important;
+
+}
+
+.fill ul li a:hover:after {
+  z-index: -10;
+  animation: fill 0.5s forwards;
+  -webkit-animation: fill 0.5s forwards;
+  -moz-animation: fill 0.5s forwards;
+  opacity: 1;
+}
+
+@keyframes fill {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: #4c4c4c; /* Default background color */
+    border-radius: 2px;
+  }
+}
+
+@keyframes fill-dark {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: #334255;
+    border-radius: 2px;
+  }
+}
+
+.dark .fill ul li a:hover:after {
+  animation: fill-dark 0.5s forwards;
+  -webkit-animation: fill-dark 0.5s forwards;
+  -moz-animation: fill-dark 0.5s forwards;
+}
+
+
+
 .products-scroll {
-  max-height: calc(100vh - 312px);
+  max-height: calc(100vh - 370px);
 }
 
 
@@ -46,3 +104,5 @@
 .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
   color: black;
 }
+
+
