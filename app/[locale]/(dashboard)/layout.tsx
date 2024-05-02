@@ -16,7 +16,7 @@ export default function dashboardLayout({ children, params }: LayoutProps) {
     <div className="flex flex-col justify-between h-screen">
       <Header />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

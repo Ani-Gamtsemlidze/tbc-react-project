@@ -20,7 +20,7 @@ export default function Navigation() {
         {navigation.map((list) => (
           <li key={list.href}>
             <Link
-              className={`  mr-4 rounded dark:text-white text-lg
+              className={` no-underline text-[#4C4C4C] mr-4 rounded dark:text-white text-lg
               block py-2 px-3 font-bold my-2 uppercase relative
 
               after:content-['.'] after:text-left after:opacity-5 after:m-0 
