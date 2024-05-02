@@ -33,7 +33,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "i18n.ts"  ],
+, "i18n.ts", "components/slider/slider.js"  ],
   "exclude": [
     "node_modules"
   ]

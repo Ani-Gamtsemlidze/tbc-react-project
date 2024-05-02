@@ -1,21 +1,14 @@
-import HomePage from "../../../components/home/HomePage";
-
-async function getProductsData() {
-  const res = await fetch("https://dummyjson.com/products");
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { CarouselCustomNavigation } from "../../../components/slider/slider";
 
 export default async function Home() {
-  const productsData = await getProductsData();
-
   return (
     <>
-      <HomePage productsData={productsData} />
+      <CarouselCustomNavigation />
+      <div className="text-center bg-[#F6F3EC]">
+        <h1>Shop Now</h1>
+        <p>Pick our favourite Products</p>
+      </div>
+      <div></div>
     </>
   );
 }

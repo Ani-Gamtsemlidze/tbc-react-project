@@ -9,7 +9,9 @@
       "home": "Home",
       "profile":"Profile",
       "contact": "Contact",
-      "blog": "Blog"
+      "blog": "Blog",
+      "products":"products"
+
     },
     "Footer":{
       "email":"Email address",
@@ -25,6 +27,7 @@
       "password":"Password",
       "confirmPass": "Confirm Password",
       "button": "Save Changes"
+
 
     },
     "Contact":{

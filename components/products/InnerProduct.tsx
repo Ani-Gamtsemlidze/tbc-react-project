@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel } from "../carousel/Carousel";
+import { CarouselItems } from "../carousel/Carousel";
 
 interface InnerProductData {
   title: string;
@@ -20,7 +20,7 @@ const InnerProduct: React.FC<InnerProductProps> = ({ innerProductData }) => {
     <div className="h-screen  bg-gray-200 dark:bg-slate-500 flex justify-center items-center">
       {innerProductData && (
         <div className="flex justify-center ">
-          <Carousel imagesData={innerProductData} />
+          <CarouselItems imagesData={innerProductData} />
           <div className="ml-6">
             <h1 className="text-black text-xl font-bold">
               {innerProductData.title}
