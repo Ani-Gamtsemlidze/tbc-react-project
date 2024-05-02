@@ -41,7 +41,7 @@ export default function ThemeUi({
   return (
     <>
       {mounted && (
-        <div className="relative ">
+        <div className="relative z-10">
           <button onClick={handleChangeButton}>
             {isDarkTheme ? <FiMoon /> : <FiSun />}
           </button>
