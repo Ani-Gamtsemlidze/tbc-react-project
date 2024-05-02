@@ -9,7 +9,7 @@ interface Props {
   imagesData: ImageData;
 }
 
-const Carousel: React.FC<Props> = ({ imagesData }) => {
+const CarouselItems: React.FC<Props> = ({ imagesData }) => {
   const { thumbnail, images } = imagesData;
 
   return (
@@ -37,4 +37,4 @@ const Carousel: React.FC<Props> = ({ imagesData }) => {
   );
 };
 
-export { Carousel };
+export { CarouselItems };

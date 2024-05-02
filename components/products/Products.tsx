@@ -43,7 +43,7 @@ export default function Products({
         </div>
         <div className="  my-4 w-32">
           <button
-            onClick={() => router.push(`/${id}`)}
+            onClick={() => router.push(`products/${id}`)}
             className="rounded py-2 mx-2 px-2  hover:border hover:border-[#B85042] text-[#B85042] dark:text-[#e2e8f0] dark:hover:bg-slate-800 font-bold flex flex-start cursor-pointer transition"
           >
             View More
