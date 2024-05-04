@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 export default function Footer() {
   const t = useTranslations("Footer");
   return (
-    <footer className="flex  justify-between items-center bg-[#B85042]  dark:bg-slate-600 p-4">
+    <footer className="flex  justify-between items-center bg-white  dark:bg-slate-600 p-4">
       <div className="">
         <Navigation />
         <form action="/submit">
@@ -17,7 +17,7 @@ export default function Footer() {
               placeholder={t("email")}
             />
             <button
-              className="text-white dark:text-white text-sm ml-2"
+              className="text-black dark:text-white text-sm ml-2"
               type="submit"
             >
               {t("subscribe")}
@@ -26,10 +26,10 @@ export default function Footer() {
         </form>
       </div>
       <div className="flex flex-col flex-end">
-        <a href="#" className="text-white dark:text-white text-sm">
+        <a href="#" className="text-black dark:text-white text-sm">
           {t("terms")}
         </a>
-        <a href="#" className="text-white dark:text-white text-sm mt-2">
+        <a href="#" className="text-black dark:text-white text-sm mt-2">
           {t("policy")}
         </a>
       </div>
