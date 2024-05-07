@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
