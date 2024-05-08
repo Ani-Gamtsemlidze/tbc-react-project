@@ -1,26 +1,28 @@
-
+"use server"
 // export const BASE_URL = "http://localhost:3000"
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.BASE_URL;
-console.log("BASE_URL:", baseUrl);
+// const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.BASE_URL;
+// console.log("BASE_URL:", baseUrl);
 
 
 export interface User {
-    id:number;
-    age:number;
-    name:string;
-    email:string;
+  id:number;
+  age:number;
+  name:string;
+  email:string;
 }
 
 export async function getUsers(){
-    const response = await fetch(`${baseUrl}/api/get-users`);
+  // console.log(BASE_URL)
+  console.log(process.env.BASE_URL)
+    const response = await fetch(`${process.env.BASE_URL}/api/get-users`);
     const {users} = await response.json()
 
     return users.rows;
 }
 
 export async function createUser(name:string, email:string, age:number) {
-    const response =  await fetch(`${baseUrl}/api/create-users`, {
+    const response =  await fetch(`${process.env.BASE_URL}/api/create-users`, {
         method: "POST",
         body: JSON.stringify({
           name,
@@ -35,7 +37,7 @@ export async function createUser(name:string, email:string, age:number) {
 }
 
 export async function deleteUser (id:number) {
-    const response =  await fetch(`${baseUrl}/api/delete-users/${id}`, {
+    const response =  await fetch(`${process.env.BASE_URL}/api/delete-users/${id}`, {
         method: "DELETE",
       }); 
 
