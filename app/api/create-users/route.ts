@@ -14,7 +14,8 @@ export async function POST(request: Request) {
         console.log(name, email, age);
         
         const users = await sql`SELECT * FROM users`;
-        return NextResponse.json({ users }, { status: 200 });
+        const successMessage = 'User created successfully';
+        return NextResponse.json({ users, successMessage }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 });
     }

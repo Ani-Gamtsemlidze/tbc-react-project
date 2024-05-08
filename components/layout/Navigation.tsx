@@ -8,6 +8,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const navigation = [
     { title: t("home"), href: `/` },
+    { title: t("admin"), href: `/admin` },
     { title: t("products"), href: `/products` },
     { title: t("profile"), href: `/profile` },
     { title: t("contact"), href: `/contact` },
