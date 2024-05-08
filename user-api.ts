@@ -1,6 +1,6 @@
 
 // export const BASE_URL = "http://localhost:3000"
-const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+
 
 export interface User {
     id:number;
@@ -10,6 +10,7 @@ export interface User {
 }
 
 export async function getUsers(){
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000'
     const response = await fetch(`${baseUrl}/api/get-users`);
     const {users} = await response.json()
 
@@ -17,6 +18,8 @@ export async function getUsers(){
 }
 
 export async function createUser(name:string, email:string, age:number) {
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000'
+
     const response =  await fetch(`${baseUrl}/api/create-users`, {
         method: "POST",
         body: JSON.stringify({
@@ -32,6 +35,8 @@ export async function createUser(name:string, email:string, age:number) {
 }
 
 export async function deleteUser (id:number) {
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000'
+
     const response =  await fetch(`${baseUrl}/api/delete-users/${id}`, {
         method: "DELETE",
       }); 
