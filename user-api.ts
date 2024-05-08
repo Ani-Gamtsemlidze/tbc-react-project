@@ -29,3 +29,11 @@ export async function createUser(name:string, email:string, age:number) {
 
       return data;
 }
+
+export async function deleteUser (id:number) {
+    const response =  await fetch(`${BASE_URL}/api/delete-users/${id}`, {
+        method: "DELETE",
+      }); 
+
+      return response.json()
+}

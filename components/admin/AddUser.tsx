@@ -27,7 +27,7 @@ export default function AddUser({ onAddUser }: AddUserProps) {
 
   return (
     <>
-      <div className="my-4 flex justify-between items-center  w-[700px]   ">
+      <div className="my-4 flex justify-between items-center  w-[800px]   ">
         <h1 className="font-bold text-xl">Users</h1>
         <div
           onClick={handleAddUser}
@@ -36,10 +36,11 @@ export default function AddUser({ onAddUser }: AddUserProps) {
           <button>Add User</button>
         </div>
       </div>
-      <div className="bg-stone-400	 flex  justify-between w-[700px] py-4 px-8 relative">
-        <p>name</p>
-        <p>email</p>
-        <p>age</p>
+      <div className="bg-stone-400	justify-between flex w-[800px] py-4 px-8 relative">
+        <div>Name</div>
+        <div className="ml-8">Email</div>
+        <div className="ml-32">Age</div>
+        <div className="text-transparent">Delete</div>
         {isAddUser && (
           <form
             onSubmit={handleSubmit}

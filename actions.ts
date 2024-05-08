@@ -1,5 +1,6 @@
 
-import { createUser, getUsers } from "./user-api";
+"use server"
+import { createUser, deleteUser, getUsers } from "./user-api";
 
 export async function createUserAction(formData: FormData) {
     try {
@@ -16,4 +17,8 @@ export async function createUserAction(formData: FormData) {
         console.error("Error creating user:", error);
         return { success: false, error };
     }
+}
+
+export async function deleteUserAction (id:number) {
+    await deleteUser(id);
 }
