@@ -8,6 +8,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const navigation = [
     { title: t("home"), href: `/` },
+    { title: t("admin"), href: `/admin` },
     { title: t("products"), href: `/products` },
     { title: t("profile"), href: `/profile` },
     { title: t("contact"), href: `/contact` },
@@ -29,7 +30,7 @@ export default function Navigation() {
 
               duration-[0.5s]
 
-              hover:text-white hover:z-10 dark:hover:text-[#E2E8F0]
+              hover:text-white hover:delay-200 hover:z-10 dark:hover:text-[#E2E8F0]
 
               
               ${pathname === list.href ? "active" : ""}`}

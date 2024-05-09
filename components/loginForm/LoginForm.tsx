@@ -41,6 +41,7 @@ export default function LoginForm() {
           <Image
             className="mx-auto my-2"
             src="/images/logo.png"
+            priority
             width={40}
             height={40}
             alt="logo"

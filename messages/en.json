@@ -10,7 +10,8 @@
       "profile":"Profile",
       "contact": "Contact",
       "blog": "Blog",
-      "products":"products"
+      "products":"products",
+      "admin":"admin"
 
     },
     "Footer":{
