@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const revalidate = 0;
 export async function GET () {
     try {
-        const users = await sql`SELECT * from users;`
+        const users = await sql`SELECT * from users ORDER BY id ASC;`
 
 
         

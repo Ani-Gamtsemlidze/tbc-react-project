@@ -1,9 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
-import AddUser from "../../../../components/admin/AddUser";
+
+import { useState, useEffect } from "react";
 import { User, getUsers } from "../../../../user-api";
 import { createUserAction, deleteUserAction } from "../../../../actions";
 import DeleteButton from "../../../../components/admin/DeleteButton";
+import { EditUser } from "../../../../components/admin/EditUser";
+import AddUser from "../../../../components/admin/AddUser";
+
 export default function AdminPage() {
   const [usersList, setUsersList] = useState<User[]>([]);
 
@@ -42,14 +45,22 @@ export default function AdminPage() {
     }
   };
 
+  const handleUpdateUser = (updatedUser: User) => {
+    setUsersList((prevUsers) =>
+      prevUsers.map((user) =>
+        user.id === updatedUser.id ? { ...user, ...updatedUser } : user
+      )
+    );
+  };
+
   return (
-    <div className="flex flex-col  flex-1 bg-gray-200 dark:bg-slate-500 items-center p-4 ">
+    <div className="flex flex-col flex-1 bg-gray-200 dark:bg-slate-500 items-center p-4 relative">
       <AddUser onAddUser={handleAddUser} />
-      <ul className="flex flex-col  w-[800px] max-h-[300px]  bg-stone-300 overflow-y-auto	 py-4 px-8 ">
+      <ul className="flex flex-col w-[800px] max-h-[280px] bg-stone-300 overflow-y-auto py-4 px-8">
         {usersList.map((user: User) => (
           <div
             key={user.id}
-            className="flex w-full justify-between border-b py-2 "
+            className="flex w-full justify-between border-b py-2 items-center"
           >
             <li className="w-12">{user.name}</li>
             <li className="w-52">{user.email}</li>
@@ -58,6 +69,7 @@ export default function AdminPage() {
               id={user.id}
               handleDelete={() => handleDeleteUsers(user.id)}
             />
+            <EditUser user={user} onUpdateUser={handleUpdateUser} />
           </div>
         ))}
       </ul>

@@ -2,6 +2,7 @@ import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(request: NextRequest) {
+  
   const id = request.nextUrl.pathname.replace("/api/delete-users/", " ");
 
   console.log(request, "request", id);

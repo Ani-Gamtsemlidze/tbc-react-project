@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface AddUserProps {
   onAddUser: (formData: FormData) => void;
@@ -8,6 +8,25 @@ export default function AddUser({ onAddUser }: AddUserProps) {
   const [isAddUser, setIsAddUser] = useState(false);
 
   const [formData, setFormData] = useState<FormData>(new FormData());
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const saveModule = document.getElementById("form");
+      if (saveModule && !saveModule.contains(event.target as Node)) {
+        setIsAddUser(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  function handleAddUser() {
+    setIsAddUser(!isAddUser);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -20,10 +39,6 @@ export default function AddUser({ onAddUser }: AddUserProps) {
     onAddUser(formData);
     setFormData(new FormData());
   };
-
-  function handleAddUser() {
-    setIsAddUser(!isAddUser);
-  }
 
   return (
     <>
@@ -41,6 +56,7 @@ export default function AddUser({ onAddUser }: AddUserProps) {
         <div className="ml-8">Email</div>
         <div className="ml-32">Age</div>
         <div className="text-transparent">Delete</div>
+        <div className="text-transparent">Edit</div>
         {isAddUser && (
           <form
             onSubmit={handleSubmit}

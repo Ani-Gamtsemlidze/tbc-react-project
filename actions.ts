@@ -1,6 +1,6 @@
 
 "use server"
-import { createUser, deleteUser, getUsers } from "./user-api";
+import { User, createUser, deleteUser, editUser, getUsers } from "./user-api";
 
 export async function createUserAction(formData: FormData) {
     try {
@@ -21,4 +21,14 @@ export async function createUserAction(formData: FormData) {
 
 export async function deleteUserAction (id:number) {
     await deleteUser(id);
+}
+
+export async function editUsersAction(id: number, userData: User) {
+    try {
+   await editUser(id, userData);
+
+    } catch (error) {
+        console.error("Error editing user:", error);
+        throw error; 
+    }
 }
