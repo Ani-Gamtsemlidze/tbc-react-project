@@ -50,11 +50,12 @@
       "blogs":"BLOGS"
     },
     "Login":{
-      "login": "Login",
-      "signin":"Sign In to continue access ",
+      "welcome": "Welcome",
+      "login": "to our Entertainment Hub!",
+      "signin":"Sign In",
       "name": "username",
       "password":"password",
-      "button":"Login"
+      "button":"Click Me"
 
     }
     
