@@ -1,11 +1,12 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useReducer } from "react";
 import { useTranslations } from "next-intl";
 import Search from "../search/Search";
-import Products from "./Products";
+import ProductsCard from "./ProductsCard";
+import { initialState, reducer } from "../../reducers";
 
-interface Product {
-  id: string;
+export interface Product {
+  id: number;
   title: string;
   description: string;
   price: number;
@@ -17,6 +18,8 @@ interface HomePageProps {
     products: Product[];
   };
 }
+
+export type SelectedProducts = Record<number, number>;
 
 export default function ProductsPage({ productsData }: HomePageProps) {
   const t = useTranslations("Header");
@@ -81,12 +84,27 @@ export default function ProductsPage({ productsData }: HomePageProps) {
     setSearchItem(searchQuery);
     debounceSearch(searchQuery);
   };
+
+  const [selectedProducts, dispatch] = useReducer(reducer, initialState);
+
+  // const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+
+  const handleClick = (productsData: Product) => {
+    dispatch({ type: "INCREMENT", payload: productsData.id });
+  };
+
+  const selectedNumber = Object.values(selectedProducts).reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+  console.log(selectedProducts);
+
   return (
     <div className="bg-[#E7E8D1] dark:bg-slate-900">
       <Search
         onSort={handleSort}
         searchItem={searchItem}
         onSearch={handleSearch}
+        selectedNum={selectedNumber}
       />
 
       <div className="flex flex-1 flex-col">
@@ -95,19 +113,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
             {t("title")}
           </h1>
         </div>
-        <div className="products-scroll  flex  overflow-y-scroll justify-center flex-wrap px-10 py-4">
-          {itemsData &&
-            itemsData.map((product) => (
-              <Products
-                key={product.id}
-                id={product.id}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-                img={product.images[0]}
-              />
-            ))}
-        </div>
+        <ProductsCard itemsData={itemsData} handleClick={handleClick} />
       </div>
     </div>
   );

@@ -1,13 +1,16 @@
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { ChangeEvent } from "react";
+import { IoCartOutline } from "react-icons/io5";
 
 interface SearchProps {
   onSort: () => void;
   searchItem: string;
   onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedNum: number;
 }
 
-function Search({ onSort, searchItem, onSearch }: SearchProps) {
+function Search({ onSort, searchItem, onSearch, selectedNum }: SearchProps) {
   const t = useTranslations("Header");
   return (
     <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4  ">
@@ -27,6 +30,12 @@ function Search({ onSort, searchItem, onSearch }: SearchProps) {
       >
         {t("sort")}
       </button>
+      <Link href="/checkout" className="flex relative">
+        <IoCartOutline className="w-6 h-6 text-white ml-4 object-cover cursor-pointer" />
+        <span className="absolute bottom-4 right-[-8px] text-white">
+          {selectedNum}
+        </span>
+      </Link>
     </div>
   );
 }
