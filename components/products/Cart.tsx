@@ -1,3 +1,4 @@
+"use client";
 export default function Cart({ handleClick }: { handleClick: () => void }) {
   return (
     <div className="my-4 w-32 ">

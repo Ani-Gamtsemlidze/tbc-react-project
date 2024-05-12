@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Cart from "./Cart";
-// import { useLocalStorage } from "../../hooks";
 
 interface Product {
   id: number;
@@ -21,8 +20,6 @@ export default function ProductsCard({
   itemsData,
   handleClick,
 }: ProductsCardProps) {
-  //   const [value, setValue] = useLocalStorage("cart", []);
-
   const router = useRouter();
   return (
     <div className="products-scroll flex justify-center flex-wrap px-10 py-4">

@@ -8,6 +8,7 @@ type Action =
 export const initialState: SelectedProducts = {};
 
 export function reducer(state: SelectedProducts, action: Action) {
+
   switch (action.type) {
     case "INCREMENT": {
       const count = state[action.payload] || 0;
@@ -26,7 +27,7 @@ export function reducer(state: SelectedProducts, action: Action) {
       };
     }
     case "RESET": {
-      return initialState;
+      return state;
     }
     default:
       return state;

@@ -1,8 +1,10 @@
 "use client";
-import { useState, useCallback, useReducer } from "react";
+
+import { useState, useCallback, useReducer, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import Search from "../search/Search";
 import ProductsCard from "./ProductsCard";
+import { useLocalStorage } from "../../hooks";
 import { initialState, reducer } from "../../reducers";
 
 export interface Product {
@@ -19,11 +21,21 @@ interface HomePageProps {
   };
 }
 
-export type SelectedProducts = Record<number, number>;
+export type SelectedProducts = { [key: number]: number };
 
 export default function ProductsPage({ productsData }: HomePageProps) {
   const t = useTranslations("Header");
   const { products } = productsData;
+
+  const [storedValue, setStoredValue] = useLocalStorage(
+    "selectedProducts",
+    initialState
+  );
+
+  const [selectedProducts, dispatch] = useReducer(
+    reducer,
+    storedValue || initialState
+  );
 
   const [itemsData, setItemsData] = useState<Product[]>(products);
   const [isSorted, setIsSorted] = useState(false);
@@ -85,9 +97,11 @@ export default function ProductsPage({ productsData }: HomePageProps) {
     debounceSearch(searchQuery);
   };
 
-  const [selectedProducts, dispatch] = useReducer(reducer, initialState);
-
-  // const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+  useEffect(() => {
+    if (storedValue !== undefined) {
+      setStoredValue(selectedProducts);
+    }
+  }, [selectedProducts, setStoredValue]);
 
   const handleClick = (productsData: Product) => {
     dispatch({ type: "INCREMENT", payload: productsData.id });
@@ -96,7 +110,6 @@ export default function ProductsPage({ productsData }: HomePageProps) {
   const selectedNumber = Object.values(selectedProducts).reduce((acc, cur) => {
     return acc + cur;
   }, 0);
-  console.log(selectedProducts);
 
   return (
     <div className="bg-[#E7E8D1] dark:bg-slate-900">
