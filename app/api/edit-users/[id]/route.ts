@@ -5,7 +5,7 @@ export const revalidate = 0;
 export async function PUT(request: NextRequest) {
 
   const id = request.nextUrl.pathname.replace("/api/edit-users/", " ");
-  (request, id)
+  (id)
   try {
     const { name, email, age } = await request.json();
 
