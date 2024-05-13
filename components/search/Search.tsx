@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { ChangeEvent } from "react";
-import { ItemsBucket } from "./ItemsBucket";
+import ItemsBucket from "./ItemsBucket";
 
 interface SearchProps {
   onSort: () => void;

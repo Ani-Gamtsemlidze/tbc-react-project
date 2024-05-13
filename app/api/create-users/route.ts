@@ -11,7 +11,6 @@ export async function POST(request: Request) {
         
         await sql`INSERT INTO users (name, email, age) VALUES (${name}, ${email}, ${age})`;
         
-        console.log(name, email, age);
         
         const users = await sql`SELECT * FROM users`;
         const successMessage = 'User created successfully';

@@ -6,12 +6,9 @@ export interface User {
   email:string;
 }
 
-// const BASE_URL = "http://localhost:3000"
 
 export async function getUsers(){
   
-  // console.log(BASE_URL)
-  console.log("url", process.env.BASE_URL)
     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
     const {users} = await response.json()
 
