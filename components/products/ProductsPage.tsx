@@ -2,10 +2,10 @@
 
 import { useState, useCallback, useReducer, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import Search from "../search/Search";
+import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
-import { useLocalStorage } from "../../hooks";
 import { initialState, reducer } from "../../reducers";
+import { useLocalStorage } from "../../hooks";
 
 export interface Product {
   id: number;
@@ -42,7 +42,6 @@ export default function ProductsPage({ productsData }: HomePageProps) {
   const [filteredItems, setFilteredItems] = useState<Product[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [searchItem, setSearchItem] = useState("");
-
   const handleSort = () => {
     setIsSorted(!isSorted);
 

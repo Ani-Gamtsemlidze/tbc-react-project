@@ -1,5 +1,4 @@
-import { SelectedProducts } from "./components/products/ProductsPage";
-
+import {SelectedProducts } from "./components/products/ProductsPage";
 type Action =
   | { type: "INCREMENT"; payload: number }
   | { type: "DECREMENT"; payload: number }
@@ -19,15 +18,22 @@ export function reducer(state: SelectedProducts, action: Action) {
       };
     }
     case "DECREMENT": {
-      const count = state[action.payload] || 0;
-      const newCount = Math.max(0, count - 1);
-      return {
-        ...state,
-        [action.payload]: newCount,
-      };
-    }
+        const count = state[action.payload] || 0;
+        const newCount = Math.max(0, count - 1);
+        if (newCount === 0) {
+          const newState = { ...state };
+          delete newState[action.payload];
+          return newState;
+        } else {
+          return {
+            ...state,
+            [action.payload]: newCount,
+          };
+        }
+      }
     case "RESET": {
-      return state;
+        localStorage.removeItem("selectedProducts");
+      return {};
     }
     default:
       return state;

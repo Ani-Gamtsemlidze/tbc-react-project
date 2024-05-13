@@ -1,7 +1,7 @@
 import React from "react";
 import { CarouselItems } from "../carousel/Carousel";
 
-interface InnerProductData {
+export interface InnerProductData {
   title: string;
   category: string;
   rating: number;

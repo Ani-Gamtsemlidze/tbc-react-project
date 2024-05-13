@@ -1,9 +1,15 @@
 "use client";
+import { useLocalStorage } from "../../../hooks";
+import SelectedProducts from "./SelectedProducts";
 
-export default function CheckOut() {
-  //   const [products = []] = useLocalStorage("selectedProducts");
+export default function Checkout() {
+  const [storedProducts = []] = useLocalStorage("selectedProducts");
+  const productIds: number[] = Object.keys(storedProducts).map(Number);
+  console.log(productIds);
 
-  //   const productIds = Object.keys(products);
-
-  return <div>CHECKOUT</div>;
+  return (
+    <div>
+      <SelectedProducts ids={productIds} />
+    </div>
+  );
 }
