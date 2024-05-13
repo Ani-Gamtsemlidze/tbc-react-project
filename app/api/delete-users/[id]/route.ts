@@ -5,7 +5,6 @@ export async function DELETE(request: NextRequest) {
   
   const id = request.nextUrl.pathname.replace("/api/delete-users/", " ");
 
-  console.log(request, "request", id);
 
   try {
     await sql`DELETE FROM users WHERE id = ${Number(id)};`;

@@ -1,11 +1,14 @@
 "use client";
-import { useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
-import Search from "../search/Search";
-import Products from "./Products";
 
-interface Product {
-  id: string;
+import { useState, useCallback, useReducer, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { Search } from "../search/Search";
+import ProductsCard from "./ProductsCard";
+import { initialState, reducer } from "../../reducers";
+import { useLocalStorage } from "../../hooks";
+
+export interface Product {
+  id: number;
   title: string;
   description: string;
   price: number;
@@ -18,16 +21,27 @@ interface HomePageProps {
   };
 }
 
+export type SelectedProducts = { [key: number]: number };
+
 export default function ProductsPage({ productsData }: HomePageProps) {
   const t = useTranslations("Header");
   const { products } = productsData;
+
+  const [storedValue, setStoredValue] = useLocalStorage(
+    "selectedProducts",
+    initialState
+  );
+
+  const [selectedProducts, dispatch] = useReducer(
+    reducer,
+    storedValue || initialState
+  );
 
   const [itemsData, setItemsData] = useState<Product[]>(products);
   const [isSorted, setIsSorted] = useState(false);
   const [filteredItems, setFilteredItems] = useState<Product[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [searchItem, setSearchItem] = useState("");
-
   const handleSort = () => {
     setIsSorted(!isSorted);
 
@@ -81,12 +95,28 @@ export default function ProductsPage({ productsData }: HomePageProps) {
     setSearchItem(searchQuery);
     debounceSearch(searchQuery);
   };
+
+  useEffect(() => {
+    if (storedValue !== undefined) {
+      setStoredValue(selectedProducts);
+    }
+  }, [selectedProducts, setStoredValue]);
+
+  const handleClick = (productsData: Product) => {
+    dispatch({ type: "INCREMENT", payload: productsData.id });
+  };
+
+  const selectedNumber = Object.values(selectedProducts).reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+
   return (
     <div className="bg-[#E7E8D1] dark:bg-slate-900">
       <Search
         onSort={handleSort}
         searchItem={searchItem}
         onSearch={handleSearch}
+        selectedNum={selectedNumber}
       />
 
       <div className="flex flex-1 flex-col">
@@ -95,19 +125,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
             {t("title")}
           </h1>
         </div>
-        <div className="products-scroll  flex  overflow-y-scroll justify-center flex-wrap px-10 py-4">
-          {itemsData &&
-            itemsData.map((product) => (
-              <Products
-                key={product.id}
-                id={product.id}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-                img={product.images[0]}
-              />
-            ))}
-        </div>
+        <ProductsCard itemsData={itemsData} handleClick={handleClick} />
       </div>
     </div>
   );

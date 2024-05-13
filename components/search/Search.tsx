@@ -1,13 +1,21 @@
+"use client";
 import { useTranslations } from "next-intl";
 import { ChangeEvent } from "react";
+import ItemsBucket from "./ItemsBucket";
 
 interface SearchProps {
   onSort: () => void;
   searchItem: string;
   onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedNum: number;
 }
 
-function Search({ onSort, searchItem, onSearch }: SearchProps) {
+export function Search({
+  onSort,
+  searchItem,
+  onSearch,
+  selectedNum,
+}: SearchProps) {
   const t = useTranslations("Header");
   return (
     <div className="flex   dark:border-[#B85042] dark:border-t items-center justify-center bg-[#B85042] dark:bg-slate-700   py-4  ">
@@ -27,8 +35,7 @@ function Search({ onSort, searchItem, onSearch }: SearchProps) {
       >
         {t("sort")}
       </button>
+      <ItemsBucket selectedNum={selectedNum} />
     </div>
   );
 }
-
-export default Search;
