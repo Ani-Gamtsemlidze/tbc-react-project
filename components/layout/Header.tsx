@@ -22,8 +22,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex  justify-between items-center bg-[#F6F3EC] dark:bg-slate-600 py-1 px-8">
-        <div className="flex items-center">
+      <header className="flex h-screen justify-between  items-center flex-col w-56 fixed left-0 top-0 z-50  bg-[#979797] dark:bg-slate-600 py-1 px-8">
+        <div className="flex  flex-col">
           <Link className="" href="/">
             <Image
               alt="X-logo"
@@ -35,7 +35,7 @@ export default function Header() {
           </Link>
           <Navigation />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center flex-col">
           {/* <RiSearch2Line /> */}
           <ThemeSwitch />
           <LocalSwitcher />

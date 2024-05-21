@@ -54,7 +54,7 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="flex flex-col flex-1 bg-gray-200 dark:bg-slate-500 items-center p-4 relative">
+    <div className="flex flex-col flex-1 bg-gray-200 dark:bg-slate-500 items-center p-4 relative min-h-[calc(100vh-80px)]">
       <AddUser onAddUser={handleAddUser} />
       <ul className="flex flex-col w-[800px] max-h-[280px] bg-stone-300 overflow-y-auto py-4 px-8">
         {usersList.map((user: User) => (

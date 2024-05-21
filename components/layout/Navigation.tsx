@@ -16,8 +16,8 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fill ">
-      <ul className=" flex mr-8 my-3">
+    <nav className="fill  ">
+      <ul className=" flex mr-8 my-3 flex-col">
         {navigation.map((list) => (
           <li key={list.href}>
             <Link

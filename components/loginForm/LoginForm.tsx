@@ -53,7 +53,7 @@ export default function LoginForm() {
   return (
     <div
       className={`flex flex-col bg-gray-200 dark:bg-slate-700  justify-center items-center h-screen bg-[url('/images/login/movie-bg-light.jpg')]
-      dark:bg-[url('/images/login/movie-bg-dark.jpg')] dark:bg-top-right dark:bg-no-repeat bg-no-repeat 
+      dark:bg-[url('/images/login/movie-bg-dark.jpg')] dark:bg-top-right dark:bg-no-repeat bg-no-repeat bg-tight-top 
     	 contain ${fira_sans.className}`}
     >
       <div className="flex items-center mb-4 w-[700px] ">

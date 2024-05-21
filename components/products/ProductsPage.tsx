@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useReducer, useEffect } from "react";
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
 import { initialState, reducer } from "../../reducers";
@@ -24,7 +24,7 @@ interface HomePageProps {
 export type SelectedProducts = { [key: number]: number };
 
 export default function ProductsPage({ productsData }: HomePageProps) {
-  const t = useTranslations("Header");
+  // const t = useTranslations("Header");
   const { products } = productsData;
 
   const [storedValue, setStoredValue] = useLocalStorage(
@@ -120,11 +120,11 @@ export default function ProductsPage({ productsData }: HomePageProps) {
       />
 
       <div className="flex flex-1 flex-col">
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <h1 className=" text-black dark:text-[#94a3b8] text-center text-2xl font-bold ">
             {t("title")}
           </h1>
-        </div>
+        </div> */}
         <ProductsCard itemsData={itemsData} handleClick={handleClick} />
       </div>
     </div>

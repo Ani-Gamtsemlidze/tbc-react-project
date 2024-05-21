@@ -8,8 +8,8 @@ type Props = {
 
 const ItemsBucket = ({ selectedNum }: Props) => (
   <Link href="/checkout" className="flex relative">
-    <IoCartOutline className="w-6 h-6 text-white ml-4 object-cover cursor-pointer" />
-    <span className="absolute bottom-4 right-[-8px] text-white">
+    <IoCartOutline className="w-6 h-6 text-black ml-4 object-cover cursor-pointer" />
+    <span className="absolute bottom-4 right-[-8px] text-black">
       {selectedNum}
     </span>
   </Link>

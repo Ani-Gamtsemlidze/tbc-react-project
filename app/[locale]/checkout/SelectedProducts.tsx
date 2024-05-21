@@ -76,9 +76,9 @@ export default function SelectedProducts({ ids }: SelectedProductsProps) {
   }, [ids, setProducts, items]);
 
   return (
-    <div className="bg-slate-300 min-h-screen">
+    <div className="bg-slate-300 min-h-screen pl-[220px] ">
       <Header />
-      <h2 className="text-center mt-4">Selected Products</h2>
+      <h2 className="text-center pt-8 text-2xl font-bold">Selected Products</h2>
       {isEmpty ? (
         <p className="font-bold text-center text-2xl mt-4">Cart is Empty</p>
       ) : (
@@ -105,24 +105,24 @@ export default function SelectedProducts({ ids }: SelectedProductsProps) {
                   selected Items:{selectedProducts[product.id]}
                 </span>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center">
                 <div
                   onClick={() => handleIncrement(product.id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer text-xl"
                 >
-                  Add Item
+                  +
                 </div>
                 <div
                   onClick={() => handleDecrement(product.id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer text-2xl"
                 >
-                  Remove Item
+                  -
                 </div>
               </div>
             </div>
           ))}
           <div
-            className="font-bold py-4 ml-8 text-lg cursor-pointer bg-slate-700 text-center w-44 text-white rounded px-4"
+            className="font-bold py-3 ml-8 text-md  cursor-pointer bg-slate-700 text-center w-44 text-white rounded"
             onClick={handleReset}
           >
             Clear The Cart

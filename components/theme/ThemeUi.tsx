@@ -48,7 +48,7 @@ export default function ThemeUi({
           {dropDown && (
             <ul
               id="dropdown"
-              className=" bg-white dark:bg-slate-800 border border-gray-200  rounded  absolute top-8 right-0  py-4 w-48"
+              className=" bg-white dark:bg-slate-800 border border-gray-200  rounded  absolute bottom-6 left-8 py-4 w-48"
             >
               <li
                 onClick={() => {
