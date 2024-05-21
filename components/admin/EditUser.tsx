@@ -51,7 +51,7 @@ export const EditUser: React.FC<EditUserProps> = ({ user, onUpdateUser }) => {
 
   return (
     <>
-      <div onClick={toggleEdit} className="cursor-pointer">
+      <div onClick={toggleEdit} className="cursor-pointer dark:text-black">
         <FiEdit3 />
       </div>
 

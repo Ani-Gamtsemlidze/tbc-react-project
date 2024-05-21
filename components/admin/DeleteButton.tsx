@@ -7,5 +7,9 @@ export default function DeleteButton({
   id: number;
   handleDelete: (id: number) => void;
 }) {
-  return <button onClick={() => handleDelete(id)}>X</button>;
+  return (
+    <button className="dark:text-black" onClick={() => handleDelete(id)}>
+      X
+    </button>
+  );
 }

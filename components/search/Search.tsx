@@ -7,15 +7,9 @@ interface SearchProps {
   onSort: () => void;
   searchItem: string;
   onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
-  selectedNum: number;
 }
 
-export function Search({
-  onSort,
-  searchItem,
-  onSearch,
-  selectedNum,
-}: SearchProps) {
+export function Search({ onSort, searchItem, onSearch }: SearchProps) {
   const t = useTranslations("Header");
   return (
     <div className="flex  mt-4 dark:border-[#B85042] dark:border-t items-center justify-center  dark:bg-slate-700   py-4  ">
@@ -35,7 +29,7 @@ export function Search({
       >
         {t("sort")}
       </button>
-      <ItemsBucket selectedNum={selectedNum} />
+      <ItemsBucket />
     </div>
   );
 }

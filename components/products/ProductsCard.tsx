@@ -13,13 +13,9 @@ interface Product {
 
 interface ProductsCardProps {
   itemsData: Product[];
-  handleClick: (product: Product) => void;
 }
 
-export default function ProductsCard({
-  itemsData,
-  handleClick,
-}: ProductsCardProps) {
+export default function ProductsCard({ itemsData }: ProductsCardProps) {
   const router = useRouter();
   return (
     <div className="products-scroll flex justify-center flex-wrap px-10 py-4">
@@ -60,7 +56,7 @@ export default function ProductsCard({
                     View More
                   </button>
                 </div>
-                <Cart handleClick={() => handleClick(product)} />
+                <Cart />
               </div>
             </div>
           </div>

@@ -1,11 +1,9 @@
 "use client";
 
-import { useState, useCallback, useReducer, useEffect } from "react";
+import { useState, useCallback } from "react";
 // import { useTranslations } from "next-intl";
 import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
-import { initialState, reducer } from "../../reducers";
-import { useLocalStorage } from "../../hooks";
 
 export interface Product {
   id: number;
@@ -26,16 +24,6 @@ export type SelectedProducts = { [key: number]: number };
 export default function ProductsPage({ productsData }: HomePageProps) {
   // const t = useTranslations("Header");
   const { products } = productsData;
-
-  const [storedValue, setStoredValue] = useLocalStorage(
-    "selectedProducts",
-    initialState
-  );
-
-  const [selectedProducts, dispatch] = useReducer(
-    reducer,
-    storedValue || initialState
-  );
 
   const [itemsData, setItemsData] = useState<Product[]>(products);
   const [isSorted, setIsSorted] = useState(false);
@@ -96,27 +84,12 @@ export default function ProductsPage({ productsData }: HomePageProps) {
     debounceSearch(searchQuery);
   };
 
-  useEffect(() => {
-    if (storedValue !== undefined) {
-      setStoredValue(selectedProducts);
-    }
-  }, [selectedProducts, setStoredValue]);
-
-  const handleClick = (productsData: Product) => {
-    dispatch({ type: "INCREMENT", payload: productsData.id });
-  };
-
-  const selectedNumber = Object.values(selectedProducts).reduce((acc, cur) => {
-    return acc + cur;
-  }, 0);
-
   return (
     <div className="bg-[#E7E8D1] dark:bg-slate-900">
       <Search
         onSort={handleSort}
         searchItem={searchItem}
         onSearch={handleSearch}
-        selectedNum={selectedNumber}
       />
 
       <div className="flex flex-1 flex-col">
@@ -125,7 +98,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
             {t("title")}
           </h1>
         </div> */}
-        <ProductsCard itemsData={itemsData} handleClick={handleClick} />
+        <ProductsCard itemsData={itemsData} />
       </div>
     </div>
   );

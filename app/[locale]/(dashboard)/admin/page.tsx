@@ -62,9 +62,9 @@ export default function AdminPage() {
             key={user.id}
             className="flex w-full justify-between border-b py-2 items-center"
           >
-            <li className="w-12">{user.name}</li>
-            <li className="w-52">{user.email}</li>
-            <li className="w-12">{user.age}</li>
+            <li className="w-12 dark:text-black">{user.name}</li>
+            <li className="w-52 dark:text-black">{user.email}</li>
+            <li className="w-12 dark:text-black">{user.age}</li>
             <DeleteButton
               id={user.id}
               handleDelete={() => handleDeleteUsers(user.id)}
