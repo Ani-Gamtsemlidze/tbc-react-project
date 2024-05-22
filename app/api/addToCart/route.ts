@@ -14,6 +14,7 @@ export const POST = async (request: Request) => {
         const quantity = await sql`SELECT SUM(quantity) AS total_quantity 
         FROM carts 
         WHERE user_id = ${userId}`;
+
   
         return NextResponse.json(
           {
