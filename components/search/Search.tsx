@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { ChangeEvent } from "react";
-import ItemsBucket from "./ItemsBucket";
+import  ItemsBucket  from "./ItemsBucket";
 
 interface SearchProps {
   onSort: () => void;
@@ -11,6 +11,7 @@ interface SearchProps {
 
 export function Search({ onSort, searchItem, onSearch }: SearchProps) {
   const t = useTranslations("Header");
+
   return (
     <div className="flex  mt-4 dark:border-[#B85042] dark:border-t items-center justify-center  dark:bg-slate-700   py-4  ">
       <form>

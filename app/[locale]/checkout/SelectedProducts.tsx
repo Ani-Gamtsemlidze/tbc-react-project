@@ -1,87 +1,23 @@
 "use client";
-import { useState, useEffect, useReducer } from "react";
-import { useLocalStorage } from "../../../hooks";
-import Image from "next/image";
+
 import Header from "../../../components/layout/Header";
-import { initialState, reducer } from "../../../reducers";
+// import { getUserCart } from "../../../user-api";
 
-interface SelectedProductsProps {
-  ids: number[];
-}
+// interface SelectedProductsProps {
+//   ids: number[];
+// }
 
-export default function SelectedProducts({ ids }: SelectedProductsProps) {
-  const [products, setProducts] = useState<any[]>([]);
-  const [items, setItems] = useLocalStorage("selectedProducts");
-  const [isEmpty, setIsEmpty] = useState(false);
+// const userId = 28;
 
-  const [selectedProducts, dispatch] = useReducer(
-    reducer,
-    items || initialState
-  );
+export default async function SelectedProducts() {
+  // const cart = await getUserCart(userId);
 
-  const handleIncrement = (productId: number) => {
-    dispatch({ type: "INCREMENT", payload: productId });
-  };
-  const handleDecrement = (productId: number) => {
-    dispatch({ type: "DECREMENT", payload: productId });
-  };
-  const handleReset = () => {
-    dispatch({ type: "RESET" });
-  };
-
-  useEffect(() => {
-    setItems(selectedProducts);
-  }, [selectedProducts, setItems]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      if (!items || Object.keys(items).length === 0) {
-        setProducts([]);
-        setIsEmpty(true);
-        return;
-      }
-
-      const uniqueIds = Array.from(new Set(ids));
-      const productDataArray = await Promise.all(
-        uniqueIds.map(async (id) => {
-          try {
-            const response = await fetch(
-              `https://dummyjson.com/products/${id}`
-            );
-            if (!response.ok) {
-              throw new Error(`Failed to fetch product with ID ${id}`);
-            }
-            return await response.json();
-          } catch (error) {
-            console.error(`Error fetching product with ID ${id}:`, error);
-            return null;
-          }
-        })
-      );
-
-      const uniqueProducts = productDataArray.filter(
-        (product, index, array) =>
-          product && index === array.findIndex((p) => p && p.id === product.id)
-      );
-
-      const productsInLocalStorage = Object.keys(items).map(Number);
-      const filteredProducts = uniqueProducts.filter((product) =>
-        productsInLocalStorage.includes(product.id)
-      );
-
-      setProducts(filteredProducts);
-    };
-
-    fetchProducts();
-  }, [ids, setProducts, items]);
-
+  // console.log(cart);
   return (
     <div className="bg-slate-300 min-h-screen pl-[220px] ">
       <Header />
       <h2 className="text-center pt-8 text-2xl font-bold">Selected Products</h2>
-      {isEmpty ? (
-        <p className="font-bold text-center text-2xl mt-4">Cart is Empty</p>
-      ) : (
+      {/* 
         <ul>
           {products.map((product: any, index: number) => (
             <div
@@ -127,8 +63,7 @@ export default function SelectedProducts({ ids }: SelectedProductsProps) {
           >
             Clear The Cart
           </div>
-        </ul>
-      )}
+        </ul> */}
     </div>
   );
 }

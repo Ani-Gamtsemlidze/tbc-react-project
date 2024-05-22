@@ -1,4 +1,7 @@
 "use server"
+
+import { cookies } from "next/headers";
+
 export interface User {
   id:number;
   age:number;
@@ -61,3 +64,17 @@ export async function editUser(id: number, userData: User) {
   }
 }
 
+export async function addToCart (productId: number) {
+  const cookieStore = cookies()
+  try {
+      const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
+        method: "POST",
+        body: JSON.stringify({ product_id: productId }),
+      });
+      const data = await response.json();
+
+      cookieStore.set("cart", data.quantity)
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+}
