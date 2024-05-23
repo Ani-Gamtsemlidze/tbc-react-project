@@ -14,4 +14,4 @@ export async function GET(_request: Request,{ params }: { params: { userId: numb
         console.error("Error fetching carts:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
-}
+}   

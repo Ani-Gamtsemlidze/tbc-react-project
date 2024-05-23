@@ -17,6 +17,7 @@ interface HomePageProps {
     products: Product[];
   };
   cart_total: number;
+  cart_total: number;
 }
 
 export type SelectedProducts = { [key: number]: number };
@@ -92,6 +93,7 @@ export default function ProductsPage({
         onSort={handleSort}
         searchItem={searchItem}
         onSearch={handleSearch}
+        total={cart_total}
         total={cart_total}
       />
 
