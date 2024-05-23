@@ -3,15 +3,25 @@ import Header from "../layout/Header";
 import Image from "next/image";
 import { IoMdAdd } from "react-icons/io";
 import { LuMinus } from "react-icons/lu";
+
 import { deleteProducts, updateCart } from "../../user-api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { setCartTotalCookie } from "../../actions";
+import CartQuantity from "./CartQuantity";
 
 export default function SelectedProducts({
   productsData,
   initialQuantity,
 }: any) {
   const [quantity, setQuantity] = useState(initialQuantity);
-  const [isEmpty, setIsEmpty] = useState(false);
+
+  useEffect(() => {
+    const quantityTotal: any = Object.values(quantity).reduce(
+      (acc: any, cur: any) => acc + cur,
+      0
+    );
+    setCartTotalCookie(quantityTotal);
+  }, [quantity]);
 
   const handleQuantityChange = async (id: number, change: number) => {
     const newQuantity = quantity[id] + change;
@@ -23,7 +33,7 @@ export default function SelectedProducts({
           change > 0 ? "increment" : "decrement"
         );
         if (response.msg === "Product quantity changed!") {
-          setQuantity((prevQuantity: any) => ({
+          setQuantity((prevQuantity: Record<number, number>) => ({
             ...prevQuantity,
             [id]: newQuantity,
           }));
@@ -37,29 +47,28 @@ export default function SelectedProducts({
   };
 
   const handleDeleteProducts = async () => {
-    await deleteProducts(28);
-    setIsEmpty(true);
+    await deleteProducts(30);
   };
 
-  const filteredProducts = productsData.filter(
-    (product: any) => quantity[product.id] > 0
+  const sortedProducts = [...productsData].sort(
+    (a: any, b: any) => a.id - b.id
   );
 
   return (
     <div className="bg-slate-300 min-h-screen pl-[220px]">
       <Header />
       <h2 className="text-center pt-4 font-bold text-2xl">Selected Products</h2>
-      {isEmpty || productsData.length === 0 ? (
+      {productsData.length === 0 ? (
         <p className="font-bold text-center text-2xl pt-4">Cart is Empty</p>
       ) : (
         <ul>
-          {filteredProducts.map((product: any, index: number) => (
+          {sortedProducts.map((product: any, index: number) => (
             <div
               key={`${product.id}-${index}`}
               className="flex max-lg:flex-col items-center justify-between m-8 border p-4 max-lg:p-2 relative max-lg:h-96"
             >
-              <div className="flex  items-center ">
-                <div className="w-32 h-32 max-lg:w-full max-lg:h-36 ">
+              <div className="flex items-center">
+                <div className="w-32 h-32 max-lg:w-full max-lg:h-36">
                   <Image
                     className="w-full h-full object-cover"
                     src={product?.images[0]}
@@ -68,11 +77,12 @@ export default function SelectedProducts({
                     height={300}
                   />
                 </div>
-                <li className="ml-4 max-lg:ml-0 max-lg:mt-2 ">
+                <li className="ml-4 max-lg:ml-0 max-lg:mt-2">
                   {product.title} - ${product.price}
                 </li>
-                <span className="ml-4">Quantity: {quantity[product.id]}</span>
+                <CartQuantity quantity={quantity[product?.id]} />
               </div>
+
               <div className="flex flex-col items-center">
                 <div
                   onClick={() => handleQuantityChange(product.id, 1)}

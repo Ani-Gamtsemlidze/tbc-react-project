@@ -17,11 +17,15 @@ interface HomePageProps {
   productsData: {
     products: Product[];
   };
+  cart_total: number;
 }
 
 export type SelectedProducts = { [key: number]: number };
 
-export default function ProductsPage({ productsData }: HomePageProps) {
+export default function ProductsPage({
+  productsData,
+  cart_total,
+}: HomePageProps) {
   // const t = useTranslations("Header");
   const { products } = productsData;
 
@@ -90,6 +94,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
         onSort={handleSort}
         searchItem={searchItem}
         onSearch={handleSearch}
+        total={cart_total}
       />
 
       <div className="flex flex-1 flex-col">

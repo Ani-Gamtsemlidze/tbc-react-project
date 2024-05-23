@@ -1,9 +1,9 @@
 import { sql } from "@vercel/postgres";
 import {  NextRequest, NextResponse } from "next/server";
 
-export const POST = async (request: Request) => {
+export const POST = async (request: NextRequest) => {
   
-    const userId = 28;
+    const userId = 30;
     try {
       const body = await request.json();
       const data = await sql`SELECT * FROM carts WHERE product_id = ${body.product_id} AND user_id = ${userId};`;
@@ -49,14 +49,3 @@ export const POST = async (request: Request) => {
     }
   };
 
-  export async function GET(request: NextRequest) {
-    const cartTotal = request.cookies.get('cart');
-    return NextResponse.json(
-        {
-            msg: "cart total",
-            cartTotal
-        },
-        { status: 200 }
-    );
-}
-  

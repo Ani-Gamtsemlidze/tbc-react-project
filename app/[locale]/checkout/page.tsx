@@ -1,7 +1,7 @@
 import SelectedProducts from "../../../components/products/SelectedProducts";
 import { getCarts } from "../../../user-api";
 
-const userId = 28;
+const userId = 30;
 
 export default async function Checkout() {
   const cart = await getCarts(userId);

@@ -3,7 +3,8 @@ import { sql } from "@vercel/postgres";
 
 export const revalidate = 0;
 
-export async function GET(request: Request,{ params }: { params: { userId: number } }) {
+export async function GET(_: any, { params }: { params: { userId: number } }) {
+
     try {
         const { userId } = params;
         
@@ -14,4 +15,4 @@ export async function GET(request: Request,{ params }: { params: { userId: numbe
         console.error("Error fetching carts:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
-}
+}   

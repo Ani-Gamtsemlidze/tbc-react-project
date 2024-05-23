@@ -14,7 +14,7 @@ export async function PUT(request: NextRequest) {
       await sql`DELETE FROM carts WHERE product_id = ${body.product_id}`;
     }
 
-    const updatedData: any = await sql`SELECT * FROM carts WHERE product_id = ${body.product_id}`;
+    const updatedData: any = await sql`SELECT * FROM carts WHERE product_id = ${body.product_id} ORDER BY id ASC`;
 
     return NextResponse.json(
       {
