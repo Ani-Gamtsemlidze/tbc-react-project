@@ -7,10 +7,12 @@ interface SearchProps {
   onSort: () => void;
   searchItem: string;
   onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  total: any;
 }
 
-export function Search({ onSort, searchItem, onSearch }: SearchProps) {
+export function Search({ onSort, searchItem, onSearch, total }: SearchProps) {
   const t = useTranslations("Header");
+
   return (
     <div className="flex  mt-4 dark:border-[#B85042] dark:border-t items-center justify-center  dark:bg-slate-700   py-4  ">
       <form>
@@ -29,7 +31,7 @@ export function Search({ onSort, searchItem, onSearch }: SearchProps) {
       >
         {t("sort")}
       </button>
-      <ItemsBucket />
+      <ItemsBucket total={total} />
     </div>
   );
 }

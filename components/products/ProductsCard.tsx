@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Cart from "./Cart";
+import { addToCartAction } from "../../actions";
 
 interface Product {
   id: number;
@@ -16,6 +17,10 @@ interface ProductsCardProps {
 }
 
 export default function ProductsCard({ itemsData }: ProductsCardProps) {
+  const addProduct = async (productId: number) => {
+    await addToCartAction(productId);
+  };
+
   const router = useRouter();
   return (
     <div className="products-scroll flex justify-center flex-wrap px-10 py-4">
@@ -56,7 +61,7 @@ export default function ProductsCard({ itemsData }: ProductsCardProps) {
                     View More
                   </button>
                 </div>
-                <Cart />
+                <Cart addProduct={() => addProduct(product.id)} />
               </div>
             </div>
           </div>

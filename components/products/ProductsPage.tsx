@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-// import { useTranslations } from "next-intl";
 import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
 
@@ -17,12 +16,15 @@ interface HomePageProps {
   productsData: {
     products: Product[];
   };
+  cart_total: number;
 }
 
 export type SelectedProducts = { [key: number]: number };
 
-export default function ProductsPage({ productsData }: HomePageProps) {
-  // const t = useTranslations("Header");
+export default function ProductsPage({
+  productsData,
+  cart_total,
+}: HomePageProps) {
   const { products } = productsData;
 
   const [itemsData, setItemsData] = useState<Product[]>(products);
@@ -90,14 +92,10 @@ export default function ProductsPage({ productsData }: HomePageProps) {
         onSort={handleSort}
         searchItem={searchItem}
         onSearch={handleSearch}
+        total={cart_total}
       />
 
       <div className="flex flex-1 flex-col">
-        {/* <div className="mt-4">
-          <h1 className=" text-black dark:text-[#94a3b8] text-center text-2xl font-bold ">
-            {t("title")}
-          </h1>
-        </div> */}
         <ProductsCard itemsData={itemsData} />
       </div>
     </div>
