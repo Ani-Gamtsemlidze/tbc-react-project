@@ -14,6 +14,7 @@ export interface User {
 export async function getUsers(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
+    console.log(process.env.BASE_URL)
     const {users} = await response.json()
 
     return users?.rows;
@@ -68,9 +69,11 @@ export async function editUser(id: number, userData: User) {
 export async function addToCart (productId: number) {
   try {
       const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
+        
         method: "POST",
         body: JSON.stringify({ product_id: productId }),
       });
+      console.log(process.env.BASE_URL)
       if (response.ok) {
         const data = await response.json();
         console.log(data);
@@ -85,11 +88,13 @@ export async function addToCart (productId: number) {
 
 
 export async function getCarts(user_id: number) {
+
   try {
     
     const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {
       cache: "no-store"
     });
+
     if (!response.ok) {
       throw new Error(`Failed to fetch carts: ${response.status} - ${response.statusText}`);
     }
