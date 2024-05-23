@@ -3,7 +3,7 @@ import { sql } from "@vercel/postgres";
 
 export const revalidate = 0;
 
-export async function GET(request: Request,{ params }: { params: { userId: number } }) {
+export async function GET(_request: Request,{ params }: { params: { userId: number } }) {
     try {
         const { userId } = params;
         

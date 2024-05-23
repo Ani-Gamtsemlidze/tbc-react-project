@@ -7,9 +7,10 @@ interface SearchProps {
   onSort: () => void;
   searchItem: string;
   onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  total: any;
 }
 
-export function Search({ onSort, searchItem, onSearch }: SearchProps) {
+export function Search({ onSort, searchItem, onSearch, total }: SearchProps) {
   const t = useTranslations("Header");
 
   return (
@@ -30,7 +31,7 @@ export function Search({ onSort, searchItem, onSearch }: SearchProps) {
       >
         {t("sort")}
       </button>
-      <ItemsBucket />
+      <ItemsBucket total={total} />
     </div>
   );
 }

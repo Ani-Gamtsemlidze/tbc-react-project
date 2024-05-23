@@ -1,5 +1,6 @@
 "use server"
 
+import { cookies } from "next/headers";
 import { setCartTotalCookie } from "./actions";
 
 export interface User {
@@ -70,10 +71,13 @@ export async function addToCart (productId: number) {
         method: "POST",
         body: JSON.stringify({ product_id: productId }),
       });
-      const data = await response.json();
-      setCartTotalCookie(data.quantity)
-
-      // cookieStore.set("cart", data.quantity)
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setCartTotalCookie(data.quantity);
+      } else {
+        console.error("Error adding product to cart. Status:", response.status);
+      }
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
@@ -82,6 +86,7 @@ export async function addToCart (productId: number) {
 
 export async function getCarts(user_id: number) {
   try {
+    
     const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {
       cache: "no-store"
     });
@@ -129,4 +134,5 @@ export const deleteProducts = async (userId: number) => {
     },
     body: JSON.stringify({ user_id: userId })
   });
+  cookies().delete("cart_total")
 };
