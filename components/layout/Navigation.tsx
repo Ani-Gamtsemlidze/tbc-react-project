@@ -8,12 +8,12 @@ export default function Navigation() {
   const t = useTranslations("Navigation");
   const pathname = usePathname();
   const navigation = [
-    { title: t("home"), href: `/`, src: "/images/shape.svg" },
+    { title: t("home"), href: `/`, src: "/images/Shape.svg" },
     { title: t("admin"), href: `/admin`, src: "/images/movies.svg" },
     { title: t("movies"), href: `/products`, src: "/images/movies.svg" },
     { title: t("tvshows"), href: `/tvshows`, src: "/images/tv.svg" },
     { title: t("profile"), href: `/profile`, src: "/images/movies.svg" },
-    { title: t("contact"), href: `/contact`, src: "/images/movies.svg" },
+    { title: t("contact"), href: `/contact`, src: "/images/Bookmark.svg" },
     { title: t("blog"), href: `/blog`, src: "/images/movies.svg" },
   ];
 
@@ -27,8 +27,8 @@ export default function Navigation() {
                 className="mr-4"
                 src={list.src}
                 alt={`${list.title} icon`}
-                width={20}
-                height={20}
+                width={18}
+                height={18}
               />
             )}
             <Link
