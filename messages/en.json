@@ -10,7 +10,9 @@
       "profile":"Profile",
       "contact": "Contact",
       "blog": "Blog",
-      "products":"products",
+      "movies":"Movies",
+    "tvshows":"Tv-Shows",
+
       "admin":"admin"
 
     },

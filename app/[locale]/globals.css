@@ -15,9 +15,14 @@
   background: #4c4c4c;
   color: white;
   border-radius: 2px;
-
 } 
 
+.active .tv-icon {
+  fill:#5A698F
+}
+.active .movies_icon {
+  fill: #fff;
+}
 .dark .active {
   background: #334255;
   color: #E2E8F0 !important;

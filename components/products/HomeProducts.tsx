@@ -1,9 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 export default function HomeProducts() {
   return (
     <>
-      <div className="flex px-6  justify-around py-12 ">
+      HOMEPAGE
+      {/* <div className="flex px-6  justify-around py-12 ">
         <Link
           href="/products/1"
           className=" no-underline text-[#4C4C4C] dark:text-white  rounded overflow-hidden hover:transform hover:scale-105 transition-transform duration-300 cursor-pointer"
@@ -72,7 +73,7 @@ export default function HomeProducts() {
           </div>
           <p className="mb-0">The ultimate iPhone.</p>
         </Link>
-      </div>
+      </div> */}
     </>
   );
 }

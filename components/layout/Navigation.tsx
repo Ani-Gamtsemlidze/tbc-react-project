@@ -2,26 +2,37 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Navigation() {
   const t = useTranslations("Navigation");
   const pathname = usePathname();
   const navigation = [
-    { title: t("home"), href: `/` },
-    { title: t("admin"), href: `/admin` },
-    { title: t("products"), href: `/products` },
-    { title: t("profile"), href: `/profile` },
-    { title: t("contact"), href: `/contact` },
-    { title: t("blog"), href: `/blog` },
+    { title: t("home"), href: `/`, src: "/images/shape.svg" },
+    { title: t("admin"), href: `/admin`, src: "/images/movies.svg" },
+    { title: t("movies"), href: `/products`, src: "/images/movies.svg" },
+    { title: t("tvshows"), href: `/tvshows`, src: "/images/tv.svg" },
+    { title: t("profile"), href: `/profile`, src: "/images/movies.svg" },
+    { title: t("contact"), href: `/contact`, src: "/images/movies.svg" },
+    { title: t("blog"), href: `/blog`, src: "/images/movies.svg" },
   ];
 
   return (
     <nav className="fill  ">
       <ul className=" flex mr-8 my-3 flex-col">
         {navigation.map((list) => (
-          <li key={list.href}>
+          <li key={list.href} className="flex items-center">
+            {list.src && (
+              <Image
+                className="mr-4"
+                src={list.src}
+                alt={`${list.title} icon`}
+                width={20}
+                height={20}
+              />
+            )}
             <Link
-              className={` no-underline text-[#4C4C4C] mr-4 rounded dark:text-white text-lg
+              className={`  no-underline text-[#4C4C4C] mr-4 rounded dark:text-[#92a7dd] text-sm
               block py-2 px-3 font-bold my-2 uppercase relative
 
               after:content-['.'] after:text-left after:opacity-5 after:m-0 
