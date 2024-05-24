@@ -16,6 +16,8 @@ export async function getUsers(){
     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
     console.log(process.env.BASE_URL)
     const {users} = await response.json()
+    console.log(users)
+    console.log('Database URL:', process.env.POSTGRES_URL);
 
     return users?.rows;
 }
