@@ -1,4 +1,8 @@
 "use server"
+
+import { cookies } from "next/headers";
+import { setCartTotalCookie } from "./actions";
+
 export interface User {
   id:number;
   age:number;
@@ -10,6 +14,7 @@ export interface User {
 export async function getUsers(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
+    console.log(process.env.BASE_URL)
     const {users} = await response.json()
 
     return users?.rows;
@@ -61,3 +66,78 @@ export async function editUser(id: number, userData: User) {
   }
 }
 
+export async function addToCart (productId: number) {
+  try {
+      const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
+        
+        method: "POST",
+        body: JSON.stringify({ product_id: productId }),
+      });
+      console.log(process.env.BASE_URL)
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setCartTotalCookie(data.quantity);
+      } else {
+        console.error("Error adding product to cart. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+}
+
+
+export async function getCarts(user_id: number) {
+
+  try {
+    
+    const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch carts: ${response.status} - ${response.statusText}`);
+    }
+    const carts = await response.json();
+    return carts.carts.rows; 
+  } catch (error) {
+    console.error("Error fetching carts:", error);
+    throw error;
+  }
+}
+
+export async function updateCart(productId: number, quantity: number, change: string) {
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/api/update-cart`, {
+      cache: "no-store",
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ product_id: productId, quantity, change })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update cart: ${response.status} - ${response.statusText}`);
+    }
+
+    const updatedData = await response.json(); 
+    return updatedData;
+  } catch (error) {
+    console.error("Error updating cart:", error);
+    throw error;
+  }
+}
+
+
+
+export const deleteProducts = async (userId: number) => {
+  await fetch(`${process.env.BASE_URL}/api/update-cart`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ user_id: userId })
+  });
+  cookies().delete("cart_total")
+};

@@ -1,12 +1,10 @@
 import { useTranslations } from "next-intl";
-import Navigation from "./Navigation";
 
 export default function Footer() {
   const t = useTranslations("Footer");
   return (
     <footer className="flex  justify-between items-center bg-[#F6F3EC]  dark:bg-slate-600 p-4">
       <div className="">
-        {/* <Navigation /> */}
         <form action="/submit">
           <div className="mt-2 ">
             <input

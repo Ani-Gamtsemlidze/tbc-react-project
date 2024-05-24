@@ -1,6 +1,7 @@
 
 "use server"
-import { User, createUser, deleteUser, editUser, getUsers } from "./user-api";
+import { cookies } from "next/headers";
+import {  User, addToCart, createUser, deleteUser, editUser, getUsers } from "./user-api";
 
 export async function createUserAction(formData: FormData) {
     try {
@@ -32,3 +33,17 @@ export async function editUsersAction(id: number, userData: User) {
         throw error; 
     }
 }
+
+export async function addToCartAction(productId: number) {
+    try {
+      await addToCart(productId);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      throw error;
+    }
+  }
+
+  export const setCartTotalCookie = async (quantity: number) => {
+    const cookieStore = cookies();
+    cookieStore.set("cart_total", quantity.toString());
+  };
