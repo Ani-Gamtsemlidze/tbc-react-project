@@ -104,14 +104,14 @@ export async function getCarts(user_id: number) {
     return carts.carts.rows; 
   } catch (error) {
     console.error("Error fetching carts:", error);
-    throw error;
+    return [];
+  } 
   }
-}
 
 export async function updateCart(productId: number, quantity: number, change: string) {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-cart`, {
-      cache: "no-store",
+      cache: "no-store",  
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
