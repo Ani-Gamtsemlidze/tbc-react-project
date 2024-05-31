@@ -1,7 +1,8 @@
-import { useTranslations } from "next-intl";
 import ProfileForm from "../../../../components/profileForm/ProfileForm";
 
 import { unstable_setRequestLocale } from "next-intl/server";
+import { getPicture } from "../../../../user-api";
+import { getSession } from "@auth0/nextjs-auth0";
 
 interface Params {
   params: {
@@ -11,23 +12,17 @@ interface Params {
 
 export const revalidate = 0;
 
-export default function Profile({ params }: Params) {
+export default async function Profile({ params }: Params) {
   unstable_setRequestLocale(params.locale);
+  const { user }: any = await getSession();
 
-  const t = useTranslations("Profile");
+  const pictureUrl = await getPicture(user?.sub);
 
   return (
-    <section className="flex flex-1 bg-gray-200 dark:bg-slate-500 justify-center p-4">
-      <form className="flex flex-col bg-[#B85042]  dark:bg-slate-600 w-96 p-4 gap-2">
-        <ProfileForm />
-
-        <button
-          className=" hover:bg-slate-300 bg-slate-200   dark:bg-slate-500 transition px-4 py-2  mx-auto mt-8"
-          type="submit"
-        >
-          {t("button")}
-        </button>
-      </form>
+    <section className="flex h-screen bg-gray-200 dark:bg-slate-500  items-center justify-center ">
+      <div className="flex flex-col w-96 p-4 gap-2">
+        <ProfileForm picture={pictureUrl[0].picture} />
+      </div>
     </section>
   );
 }

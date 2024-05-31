@@ -7,9 +7,12 @@ import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import ThemeSwitch from "../theme/ThemeSwitch";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import LoginBtn from "../login/LoginBtn";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Header() {
   const { theme } = useTheme();
+  const { user } = useUser();
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
@@ -37,8 +40,9 @@ export default function Header() {
           <div className="flex items-center  flex-col mt-6">
             <div className="flex items-center mb-4">
               <ThemeSwitch />
+
               <div className="ml-4 border-l border-l-slate-600 pl-2">
-                <LogoutBtn />
+                {user ? <LogoutBtn /> : <LoginBtn />}
               </div>
             </div>
             <LocalSwitcher />

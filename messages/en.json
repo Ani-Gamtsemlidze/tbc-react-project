@@ -2,6 +2,7 @@
     "Header": {
       "title": "Products",
       "logout":"Log Out",
+      "login":"Log In",
       "search":"Search",
       "sort": "Sort"
     },

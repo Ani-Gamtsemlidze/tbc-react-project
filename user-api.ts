@@ -144,3 +144,21 @@ export const deleteProducts = async (userId: number) => {
   });
   cookies().delete("cart_total")
 };
+
+  
+export async function getPicture(sub: any) {
+  const response = await fetch(`${process.env.BASE_URL}/api/get-picture`, {
+    method: "POST",
+    body: JSON.stringify({ sub }),
+  });
+  const data = await response.json();
+  return data.response;
+
+}
+
+export async function changePictureAction(sub: string, picture: string) {
+  await fetch(`${process.env.BASE_URL}/api/change-picture`, {
+    method: "PUT",
+    body: JSON.stringify({ sub, picture }),
+  });
+}
