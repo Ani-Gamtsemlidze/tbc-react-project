@@ -1,5 +1,4 @@
 "use client";
-import Header from "../layout/Header";
 import Image from "next/image";
 import { IoMdAdd } from "react-icons/io";
 import { LuMinus } from "react-icons/lu";
@@ -56,7 +55,6 @@ export default function SelectedProducts({
 
   return (
     <div className="bg-slate-300 min-h-screen pl-[220px]">
-      <Header />
       <h2 className="text-center pt-4 font-bold text-2xl">Selected Products</h2>
       {productsData.length === 0 ? (
         <p className="font-bold text-center text-2xl pt-4">Cart is Empty</p>

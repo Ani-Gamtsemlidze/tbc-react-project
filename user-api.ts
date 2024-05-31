@@ -90,9 +90,8 @@ export async function addToCart (productId: number) {
 
 
 export async function getCarts(user_id: number) {
-
   try {
-    
+
     const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {
       cache: "no-store"
     });
@@ -100,13 +99,15 @@ export async function getCarts(user_id: number) {
     if (!response.ok) {
       throw new Error(`Failed to fetch carts: ${response.status} - ${response.statusText}`);
     }
+    
     const carts = await response.json();
-    return carts.carts.rows; 
+    return carts.carts.rows;
   } catch (error) {
     console.error("Error fetching carts:", error);
     return [];
-  } 
   }
+}
+
 
 export async function updateCart(productId: number, quantity: number, change: string) {
   try {

@@ -1,5 +1,5 @@
-import SelectedProducts from "../../../components/products/SelectedProducts";
-import { getCarts } from "../../../user-api";
+import SelectedProducts from "../../../../components/products/SelectedProducts";
+import { getCarts } from "../../../../user-api";
 
 const userId = 30;
 

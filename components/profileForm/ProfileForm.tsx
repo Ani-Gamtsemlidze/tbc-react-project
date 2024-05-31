@@ -1,37 +1,36 @@
 "use client";
-import { useTranslations } from "next-intl";
-import { ChangeEvent, useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-interface ProfileFormProps {
-  type: string;
-  id: string;
-  placeholder: string;
+interface User {
+  given_name?: string;
+  family_name?: string;
+  email?: string;
+  email_verified?: boolean;
+  locale?: string;
+  name?: string;
+  nickname?: string;
+  picture?: string;
+  sid?: string;
+  sub?: string;
+  updated_at?: string;
 }
-export default function ProfileForm({
-  type,
-  id,
-  placeholder,
-}: ProfileFormProps) {
-  const t = useTranslations("Profile");
 
-  const [userProfile, setUserProfile] = useState("");
+export default function ProfileClient() {
+  const { user, error, isLoading } = useUser();
+  console.log(user);
 
-  const handleProfile = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserProfile(e.target.value);
-  };
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  const typedUser = user as User;
 
   return (
-    <>
-      <label htmlFor={id}>{t("title")}</label>
-      <input
-        className="py-2 pl-2 bg-[#E5E7EB] placeholder:text-[#B85042]  text-white outline-none"
-        autoComplete="off"
-        id={id}
-        type={type}
-        value={userProfile}
-        placeholder={placeholder}
-        onChange={handleProfile}
-      />
-    </>
+    typedUser && (
+      <div>
+        <h2>{typedUser.given_name || user?.name?.split("@")[0]}</h2>
+        <p>{typedUser.family_name}</p>
+        <p>{typedUser.email}</p>
+      </div>
+    )
   );
 }
