@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex justify-between  items-center w-screen bg-[#d7d7da] dark:bg-[#161D2F] py-1 px-8">
+      <header className="flex justify-between  items-center  bg-[#d7d7da] dark:bg-[#161D2F] py-1 px-8">
         <div className="flex ">
           <Link className="" href="/">
             <Image
