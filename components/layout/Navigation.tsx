@@ -14,7 +14,7 @@ export default function Navigation() {
     { title: t("tvshows"), href: `/tvshows`, src: "/images/tv.svg" },
     { title: t("profile"), href: `/profile`, src: "/images/movies.svg" },
     { title: t("contact"), href: `/contact`, src: "/images/Bookmark.svg" },
-    { title: t("blog"), href: `/blog`, src: "/images/movies.svg" },
+    { title: t("recipes"), href: `/recipes`, src: "/images/movies.svg" },
   ];
 
   return (

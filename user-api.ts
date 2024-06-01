@@ -21,6 +21,23 @@ export interface User {
 
 //     return users?.rows;
 // }
+
+export async function getRecipe(id: number) {
+  try {
+    const url = `${process.env.BASE_URL}/api/get-single-recipe/${id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.recipe.rows;
+  } catch (error) {
+    console.error('Error fetching recipe:', error);
+    throw error;
+  }
+}
+
+
 export async function getRecipes(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
@@ -31,21 +48,8 @@ export async function getRecipes(){
     return recipes?.rows;
 }
 
-// export async function createUser(name:string, email:string, age:number) {
 
-//     const response =  await fetch(`${process.env.BASE_URL}/api/create-users`, {
-//         method: "POST",
-//         body: JSON.stringify({
-//           name,
-//           email,
-//           age
-//         }),
-//       }); 
 
-//       const data = await response.json()
-
-//       return data;
-// }
 
 export async function deleteUser (id:number) {
 
@@ -55,6 +59,8 @@ export async function deleteUser (id:number) {
 
       return response.json()
 }
+
+
 
 export async function editUser(id: number, userData: User) {
   try {
