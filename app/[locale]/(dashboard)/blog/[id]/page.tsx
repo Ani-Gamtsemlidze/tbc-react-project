@@ -1,5 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
-import { InnerBlog } from "../../../../../components/blog/InnerBlog";
+import { InnerBlog } from "../../../../../components/recipes/InnerBlog";
 
 interface Blog {
   id: number;

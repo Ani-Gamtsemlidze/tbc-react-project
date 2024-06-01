@@ -3,8 +3,8 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import AvatarUploadPage from "../avatar/page";
 import { useEffect, useState } from "react";
+import AvatarUploadPage from "../avatar/page";
 // import { useTranslations } from "next-intl";
 
 interface User {
@@ -21,7 +21,7 @@ interface User {
   updated_at?: string;
 }
 
-export default function ProfileForm({ picture }: any) {
+export default function UserInfo({ picture }: any) {
   const { user, error, isLoading } = useUser();
   const [isUpload, setIsUpload] = useState(false);
   // const t = useTranslations("Profile");
@@ -70,7 +70,7 @@ export default function ProfileForm({ picture }: any) {
       </div>
       <div
         onClick={handleUploadPicture}
-        className="absolute cursor-pointer rounded-full top-[-60px] left-[170px] inset-0 w-40 h-40 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 opacity-0 transition-opacity duration-300 hover:opacity-100"
+        className="absolute cursor-pointer rounded-full top-[-60px] left-[96px] inset-0 w-40 h-40 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 opacity-0 transition-opacity duration-300 hover:opacity-100"
       >
         <FaCloudUploadAlt className="text-white w-9 h-9" />
       </div>

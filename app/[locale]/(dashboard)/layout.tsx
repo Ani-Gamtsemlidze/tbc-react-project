@@ -13,7 +13,7 @@ interface LayoutProps {
 export default function dashboardLayout({ children, params }: LayoutProps) {
   unstable_setRequestLocale(params.locale);
   return (
-    <div className="flex flex-col justify-between pl-[224px]">
+    <div className="flex flex-col justify-between ">
       <Header />
       {children}
       <Footer />

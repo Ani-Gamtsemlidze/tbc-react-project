@@ -1,9 +1,12 @@
+import { getSession } from "@auth0/nextjs-auth0";
 import SelectedProducts from "../../../../components/products/SelectedProducts";
 import { getCarts } from "../../../../user-api";
 
-const userId = 30;
+const userId = 6;
 
 export default async function Checkout() {
+  // const { user }: any = await getSession();
+  // console.log("user", user);
   const cart = await getCarts(userId);
   const ids = cart.map((product: any) => product.product_id);
 
