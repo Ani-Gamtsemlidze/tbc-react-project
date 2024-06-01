@@ -11,32 +11,41 @@ export interface User {
 }
 
 
-export async function getUsers(){
+// export async function getUsers(){
   
-    const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
-    console.log(process.env.BASE_URL)
-    const {users} = await response.json()
-    console.log(users)
+//     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
+//     console.log(process.env.BASE_URL)
+//     const {users} = await response.json()
+//     console.log(users)
+//     console.log('Database URL:', process.env.POSTGRES_URL);
+
+//     return users?.rows;
+// }
+export async function getRecipes(){
+  
+    const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
+    const {recipes} = await response.json()
+    console.log(recipes)
     console.log('Database URL:', process.env.POSTGRES_URL);
 
-    return users?.rows;
+    return recipes?.rows;
 }
 
-export async function createUser(name:string, email:string, age:number) {
+// export async function createUser(name:string, email:string, age:number) {
 
-    const response =  await fetch(`${process.env.BASE_URL}/api/create-users`, {
-        method: "POST",
-        body: JSON.stringify({
-          name,
-          email,
-          age
-        }),
-      }); 
+//     const response =  await fetch(`${process.env.BASE_URL}/api/create-users`, {
+//         method: "POST",
+//         body: JSON.stringify({
+//           name,
+//           email,
+//           age
+//         }),
+//       }); 
 
-      const data = await response.json()
+//       const data = await response.json()
 
-      return data;
-}
+//       return data;
+// }
 
 export async function deleteUser (id:number) {
 
@@ -78,7 +87,7 @@ export async function addToCart (productId: number) {
       console.log(process.env.BASE_URL)
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        console.log(data.quantity, "data");
         setCartTotalCookie(data.quantity);
       } else {
         console.error("Error adding product to cart. Status:", response.status);
@@ -90,9 +99,8 @@ export async function addToCart (productId: number) {
 
 
 export async function getCarts(user_id: number) {
-
   try {
-    
+
     const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {
       cache: "no-store"
     });
@@ -100,13 +108,15 @@ export async function getCarts(user_id: number) {
     if (!response.ok) {
       throw new Error(`Failed to fetch carts: ${response.status} - ${response.statusText}`);
     }
+    
     const carts = await response.json();
-    return carts.carts.rows; 
+    return carts.carts.rows;
   } catch (error) {
     console.error("Error fetching carts:", error);
     return [];
-  } 
   }
+}
+
 
 export async function updateCart(productId: number, quantity: number, change: string) {
   try {
@@ -143,3 +153,21 @@ export const deleteProducts = async (userId: number) => {
   });
   cookies().delete("cart_total")
 };
+
+  
+export async function getPicture(sub: any) {
+  const response = await fetch(`${process.env.BASE_URL}/api/get-picture`, {
+    method: "POST",
+    body: JSON.stringify({ sub }),
+  });
+  const data = await response.json();
+  return data.response;
+
+}
+
+export async function changePictureAction(sub: string, picture: string) {
+  await fetch(`${process.env.BASE_URL}/api/change-picture`, {
+    method: "PUT",
+    body: JSON.stringify({ sub, picture }),
+  });
+}

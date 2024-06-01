@@ -1,11 +1,17 @@
+import {  getSession } from "@auth0/nextjs-auth0";
 import { sql } from "@vercel/postgres";
 import {  NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
+  const session = await getSession()
+  const body = await request.json()
   
-    const userId = 30;
+  const user = session?.user;
+  const userId = user?.sub;
+  
+  console.log(userId, "user")
     try {
-      const body = await request.json();
+      console.log("body", request)
       const data = await sql`SELECT * FROM carts WHERE product_id = ${body.product_id} AND user_id = ${userId};`;
   
       if (data.rows.length > 0) {

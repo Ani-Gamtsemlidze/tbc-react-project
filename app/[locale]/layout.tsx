@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { notFound } from "next/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export const metadata = {
   title: "Create Next App",
@@ -37,15 +38,17 @@ export default async function RootLayout({
 
   return (
     <html lang={params.locale} suppressHydrationWarning>
-      <body>
-        <NextIntlClientProvider locale={params.locale} messages={messages}>
-          <Providers>
-            <div className="flex flex-col justify-between h-screen">
-              {children}
-            </div>
-          </Providers>
-        </NextIntlClientProvider>
-      </body>
+      <UserProvider>
+        <body>
+          <NextIntlClientProvider locale={params.locale} messages={messages}>
+            <Providers>
+              <div className="flex flex-col justify-between h-screen">
+                {children}
+              </div>
+            </Providers>
+          </NextIntlClientProvider>
+        </body>
+      </UserProvider>
     </html>
   );
 }

@@ -1,24 +1,24 @@
 
 "use server"
 import { cookies } from "next/headers";
-import {  User, addToCart, createUser, deleteUser, editUser, getUsers } from "./user-api";
+import {  User, addToCart, deleteUser, editUser } from "./user-api";
 
-export async function createUserAction(formData: FormData) {
-    try {
-        const name = formData.get("name") as string;
-        const email = formData.get("email") as string;
-        const age = formData.get("age") as string;
+// export async function createUserAction(formData: FormData) {
+//     try {
+//         const name = formData.get("name") as string;
+//         const email = formData.get("email") as string;
+//         const age = formData.get("age") as string;
 
-        await createUser(name, email, Number(age));
+//         await createUser(name, email, Number(age));
 
-        const users = await getUsers();
+//         const users = await getUsers();
 
-        return { success: true, users };
-    } catch (error) {
-        console.error("Error creating user:", error);
-        return { success: false, error };
-    }
-}
+//         return { success: true, users };
+//     } catch (error) {
+//         console.error("Error creating user:", error);
+//         return { success: false, error };
+//     }
+// }
 
 export async function deleteUserAction (id:number) {
     await deleteUser(id);
@@ -45,5 +45,5 @@ export async function addToCartAction(productId: number) {
 
   export const setCartTotalCookie = async (quantity: number) => {
     const cookieStore = cookies();
-    cookieStore.set("cart_total", quantity.toString());
+    // cookieStore.set("cart_total", quantity.toString());
   };

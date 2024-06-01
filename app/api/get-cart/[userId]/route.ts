@@ -3,11 +3,11 @@ import { sql } from "@vercel/postgres";
 
 export const revalidate = 0;
 
-export async function GET(_request: Request,{ params }: { params: { userId: number } }) {
+export async function GET(_request: Request,{ params }: { params: { userId: string } }) {
     try {
         const { userId } = params;
         
-        const carts = await sql`SELECT * FROM carts WHERE user_id = ${Number(userId)}`
+        const carts = await sql`SELECT * FROM carts WHERE user_id = ${userId}`
         
         return NextResponse.json({carts }, { status: 200 });
     } catch (error) {

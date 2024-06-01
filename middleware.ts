@@ -1,26 +1,36 @@
-import { NextResponse } from "next/server";
-import { AUTH_COOKIE } from "./constants";
 import createMiddleware from "next-intl/middleware";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "@auth0/nextjs-auth0/edge";
 
-function loginMiddleware(request:NextRequest) {
-  const token = request.cookies.get(AUTH_COOKIE);
+function pathProtected (pathName: string) {
+  const protectedRoutes = ["/profile", "/users", "/admin"];
 
-  if (!token && !request.nextUrl.pathname.includes("login")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  for (const route of protectedRoutes) {
+      if(pathName.startsWith(route)) {
+        return true;
+      }
   }
-  return
+  return false;
 }
 
 const langMiddleware = createMiddleware({
   locales: ["ka", "en"],
   defaultLocale: "en",
-
-  localePrefix: 'never'
+  localePrefix: 'never',
 });
 
-export default function middleware(request:NextRequest) {
-  return loginMiddleware(request) || langMiddleware(request);
+export default async function middleware(request:NextRequest) {
+  const response = NextResponse.next()
+  const session = await getSession(request, response);
+  console.log(session?.user)
+
+  const pathName = request.nextUrl.pathname;
+  
+  if (!session?.user && pathProtected(pathName)) {
+    return NextResponse.redirect(new URL("/api/auth/login", request.url));
+  }
+
+  return  langMiddleware(request);
 }
 
 export const config = {

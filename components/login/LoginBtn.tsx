@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import { FiUser } from "react-icons/fi";
 
-export default function LogoutBtn() {
+export default function LoginBtn() {
   const t = useTranslations("Header");
 
   return (
@@ -11,10 +11,10 @@ export default function LogoutBtn() {
         <FiUser />
 
         <a
-          href="/api/auth/logout"
+          href="/api/auth/login"
           className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
         >
-          {t("logout")}
+          {t("login")}
         </a>
       </div>
     </>
