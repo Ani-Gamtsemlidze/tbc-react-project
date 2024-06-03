@@ -13,10 +13,10 @@ import { FaRegBookmark } from "react-icons/fa";
 import Categories from "../categories/Categories";
 import AddRecipe from "./AddRecipe";
 import { Search } from "../search/Search";
+import AllCategories from "../categories/AllCategories";
 
 export default function RecipesPage() {
   const [data, setData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
   const [isAddRecipe, SetIsAddRecipe] = useState(false);
 
   useEffect(() => {
@@ -31,8 +31,6 @@ export default function RecipesPage() {
     try {
       const recipes = await getRecipes();
       setData(recipes);
-      const categories = recipes.map((recipe: any) => recipe.category);
-      setCategoryData(categories);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -91,11 +89,7 @@ export default function RecipesPage() {
             Categories
           </h1>
           <ul className={`flex flex-col text-xl ${adamina.className}`}>
-            {categoryData.map((category: any) => (
-              <Link key={category.id} href={`/recipes/category/${category}`}>
-                {category}
-              </Link>
-            ))}
+            <AllCategories />
           </ul>
         </div>
         <div className="flex flex-wrap justify-start">

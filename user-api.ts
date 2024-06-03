@@ -86,6 +86,13 @@ export async function getCategories(){
 
     return categories?.rows;
 }
+export async function getAllCategories(){
+  
+    const response = await fetch(`${process.env.BASE_URL}/api/get-all-categories` );
+    const {categories} = await response.json()
+
+    return categories?.rows;
+}
 
 
 // export async function createRecipe(

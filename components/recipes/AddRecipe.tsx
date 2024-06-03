@@ -124,7 +124,10 @@ export default function AddRecipe() {
       onSubmit={handleSubmit}
     >
       {formFields.map((field) => (
-        <div className="flex justify-between items-center my-2 mr-12 ">
+        <div
+          key={field.label}
+          className="flex justify-between items-center my-2 mr-12 "
+        >
           <label className="text-white  flex float-start" key={field.name}>
             {field.label}
           </label>
