@@ -6,17 +6,26 @@ import { adamina, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
 import Image from "next/image";
 import Link from "next/link";
+import { BiSolidAddToQueue } from "react-icons/bi";
+
 // import { MdOutlineBookmark } from "react-icons/md";
 import { FaRegBookmark } from "react-icons/fa";
 import Categories from "../categories/Categories";
+import AddRecipe from "./AddRecipe";
+import { Search } from "../search/Search";
 
 export default function RecipesPage() {
   const [data, setData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
+  const [isAddRecipe, SetIsAddRecipe] = useState(false);
 
   useEffect(() => {
     fetchRecipes();
   }, []);
+
+  function handleAddRecipe() {
+    SetIsAddRecipe(!isAddRecipe);
+  }
 
   const fetchRecipes = async () => {
     try {
@@ -41,11 +50,29 @@ export default function RecipesPage() {
   // const t = useTranslations("Blogs");
 
   return (
-    <div className="flex flex-col bg-gray-200 dark:bg-gray-700 ">
-      <div className="mt-4">
+    <div className="flex flex-col bg-gray-200 dark:bg-gray-700 relative ">
+      <div className="mt-4 flex items-center justify-center">
         <h1 className={`text-center text-2xl ${oleo.className}`}>
           Exploring Vegan Recipes
         </h1>
+        <div className="bg-white flex items-end ">
+          <Search />
+        </div>
+      </div>
+      <div className="text-center my-8">
+        <div className="flex items-center justify-center cursor-pointer">
+          <div>
+            <p className={`text-xl font-bold mr-4  ${monda.className}`}>
+              {" "}
+              Add Your Recipe
+            </p>
+          </div>
+          <BiSolidAddToQueue onClick={handleAddRecipe} className="text-2xl" />
+          {isAddRecipe && <AddRecipe />}
+        </div>
+        <p className={`${adamina.className} mt-4`}>
+          Contribute to Our Vegan Recipe Collection!
+        </p>
       </div>
       <div className="mt-4">
         <h1 className={`text-center text-2xl ${monda.className}`}>
@@ -57,7 +84,7 @@ export default function RecipesPage() {
         </p>
         <Categories />
       </div>
-      <h1 className="text-center text-xl mt-8">All Recipes</h1>
+      <h1 className="text-center text-2xl my-8 font-bold ">All Recipes</h1>
       <div className="flex ">
         <div className="ml-8">
           <h1 className={`font-bold text-2xl ${monda.className} `}>

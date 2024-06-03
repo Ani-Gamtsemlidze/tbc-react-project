@@ -88,6 +88,53 @@ export async function getCategories(){
 }
 
 
+// export async function createRecipe(
+//   title:string,
+//   introduction:string,
+//   category:string,
+//   ingredients_list:string,
+//   preparation_time:string,
+//   servings:string,
+//   instructions:string,
+//   tips_and_variations:string,
+//   nutritional_information:string,
+//   storage_instructions:string,
+//   image_url:string
+// ) {
+//   try {
+//     const response = await fetch(`${process.env.BASE_URL}/api/save-recipe`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         title,
+//         introduction,
+//         category,
+//         ingredients_list,
+//         preparation_time,
+//         servings,
+//         instructions,
+//         tips_and_variations,
+//         nutritional_information,
+//         storage_instructions,
+//         image_url,
+//       }),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Failed to create recipe");
+//     }
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error creating recipe:", error);
+//     return { success: false, error: error };
+//   }
+// }
+
+
 
 
 export async function deleteUser (id:number) {

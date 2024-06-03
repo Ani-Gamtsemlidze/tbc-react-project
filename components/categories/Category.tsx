@@ -25,7 +25,7 @@ export default function Category({ categoryName }: CategoryProps) {
     console.log("categoryNAME", categoryName);
     try {
       const category = await getCategory(categoryName);
-      setData(category.rows || []); // Check if category.rows exists
+      setData(category.rows || []);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching category:", error);
