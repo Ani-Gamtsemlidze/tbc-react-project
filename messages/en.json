@@ -11,10 +11,9 @@
       "profile":"Profile",
       "contact": "Contact",
       "recipes": "Recipes",
-      "movies":"Movies",
-    "tvshows":"Tv-Shows",
+      "products":"Products",
+    "tvshows":"Tv-Shows"
 
-      "admin":"admin"
 
     },
     "Footer":{

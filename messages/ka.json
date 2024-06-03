@@ -11,9 +11,7 @@
     "profile":"პროფილი",
     "contact": "კონტაქტი",
     "recipes": "რეცეპტები",
-    "movies":"ფილმები",
-    "tvshows":"სერიალები",
-    "admin":"ადმინი"
+    "products":"პროდუქტები",    "tvshows":"სერიალები"
   },
   "Footer":{
     "email":"ელ-ფოსტა",

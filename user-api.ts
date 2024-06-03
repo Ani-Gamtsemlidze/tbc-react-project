@@ -1,7 +1,6 @@
 "use server"
 
 import { cookies } from "next/headers";
-import { setCartTotalCookie } from "./actions";
 
 export interface User {
   id:number;
@@ -14,7 +13,7 @@ export interface User {
 // export async function getUsers(){
   
 //     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
-//     console.log(process.env.BASE_URL)
+//     console.log(process.env.BASE_URL)  
 //     const {users} = await response.json()
 //     console.log(users)
 //     console.log('Database URL:', process.env.POSTGRES_URL);
@@ -36,16 +35,56 @@ export async function getRecipe(id: number) {
     throw error;
   }
 }
+export async function getCategory(categoryName: any) {  
+  try {
+    const url = `${process.env.BASE_URL}/api/get-category/${categoryName}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching recipes:', error);
+    throw error;
+  }
+}
+
+// export async function addToBookmarks(userId: number, recipeId: number) {
+//   try {
+//       const url = `${process.env.BASE_URL}/api/save-recipe`;
+//       const response = await fetch(url, {
+//           method: 'POST',
+//           body: JSON.stringify({ userId, recipeId }),
+//           headers: {
+//               'Content-Type': 'application/json'
+//           }
+//       });
+//       if (!response.ok) {
+//           throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+//       const data = await response.json();
+//       return data;
+//   } catch (error) {
+//       console.error('Error adding recipe to bookmarks:', error);
+//       throw error;
+//   }
+// }
 
 
 export async function getRecipes(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
     const {recipes} = await response.json()
-    console.log(recipes)
-    console.log('Database URL:', process.env.POSTGRES_URL);
 
     return recipes?.rows;
+}
+export async function getCategories(){
+  
+    const response = await fetch(`${process.env.BASE_URL}/api/get-categories` );
+    const {categories} = await response.json()
+
+    return categories?.rows;
 }
 
 
@@ -90,11 +129,9 @@ export async function addToCart (productId: number) {
         method: "POST",
         body: JSON.stringify({ product_id: productId }),
       });
-      console.log(process.env.BASE_URL)
       if (response.ok) {
-        const data = await response.json();
-        console.log(data.quantity, "data");
-        setCartTotalCookie(data.quantity);
+        // const data = await response.json();
+        // setCartTotalCookie(data.quantity);
       } else {
         console.error("Error adding product to cart. Status:", response.status);
       }

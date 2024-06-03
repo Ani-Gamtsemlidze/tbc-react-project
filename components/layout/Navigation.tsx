@@ -9,9 +9,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const navigation = [
     { title: t("home"), href: `/`, src: "/images/Shape.svg" },
-    { title: t("admin"), href: `/admin`, src: "/images/movies.svg" },
-    { title: t("movies"), href: `/products`, src: "/images/movies.svg" },
-    { title: t("tvshows"), href: `/tvshows`, src: "/images/tv.svg" },
+    { title: t("products"), href: `/products`, src: "/images/movies.svg" },
     { title: t("profile"), href: `/profile`, src: "/images/movies.svg" },
     { title: t("contact"), href: `/contact`, src: "/images/Bookmark.svg" },
     { title: t("recipes"), href: `/recipes`, src: "/images/movies.svg" },

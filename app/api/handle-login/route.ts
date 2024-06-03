@@ -6,7 +6,7 @@ export async function GET(_request: Request) {
   try {
     const {user}:any = await getSession();
 
-    console.log(user)
+    console.log(user, "userrrr")
 
     if (!user.sub) {
       throw new Error("sub, email, picture are required");
@@ -26,8 +26,9 @@ export async function GET(_request: Request) {
     `;
     }
 
-    const singleUser =
-    await sql`SELECT picture FROM users_info WHERE sub = ${user.sub};`;
+    const singleUser = await sql`SELECT picture FROM users_info WHERE sub = ${user.sub};`;
+
+    console.log(singleUser, "singleUser")
     
     return NextResponse.json({ singleUser }, { status: 200 });
   } catch (error: any) {

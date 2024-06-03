@@ -4,8 +4,8 @@ import { IoMdAdd } from "react-icons/io";
 import { LuMinus } from "react-icons/lu";
 
 import { deleteProducts, updateCart } from "../../user-api";
-import { useState, useEffect } from "react";
-import { setCartTotalCookie } from "../../actions";
+import { useState } from "react";
+// import { setCartTotalCookie } from "../../actions";
 import CartQuantity from "./CartQuantity";
 
 export default function SelectedProducts({
@@ -14,13 +14,13 @@ export default function SelectedProducts({
 }: any) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
-  useEffect(() => {
-    const quantityTotal: any = Object.values(quantity).reduce(
-      (acc: any, cur: any) => acc + cur,
-      0
-    );
-    setCartTotalCookie(quantityTotal);
-  }, [quantity]);
+  // useEffect(() => {
+  //   const quantityTotal: any = Object.values(quantity).reduce(
+  //     (acc: any, cur: any) => acc + cur,
+  //     0
+  //   );
+  //   // setCartTotalCookie(quantityTotal);
+  // }, [quantity]);
 
   const handleQuantityChange = async (id: number, change: number) => {
     const newQuantity = quantity[id] + change;

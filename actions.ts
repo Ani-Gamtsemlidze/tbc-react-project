@@ -1,6 +1,6 @@
 
 "use server"
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import {  User, addToCart, deleteUser, editUser } from "./user-api";
 
 // export async function createUserAction(formData: FormData) {
@@ -42,8 +42,3 @@ export async function addToCartAction(productId: number) {
       throw error;
     }
   }
-
-  export const setCartTotalCookie = async (quantity: number) => {
-    const cookieStore = cookies();
-    // cookieStore.set("cart_total", quantity.toString());
-  };

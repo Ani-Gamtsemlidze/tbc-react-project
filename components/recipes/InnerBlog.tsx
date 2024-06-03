@@ -14,6 +14,7 @@ import Image from "next/image";
 //   reciepeData: recipeData | null;
 // }
 function InnerBlog({ recipeData }: any) {
+  console.log(recipeData);
   return (
     <>
       {recipeData ? (
