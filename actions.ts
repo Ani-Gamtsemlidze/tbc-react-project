@@ -1,24 +1,109 @@
 
 "use server"
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import {  User, addToCart, deleteUser, editUser } from "./user-api";
 
-// export async function createUserAction(formData: FormData) {
+// export async function createRecipeAction(formData: FormData) {
+//   try {
+//       const title = formData.get("title") as string;
+//       const introduction = formData.get("introduction") as string;
+//       const category = formData.get("category") as string;
+//       const ingredients_list = formData.get("ingredients_list") as string;
+//       const preparation_time = formData.get("preparation_time") as string;
+//       const servings = formData.get("servings") as string;
+//       const instructions = formData.get("instructions") as string;
+//       const tips_and_variations = formData.get("tips_and_variations") as string;
+//       const nutritional_information = formData.get("nutritional_information") as string;
+//       const storage_instructions = formData.get("storage_instructions") as string;
+//       const image_url = formData.get("image_url") as string;
+
+//       const response = await createRecipe(
+//           title,
+//           introduction,
+//           category,
+//           ingredients_list,
+//           preparation_time,
+//           servings,
+//           instructions,
+//           tips_and_variations,
+//           nutritional_information,
+//           storage_instructions,
+//           image_url
+//       );
+
+//       if (response.success) {
+//           const recipes = await getRecipes();
+//           return { success: true, recipes };
+//       } else {
+//           return { success: false, error: response.error };
+//       }
+//   } catch (error) {
+//       console.error("Error creating recipe:", error);
+//       return { success: false, error };
+//   }
+// }
+
+// export async function createRecipeAction(formData: FormData) {
 //     try {
-//         const name = formData.get("name") as string;
-//         const email = formData.get("email") as string;
-//         const age = formData.get("age") as string;
+//         const title = formData.get("title") as string;
+//         const introduction = formData.get("introduction") as string;
+//         const category = formData.get("category") as string;
+//         const ingredients_list = formData.get("ingredients_list") as string;
+//         const preparation_time = formData.get("preparation_time") as string;
+//         const servings = formData.get("servings") as string;
+//         const instructions = formData.get("instructions") as string;
+//         const tips_and_variations = formData.get("tips_and_variations") as string;
+//         const nutritional_information = formData.get("nutritional_information") as string;
+//         const storage_instructions = formData.get("storage_instructions") as string;
+//         const imageFile = formData.get("image") as File;
 
-//         await createUser(name, email, Number(age));
+//         let image_url = "";
 
-//         const users = await getUsers();
+//         if (imageFile) {
+//             const imageData = new FormData();
+//             imageData.append("file", imageFile);
+            
+//             const imageUploadResponse = await fetch(`${process.env.BASE_URL}/api/upload-image`, {
+//                 method: "POST",
+//                 body: imageData,
+//             });
 
-//         return { success: true, users };
+//             if (!imageUploadResponse.ok) {
+//                 throw new Error("Failed to upload image");
+//             }
+
+//             const imageUploadData = await imageUploadResponse.json();
+//             image_url = imageUploadData.url; 
+//         }
+
+//         const response = await createRecipe(
+//             title,
+//             introduction,
+//             JSON.parse(category), 
+//             JSON.parse(ingredients_list), 
+//             preparation_time,
+//             servings,
+//             JSON.parse(instructions), 
+//             tips_and_variations,
+//             nutritional_information,
+//             storage_instructions,
+//             image_url
+//         );
+
+//         if (response.success) {
+//             const recipes = await getRecipes();
+//             return { success: true, recipes };
+//         } else {
+//             throw new Error(response.error);
+//         }
 //     } catch (error) {
-//         console.error("Error creating user:", error);
-//         return { success: false, error };
+//         console.error("Error creating recipe:", error);
+//         return { success: false, error: error };
 //     }
 // }
+
+
+
 
 export async function deleteUserAction (id:number) {
     await deleteUser(id);
@@ -42,8 +127,3 @@ export async function addToCartAction(productId: number) {
       throw error;
     }
   }
-
-  export const setCartTotalCookie = async (quantity: number) => {
-    const cookieStore = cookies();
-    // cookieStore.set("cart_total", quantity.toString());
-  };

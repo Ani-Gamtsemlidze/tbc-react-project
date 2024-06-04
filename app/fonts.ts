@@ -1,4 +1,4 @@
-import { Arvo, Fira_Sans, Inter, Monda, Roboto_Mono } from 'next/font/google'
+import { Adamina, Arvo, Fira_Sans, Inter, Monda, Oleo_Script, Roboto_Mono } from 'next/font/google'
  
 export const inter = Inter({
   subsets: ['latin'],
@@ -24,3 +24,18 @@ export const monda = Monda({
   display: 'swap',
   weight:"700"
 })
+export const oleo = Oleo_Script({
+  subsets: ['latin'],
+  display: 'swap',
+  weight:"700"
+})
+export const adamina = Adamina({
+  subsets: ['latin'],
+  display: 'swap',
+  weight:"400"
+})
+// export const platypi = Oleo_Script({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   weight:"700"
+// })

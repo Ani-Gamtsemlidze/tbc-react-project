@@ -3,18 +3,17 @@
       "title": "Products",
       "logout":"Log Out",
       "login":"Log In",
-      "search":"Search",
+      "search":"Search For Recipes",
       "sort": "Sort"
     },
     "Navigation": {
       "home": "Home",
       "profile":"Profile",
       "contact": "Contact",
-      "blog": "Blog",
-      "movies":"Movies",
-    "tvshows":"Tv-Shows",
+      "recipes": "Recipes",
+      "products":"Products",
+    "tvshows":"Tv-Shows"
 
-      "admin":"admin"
 
     },
     "Footer":{

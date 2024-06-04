@@ -1,55 +1,40 @@
 import Image from "next/image";
 
-interface BlogData {
-  name: string;
-  image: string;
-  ingredients: string[];
-  instructions: string[];
-  difficulty: string;
-  cuisine: string;
-  prepTimeMinutes: number;
-}
+// interface recipeData {
+//   name: string;
+//   image: string;
+//   ingredients: string[];
+//   instructions: string[];
+//   difficulty: string;
+//   cuisine: string;
+//   prepTimeMinutes: number;
+// }
 
-interface Props {
-  blogsData: BlogData | null;
-}
-const InnerBlog: React.FC<Props> = ({ blogsData }) => {
+// interface Props {
+//   reciepeData: recipeData | null;
+// }
+function InnerBlog({ recipeData }: any) {
+  console.log(recipeData);
   return (
     <>
-      {blogsData ? (
+      {recipeData ? (
         <div className="flex h-screen px-4 bg-gray-200 dark:bg-slate-500 items-center">
           <Image
-            src={blogsData.image}
-            alt={blogsData.name}
+            src="/images/blog/BlogSeries2.jpg"
+            alt={recipeData.title}
             width={200}
             height={200}
             className="w-96 h-96 object-cover rounded"
           />
           <div className="ml-6">
-            <h1 className="font-bold">{blogsData.name}</h1>
+            <h1 className="font-bold">{recipeData.title}</h1>
             <div className="flex flex-col">
-              <span className="font-bold">Ingredients: </span>
-              <div className="flex flex-wrap">
-                {blogsData.ingredients.map((ingredient, index) => (
-                  <p key={index}>
-                    {ingredient}
-                    {index !== blogsData.ingredients.length - 1 && ", "}
-                  </p>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold">Instructions: </span>
-              <div>
-                {blogsData.instructions.map((instruction, index) => (
-                  <p key={index}>{instruction}</p>
-                ))}
-              </div>
+              <span className="font-bold">{recipeData.category} </span>
             </div>
             <div className="flex mt-2 font-bold">
-              <p>{blogsData.difficulty}</p>
-              <p className="mx-4">{blogsData.cuisine}</p>
-              <p>{blogsData.prepTimeMinutes} Minutes</p>
+              <p>{recipeData.preparation_time}</p>
+              <p className="mx-4">{recipeData.tips_and_variations}</p>
+              <p>{recipeData.storage_instructions} Minutes</p>
             </div>
           </div>
         </div>
@@ -58,6 +43,6 @@ const InnerBlog: React.FC<Props> = ({ blogsData }) => {
       )}
     </>
   );
-};
+}
 
 export { InnerBlog };
