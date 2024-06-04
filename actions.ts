@@ -1,7 +1,7 @@
 
 "use server"
 // import { cookies } from "next/headers";
-import {  User, addToCart, deleteUser, editUser } from "./user-api";
+import {  addToCart, deleteUser, editUserInfo } from "./user-api";
 
 // export async function createRecipeAction(formData: FormData) {
 //   try {
@@ -109,9 +109,10 @@ export async function deleteUserAction (id:number) {
     await deleteUser(id);
 }
 
-export async function editUsersAction(id: number, userData: User) {
+export async function editUsersAction(id: number, email: any) {
+  console.log("IDDDD", id, email)
     try {
-   await editUser(id, userData);
+   await editUserInfo(id, email);
 
     } catch (error) {
         console.error("Error editing user:", error);

@@ -1,6 +1,8 @@
 "use client";
 // import { useTranslations } from "next-intl";
 import { getRecipes } from "../../user-api";
+// import ScrollAnimation from "react-animate-on-scroll";
+
 import { useEffect, useState } from "react";
 import { adamina, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
@@ -82,7 +84,9 @@ export default function RecipesPage() {
         </p>
         <Categories />
       </div>
+      {/* <ScrollAnimation delay="1" animateIn="fadeIn" duration="2"> */}
       <h1 className="text-center text-2xl my-8 font-bold ">All Recipes</h1>
+      {/* </ScrollAnimation> */}
       <div className="flex ">
         <div className="ml-8">
           <h1 className={`font-bold text-2xl ${monda.className} `}>

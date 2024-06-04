@@ -3,6 +3,19 @@ import { useEffect, useState } from "react";
 import { getCategories } from "../../user-api";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
+// import { Pagination } from "swiper/modules";
+
+// import "./styles.css";
+
+// import required modules
 
 export default function Categories() {
   const [categoryData, setCategoryData] = useState([]);
@@ -23,22 +36,32 @@ export default function Categories() {
 
   return (
     <div className="flex flex-wrap justify-start bg-gray-200 dark:bg-gray-700 mt-6">
-      {categoryData.map((category: any) => (
-        <Link
-          href={`/recipes/category/${category.name}`}
-          key={category.id}
-          className="ml-4"
-        >
-          <Image
-            className="w-64 h-56 rounded-md object-cover"
-            src={category.image}
-            width={400}
-            height={400}
-            alt="recipe image"
-          />
-          <h1 className="font-bold text-2xl">{category.name}</h1>
-        </Link>
-      ))}
+      <Swiper
+        slidesPerView={5}
+        spaceBetween={5}
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper"
+      >
+        {categoryData.map((category: any) => (
+          <SwiperSlide key={category.id}>
+            <Link
+              href={`/recipes/category/${category.name}`}
+              key={category.id}
+              className="ml-4"
+            >
+              <Image
+                className="w-64 h-56 rounded-md object-cover"
+                src={category.image}
+                width={400}
+                height={400}
+                alt="recipe image"
+              />
+              <h1 className="font-bold text-2xl">{category.name}</h1>
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }

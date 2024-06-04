@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export interface User {
@@ -10,16 +11,14 @@ export interface User {
 }
 
 
-// export async function getUsers(){
+export async function getUsers(){
   
-//     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
-//     console.log(process.env.BASE_URL)  
-//     const {users} = await response.json()
-//     console.log(users)
-//     console.log('Database URL:', process.env.POSTGRES_URL);
+    const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
+    const data = await response.json()
+    console.log("DATAAAA", data)
 
-//     return users?.rows;
-// }
+    return data.users?.rows;
+}
 
 export async function getRecipe(id: number) {
   try {
@@ -155,14 +154,37 @@ export async function deleteUser (id:number) {
 
 
 
-export async function editUser(id: number, userData: User) {
+// export async function editUser(id: number, userData: User) {
+//   try {
+//     const response = await fetch(`${process.env.BASE_URL}/api/edit-users/${id}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(userData),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Failed to update user");
+//     }
+
+//     return response.json();
+//   } catch (error) {
+//     console.error("Error updating user:", error);
+//     throw error; 
+//   }
+// }
+
+
+export async function editUserInfo(id: number, email: any) {
+  console.log(id, email, "DAVIGALE")
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/edit-users/${id}`, {
+    const response = await fetch(`${process.env.BASE_URL}/api/update-user-info/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(email),
     });
 
     if (!response.ok) {
@@ -267,4 +289,5 @@ export async function changePictureAction(sub: string, picture: string) {
     method: "PUT",
     body: JSON.stringify({ sub, picture }),
   });
+  revalidatePath("/Profile");
 }

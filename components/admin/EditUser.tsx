@@ -41,7 +41,7 @@ export const EditUser: React.FC<EditUserProps> = ({ user, onUpdateUser }) => {
 
   const saveEdit = async () => {
     try {
-      await editUsersAction(editedUser.id, editedUser);
+      await editUsersAction(editedUser.id, editedUser.email);
       onUpdateUser(editedUser);
       setIsEdit(false);
     } catch (error) {

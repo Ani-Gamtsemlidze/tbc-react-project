@@ -3,8 +3,8 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { useEffect, useState } from "react";
 import AvatarUploadPage from "../avatar/page";
+import { useState } from "react";
 // import { useTranslations } from "next-intl";
 
 interface User {
@@ -25,28 +25,6 @@ export default function UserInfo({ picture }: any) {
   const { user, error, isLoading } = useUser();
   const [isUpload, setIsUpload] = useState(false);
   // const t = useTranslations("Profile");
-
-  useEffect(() => {
-    const saveUser = async () => {
-      if (user && !user?.sub) {
-        try {
-          const response = await fetch("/api/handle-login", {
-            method: "GET",
-          });
-          const data = await response.json();
-          if (response.ok) {
-            console.log("User saved:", data);
-          } else {
-            console.error("Error saving user:", data.error);
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-    };
-
-    saveUser();
-  }, [user]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
