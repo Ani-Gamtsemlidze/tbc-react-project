@@ -1,0 +1,107 @@
+// products
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    ingredients JSONB,
+    nutrients JSONB,
+    price NUMERIC(10, 2),
+    images JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    ingredients JSONB,
+    nutrients JSONB,
+    price NUMERIC(10, 2),
+    images JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+// meat products
+INSERT INTO products (title, description, ingredients, nutrients, price, images)
+VALUES 
+(
+    'Vegan Chick''n Tenders',
+    'Delicious vegan chicken tenders made from soy protein with a crispy coating.',
+    '{"soy protein", "wheat gluten", "vegetable oil", "spices", "salt"}',
+    '{"protein": "15g", "fat": "8g", "carbohydrates": "10g", "fiber": "3g"}',
+    9.99,
+    '["https://example.com/vegan-chickn-tenders.jpg"]'
+),
+(
+    'Vegan Beef Burgers',
+    'Juicy vegan beef-style burgers made from a blend of plant-based proteins and savory seasonings.',
+    '{"pea protein", "mushrooms", "onions", "spices", "flaxseed"}',
+    '{"protein": "20g", "fat": "12g", "carbohydrates": "8g", "fiber": "5g"}',
+    12.99,
+    '["https://example.com/vegan-beef-burgers.jpg"]'
+),
+(
+    'Vegan Sausages',
+    'Savory vegan sausages made with a mix of beans, grains, and herbs, perfect for grilling or frying.',
+    '{"kidney beans", "oats", "onions", "nutritional yeast", "smoked paprika"}',
+    '{"protein": "18g", "fat": "10g", "carbohydrates": "15g", "fiber": "6g"}',
+    8.49,
+    '["https://example.com/vegan-sausages.jpg"]'
+),
+(
+    'Vegan BBQ Ribs',
+    'Tender vegan ribs smothered in barbecue sauce, made from seitan and jackfruit for a meaty texture.',
+    '{"vital wheat gluten", "jackfruit", "barbecue sauce", "apple cider vinegar", "molasses"}',
+    '{"protein": "22g", "fat": "6g", "carbohydrates": "20g", "fiber": "4g"}',
+    14.99,
+    '["https://example.com/vegan-bbq-ribs.jpg"]'
+),
+(
+    'Vegan Meatballs',
+    'Hearty vegan meatballs made with lentils, oats, and Italian herbs, perfect for spaghetti and meatball dishes.',
+    '{"lentils", "rolled oats", "tomato paste", "garlic", "Italian seasoning"}',
+    '{"protein": "12g", "fat": "4g", "carbohydrates": "18g", "fiber": "5g"}',
+    10.49,
+    '["https://example.com/vegan-meatballs.jpg"]'
+);
+
+
+
+
+
+// recipes
+CREATE TABLE recipes (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    introduction TEXT,
+    category JSONB,
+    ingredients_list JSONB,
+    preparation_time VARCHAR(50),
+    servings VARCHAR(50),
+    instructions JSONB,
+    tips_and_variations TEXT,
+    nutritional_information TEXT,
+    storage_instructions TEXT,
+    images JSONB
+);
+
+// categories
+
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+INSERT INTO categories (name) VALUES
+('dinner'),
+('spicy'),
+('quick'),
+('mushrooms'),
+('salad'),
+('soups'),
+('dessert'),
+('main course'),
+('breakfast'),
+('snack'),
+('drinks');
