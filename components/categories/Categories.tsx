@@ -35,9 +35,9 @@ export default function Categories() {
   };
 
   return (
-    <div className="flex flex-wrap justify-start bg-gray-200 dark:bg-gray-700 mt-6">
+    <div className="flex ml-4 flex-wrap justify-start dark:bg-gray-700 mt-6">
       <Swiper
-        slidesPerView={5}
+        slidesPerView={4}
         spaceBetween={5}
         navigation={true}
         modules={[Navigation]}
@@ -51,13 +51,15 @@ export default function Categories() {
               className="ml-4"
             >
               <Image
-                className="w-64 h-56 rounded-md object-cover"
+                className="w-[400px] h-[324px] rounded-2xl object-cover"
                 src={category.image}
                 width={400}
                 height={400}
                 alt="recipe image"
               />
-              <h1 className="font-bold text-2xl">{category.name}</h1>
+              <h1 className="font-bold text-2xl text-[#27343a] uppercase mt-4">
+                {category.name}
+              </h1>
             </Link>
           </SwiperSlide>
         ))}

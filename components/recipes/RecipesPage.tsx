@@ -4,7 +4,7 @@ import { getRecipes } from "../../user-api";
 // import ScrollAnimation from "react-animate-on-scroll";
 
 import { useEffect, useState } from "react";
-import { adamina, oleo } from "../../app/fonts";
+import { acme, adamina, inter, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,10 +50,13 @@ export default function RecipesPage() {
   // const t = useTranslations("Blogs");
 
   return (
-    <div className="flex flex-col bg-gray-200 dark:bg-gray-700 relative ">
+    <div className="flex flex-col bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
       <div className="mt-4 flex items-center justify-center">
-        <h1 className={`text-center text-2xl ${oleo.className}`}>
-          Exploring Vegan Recipes
+        <h1
+          className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
+        >
+          <p>Exploring</p>
+          Vegan Recipes
         </h1>
         <div className="bg-white flex items-end ">
           <Search />
@@ -75,28 +78,43 @@ export default function RecipesPage() {
         </p>
       </div>
       <div className="mt-4">
-        <h1 className={`text-center text-2xl ${monda.className}`}>
+        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
+
+        <h1
+          className={`text-center mt-3 text-6xl ${acme.className} text-[#035C41]`}
+        >
           Popular Vegan Categories
         </h1>
 
-        <p className={`text-center ${adamina.className} `}>
+        <p
+          className={`text-center text-xl text-[#27343A] ${inter.className} mt-6 `}
+        >
           Find your next favorite cooking adventure.
         </p>
         <Categories />
       </div>
+      <div className="mt-24">
+        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
+        <h1
+          className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
+        >
+          All Recipes
+        </h1>
+      </div>
       {/* <ScrollAnimation delay="1" animateIn="fadeIn" duration="2"> */}
-      <h1 className="text-center text-2xl my-8 font-bold ">All Recipes</h1>
       {/* </ScrollAnimation> */}
       <div className="flex ">
         <div className="ml-8">
-          <h1 className={`font-bold text-2xl ${monda.className} `}>
+          <h1
+            className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+          >
             Categories
           </h1>
           <ul className={`flex flex-col text-xl ${adamina.className}`}>
             <AllCategories />
           </ul>
         </div>
-        <div className="flex flex-wrap justify-start">
+        <div className="flex flex-wrap justify-start ml-36">
           {data &&
             data.map((recipe: any) => (
               <div key={recipe.id} className="ml-8">
