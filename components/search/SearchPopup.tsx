@@ -1,4 +1,3 @@
-"use client";
 import { CiSearch } from "react-icons/ci";
 import { oleo } from "../../app/fonts";
 import Link from "next/link";
@@ -6,20 +5,45 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getAllCategories, getRecipes } from "../../user-api";
 
-const images: any = {
-  spicy: "/images/search_categories/spicy.jpg",
-  quick: "/images/search_categories/quick.jpg",
-  dinner: "/images/search_categories/dinner.jpg",
-  salad: "/images/search_categories/salad.jpg",
-  mushrooms: "/images/search_categories/mushrooms.jpg",
-  soups: "/images/search_categories/soups.jpg",
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface Recipe {
+  id: number;
+  title: string;
+  price: number;
+  category: string[];
+  images: string;
+}
+
+interface Image {
+  [key: string]: string;
+}
+
+interface SearchPopupProps {
+  isOpen: boolean;
+  handleOpenSearchBox: (event: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+const images: Image = {
+  Spicy: "/images/search_categories/Spicy.jpg",
+  Quick: "/images/search_categories/Quick.jpg",
+  Dinner: "/images/search_categories/Dinner.jpg",
+  Salad: "/images/search_categories/Salad.jpg",
+  Mushrooms: "/images/search_categories/Mushrooms.jpg",
+  Soups: "/images/search_categories/Soups.jpg",
 };
 
-export default function SearchPopup({ isOpen, handleOpenSearchBox }: any) {
-  const [allCategories, setAllCategories] = useState([]);
-  const [recipesData, setRecipesData] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const [isFilteredRecipes, setIsFilteredRecipes] = useState(false);
+export default function SearchPopup({
+  isOpen,
+  handleOpenSearchBox,
+}: SearchPopupProps) {
+  const [allCategories, setAllCategories] = useState<Category[]>([]);
+  const [recipesData, setRecipesData] = useState<Recipe[]>([]);
+  const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     fetchRecipes();
@@ -34,23 +58,25 @@ export default function SearchPopup({ isOpen, handleOpenSearchBox }: any) {
       console.error("Error fetching users:", error);
     }
   };
-  const debounce = <Args extends any[]>(
-    func: (...args: Args) => void,
-    delay: number
-  ) => {
-    let timerId: ReturnType<typeof setTimeout>;
-    return (...args: Args) => {
-      clearTimeout(timerId);
-      timerId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
+
+  const debounce = useCallback(
+    (func: (...args: any[]) => void, delay: number) => {
+      let timerId: ReturnType<typeof setTimeout>;
+      return (...args: any[]) => {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => {
+          func(...args);
+        }, delay);
+      };
+    },
+    []
+  );
+
   const debounceSearch = useCallback(
     debounce((searchQuery: string) => {
       const priceSearch = Number(searchQuery);
 
-      const filtered = recipesData?.filter((recipe: any) =>
+      const filtered = recipesData?.filter((recipe: Recipe) =>
         Object.values(recipe).some((value) =>
           typeof value === "string"
             ? value.toLowerCase().includes(searchQuery.toLowerCase())
@@ -63,11 +89,9 @@ export default function SearchPopup({ isOpen, handleOpenSearchBox }: any) {
     [recipesData]
   );
 
-  console.log(filteredRecipes);
-
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = e.target.value;
-    setIsFilteredRecipes(true);
+    setSearchQuery(searchQuery);
 
     debounceSearch(searchQuery);
   };
@@ -94,7 +118,7 @@ export default function SearchPopup({ isOpen, handleOpenSearchBox }: any) {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white w-[650px] h-[410px] rounded-2xl fixed"
+            className="bg-white w-[650px] max-h-[410px] overflow-y-auto rounded-2xl fixed"
           >
             <form className="relative flex ml-12 mt-8 items-center">
               <input
@@ -116,14 +140,32 @@ export default function SearchPopup({ isOpen, handleOpenSearchBox }: any) {
               <h3 className={`${oleo.className} ml-12 mt-6 mb-2 text-2xl`}>
                 Categories
               </h3>
-              <div className="flex flex-wrap  items-center justify-center ">
-                {isFilteredRecipes
-                  ? filteredRecipes.map((recipe: any, index) => (
-                      <div key={index}>
-                        <p className="text-black text-2xl">{recipe.title}</p>{" "}
-                      </div>
+              <div className="flex flex-wrap  items-center justify-center my-4 ">
+                {searchQuery.length !== 0
+                  ? filteredRecipes.map((recipe: Recipe, index: number) => (
+                      <Link
+                        href={`/recipes/${recipe.id}`}
+                        className="flex items-center mx-12 w-full my-4 transition hover:bg-[rgb(244,244,244)] rounded-lg "
+                        key={index}
+                      >
+                        <div className="items-start">
+                          <Image
+                            className="w-20 h-20 object-cover rounded-lg"
+                            src={recipe.images[0]}
+                            alt="image"
+                            width={400}
+                            height={400}
+                          />
+                        </div>
+                        <h1 className="text-[#16442a] font-bold text-xl ml-4">
+                          {recipe.title}
+                        </h1>
+                        <p className="text-black text-xl border-l ml-3 pl-3">
+                          {recipe.category}
+                        </p>
+                      </Link>
                     ))
-                  : allCategories.slice(0, 6).map((category: any) => (
+                  : allCategories.slice(0, 6).map((category: Category) => (
                       <Link
                         href={`/recipes/category/${category.name}`}
                         key={category.id}

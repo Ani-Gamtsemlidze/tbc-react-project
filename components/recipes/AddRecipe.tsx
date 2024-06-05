@@ -1,5 +1,7 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-// import { createRecipeAction } from "../../actions";
+"use client";
+import React, { useState, ChangeEvent } from "react";
+import { oleo } from "../../app/fonts";
+import { IoMdClose } from "react-icons/io";
 
 interface FormField {
   label: string;
@@ -7,147 +9,176 @@ interface FormField {
   type: string;
 }
 
+interface AddRecipeProps {
+  handleAddRecipe: () => void;
+  isAddRecipe: boolean;
+}
+
 const formFields: FormField[] = [
   { label: "Recipe Title:", name: "title", type: "text" },
   { label: "Recipe Category:", name: "category", type: "text" },
   { label: "Brief Recipe Description:", name: "introduction", type: "text" },
-  { label: "List of Ingredients:", name: "ingredients_list", type: "text" },
+  { label: "List of Ingredients:", name: "ingredients", type: "text" },
   {
     label: "Preparation Time (in minutes):",
-    name: "preparation_time",
+    name: "preparationTime",
     type: "text",
   },
   { label: "Servings (portion size):", name: "servings", type: "text" },
   { label: "Step-by-Step Instructions:", name: "instructions", type: "text" },
   {
     label: "Tips and Variations (optional):",
-    name: "tips_and_variations",
+    name: "tipsAndVariations",
     type: "text",
   },
   {
     label: "Nutritional Information (per serving):",
-    name: "nutritional_information",
+    name: "nutritionalInformation",
     type: "text",
   },
   {
     label: "Storage Instructions (if applicable):",
-    name: "storage_instructions",
+    name: "storageInstructions",
     type: "text",
-  },
-  {
-    label: "Upload Image:",
-    name: "image",
-    type: "file",
   },
 ];
 
-interface RecipeData {
+export interface RecipeData {
   title: string;
   introduction: string;
   category: string;
-  ingredients_list: string;
-  preparation_time: string;
+  ingredients: string;
+  preparationTime: string;
   servings: string;
   instructions: string;
-  tips_and_variations: string;
-  nutritional_information: string;
-  storage_instructions: string;
-  image: string;
+  tipsAndVariations: string;
+  nutritionalInformation: string;
+  storageInstructions: string;
+  images: string[];
 }
 
-export default function AddRecipe() {
-  //   const [recipesList, setRecipesList] = useState([]);
-  const [formData, setFormData] = useState<RecipeData>({
+const AddRecipe: React.FC<AddRecipeProps> = ({ handleAddRecipe }) => {
+  const [formData, setFormData] = useState<Partial<RecipeData>>({
     title: "",
     introduction: "",
     category: "",
-    ingredients_list: "",
-    preparation_time: "",
+    ingredients: "",
+    preparationTime: "",
     servings: "",
     instructions: "",
-    tips_and_variations: "",
-    nutritional_information: "",
-    storage_instructions: "",
-    image: "",
+    tipsAndVariations: "",
+    nutritionalInformation: "",
+    storageInstructions: "",
+    images: [], // Initialize images as an empty array
   });
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name as keyof RecipeData]: value });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     const formDataToSend: RecipeData = {
+  //       title: formData.title || "",
+  //       introduction: formData.introduction || "",
+  //       category: formData.category || "",
+  //       ingredients: formData.ingredients || "",
+  //       preparationTime: formData.preparationTime || "",
+  //       servings: formData.servings || "",
+  //       instructions: formData.instructions || "",
+  //       tipsAndVariations: formData.tipsAndVariations || "",
+  //       nutritionalInformation: formData.nutritionalInformation || "",
+  //       storageInstructions: formData.storageInstructions || "",
+  //       images: formData.images || [],
+  //     };
 
-    const formDataObj = new FormData();
-
-    // Append each field from formData to formDataObj
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataObj.append(key, value);
-    });
-
-    // try {
-    // //   const { success, recipes } = await createRecipeAction(formDataObj);
-    //   if (success) {
-    //     // setRecipesList(recipes);
-    //     alert("Recipe created successfully.");
-    //     setFormData({
-    //       title: "",
-    //       introduction: "",
-    //       category: "",
-    //       ingredients_list: "",
-    //       preparation_time: "",
-    //       servings: "",
-    //       instructions: "",
-    //       tips_and_variations: "",
-    //       nutritional_information: "",
-    //       storage_instructions: "",
-    //       image: "",
-    //     });
-    //   } else {
-    //     console.error("Failed to add recipe");
-    //     alert("Failed to add recipe. Please try again later.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error adding recipe:", error);
-    //   alert(
-    //     "An error occurred while adding the recipe. Please try again later."
-    //   );
-    // }
-  };
+  //     const result = await createRecipe(formDataToSend);
+  //     console.log(result); // Handle success
+  //   } catch (error) {
+  //     console.error("Error:", error); // Handle error
+  //   }
+  // };
 
   return (
-    <form
-      className="flex flex-col pl-12  overflow-y-scroll bg-gray-400 w-[650px] h-screen text-black fixed top-0 right-0 z-[100]"
-      onSubmit={handleSubmit}
+    <div
+      onClick={handleAddRecipe}
+      className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-[1000]"
     >
-      {formFields.map((field) => (
-        <div
-          key={field.label}
-          className="flex justify-between items-center my-2 mr-12 "
-        >
-          <label className="text-white  flex float-start" key={field.name}>
-            {field.label}
-          </label>
-          <input
-            className="w-52 h-20 py-4 pl-2 outline-none flex items-start"
-            placeholder={field.name}
-            type={field.type}
-            name={field.name}
-            value={formData[field.name]}
-            onChange={handleChange}
-          />
+      <div onClick={(e) => e.stopPropagation()} className="relative w-[900px]">
+        <div className="absolute inset-0 bg-[url('/images/recipes.jpg')] bg-cover bg-no-repeat bg-left blur-sm"></div>
+        <div className="relative flex flex-col pl-12 overflow-y-scroll max-h-[600px] backdrop-blur-sm rounded-lg">
+          <div
+            onClick={() => handleAddRecipe()}
+            className="text-white text-3xl relative "
+          >
+            <IoMdClose className="absolute right-6 top-4 cursor-pointer" />
+          </div>
+          <h1
+            className={`font-bold text-4xl my-8 text-[#fff] ${oleo.className}`}
+          >
+            Share your Favourite Recipe
+          </h1>
+
+          <form
+            // onSubmit={handleSubmit}
+            className="w-[600px] mx-auto px-16 py-4 my-4 bg-white shadow-lg rounded-lg"
+          >
+            {formFields.map((field) => (
+              <div key={field.name} className="mb-6">
+                <label
+                  className="block text-lg font-semibold text-gray-700 mb-2"
+                  htmlFor={field.name}
+                >
+                  {field.label}
+                </label>
+                <input
+                  id={field.name}
+                  className="w-full p-4 border placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder={field.label}
+                  type={field.type}
+                  name={field.name}
+                  value={formData[field.name] as string}
+                  onChange={handleChange}
+                />
+              </div>
+            ))}
+            <button
+              type="submit"
+              className="w-96 py-4 mt-6 text-lg font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              Submit
+            </button>
+          </form>
         </div>
-      ))}
-      <br />
-      <button
-        className="w-32 bg-black text-white py-4 my-4 rounded"
-        type="submit"
-      >
-        Submit
-      </button>
-    </form>
+      </div>
+    </div>
   );
-}
+};
+
+export default AddRecipe;
+
+// {formFields.map((field) => (
+//   <div
+//     key={field.label}
+//     className="flex justify-between items-center my-8 mr-12 "
+//   >
+//     <label
+//       className="font-bold  flex float-start text-[#035C41]"
+//       key={field.name}
+//     >
+//       {field.label}
+//     </label>
+//     <input
+//       className="w-52 h-14 py-4 pl-2 outline-none flex items-start text-[#035C41]"
+//       placeholder={field.name}
+//       type={field.type}
+//       name={field.name}
+//       value={formData[field.name]}
+//       onChange={handleChange}
+//     />
+//   </div>
+// ))}

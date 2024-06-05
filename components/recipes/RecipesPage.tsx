@@ -3,7 +3,7 @@
 import { getRecipes } from "../../user-api";
 // import ScrollAnimation from "react-animate-on-scroll";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { acme, adamina, inter, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
 import Image from "next/image";
@@ -17,13 +17,54 @@ import AddRecipe from "./AddRecipe";
 import { Search } from "../search/Search";
 import AllCategories from "../categories/AllCategories";
 
+interface Recipe {
+  id: string;
+  images: string[];
+  category: string[];
+  preparation_time: number;
+  title: string;
+}
+
 export default function RecipesPage() {
   const [data, setData] = useState([]);
   const [isAddRecipe, SetIsAddRecipe] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        SetIsAddRecipe(false);
+      }
+    }
+
+    if (isAddRecipe) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAddRecipe]);
 
   useEffect(() => {
     fetchRecipes();
   }, []);
+
+  useEffect(() => {
+    if (isAddRecipe) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isAddRecipe]);
 
   function handleAddRecipe() {
     SetIsAddRecipe(!isAddRecipe);
@@ -38,19 +79,8 @@ export default function RecipesPage() {
     }
   };
 
-  // const handleBookmark = async () => {
-  //   try {
-  //     await addToBookmarks(userId, recipeId);
-  //     alert("Recipe added to bookmarks!");
-  //   } catch (error) {
-  //     console.error("Error adding recipe to bookmarks:", error);
-  //     alert("An error occurred while adding the recipe to bookmarks.");
-  //   }
-  // };
-  // const t = useTranslations("Blogs");
-
   return (
-    <div className="flex flex-col bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
+    <div className="flex flex-col    bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
       <div className="mt-4 flex items-center justify-center">
         <h1
           className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
@@ -63,17 +93,27 @@ export default function RecipesPage() {
         </div>
       </div>
       <div className="text-center my-8">
-        <div className="flex items-center justify-center cursor-pointer">
+        <div className="flex items-center justify-center ">
           <div>
-            <p className={`text-xl font-bold mr-4  ${monda.className}`}>
+            <p
+              className={`text-3xl font-bold mr-4 text-[#035C41]   ${monda.className}`}
+            >
               {" "}
               Add Your Recipe
             </p>
           </div>
-          <BiSolidAddToQueue onClick={handleAddRecipe} className="text-2xl" />
-          {isAddRecipe && <AddRecipe />}
+          <BiSolidAddToQueue
+            onClick={handleAddRecipe}
+            className="text-2xl text-[#035C41] cursor-pointer"
+          />
+          {isAddRecipe && (
+            <AddRecipe
+              handleAddRecipe={handleAddRecipe}
+              isAddRecipe={isAddRecipe}
+            />
+          )}
         </div>
-        <p className={`${adamina.className} mt-4`}>
+        <p className={`${adamina.className} mt-4 text-xl text-[#035C41]  `}>
           Contribute to Our Vegan Recipe Collection!
         </p>
       </div>
@@ -116,7 +156,7 @@ export default function RecipesPage() {
         </div>
         <div className="flex flex-wrap justify-start ml-36">
           {data &&
-            data.map((recipe: any) => (
+            data.map((recipe: Recipe) => (
               <div key={recipe.id} className="ml-8">
                 {recipe.images.length > 0 && (
                   <Image
