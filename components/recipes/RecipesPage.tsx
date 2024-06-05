@@ -3,8 +3,8 @@
 import { getRecipes } from "../../user-api";
 // import ScrollAnimation from "react-animate-on-scroll";
 
-import { useEffect, useState } from "react";
-import { adamina, oleo } from "../../app/fonts";
+import { useEffect, useRef, useState } from "react";
+import { acme, adamina, inter, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,13 +17,54 @@ import AddRecipe from "./AddRecipe";
 import { Search } from "../search/Search";
 import AllCategories from "../categories/AllCategories";
 
+interface Recipe {
+  id: string;
+  images: string[];
+  category: string[];
+  preparation_time: number;
+  title: string;
+}
+
 export default function RecipesPage() {
   const [data, setData] = useState([]);
   const [isAddRecipe, SetIsAddRecipe] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        SetIsAddRecipe(false);
+      }
+    }
+
+    if (isAddRecipe) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAddRecipe]);
 
   useEffect(() => {
     fetchRecipes();
   }, []);
+
+  useEffect(() => {
+    if (isAddRecipe) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isAddRecipe]);
 
   function handleAddRecipe() {
     SetIsAddRecipe(!isAddRecipe);
@@ -38,67 +79,84 @@ export default function RecipesPage() {
     }
   };
 
-  // const handleBookmark = async () => {
-  //   try {
-  //     await addToBookmarks(userId, recipeId);
-  //     alert("Recipe added to bookmarks!");
-  //   } catch (error) {
-  //     console.error("Error adding recipe to bookmarks:", error);
-  //     alert("An error occurred while adding the recipe to bookmarks.");
-  //   }
-  // };
-  // const t = useTranslations("Blogs");
-
   return (
-    <div className="flex flex-col bg-gray-200 dark:bg-gray-700 relative ">
+    <div className="flex flex-col    bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
       <div className="mt-4 flex items-center justify-center">
-        <h1 className={`text-center text-2xl ${oleo.className}`}>
-          Exploring Vegan Recipes
+        <h1
+          className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
+        >
+          <p>Exploring</p>
+          Vegan Recipes
         </h1>
         <div className="bg-white flex items-end ">
           <Search />
         </div>
       </div>
       <div className="text-center my-8">
-        <div className="flex items-center justify-center cursor-pointer">
+        <div className="flex items-center justify-center ">
           <div>
-            <p className={`text-xl font-bold mr-4  ${monda.className}`}>
+            <p
+              className={`text-3xl font-bold mr-4 text-[#035C41]   ${monda.className}`}
+            >
               {" "}
               Add Your Recipe
             </p>
           </div>
-          <BiSolidAddToQueue onClick={handleAddRecipe} className="text-2xl" />
-          {isAddRecipe && <AddRecipe />}
+          <BiSolidAddToQueue
+            onClick={handleAddRecipe}
+            className="text-2xl text-[#035C41] cursor-pointer"
+          />
+          {isAddRecipe && (
+            <AddRecipe
+              handleAddRecipe={handleAddRecipe}
+              isAddRecipe={isAddRecipe}
+            />
+          )}
         </div>
-        <p className={`${adamina.className} mt-4`}>
+        <p className={`${adamina.className} mt-4 text-xl text-[#035C41]  `}>
           Contribute to Our Vegan Recipe Collection!
         </p>
       </div>
       <div className="mt-4">
-        <h1 className={`text-center text-2xl ${monda.className}`}>
+        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
+
+        <h1
+          className={`text-center mt-3 text-6xl ${acme.className} text-[#035C41]`}
+        >
           Popular Vegan Categories
         </h1>
 
-        <p className={`text-center ${adamina.className} `}>
+        <p
+          className={`text-center text-xl text-[#27343A] ${inter.className} mt-6 `}
+        >
           Find your next favorite cooking adventure.
         </p>
         <Categories />
       </div>
+      <div className="mt-24">
+        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
+        <h1
+          className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
+        >
+          All Recipes
+        </h1>
+      </div>
       {/* <ScrollAnimation delay="1" animateIn="fadeIn" duration="2"> */}
-      <h1 className="text-center text-2xl my-8 font-bold ">All Recipes</h1>
       {/* </ScrollAnimation> */}
       <div className="flex ">
         <div className="ml-8">
-          <h1 className={`font-bold text-2xl ${monda.className} `}>
+          <h1
+            className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+          >
             Categories
           </h1>
           <ul className={`flex flex-col text-xl ${adamina.className}`}>
             <AllCategories />
           </ul>
         </div>
-        <div className="flex flex-wrap justify-start">
+        <div className="flex flex-wrap justify-start ml-36">
           {data &&
-            data.map((recipe: any) => (
+            data.map((recipe: Recipe) => (
               <div key={recipe.id} className="ml-8">
                 {recipe.images.length > 0 && (
                   <Image

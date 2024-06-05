@@ -38,6 +38,37 @@
   opacity: 1;
 }
 
+.swiper-button-next   {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: rgb(234, 234, 234);
+  top: 50%;
+  transform: translateY(-50%);
+  right: 48px;
+  z-index: 10000;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.swiper-button-prev {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: rgb(234, 234, 234);
+  top: 50%;
+  transform: translateY(-50%);
+  left: 24px;
+  z-index: 10000;
+  opacity: 0;
+  cursor: pointer;
+
+}
+
 @keyframes fill {
   0% {
     width: 0%;

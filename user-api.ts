@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+// import { RecipeData } from "./components/recipes/AddRecipe";
 
 export interface User {
   id:number;
@@ -27,6 +28,7 @@ export async function getRecipe(id: number) {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
+    revalidatePath(`/recipes/${id}`);
     const data = await response.json();
     return data.recipe.rows;
   } catch (error) {
@@ -34,7 +36,7 @@ export async function getRecipe(id: number) {
     throw error;
   }
 }
-export async function getCategory(categoryName: any) {  
+export async function getCategory(categoryName: string) {  
   try {
     const url = `${process.env.BASE_URL}/api/get-category/${categoryName}`;
     const response = await fetch(url);
@@ -76,6 +78,7 @@ export async function getRecipes(){
     const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
     const {recipes} = await response.json()
 
+   
     return recipes?.rows;
 }
 export async function getCategories(){
@@ -93,39 +96,22 @@ export async function getAllCategories(){
     return categories?.rows;
 }
 
-
-// export async function createRecipe(
-//   title:string,
-//   introduction:string,
-//   category:string,
-//   ingredients_list:string,
-//   preparation_time:string,
-//   servings:string,
-//   instructions:string,
-//   tips_and_variations:string,
-//   nutritional_information:string,
-//   storage_instructions:string,
-//   image_url:string
-// ) {
+// export async function createRecipe(recipeData: RecipeData) {
 //   try {
+
+//     const formData = new FormData();
+
+//     Object.entries(recipeData).forEach(([key, value]) => {
+//       if (key === "image" && value instanceof File) {
+//         formData.append(key, value);
+//       } else {
+//         formData.append(key, value.toString());
+//       }
+//     });
+
 //     const response = await fetch(`${process.env.BASE_URL}/api/save-recipe`, {
 //       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         title,
-//         introduction,
-//         category,
-//         ingredients_list,
-//         preparation_time,
-//         servings,
-//         instructions,
-//         tips_and_variations,
-//         nutritional_information,
-//         storage_instructions,
-//         image_url,
-//       }),
+//       body: formData,
 //     });
 
 //     if (!response.ok) {
@@ -139,7 +125,6 @@ export async function getAllCategories(){
 //     return { success: false, error: error };
 //   }
 // }
-
 
 
 
@@ -274,7 +259,7 @@ export const deleteProducts = async (userId: number) => {
 };
 
   
-export async function getPicture(sub: any) {
+export async function getPicture(sub: string) {
   const response = await fetch(`${process.env.BASE_URL}/api/get-picture`, {
     method: "POST",
     body: JSON.stringify({ sub }),

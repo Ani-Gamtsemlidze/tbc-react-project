@@ -1,39 +1,63 @@
 import { sql } from '@vercel/postgres';
-import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    const { title, introduction, categoryJson, ingredientsListJson,preparation_time,servings,instructionsJson,  tips_and_variations, 
-    nutritional_information, 
-    storage_instructions,
-    imageUrl}  = await request.json();
-    
+    const {
+        title,
+        introduction,
+        category,
+        ingredients_list,
+        preparation_time,
+        servings,
+        instructions,
+        tips_and_variations,
+        nutritional_information,
+        storage_instructions,
+        image_url
+    } = await request.json();
+
+    console.log("Title:", title);
+
     try {
-        // if (!name || !email || !age) {
-        //     throw new Error('name, email, and age are required');
-        // }
-        
+        // Data Validation
+        if (!title || !introduction || !category || !ingredients_list || !preparation_time || !servings || !instructions || !image_url) {
+            throw new Error('All fields are required');
+        }
+
+        // Insert into database
         await sql`
-        INSERT INTO recipes (title, introduction, category, ingredients_list, preparation_time, servings, instructions, tips_and_variations, nutritional_information, storage_instructions, image_url)
-        VALUES (
-          ${title}, 
-          ${introduction}, 
-          ${categoryJson}, 
-          ${ingredientsListJson}, 
-          ${preparation_time}, 
-          ${servings}, 
-          ${instructionsJson}, 
-          ${tips_and_variations}, 
-          ${nutritional_information}, 
-          ${storage_instructions}, 
-          ${imageUrl}
-        )
-      `;
-        
-        
-        const recipes = await sql`SELECT * FROM recipes`;
+            INSERT INTO recipes (
+                title, 
+                introduction, 
+                category, 
+                ingredients_list, 
+                preparation_time, 
+                servings, 
+                instructions, 
+                tips_and_variations, 
+                nutritional_information, 
+                storage_instructions, 
+                image_url
+            ) VALUES (
+                ${title}, 
+                ${introduction}, 
+                ${category}, 
+                ${ingredients_list}, 
+                ${preparation_time}, 
+                ${servings}, 
+                ${instructions}, 
+                ${tips_and_variations}, 
+                ${nutritional_information}, 
+                ${storage_instructions}, 
+                ${image_url}
+            )
+        `;
+
+        // Return success response with the newly added recipe
         const successMessage = 'Recipe created successfully';
-        return NextResponse.json({ recipes, successMessage }, { status: 200 });
+        return new Response(JSON.stringify({ success: true, message: successMessage }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     } catch (error) {
-        return NextResponse.json({ error }, { status: 500 });
+        // Return error response
+        const errorMessage = error || 'Internal server error';
+        return new Response(JSON.stringify({ success: false, error: errorMessage }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
 }

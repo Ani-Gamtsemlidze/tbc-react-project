@@ -10,8 +10,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Navigation } from "swiper/modules";
-// import { Pagination } from "swiper/modules";
 
 // import "./styles.css";
 
@@ -35,11 +35,13 @@ export default function Categories() {
   };
 
   return (
-    <div className="flex flex-wrap justify-start bg-gray-200 dark:bg-gray-700 mt-6">
+    <div className="flex  flex-wrap justify-start dark:bg-gray-700 mt-6">
       <Swiper
-        slidesPerView={5}
-        spaceBetween={5}
+        slidesPerView={4}
+        spaceBetween={30}
+        centeredSlides={true}
         navigation={true}
+        loop={true}
         modules={[Navigation]}
         className="mySwiper"
       >
@@ -48,19 +50,23 @@ export default function Categories() {
             <Link
               href={`/recipes/category/${category.name}`}
               key={category.id}
-              className="ml-4"
+              className=" bg-[rgb(255,240,218)] w-96 "
             >
               <Image
-                className="w-64 h-56 rounded-md object-cover"
+                className="w-[440px] h-[324px] rounded-2xl object-cover"
                 src={category.image}
                 width={400}
                 height={400}
                 alt="recipe image"
               />
-              <h1 className="font-bold text-2xl">{category.name}</h1>
+              <h1 className="font-bold text-2xl  text-[#27343a] uppercase mt-4">
+                {category.name}
+              </h1>
             </Link>
           </SwiperSlide>
         ))}
+        <IoIosArrowForward className=" text-[#035C41] absolute top-[50%] translate-y-[-50%]  bg-white rounded-full w-12 h-12 object-cover z-[1000] right-[48px] " />
+        <IoIosArrowBack className=" text-[#035C41] absolute top-[50%] translate-y-[-50%]  bg-white rounded-full w-12 h-12 object-cover z-[1000] left-[24px] " />
       </Swiper>
     </div>
   );
