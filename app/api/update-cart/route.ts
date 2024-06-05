@@ -6,7 +6,6 @@ export const revalidate = 0;
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log(body);
 
     await sql`UPDATE carts SET quantity = ${body.quantity} WHERE product_id = ${body.product_id}`;
 

@@ -9,7 +9,6 @@ export const POST = async (request: Request) => {
   const user = session?.user;
   const userId = user?.sub;
   
-  console.log(userId, "user")
     try {
       console.log("body", request)
       const data = await sql`SELECT * FROM carts WHERE product_id = ${body.product_id} AND user_id = ${userId};`;

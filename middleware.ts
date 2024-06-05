@@ -22,7 +22,6 @@ const langMiddleware = createMiddleware({
 export default async function middleware(request:NextRequest) {
   const response = NextResponse.next()
   const session = await getSession(request, response);
-  console.log(session?.user)
 
   const pathName = request.nextUrl.pathname;
   

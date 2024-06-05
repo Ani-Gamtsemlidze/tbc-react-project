@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { getCategory } from "../../user-api";
-
-interface Recipe {
-  id: number;
-  title: string;
-  introduction: string;
-}
+import { Recipe } from "../recipes/RecipesPage";
+import RecipeCard from "../recipes/RecipeCard";
+import { acme, adamina, oleo } from "../../app/fonts";
+import AllCategories from "./AllCategories";
 
 interface CategoryProps {
   categoryName: string;
@@ -15,7 +13,6 @@ interface CategoryProps {
 
 export default function Category({ categoryName }: CategoryProps) {
   const [data, setData] = useState<Recipe[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCategory(categoryName);
@@ -26,32 +23,39 @@ export default function Category({ categoryName }: CategoryProps) {
     try {
       const category = await getCategory(categoryName);
       setData(category.rows || []);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching category:", error);
-      setLoading(false);
     }
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
-    <div>
-      <h1>{categoryName} Recipes</h1>
-      {data.length === 0 ? (
-        <p>No recipes found.</p>
-      ) : (
-        <div className="recipe-list">
-          {data.map((recipe) => (
-            <div key={recipe.id} className="recipe-item">
-              <h2>{recipe.title}</h2>
-              <p>{recipe.introduction}</p>
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="flex flex-col h-screen  w-full  bg-[rgb(255,247,236)] dark:bg-slate-500 ">
+      <h1
+        className={`text-center text-5xl text-[#035C41] ${oleo.className} my-12 `}
+      >
+        {categoryName} Recipes
+      </h1>
+      <div className="flex items-start">
+        <div className="ml-8">
+          <h1
+            className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+          >
+            Categories
+          </h1>
+          <ul className={`flex flex-col text-xl ${adamina.className}`}>
+            <AllCategories />
+          </ul>
+        </div>{" "}
+        {data.length === 0 ? (
+          <p>No recipes found.</p>
+        ) : (
+          <RecipeCard data={data} />
+        )}
+      </div>
     </div>
   );
 }

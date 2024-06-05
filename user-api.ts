@@ -16,7 +16,6 @@ export async function getUsers(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
     const data = await response.json()
-    console.log("DATAAAA", data)
 
     return data.users?.rows;
 }
@@ -28,7 +27,6 @@ export async function getRecipe(id: number) {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    revalidatePath(`/recipes/${id}`);
     const data = await response.json();
     return data.recipe.rows;
   } catch (error) {
@@ -162,7 +160,6 @@ export async function deleteUser (id:number) {
 
 
 export async function editUserInfo(id: number, email: any) {
-  console.log(id, email, "DAVIGALE")
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-user-info/${id}`, {
       method: "PUT",

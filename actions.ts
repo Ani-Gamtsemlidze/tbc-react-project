@@ -103,7 +103,6 @@ export async function deleteUserAction (id:number) {
 }
 
 export async function editUsersAction(id: number, email: any) {
-  console.log("IDDDD", id, email)
     try {
    await editUserInfo(id, email);
 

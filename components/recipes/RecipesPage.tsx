@@ -6,18 +6,17 @@ import { getRecipes } from "../../user-api";
 import { useEffect, useRef, useState } from "react";
 import { acme, adamina, inter, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
-import Image from "next/image";
-import Link from "next/link";
 import { BiSolidAddToQueue } from "react-icons/bi";
 
 // import { MdOutlineBookmark } from "react-icons/md";
-import { FaRegBookmark } from "react-icons/fa";
 import Categories from "../categories/Categories";
 import AddRecipe from "./AddRecipe";
 import { Search } from "../search/Search";
 import AllCategories from "../categories/AllCategories";
+import RecipeCard from "./RecipeCard";
+import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 
-interface Recipe {
+export interface Recipe {
   id: string;
   images: string[];
   category: string[];
@@ -28,6 +27,8 @@ interface Recipe {
 export default function RecipesPage() {
   const [data, setData] = useState([]);
   const [isAddRecipe, SetIsAddRecipe] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,13 +75,18 @@ export default function RecipesPage() {
     try {
       const recipes = await getRecipes();
       setData(recipes);
+      setLoading(true);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
   };
 
+  if (!loading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="flex flex-col    bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
+    <div className=" flex flex-col    bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
       <div className="mt-4 flex items-center justify-center">
         <h1
           className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
@@ -154,48 +160,7 @@ export default function RecipesPage() {
             <AllCategories />
           </ul>
         </div>
-        <div className="flex flex-wrap justify-start ml-36">
-          {data &&
-            data.map((recipe: Recipe) => (
-              <div key={recipe.id} className="ml-8">
-                {recipe.images.length > 0 && (
-                  <Image
-                    className="w-64 h-56 rounded-md object-cover"
-                    src={recipe.images[0]}
-                    width={400}
-                    height={400}
-                    alt="recipe image"
-                  />
-                )}
-                <div className="flex items-center justify-between">
-                  <div className="bg-[#E895D0] min-w-24 rounded-2xl px-6 mt-4 py-1  ">
-                    <p className="text-[#27343A] text-center">
-                      {recipe.category}
-                    </p>
-                  </div>
-                  <div className=" mt-4">
-                    <p className="text-[#27343A] text-center">
-                      {recipe.preparation_time}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <Link href={`/recipes/${recipe.id}`} className="text-2xl ">
-                    {recipe.title}
-                  </Link>
-                </div>
-                <div className="flex items-center justify-between mt-4">
-                  <p>STARS</p>
-                  {/* <MdOutlineBookmark className="text-[#E895D0] w-6 h-6 object-cover" /> */}
-                  <FaRegBookmark
-                    // onClick={handleBookmark}
-                    className="cursor-pointer w-4 h-4 object-cover"
-                  />
-                </div>
-              </div>
-            ))}
-        </div>
+        <RecipeCard data={data} />
       </div>
     </div>
   );
