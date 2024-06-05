@@ -1,4 +1,4 @@
-import { Acme, Adamina, Arvo, Fira_Sans, Inter, Monda, Oleo_Script, Roboto_Mono } from 'next/font/google'
+import { Acme, Adamina, Arvo,Fira_Sans, Inter, Merienda, Monda, Oleo_Script, Roboto_Mono } from 'next/font/google'
  
 export const inter = Inter({
   subsets: ['latin'],
@@ -38,4 +38,9 @@ export const acme = Acme({
   subsets: ['latin'],
   display: 'swap',
   weight:"400"
+})
+export const merienda = Merienda({
+  subsets: ['latin'],
+  display: 'swap',
+  weight:"700"
 })
