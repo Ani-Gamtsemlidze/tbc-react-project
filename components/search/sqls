@@ -105,3 +105,11 @@ INSERT INTO categories (name) VALUES
 ('breakfast'),
 ('snack'),
 ('drinks');
+
+
+
+// products
+
+INSERT INTO products (title, description, ingredients, nutrients, price, images, categories)
+VALUES 
+    ('Vegan Burger', 'Delicious plant-based burger made with organic ingredients.', '["Quinoa", "Black Beans", "Spinach", "Tomatoes", "Avocado"]', '{"calories": 320, "protein": 12, "fat": 8, "carbohydrates": 45}', 9.99, '["https://bst393o16jrclv3y.public.blob.vercel-storage.com/products_images/meat%20alternative/Black-Bean-Vegan-Burger-Recipe-wlH4yJeNYUSUsUxT3jnkoUwVHwkcqO.jpg", "https://bst393o16jrclv3y.public.blob.vercel-storage.com/products_images/meat%20alternative/IMG_1013-2-28bYz4UXzbHvyujULAZqvsNT1t0svY.jpg", "https://bst393o16jrclv3y.public.blob.vercel-storage.com/products_images/meat%20alternative/vegan%20burger-J1b2ihdLy2qtJCTl61CmltkmzePi5K.png"]', '["Vegan Meat Alternatives"]');

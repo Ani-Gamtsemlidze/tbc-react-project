@@ -30,6 +30,37 @@
 
 }
 
+.products_swiper {
+  width: 1500px;
+}
+
+/* 
+.swiper-button-prev {
+  background-color: #fff !important;
+  width: 50px !important;
+  height: 50px !important;
+    opacity: 1 !important;
+    border-radius: 50%;
+    margin: 0 auto !important ;
+    margin-left: 10px !important;
+}
+.swiper-button-next {
+  background-color: #fff !important;
+  width: 50px !important;
+  height: 50px !important;
+    opacity: 1 !important;
+    border-radius: 50%;
+    margin: 0 auto !important ;
+    margin-right: 10px !important;
+
+}   
+
+
+.swiper-button-prev:after, .swiper-button-next:after {
+  color: #035C41;
+  font-size: 20px !important;
+} */
+
   /* HTML: <div class="loader"></div> */
 /* .loader {
   width: 80px;
@@ -320,34 +351,23 @@
   opacity: 1;
 }
 
-.swiper-button-next   {
-  position: absolute;
-  width: 44px;
-  height: 44px;
+.swiper-button-next, .swiper-button-prev   {
+  position: absolute !important;
+  width: 44px !important;
+  height: 44px !important;
   object-fit: cover;
   border-radius: 50%;
   background-color: rgb(234, 234, 234);
-  top: 50%;
+  top: 50% !important;
   transform: translateY(-50%);
-  right: 48px;
-  z-index: 10000;
+  right: 48px !important;
+  z-index: 10000 !important;
   opacity: 0;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .swiper-button-prev {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  object-fit: cover;
-  border-radius: 50%;
-  background-color: rgb(234, 234, 234);
-  top: 50%;
-  transform: translateY(-50%);
-  left: 24px;
-  z-index: 10000;
-  opacity: 0;
-  cursor: pointer;
+  left: 24px !important;
 
 }
 

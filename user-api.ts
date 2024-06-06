@@ -75,10 +75,38 @@ export async function getRecipes(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
     const {recipes} = await response.json()
-
    
     return recipes?.rows;
 }
+
+
+export async function getProducts(){
+  const response = await fetch(`${process.env.BASE_URL}/api/get-products`, {
+    cache: "no-store",  
+    method: "GET",
+  });
+    const {products} = await response.json()
+  console.log("pRRoducts", products)
+ 
+  return products?.rows;
+}
+
+export async function getProduct(id: number) {
+  try {
+    const url = `${process.env.BASE_URL}/api/get-product/${id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.product.rows;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    throw error;
+  }
+}
+
+
 export async function getCategories(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-categories` );

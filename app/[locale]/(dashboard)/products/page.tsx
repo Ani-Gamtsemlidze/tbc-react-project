@@ -1,24 +1,16 @@
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import ProductsPage from "../../../../components/products/ProductsPage";
-
-async function getProductsData() {
-  const res = await fetch("https://dummyjson.com/products");
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { getProducts } from "../../../../user-api";
 
 export default async function Home() {
-  const productsData = await getProductsData();
+  const productsData = await getProducts();
+  console.log("DATA", productsData);
 
-  const cart_total: any = cookies().get("cart_total")?.value;
+  // const cart_total: any = cookies().get("cart_total")?.value;
 
   return (
     <>
-      <ProductsPage productsData={productsData} cart_total={cart_total} />
+      <ProductsPage productsData={productsData} />
     </>
   );
 }

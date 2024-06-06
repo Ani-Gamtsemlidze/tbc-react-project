@@ -1,8 +1,17 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 // import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
+import { acme, adamina, oleo } from "../../app/fonts";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+// import { Navigation, Pagination } from "swiper/modules";
+import Image from "next/image";
+import AllCategories from "../categories/AllCategories";
+import { Autoplay } from "swiper/modules";
 
 export interface Product {
   id: number;
@@ -16,15 +25,15 @@ interface HomePageProps {
   productsData: {
     products: Product[];
   };
-  cart_total: number;
+  // cart_total: number;
 }
 
 export type SelectedProducts = { [key: number]: number };
 
 export default function ProductsPage({ productsData }: HomePageProps) {
-  const { products } = productsData;
+  // const { products } = productsData;
 
-  const [itemsData] = useState<Product[]>(products);
+  // const [itemsData] = useState<Product[]>(productsData);
   // const [isSorted, setIsSorted] = useState(false);
   // const [filteredItems, setFilteredItems] = useState<Product[]>([]);
   // const [isFiltered, setIsFiltered] = useState(false);
@@ -84,11 +93,81 @@ export default function ProductsPage({ productsData }: HomePageProps) {
   // };
 
   return (
-    <div className="bg-[#E7E8D1] dark:bg-slate-900">
+    <div className="flex flex-col  bg-[rgb(255,247,236)] dark:bg-gray-700 relative">
       {/* <Search /> */}
+      <h1
+        className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
+      >
+        <p>Exploring</p>
+        Vegan Products
+      </h1>
+      <div>
+        <Swiper
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          // navigation={true}
+          // pagination={{
+          //   dynamicBullets: true,
+          // }}
+          // modules={[Navigation]}
+          className="mySwiper products_swiper"
+        >
+          <SwiperSlide>
+            <Image
+              className="w-full h-[400px] object-cover"
+              src="/images/products_slider/mushroom-meat.jpg"
+              alt="slider"
+              width={3000}
+              height={3000}
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Image
+              className="w-full h-[400px] object-cover"
+              src="/images/products_slider/slider-4.jpg"
+              alt="slider"
+              width={3000}
+              height={3000}
+            />
+          </SwiperSlide>
+          <SwiperSlide className="">
+            <Image
+              className="w-full h-[400px] object-cover"
+              src="/images/products_slider/slider-2.jpg"
+              alt="slider"
+              width={3000}
+              height={3000}
+            />
+          </SwiperSlide>
+        </Swiper>
+      </div>
 
-      <div className="flex flex-1 flex-col">
-        <ProductsCard itemsData={itemsData} />
+      <div className="mt-24">
+        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
+        <h1
+          className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
+        >
+          All Products
+        </h1>
+      </div>
+
+      <div className="flex my-12 ">
+        <div className="ml-8">
+          <h1
+            className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+          >
+            Categories
+          </h1>
+          <ul className={`flex flex-col text-xl ${adamina.className}`}>
+            <AllCategories />
+          </ul>
+        </div>
+        <div className="flex flex-1 flex-col ml-36">
+          <ProductsCard itemsData={productsData} />
+        </div>
       </div>
     </div>
   );
