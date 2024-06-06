@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search } from "../search/Search";
+// import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
 
 export interface Product {
@@ -85,7 +85,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
 
   return (
     <div className="bg-[#E7E8D1] dark:bg-slate-900">
-      <Search />
+      {/* <Search /> */}
 
       <div className="flex flex-1 flex-col">
         <ProductsCard itemsData={itemsData} />

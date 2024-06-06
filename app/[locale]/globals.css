@@ -3,15 +3,6 @@
 @import "tailwindcss/utilities";
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
-/* $color-pancake: #C4B26F;
-$color-pancake: #D8CB9F;
-$color-pancake-dark: darken($color-pancake,50%);
-$color-butter: #EADD4D;
-$color-bg: #249D98;
-$color-plate: #D3EBEA;
-
-$animation-duration: 6000ms; */
-
 ::-webkit-scrollbar {
   width: 10px; 
 }
@@ -22,9 +13,9 @@ $animation-duration: 6000ms; */
 }
 
 .active {
-  background: #4c4c4c;
   color: white;
-  border-radius: 2px;
+  background: #035C41;
+  border-radius: 8px;
 } 
 
 .active .tv-icon {
@@ -372,8 +363,8 @@ $animation-duration: 6000ms; */
   100% {
     width: 100%;
     height: 100%;
-    background: #4c4c4c;
-    border-radius: 2px;
+    background: #035C41;
+    border-radius: 8px;
   }
 }
 

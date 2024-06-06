@@ -39,7 +39,7 @@ export default function SelectSmall() {
   }, [localActive]);
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small" className="!my-4">
+    <FormControl sx={{ m: 1, minWidth: 120 }} size="small" className="!mb-4">
       <InputLabel className="dark:text-white" id="demo-select-small-label">
         Language
       </InputLabel>

@@ -25,23 +25,25 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex justify-between  items-center  bg-[#fff] dark:bg-[#161D2F] py-1 px-8">
-        <div className="flex ">
-          <Link
-            className={`${merienda.className} font-bold text-3xl text-[#035C41] leading-normal	mx-4 		`}
-            href="/"
-          >
-            Veggy
-            <p className="ml-5 ">Vibes</p>
-            {/* <Image
+      <header className="flex  items-center  bg-[#fff] dark:bg-[#161D2F] py-1 px-8">
+        <div className="flex items-center w-full justify-between ">
+          <div className="flex">
+            <Link
+              className={`${merienda.className} font-bold text-3xl text-[#035C41] leading-normal	mx-4 		`}
+              href="/"
+            >
+              Veggy
+              <p className="ml-5 ">Vibes</p>
+              {/* <Image
               alt="X-logo"
               className="w-16 h-16 object-contain mr-4"
               src={isDark ? "/images/logo.png" : "/images/light-logo.png"}
               width={400}
               height={400}
             /> */}
-          </Link>
-          <Navigation />
+            </Link>
+            <Navigation />
+          </div>
           <div className="flex items-center  mt-6">
             <div className="flex items-center mb-4">
               <ThemeSwitch />

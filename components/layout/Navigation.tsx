@@ -16,7 +16,7 @@ export default function Navigation() {
 
   return (
     <nav className="fill  ">
-      <ul className=" flex mr-8 my-3 ">
+      <ul className=" flex ml-8 my-3 ">
         {navigation.map((list) => (
           <li key={list.href} className="flex items-center">
             {/* {list.src && (
@@ -29,8 +29,8 @@ export default function Navigation() {
               />
             )} */}
             <Link
-              className={`  no-underline text-[#4C4C4C] mr-4 rounded dark:text-[#92a7dd] text-sm
-              block py-2 px-3 font-bold my-2 uppercase relative
+              className={` text-md no-underline text-[#4C4C4C] mr-4 rounded dark:text-[#92a7dd]
+              block py-3 px-5 font-bold my-2 uppercase relative
 
               after:content-['.'] after:text-left after:opacity-5 after:m-0 
               after:absolute after:mx-auto after:text-transparent after:inset-x-0 after:bottom-0	after:w-0  after:bg-[#aaa] after:h-[1px]
