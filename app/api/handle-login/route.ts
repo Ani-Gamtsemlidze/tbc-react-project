@@ -39,14 +39,14 @@ export async function GET(_request: Request) {
     const session = await getSession();
 
     if (session?.user) {
-      const { email, sub, picture } = session.user;
+      const { email, sub, picture,given_name, family_name, nickname } = session.user;
       console.log(session.user, "session.user");
-      const existingUser = await sql`SELECT * FROM user_ WHERE sub = ${sub};`;
+      const existingUser = await sql`SELECT * FROM users_info WHERE user_id = ${sub};`;
 
       if (!existingUser.rows.length)
         await sql`
-      INSERT INTO user_ (sub, email, picture)
-      VALUES (${sub}, ${email}, ${picture} );
+      INSERT INTO users_info (user_id, email, picture, firstname, lastname, nickname)
+      VALUES (${sub}, ${email}, ${picture}, ${given_name}, ${family_name}, ${nickname} );
     `;
     } else {
       return redirect("/api/auth/login");

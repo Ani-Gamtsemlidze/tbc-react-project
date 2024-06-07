@@ -7,15 +7,17 @@ export async function PUT(request: NextRequest) {
   const id = request.nextUrl.pathname.replace("/api/edit-users/", " ");
   (id)
   try {
-    const { name, email, age } = await request.json();
+    const { email, given_name, family_name, nickname  } = await request.json();
 
-    if (!name || !email || !age) {
+    if ( !email || !given_name) {
       throw new Error("Name, email, or age is missing in the request body.");
     }
 
-    await sql`UPDATE users SET name = ${name}, email = ${email}, age = ${age} WHERE id = ${Number(id)}`;
+    await sql`UPDATE users SET firstname = ${given_name}, email = ${email}, lastname = ${family_name},
+    nickname = ${nickname}
+    WHERE user_id = ${id}}`;
 
-    const users = await sql`SELECT * FROM users`;
+    const users = await sql`SELECT * FROM users_info`;
 
     return NextResponse.json({ users }, { status: 200 });
   } catch (error) {

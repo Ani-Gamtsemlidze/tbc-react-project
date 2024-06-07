@@ -43,7 +43,7 @@ export default function Categories() {
         navigation={true}
         loop={true}
         modules={[Navigation]}
-        className="mySwiper"
+        className="mySwiper categories_swiper"
       >
         {categoryData.map((category: any) => (
           <SwiperSlide key={category.id}>

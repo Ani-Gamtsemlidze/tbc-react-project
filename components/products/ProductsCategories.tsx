@@ -15,7 +15,6 @@ export default function ProductsCategories() {
     try {
       const categories = await getProductsCategories();
 
-      console.log("ALLCCA", allCategories);
       setAllCategories(categories);
     } catch (error) {
       console.error("Error fetching users:", error);

@@ -350,8 +350,11 @@
   -moz-animation: fill 0.5s forwards;
   opacity: 1;
 }
+ /* .swiper-button-next {
+  background-color: #035C41 !important;
+} */
 
-.swiper-button-next, .swiper-button-prev   {
+.categories_swiper .swiper-button-next, .swiper-button-prev   {
   position: absolute !important;
   width: 44px !important;
   height: 44px !important;
@@ -364,6 +367,7 @@
   z-index: 10000 !important;
   opacity: 0;
   cursor: pointer !important;
+  margin-top: 0;
 }
 
 .swiper-button-prev {
@@ -454,3 +458,6 @@
 .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
   color: black;
 }
+
+
+/* input [file] */

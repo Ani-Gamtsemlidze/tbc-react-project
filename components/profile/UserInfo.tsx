@@ -1,69 +1,65 @@
 "use client";
-
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useState } from "react";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import AvatarUploadPage from "../avatar/page";
-import { useState } from "react";
-// import { useTranslations } from "next-intl";
 
-interface User {
-  given_name?: string;
-  family_name?: string;
+export interface User {
+  firstname?: string;
+  lastname?: string;
   email?: string;
-  email_verified?: boolean;
-  locale?: string;
-  name?: string;
   nickname?: string;
-  picture?: string;
-  sid?: string;
-  sub?: string;
-  updated_at?: string;
+  picture?: any;
 }
 
-export default function UserInfo({ picture }: any) {
-  const { user, error, isLoading } = useUser();
+export default function UserInfo({ userData }: any) {
   const [isUpload, setIsUpload] = useState(false);
-  // const t = useTranslations("Profile");
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
+  // const []
 
   function handleUploadPicture() {
     setIsUpload(!isUpload);
   }
 
-  const typedUser = user as User;
+  const user = userData[0] as User;
+
+  // useEffect (() => {
+
+  // }, [user.picture])
 
   return (
-    <div className="bg-white w-[500px] rounded-xl flex flex-col items-center justify-center h-[300px] relative">
-      <div className="absolute top-[-60px]">
-        <Image
-          src={picture}
-          className="rounded-full object-cover w-40 h-40 shadow-slate-950 shadow"
-          width={250}
-          height={250}
-          alt="image"
-        />
+    <div className="m-10 max-w-sm relative">
+      <div className="rounded-lg w-96 border bg-white px-4 pt-8 pb-10 shadow-lg">
+        <div className="relative mx-auto w-36 rounded-full">
+          <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
+          <Image
+            src={user?.picture}
+            className="rounded-full object-cover w-40"
+            width={400}
+            height={400}
+            quality={100}
+            alt="image"
+          />
+        </div>
+        <div
+          onClick={handleUploadPicture}
+          className="absolute cursor-pointer rounded-full top-8 left-14 inset-0 w-36 h-36 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 opacity-0 transition-opacity duration-300 hover:opacity-100"
+        >
+          <FaCloudUploadAlt className="text-white w-9 h-9" />
+        </div>
+        {isUpload && <AvatarUploadPage />}
+        <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900">
+          {user?.firstname} {user?.lastname}
+        </h1>
+        <h3 className="font-lg text-semibold text-center leading-6 text-gray-600">
+          {user?.email}
+        </h3>
+        <ul className="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
+          <li className="flex items-center py-3 text-sm">
+            <span>Nickname</span>
+            <span className="ml-auto">{user?.nickname}</span>
+          </li>
+        </ul>
       </div>
-      <div
-        onClick={handleUploadPicture}
-        className="absolute cursor-pointer rounded-full top-[-60px] left-[96px] inset-0 w-40 h-40 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 opacity-0 transition-opacity duration-300 hover:opacity-100"
-      >
-        <FaCloudUploadAlt className="text-white w-9 h-9" />
-      </div>
-      {isUpload && <AvatarUploadPage />}
-      <div className="flex">
-        <h2>{typedUser.given_name || user?.name?.split("@")[0]}</h2>
-        <p className="ml-2">{typedUser.family_name}</p>
-      </div>
-      <p>{typedUser.email}</p>
-      {/* <button
-        className=" hover:bg-slate-300 bg-slate-200  dark:bg-slate-500 transition px-4 py-2 "
-        type="submit"
-      >
-        {t("button")}
-      </button> */}
     </div>
   );
 }

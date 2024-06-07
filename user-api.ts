@@ -34,6 +34,27 @@ export async function getRecipe(id: number) {
     throw error;
   }
 }
+export async function getUser(id: string) {
+  try {
+    const url = `${process.env.BASE_URL}/api/get-user/${id}`; 
+    const response = await fetch(url, {
+      cache: "no-store", 
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.user.rows;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
+}
+
+
+
+
+
 export async function getCategory(categoryName: string) {  
   try {
     const url = `${process.env.BASE_URL}/api/get-category/${categoryName}`;
@@ -56,7 +77,6 @@ export async function getProductsCategory(category: string) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("PRODCATEGORU", data) // aqac modis
     return data;
   } catch (error) {
     console.error('Error fetching recipes:', error);
@@ -101,7 +121,6 @@ export async function getProducts(){
     method: "GET",
   });
     const {products} = await response.json()
-  console.log("pRRoducts", products)
  
   return products?.rows;
 }
@@ -147,7 +166,6 @@ export async function getProductsCategories() {
     const data = await response.json();
     const productsCategories = data?.productsCategories;
 
-    console.log(productsCategories, "api categories");
 
     return productsCategories?.rows;
   } catch (error) {
@@ -223,18 +241,18 @@ export async function deleteUser (id:number) {
 // }
 
 
-export async function editUserInfo(id: number, email: any) {
+export async function editUserInfo(id: string, editUser:any) {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-user-info/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(email),
+      body: JSON.stringify(editUser),
     });
 
     if (!response.ok) {
-      throw new Error("Failed to update user");
+      throw new Error("Failed to edit user");
     }
 
     return response.json();

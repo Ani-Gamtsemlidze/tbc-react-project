@@ -26,7 +26,6 @@ export interface RecipeData {
 export default function AddRecipe({ handleAddRecipe }: any) {
   // const t = useTranslations("Contact");
   const { user }: any = useUser();
-  console.log(user, "uuuuuuuuuuu");
   const handleSubmit = async (
     values: RecipeData,
     setErrors: (errors: FormikErrors<RecipeData>) => void,

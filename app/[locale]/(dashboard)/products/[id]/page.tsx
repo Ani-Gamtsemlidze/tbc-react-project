@@ -39,7 +39,6 @@ interface PageParams {
 export default async function Page({ params }: PageParams) {
   const { id } = params;
   const innerProductData = await getProduct(id);
-  console.log("innerProductData", innerProductData);
 
   // unstable_setRequestLocale(params.locale);
   // const innerProductData = await getInnerData(id);

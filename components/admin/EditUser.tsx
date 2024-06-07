@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { User } from "../../user-api";
 import { FiEdit3 } from "react-icons/fi";
-import { editUsersAction } from "../../actions";
 
 interface EditUserProps {
   user: User;
@@ -41,7 +40,6 @@ export const EditUser: React.FC<EditUserProps> = ({ user, onUpdateUser }) => {
 
   const saveEdit = async () => {
     try {
-      await editUsersAction(editedUser.id, editedUser.email);
       onUpdateUser(editedUser);
       setIsEdit(false);
     } catch (error) {

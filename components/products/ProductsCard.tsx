@@ -27,7 +27,6 @@ import React from "react";
 // }
 
 export default function ProductsCard({ data }: any) {
-  console.log("ITEMSDATA", data);
   // const addProduct = async (productId: number) => {
   //   await addToCartAction(productId);
   // };

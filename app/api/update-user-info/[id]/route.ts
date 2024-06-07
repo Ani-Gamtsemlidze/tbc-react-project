@@ -2,25 +2,34 @@ import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 
 export const revalidate = 0;
+
 export async function PUT(request: NextRequest) {
+  // Extracting the id from the URL
+  const id = request.nextUrl.pathname.split("/").pop();
 
-  const id = request.nextUrl.pathname.replace("/api/update-user-info/", " ");
-  console.log("IDDD", id)
   try {
-    const {  email } = await request.json();
-    console.log(email)
+    const { email, firstname, lastname, nickname } = await request.json();
 
-    if ( !email ) {
-      throw new Error("Name, email, or age is missing in the request body.");
+    if (!email || !lastname) {
+      throw new Error("Name or email is missing in the request body.");
     }
 
-    await sql`UPDATE users_info SET email = ${email} WHERE user_id = ${id}}`;
+    // Update user info in the database
+ await sql`
+      UPDATE users_info 
+      SET firstname = ${firstname}, 
+          email = ${email}, 
+          lastname = ${lastname},
+          nickname = ${nickname}
+      WHERE user_id = ${id}
+    `;
 
-    const users = await sql`SELECT * FROM users_info`;
-    console.log("USERSSS", users)
+    // Retrieve the updated user information
+    const user = await sql`SELECT * FROM users_info WHERE user_id = ${id}`;
 
-    return NextResponse.json({ users }, { status: 200 });
+    return NextResponse.json({ user }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
 }
+

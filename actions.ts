@@ -2,7 +2,7 @@
 "use server"
 // import { RecipeData } from "./components/recipes/AddRecipe";
 // import { cookies } from "next/headers";
-import {  addToCart, deleteUser, editUserInfo } from "./user-api";
+import {  addToCart, deleteUser } from "./user-api";
 
 
 // export async function createRecipeAction(formData: FormData) {
@@ -102,15 +102,15 @@ export async function deleteUserAction (id:number) {
     await deleteUser(id);
 }
 
-export async function editUsersAction(id: number, email: any) {
-    try {
-   await editUserInfo(id, email);
+// export async function editUsersAction(id: number, email: any) {
+//     try {
+//    await editUserInfo(id, email);
 
-    } catch (error) {
-        console.error("Error editing user:", error);
-        throw error; 
-    }
-}
+//     } catch (error) {
+//         console.error("Error editing user:", error);
+//         throw error; 
+//     }
+// }
 
 export async function addToCartAction(productId: number) {
     try {
