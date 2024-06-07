@@ -2,15 +2,9 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@auth0/nextjs-auth0/edge";
 
-function pathProtected (pathName: string) {
+function pathProtected(pathName: string): boolean {
   const protectedRoutes = ["/profile", "/users", "/recipes"];
-
-  for (const route of protectedRoutes) {
-      if(pathName.startsWith(route)) {
-        return true;
-      }
-  }
-  return false;
+  return protectedRoutes.some(route => pathName.startsWith(route));
 }
 
 const langMiddleware = createMiddleware({
@@ -19,17 +13,25 @@ const langMiddleware = createMiddleware({
   localePrefix: 'never',
 });
 
-export default async function middleware(request:NextRequest) {
-  const response = NextResponse.next()
+export default async function middleware(request: NextRequest): Promise<NextResponse> {
+  console.log('Middleware invoked');
+
+  const response = NextResponse.next();
+  
   const session = await getSession(request, response);
+  console.log('Session:', session);
 
   const pathName = request.nextUrl.pathname;
-  
+
   if (!session?.user && pathProtected(pathName)) {
-    return NextResponse.rewrite(new URL("/api/auth/login", request.url));
+    console.log('User not authenticated, redirecting to login');
+    return NextResponse.redirect(new URL("/api/auth/login", request.url));
   }
 
-  return  langMiddleware(request);
+  const langResponse = await langMiddleware(request);
+  console.log('Language middleware executed');
+
+  return langResponse || response;
 }
 
 export const config = {
