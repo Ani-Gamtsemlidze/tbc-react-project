@@ -4,6 +4,7 @@
       "logout":"Log Out",
       "login":"Log In",
       "search":"Search For Recipes",
+      "productSearch":"Search For Products",
       "sort": "Sort"
     },
     "Navigation": {

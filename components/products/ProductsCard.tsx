@@ -26,7 +26,8 @@ import React from "react";
 //   itemsData: Product[];
 // }
 
-export default function ProductsCard({ itemsData }: any) {
+export default function ProductsCard({ data }: any) {
+  console.log("ITEMSDATA", data);
   // const addProduct = async (productId: number) => {
   //   await addToCartAction(productId);
   // };
@@ -34,16 +35,15 @@ export default function ProductsCard({ itemsData }: any) {
   // const router = useRouter();
   return (
     <div className=" ml-8 group  flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-      {itemsData &&
-        itemsData.map((product: any) => (
-          <>
+      {data &&
+        data.map((product: any) => (
+          <div key={product.id}>
             {/* <div className="bg-[#E895D0] min-w-24 rounded-2xl  mt-4 py-2  ">
               <p className="text-[#27343A] text-center">{product.categories}</p>
             </div> */}
             <Link
               className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
               href={`/products/${product.id}`}
-              key={product.id}
             >
               <Image
                 className="peer absolute top-0 right-0 h-full w-full object-cover"
@@ -109,7 +109,7 @@ export default function ProductsCard({ itemsData }: any) {
                 Add to cart
               </Link>
             </div>
-          </>
+          </div>
         ))}
     </div>
 

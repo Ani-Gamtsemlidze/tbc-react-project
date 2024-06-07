@@ -10,8 +10,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 // import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
-import AllCategories from "../categories/AllCategories";
 import { Autoplay } from "swiper/modules";
+import ProductsCategories from "./ProductsCategories";
+import ProductsSearch from "./ProductsSearch";
 
 export interface Product {
   id: number;
@@ -95,12 +96,15 @@ export default function ProductsPage({ productsData }: HomePageProps) {
   return (
     <div className="flex flex-col  bg-[rgb(255,247,236)] dark:bg-gray-700 relative">
       {/* <Search /> */}
-      <h1
-        className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
-      >
-        <p>Exploring</p>
-        Vegan Products
-      </h1>
+      <div className="flex items-center justify-center">
+        <h1
+          className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
+        >
+          <p>Exploring</p>
+          Vegan Products
+        </h1>
+        <ProductsSearch productsData={productsData} />
+      </div>
       <div>
         <Swiper
           autoplay={{
@@ -145,28 +149,32 @@ export default function ProductsPage({ productsData }: HomePageProps) {
         </Swiper>
       </div>
 
-      <div className="mt-24">
-        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
-        <h1
-          className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
-        >
-          All Products
-        </h1>
-      </div>
-
-      <div className="flex my-12 ">
-        <div className="ml-8">
+      <div className="flex justify-center ">
+        <div className="mt-24">
+          <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
           <h1
-            className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+            className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
           >
-            Categories
+            All Products
           </h1>
-          <ul className={`flex flex-col text-xl ${adamina.className}`}>
-            <AllCategories />
-          </ul>
         </div>
-        <div className="flex flex-1 flex-col ml-36">
-          <ProductsCard itemsData={productsData} />
+      </div>
+      <div className="flex my-12 ">
+        <div className="flex flex-col">
+          <div className="ml-8">
+            <h1
+              className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+            >
+              Categories
+            </h1>
+            <ul className={`flex flex-col text-xl ${adamina.className}`}>
+              <ProductsCategories />
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-1 ml-36">
+          <ProductsCard data={productsData} />
+          <ProductsCard data={productsData} />
         </div>
       </div>
     </div>

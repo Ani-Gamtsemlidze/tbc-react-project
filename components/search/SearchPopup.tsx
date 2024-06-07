@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getAllCategories, getRecipes } from "../../user-api";
+// import { useSearch } from "../../hooks";
 
 interface Category {
   id: number;
@@ -53,37 +54,29 @@ export default function SearchPopup({
     try {
       const recipes = await getRecipes();
       setRecipesData(recipes);
-      setFilteredRecipes(recipes);
+      // setFilteredRecipes(recipes);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
   };
+  // const { searchQuery, filteredRecipes, handleSearch } = useSearch(recipesData);
 
-  const debounce = useCallback(
-    (func: (...args: any[]) => void, delay: number) => {
-      let timerId: ReturnType<typeof setTimeout>;
-      return (...args: any[]) => {
-        clearTimeout(timerId);
-        timerId = setTimeout(() => {
-          func(...args);
-        }, delay);
-      };
-    },
-    []
-  );
+  const debounce = (func: (...args: any[]) => void, delay: number) => {
+    let timerId: ReturnType<typeof setTimeout>;
+    return (...args: any[]) => {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
 
   const debounceSearch = useCallback(
     debounce((searchQuery: string) => {
-      const priceSearch = Number(searchQuery);
-
-      const filtered = recipesData?.filter((recipe: Recipe) =>
-        Object.values(recipe).some((value) =>
-          typeof value === "string"
-            ? value.toLowerCase().includes(searchQuery.toLowerCase())
-            : !isNaN(priceSearch) && recipe.price === priceSearch
-        )
+      console.log("Debounced search query:", searchQuery);
+      const filtered = recipesData?.filter((recipe: any) =>
+        recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-
       setFilteredRecipes(filtered || []);
     }, 500),
     [recipesData]
@@ -91,8 +84,8 @@ export default function SearchPopup({
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = e.target.value;
+    console.log(searchQuery);
     setSearchQuery(searchQuery);
-
     debounceSearch(searchQuery);
   };
 

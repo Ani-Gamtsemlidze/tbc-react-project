@@ -48,6 +48,21 @@ export async function getCategory(categoryName: string) {
     throw error;
   }
 }
+export async function getProductsCategory(category: string) {  
+  try {
+    const url = `${process.env.BASE_URL}/api/get-products-category/${category}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("PRODCATEGORU", data) // aqac modis
+    return data;
+  } catch (error) {
+    console.error('Error fetching recipes:', error);
+    throw error;
+  }
+}
 
 // export async function addToBookmarks(userId: number, recipeId: number) {
 //   try {
@@ -121,6 +136,27 @@ export async function getAllCategories(){
 
     return categories?.rows;
 }
+export async function getProductsCategories() {
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/api/get-products-categories`);
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    const productsCategories = data?.productsCategories;
+
+    console.log(productsCategories, "api categories");
+
+    return productsCategories?.rows;
+  } catch (error) {
+    console.error("Failed to fetch product categories:", error);
+    return [];
+  }
+}
+
+
 
 // export async function createRecipe(recipeData: RecipeData) {
 //   try {

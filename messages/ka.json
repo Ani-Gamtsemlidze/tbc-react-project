@@ -4,7 +4,9 @@
     "logout":"გამოსვლა",
     "login":"შესვლა",
     "search":"ძებნა",
-    "sort": "სორტირება"
+    "sort": "სორტირება",
+    "productSearch":"ძებნა"
+
   },
   "Navigation": {
     "home": "მთავარი",
