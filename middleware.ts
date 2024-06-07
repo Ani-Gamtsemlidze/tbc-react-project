@@ -26,7 +26,7 @@ export default async function middleware(request:NextRequest) {
   const pathName = request.nextUrl.pathname;
   
   if (!session?.user && pathProtected(pathName)) {
-    return NextResponse.redirect(new URL("/api/auth/login", request.url));
+    return NextResponse.rewrite(new URL("/api/auth/login", request.url));
   }
 
   return  langMiddleware(request);
