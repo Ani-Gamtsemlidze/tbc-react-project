@@ -17,7 +17,7 @@ import { monda, oleo } from "../../app/fonts";
 function InnerBlog({ recipeData }: any) {
   console.log(recipeData);
   return (
-    <div className="flex flex-col  w-full  bg-[rgb(255,247,236)] dark:bg-slate-500  ">
+    <div className="flex flex-col  w-full  bg-mainBackground dark:bg-slate-500  ">
       {recipeData ? (
         <div className="flex flex-col ">
           <h1

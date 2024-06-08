@@ -6,7 +6,12 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        mainBackground: "#fff7ec",
+        greenColor: "#035C41",
+      },
+    },
   },
   plugins: [],
   darkMode: "class",

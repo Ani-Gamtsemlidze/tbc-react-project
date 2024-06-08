@@ -49,6 +49,7 @@ export async function getUser(id: string) {
     console.error('Error fetching user:', error);
     throw error;
   }
+
 }
 
 

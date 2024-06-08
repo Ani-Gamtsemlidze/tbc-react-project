@@ -1,7 +1,9 @@
-import { useTranslations } from "next-intl";
-import ContactForm from "../../../../components/contact/ContactForm";
+// import { useTranslations } from "next-intl";
+
 import CompanyContact from "../../../../components/contact/CompanyContact";
+
 import { unstable_setRequestLocale } from "next-intl/server";
+import ContactForm from "../../../../components/contact/ContactForm";
 
 interface Params {
   params: {
@@ -12,64 +14,71 @@ interface Params {
 export default function Contact({ params }: Params) {
   unstable_setRequestLocale(params.locale);
 
-  const t = useTranslations("Contact");
-  return (
-    <div className="bg-gray-200 dark:bg-slate-500 flex flex-1 p-8 justify-center">
-      <form action="/submit-form">
-        <div className=" bg-gray-100 p-8  w-[550px]">
-          <h1 className="text-xl font-medium">{t("message")}</h1>
-          <ContactForm
-            type="text"
-            label={t("name-label")}
-            placeholder={t("name")}
-            id="fullName"
-          />
-          <ContactForm
-            type="text"
-            label={t("email-label")}
-            placeholder={t("email")}
-            id="Email"
-          />
-          <ContactForm
-            type="text"
-            label={t("subject")}
-            placeholder={t("subject")}
-            id="subject"
-          />
-          <ContactForm
-            type="textarea"
-            label={t("textarea")}
-            id="textarea"
-            placeholder={t("message")}
-          />
+  // const t = useTranslations("Contact");
 
-          <button
-            className="bg-gray-800 hover:bg-gray-900 transition text-white px-4 py-2 rounded w-36 mt-4 ml-4"
-            type="submit"
-          >
-            {t("send-button")}
-          </button>
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [question, setQuestion] = useState("");
+
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   const subject = `Question from ${name}`;
+  //   const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AQuestion:%0D%0A${question}`;
+  //   const mailtoLink = `mailto:your-email@example.com?subject=${encodeURIComponent(
+  //     subject
+  //   )}&body=${encodeURIComponent(body)}`;
+  //   window.location.href = mailtoLink;
+  // };
+
+  return (
+    <div className="sm:p-10 my-auto bg-mainBackground">
+      <section className="mx-auto bg-white max-w-screen-xl md:rounded-md md:border md:shadow-lg">
+        <div className="grid grid-cols-4 text-gray-800 lg:grid-cols-3">
+          <CompanyContact />
+          <ContactForm />
+
+          {/* <div className="order-first col-span-4 max-w-screen-md px-8 py-10 md:order-last md:col-span-2 md:px-10 md:py-12">
+            <h2 className="mb-8 text-2xl font-black">Get in touch</h2>
+            <p className="mt-2 mb-4 font-sans text-sm tracking-normal">
+              Don't be shy to ask us a question.
+            </p>
+            <form onSubmit={handleSubmit}>
+              <div className="md:col-gap-4 mb-5 grid md:grid-cols-2">
+                <input
+                  className="col-span-1 w-full border-b py-3 text-sm outline-none focus:border-b-2 focus:border-black"
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  className="col-span-1 ml-3 w-full border-b py-3 text-sm outline-none focus:border-b-2 focus:border-black"
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <textarea
+                className="mb-10 w-full resize-y whitespace-pre-wrap border-b py-3 text-sm outline-none focus:border-b-2 focus:border-black"
+                placeholder="Question"
+                name="question"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+              ></textarea>
+              <button
+                type="submit"
+                className="group flex cursor-pointer items-center rounded-xl bg-blue-600 bg-none px-8 py-4 text-center font-semibold leading-tight text-white"
+              >
+                Send
+                <VscSend className="w-8 h-8 text-white object-cover group-hover:ml-8 ml-4 transition-all" />
+              </button>
+            </form>
+          </div> */}
         </div>
-      </form>
-      <div className="bg-cyan-600 p-8">
-        <h1 className="text-xl font-medium">{t("contact-us")}</h1>
-        <CompanyContact
-          image="/images/contact/location.png"
-          companyInfo="Suite 293 95409 Grimes Crossing"
-        />
-        <CompanyContact
-          image="/images/contact/phone.png"
-          companyInfo="638 891 206 "
-        />
-        <CompanyContact
-          image="/images/contact/website.png"
-          companyInfo="www.web-site. com"
-        />
-        <CompanyContact
-          image="/images/contact/mail.png"
-          companyInfo="pas-uwufuba91@mail.com"
-        />
-      </div>
+      </section>
     </div>
   );
 }

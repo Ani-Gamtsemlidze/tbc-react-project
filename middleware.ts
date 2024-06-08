@@ -19,7 +19,6 @@ export default async function middleware(request: NextRequest): Promise<NextResp
   const response = NextResponse.next();
   
   const session = await getSession(request, response);
-  console.log('Session:', session);
 
   const pathName = request.nextUrl.pathname;
 

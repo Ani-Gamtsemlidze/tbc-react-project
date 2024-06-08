@@ -94,7 +94,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
   // };
 
   return (
-    <div className="flex flex-col  bg-[rgb(255,247,236)] dark:bg-gray-700 relative">
+    <div className="flex flex-col  bg-mainBackground dark:bg-gray-700 relative">
       {/* <Search /> */}
       <div className="flex items-center justify-center">
         <h1

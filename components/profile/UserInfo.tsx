@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import AvatarUploadPage from "../avatar/page";
@@ -14,37 +14,36 @@ export interface User {
 
 export default function UserInfo({ userData }: any) {
   const [isUpload, setIsUpload] = useState(false);
-  // const []
+  const [user, setUser] = useState(userData[0] || {});
+  console.log(userData[0]);
+
+  useEffect(() => {
+    setUser(userData[0] || {});
+  }, [userData[0]]);
 
   function handleUploadPicture() {
     setIsUpload(!isUpload);
   }
 
-  const user = userData[0] as User;
-
-  // useEffect (() => {
-
-  // }, [user.picture])
-
   return (
     <div className="m-10 max-w-sm relative">
       <div className="rounded-lg w-96 border bg-white px-4 pt-8 pb-10 shadow-lg">
         <div className="relative mx-auto w-36 rounded-full">
-          <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
+          {/* <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span> */}
           <Image
             src={user?.picture}
-            className="rounded-full object-cover w-40"
+            className="rounded-full object-cover  h-40 max-w-40"
             width={400}
             height={400}
-            quality={100}
+            // quality={100}
             alt="image"
           />
-        </div>
-        <div
-          onClick={handleUploadPicture}
-          className="absolute cursor-pointer rounded-full top-8 left-14 inset-0 w-36 h-36 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 opacity-0 transition-opacity duration-300 hover:opacity-100"
-        >
-          <FaCloudUploadAlt className="text-white w-9 h-9" />
+          <div
+            onClick={handleUploadPicture}
+            className="absolute cursor-pointer rounded-full top-0 left-0 inset-0 w-40 h-40 z-50 flex justify-center items-center bg-[rgb(3,92,65)] bg-opacity-40   opacity-0 transition-opacity duration-300 hover:opacity-100"
+          >
+            <FaCloudUploadAlt className="text-white w-9 h-9" />
+          </div>
         </div>
         {isUpload && <AvatarUploadPage />}
         <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900">

@@ -86,7 +86,7 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className=" flex flex-col    bg-[rgb(255,247,236)] dark:bg-gray-700 relative ">
+    <div className=" flex flex-col    bg-mainBackground dark:bg-gray-700 relative ">
       <div className="mt-4 flex items-center justify-center">
         <h1
           className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
