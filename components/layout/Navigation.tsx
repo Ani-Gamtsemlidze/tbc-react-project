@@ -9,9 +9,8 @@ export default function Navigation() {
   const navigation = [
     { title: t("home"), href: `/` },
     { title: t("products"), href: `/products` },
-    { title: t("profile"), href: `/profile` },
-    { title: t("contact"), href: `/contact` },
     { title: t("recipes"), href: `/recipes` },
+    { title: t("contact"), href: `/contact` },
   ];
 
   return (
@@ -19,15 +18,6 @@ export default function Navigation() {
       <ul className=" flex ml-8 my-3 ">
         {navigation.map((list) => (
           <li key={list.href} className="flex items-center">
-            {/* {list.src && (
-              <Image
-                className="mr-4"
-                src={list.src}
-                alt={`${list.title} icon`}
-                width={18}
-                height={18}
-              />
-            )} */}
             <Link
               className={` text-md no-underline text-[#4C4C4C] mr-4 rounded dark:text-[#92a7dd]
               block py-3 px-5 font-bold my-2 uppercase relative
@@ -41,7 +31,13 @@ export default function Navigation() {
               hover:text-white hover:delay-200 hover:z-10 dark:hover:text-[#E2E8F0]
 
               
-              ${pathname === list.href ? "active" : ""}`}
+              ${
+                list.href === "/" && pathname !== "/"
+                  ? ""
+                  : pathname.includes(list.href)
+                  ? "active"
+                  : ""
+              }`}
               href={list.href}
             >
               {list.title}

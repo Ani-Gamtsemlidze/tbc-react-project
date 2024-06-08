@@ -1,9 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
 import SearchPopup from "./SearchPopup";
+import useDropdown from "../../hooks";
 
 // import { ChangeEvent } from "react";
 // import ItemsBucket from "./ItemsBucket";
@@ -42,51 +42,49 @@ import SearchPopup from "./SearchPopup";
 // };
 
 export function Search() {
-  const [isOpen, setIsOpen] = useState(false);
-  const popupRef = useRef<HTMLDivElement>(null);
-
+  const { isDropDown, handleDropDown, popupRef } = useDropdown();
   const t = useTranslations("Header");
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [isOpen]);
 
-  function handleOpenSearchBox() {
-    setIsOpen(!isOpen);
-  }
+  //   if (isOpen) {
+  //     document.body.classList.add("overflow-hidden");
+  //   } else {
+  //     document.body.classList.remove("overflow-hidden");
+  //   }
+  //   return () => {
+  //     document.body.classList.remove("overflow-hidden");
+  //   };
+  // }, [isOpen]);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        popupRef.current &&
-        !popupRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    }
+  // function handleOpenSearchBox() {
+  //   setIsOpen(!isOpen);
+  // }
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+  // useEffect(() => {
+  //   function handleClickOutside(event: MouseEvent) {
+  //     if (
+  //       popupRef.current &&
+  //       !popupRef.current.contains(event.target as Node)
+  //     ) {
+  //       setIsOpen(false);
+  //     }
+  //   }
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
+  //   if (isOpen) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isOpen]);
 
   return (
     <div className="flex  dark:border-[#B85042] dark:border-t items-center justify-center  dark:bg-slate-700 absolute top-2 right-4  ">
       <div className="relative">
         <div
-          onClick={handleOpenSearchBox}
+          onClick={handleDropDown}
           className="transition hover:bg-[#e1e1e1] hover:placeholder-[#16442a] hover:text-[#16442a]  border-[rgb(122,122,122)]  rounded-md  border cursor-pointer p-2 pl-10 bg-transparent placeholder-black focus:outline-none text-black "
         >
           {t("search")}
@@ -94,7 +92,9 @@ export function Search() {
 
         <CiSearch className="absolute top-[50%] translate-y-[-50%] left-2" />
       </div>
-      <SearchPopup isOpen={isOpen} handleOpenSearchBox={handleOpenSearchBox} />
+      <div ref={popupRef}>
+        <SearchPopup isOpen={isDropDown} handleOpenSearchBox={handleDropDown} />
+      </div>
 
       {/* <button
         className="transition justify-center py-2 px-4 ml-2 border-[#B85042]   text-md border text-black hover:bg-[#E7E8D1] hover:text-[#B85042]"

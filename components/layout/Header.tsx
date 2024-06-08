@@ -4,52 +4,44 @@ import Navigation from "./Navigation";
 import LogoutBtn from "../logout/LogoutBtn";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import ThemeSwitch from "../theme/ThemeSwitch";
-// import { useTheme } from "next-themes";
-// import { useEffect, useState } from "react";
 import LoginBtn from "../login/LoginBtn";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { merienda } from "../../app/fonts";
+import useDropdown from "../../hooks";
 
 export default function Header() {
-  // const { theme } = useTheme();
   const { user } = useUser();
-  // const [ setIsDark] = useState(true);
-
-  // useEffect(() => {
-  //   if (theme === "dark") {
-  //     setIsDark(false);
-  //   } else {
-  //     setIsDark(true);
-  //   }
-  // }, [theme]);
+  const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  console.log(popupRef);
 
   return (
     <>
-      <header className="flex  items-center  bg-[#fff] dark:bg-[#161D2F] py-1 px-8">
+      <header className="flex items-center bg-[#fff] dark:bg-[#161D2F] py-1 px-8">
         <div className="flex items-center w-full justify-between ">
           <div className="flex">
             <Link
-              className={` font-bold text-3xl text-[#035C41] leading-normal	mx-4 ${merienda.className}`}
+              className={`font-bold text-3xl text-[#035C41] leading-normal mx-4 ${merienda.className}`}
               href="/"
             >
               Veggy
-              <p className="ml-5 ">Vibes</p>
-              {/* <Image
-              alt="X-logo"
-              className="w-16 h-16 object-contain mr-4"
-              src={isDark ? "/images/logo.png" : "/images/light-logo.png"}
-              width={400}
-              height={400}
-            /> */}
+              <p className="ml-5">Vibes</p>
             </Link>
             <Navigation />
           </div>
-          <div className="flex items-center  mt-6">
+          <div className="flex items-center mt-6">
             <div className="flex items-center mb-4">
               <ThemeSwitch />
-
               <div className="ml-4 border-l border-l-slate-600 pl-2">
-                {user ? <LogoutBtn /> : <LoginBtn />}
+                {user ? (
+                  <div ref={popupRef}>
+                    <LogoutBtn
+                      isDropDown={isDropDown}
+                      handleDropDown={handleDropDown}
+                    />
+                  </div>
+                ) : (
+                  <LoginBtn />
+                )}
               </div>
             </div>
             <LocalSwitcher />

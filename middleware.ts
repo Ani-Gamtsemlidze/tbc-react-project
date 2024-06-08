@@ -14,7 +14,6 @@ const langMiddleware = createMiddleware({
 });
 
 export default async function middleware(request: NextRequest): Promise<NextResponse> {
-  console.log('Middleware invoked');
 
   const response = NextResponse.next();
   
@@ -23,12 +22,10 @@ export default async function middleware(request: NextRequest): Promise<NextResp
   const pathName = request.nextUrl.pathname;
 
   if (!session?.user && pathProtected(pathName)) {
-    console.log('User not authenticated, redirecting to login');
     return NextResponse.redirect(new URL("/api/auth/login", request.url));
   }
 
   const langResponse = await langMiddleware(request);
-  console.log('Language middleware executed');
 
   return langResponse || response;
 }

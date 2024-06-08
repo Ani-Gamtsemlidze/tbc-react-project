@@ -23,7 +23,7 @@ export interface RecipeData {
   image: string;
 }
 
-export default function AddRecipe({ handleAddRecipe }: any) {
+export default function AddRecipe({ handleDropDown }: any) {
   // const t = useTranslations("Contact");
   const { user }: any = useUser();
   const handleSubmit = async (
@@ -111,12 +111,18 @@ export default function AddRecipe({ handleAddRecipe }: any) {
 
   return (
     <div className="flex flex-col pl-12  overflow-y-scroll  bg-slate-200 w-[650px] h-screen text-black fixed top-0 right-0 z-[100]">
-      <div className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-[1000]">
-        <div className="relative w-[900px]">
+      <div
+        onClick={handleDropDown}
+        className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-[1000]"
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-[900px]"
+        >
           <div className="absolute inset-0 bg-[url('/images/recipes.jpg')] bg-cover bg-no-repeat bg-left blur-sm"></div>
           <div className="relative flex flex-col pl-12 overflow-y-scroll max-h-[600px] backdrop-blur-sm rounded-lg mb-6">
             <div
-              onClick={() => handleAddRecipe()}
+              onClick={() => handleDropDown()}
               className="text-white text-3xl relative "
             >
               <IoMdClose className="absolute right-6 top-4 cursor-pointer" />

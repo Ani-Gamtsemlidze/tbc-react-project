@@ -1,36 +1,49 @@
-// import { useCallback, useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-// export function useSearch(recipesData: any[]) {
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [filteredRecipes, setFilteredRecipes] = useState<any>([]);
+const useDropdown = () => {
+  const [isDropDown, setIsDropDown] = useState(false);
+  const popupRef = useRef< HTMLDivElement>(null);
 
-//   const debounce = (func: (...args: any[]) => void, delay: number) => {
-//     let timerId: ReturnType<typeof setTimeout>;
-//     return (...args: any[]) => {
-//       clearTimeout(timerId);
-//       timerId = setTimeout(() => {
-//         func(...args);
-//       }, delay);
-//     };
-//   };
+  // Handle body overflow class
+  useEffect(() => {
+    if (isDropDown) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isDropDown]);
 
-//   const debounceSearch = useCallback(
-//     debounce((searchQuery: string) => {
-//       console.log("Debounced search query:", searchQuery);
-//       const filtered = recipesData?.filter((recipe: any) =>
-//         recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
-//       );
-//       setFilteredRecipes(filtered || []);
-//     }, 500),
-//     []
-//   );
+  // Handle click outside for all dropdowns
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (
+      popupRef.current &&
+      !popupRef.current.contains(event.target as Node)
+    ) {
+      console.log("Clicked outside, closing all dropdowns");
+      setIsDropDown(false);
+    }
+  }, []);
 
-//   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const searchQuery = e.target.value;
-//     console.log(searchQuery);
-//     setSearchQuery(searchQuery);
-//     debounceSearch(searchQuery);
-//   };
+  useEffect(() => {
+    if (isDropDown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
 
-//   return { searchQuery, filteredRecipes, handleSearch};
-// }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropDown, handleClickOutside]);
+
+  const handleDropDown = () => {
+    setIsDropDown(!isDropDown);
+  };
+
+  return { isDropDown, handleDropDown, popupRef };
+};
+
+export default useDropdown;

@@ -3,7 +3,7 @@
 import { getRecipes } from "../../user-api";
 // import ScrollAnimation from "react-animate-on-scroll";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { acme, adamina, inter, oleo } from "../../app/fonts";
 import { monda } from "../../app/fonts";
 import { BiSolidAddToQueue } from "react-icons/bi";
@@ -15,6 +15,7 @@ import { Search } from "../search/Search";
 import AllCategories from "../categories/AllCategories";
 import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
+import useDropdown from "../../hooks";
 
 export interface Recipe {
   id: string;
@@ -25,51 +26,47 @@ export interface Recipe {
 }
 
 export default function RecipesPage() {
+  const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  console.log(popupRef);
   const [data, setData] = useState([]);
-  const [isAddRecipe, SetIsAddRecipe] = useState(false);
+  // const [isAddRecipe, SetIsAddRecipe] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const popupRef = useRef<HTMLDivElement>(null);
+  // useEffect(() => {
+  //   function handleClickOutside(event: MouseEvent) {
+  //     if (
+  //       popupRef.current &&
+  //       !popupRef.current.contains(event.target as Node)
+  //     ) {
+  //       SetIsAddRecipe(false);
+  //     }
+  //   }
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        popupRef.current &&
-        !popupRef.current.contains(event.target as Node)
-      ) {
-        SetIsAddRecipe(false);
-      }
-    }
+  //   if (isAddRecipe) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   }
 
-    if (isAddRecipe) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isAddRecipe]);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isAddRecipe]);
+  // useEffect(() => {
+  //   if (isAddRecipe) {
+  //     document.body.classList.add("overflow-hidden");
+  //   } else {
+  //     document.body.classList.remove("overflow-hidden");
+  //   }
+  //   return () => {
+  //     document.body.classList.remove("overflow-hidden");
+  //   };
+  // }, [isAddRecipe]);
 
   useEffect(() => {
     fetchRecipes();
   }, []);
-
-  useEffect(() => {
-    if (isAddRecipe) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [isAddRecipe]);
-
-  function handleAddRecipe() {
-    SetIsAddRecipe(!isAddRecipe);
-  }
 
   const fetchRecipes = async () => {
     try {
@@ -109,14 +106,13 @@ export default function RecipesPage() {
             </p>
           </div>
           <BiSolidAddToQueue
-            onClick={handleAddRecipe}
+            onClick={handleDropDown}
             className="text-2xl text-[#035C41] cursor-pointer"
           />
-          {isAddRecipe && (
-            <AddRecipe
-              handleAddRecipe={handleAddRecipe}
-              isAddRecipe={isAddRecipe}
-            />
+          {isDropDown && (
+            <div ref={popupRef}>
+              <AddRecipe handleDropDown={handleDropDown} />
+            </div>
           )}
         </div>
         <p className={`${adamina.className} mt-4 text-xl text-[#035C41]  `}>
