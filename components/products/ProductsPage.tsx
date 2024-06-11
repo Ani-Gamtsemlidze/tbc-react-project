@@ -3,16 +3,11 @@
 // import { useState } from "react";
 // import { Search } from "../search/Search";
 import ProductsCard from "./ProductsCard";
-import { acme, adamina, oleo } from "../../app/fonts";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { acme, adamina } from "../../app/fonts";
 
-import "swiper/css";
-import "swiper/css/navigation";
-// import { Navigation, Pagination } from "swiper/modules";
-import Image from "next/image";
-import { Autoplay } from "swiper/modules";
 import ProductsCategories from "./ProductsCategories";
 import ProductsSearch from "./ProductsSearch";
+import ItemBucket from "./ItemBucket";
 
 export interface Product {
   id: number;
@@ -94,18 +89,21 @@ export default function ProductsPage({ productsData }: HomePageProps) {
   // };
 
   return (
-    <div className="flex flex-col  bg-mainBackground dark:bg-gray-700 relative">
+    <div className="flex flex-col  bg-mainColor dark:bg-gray-700 relative">
       {/* <Search /> */}
       <div className="flex items-center justify-center">
-        <h1
+        {/* <h1
           className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
         >
           <p>Exploring</p>
           Vegan Products
-        </h1>
-        <ProductsSearch productsData={productsData} />
+        </h1> */}
+        <div className="flex items-center justify-center">
+          <ProductsSearch productsData={productsData} />
+          <ItemBucket />
+        </div>
       </div>
-      <div>
+      {/* <div>
         <Swiper
           autoplay={{
             delay: 2500,
@@ -147,13 +145,15 @@ export default function ProductsPage({ productsData }: HomePageProps) {
             />
           </SwiperSlide>
         </Swiper>
-      </div>
+      </div> */}
 
       <div className="flex justify-center ">
-        <div className="mt-24">
-          <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
+        <div className="mt-24 ">
+          <p className="text-center  text-3xl dark:text-mainColor text-[#035C41] ">
+            Explore
+          </p>
           <h1
-            className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
+            className={`text-center text-7xl dark:text-mainColor ${acme.className} my-6 text-[#035C41]`}
           >
             All Products
           </h1>
@@ -163,7 +163,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
         <div className="flex flex-col">
           <div className="ml-8">
             <h1
-              className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
+              className={`font-bol dark:text-mainColor text-[#035C41] text-3xl  ${acme.className} `}
             >
               Categories
             </h1>
@@ -172,8 +172,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
             </ul>
           </div>
         </div>
-        <div className="flex flex-1 ml-36">
-          <ProductsCard data={productsData} />
+        <div className="flex  ml-36">
           <ProductsCard data={productsData} />
         </div>
       </div>

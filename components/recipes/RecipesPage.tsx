@@ -4,18 +4,18 @@ import { getRecipes } from "../../user-api";
 // import ScrollAnimation from "react-animate-on-scroll";
 
 import { useEffect, useState } from "react";
-import { acme, adamina, inter, oleo } from "../../app/fonts";
-import { monda } from "../../app/fonts";
-import { BiSolidAddToQueue } from "react-icons/bi";
+import { acme, adamina, monda } from "../../app/fonts";
+// import { monda } from "../../app/fonts";
+// import { BiSolidAddToQueue } from "react-icons/bi";
+import { MdAddCircleOutline } from "react-icons/md";
 
 // import { MdOutlineBookmark } from "react-icons/md";
-import Categories from "../categories/Categories";
 import AddRecipe from "./AddRecipe";
-import { Search } from "../search/Search";
 import AllCategories from "../categories/AllCategories";
 import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 import useDropdown from "../../hooks";
+import { RecipesSearch } from "../search/RecipesSearch";
 
 export interface Recipe {
   id: string;
@@ -83,59 +83,43 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className=" flex flex-col    bg-mainBackground dark:bg-gray-700 relative ">
-      <div className="mt-4 flex items-center justify-center">
+    <div className=" flex flex-col    bg-mainColor dark:bg-gray-700 relative ">
+      {/* <div className="mt-4 flex items-center justify-center">
         <h1
           className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
         >
           <p>Exploring</p>
           Vegan Recipes
         </h1>
-        <div className="bg-white flex items-end ">
-          <Search />
+
+      </div> */}
+      <div className="flex mt-4 mr-6 items-center  justify-end">
+        <div
+          onClick={handleDropDown}
+          className="bg-[#E895D0] mr-2 justify-center w-48 h-[38px] flex items-center  cursor-pointer rounded-md px-4 py-2 "
+        >
+          <MdAddCircleOutline className="text-xl text-white cursor-pointer" />
+          <p
+            className={`text-lg font-bold ml-4 text-white  ${monda.className}`}
+          >
+            Add Recipe
+          </p>
+        </div>
+        <div className=" ">
+          <RecipesSearch />
         </div>
       </div>
       <div className="text-center my-8">
         <div className="flex items-center justify-center ">
-          <div>
-            <p
-              className={`text-3xl font-bold mr-4 text-[#035C41]   ${monda.className}`}
-            >
-              {" "}
-              Add Your Recipe
-            </p>
-          </div>
-          <BiSolidAddToQueue
-            onClick={handleDropDown}
-            className="text-2xl text-[#035C41] cursor-pointer"
-          />
           {isDropDown && (
             <div ref={popupRef}>
               <AddRecipe handleDropDown={handleDropDown} />
             </div>
           )}
         </div>
-        <p className={`${adamina.className} mt-4 text-xl text-[#035C41]  `}>
-          Contribute to Our Vegan Recipe Collection!
-        </p>
       </div>
-      <div className="mt-4">
-        <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
 
-        <h1
-          className={`text-center mt-3 text-6xl ${acme.className} text-[#035C41]`}
-        >
-          Popular Vegan Categories
-        </h1>
-
-        <p
-          className={`text-center text-xl text-[#27343A] ${inter.className} mt-6 `}
-        >
-          Find your next favorite cooking adventure.
-        </p>
-        <Categories />
-      </div>
-      <div className="mt-24">
+      <div className="">
         <p className="text-center  text-3xl text-[#035C41] ">Explore</p>
         <h1
           className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
@@ -145,6 +129,7 @@ export default function RecipesPage() {
       </div>
       {/* <ScrollAnimation delay="1" animateIn="fadeIn" duration="2"> */}
       {/* </ScrollAnimation> */}
+
       <div className="flex ">
         <div className="ml-8">
           <h1

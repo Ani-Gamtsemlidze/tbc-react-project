@@ -22,7 +22,7 @@ import "swiper/css/pagination";
 
 export default function InnerProduct({ innerProductData }: any) {
   return (
-    <div className="flex flex-col  w-full  bg-mainBackground dark:bg-slate-500  ">
+    <div className="flex flex-col  w-full  bg-mainColor dark:bg-slate-500  ">
       {innerProductData && (
         <div className="flex flex-col">
           <h1

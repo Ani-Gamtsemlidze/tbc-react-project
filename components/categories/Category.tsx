@@ -33,7 +33,7 @@ export default function Category({ categoryName }: CategoryProps) {
   // }
 
   return (
-    <div className="flex flex-col h-screen  w-full  bg-mainBackground dark:bg-slate-500 ">
+    <div className="flex flex-col h-screen  w-full  bg-mainColor dark:bg-slate-500 ">
       <h1
         className={`text-center text-5xl text-[#035C41] ${oleo.className} my-12 `}
       >

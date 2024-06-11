@@ -45,34 +45,7 @@ export default function AddRecipe({ handleDropDown }: any) {
       storage_instructions,
     } = values;
     console.log(setErrors);
-    console.log("CATEGORYCATEGORY", category); // string
     try {
-      // const requestBody = {
-      //   title,
-      //   introduction,
-      //   category,
-      //   ingredients_list,
-      //   preparation_time,
-      //   servings,
-      //   instructions,
-      //   tips_and_variations,
-      //   nutritional_information,
-      //   storage_instructions,
-      //   sub: user.sub,
-      //   image_url:
-      //     "https://st3.depositphotos.com/13324256/17303/i/450/depositphotos_173034766-stock-photo-woman-writing-down-recipe.jpg",
-      // };
-      // const categoryArray = Array.isArray(category)
-      //   ? JSON.stringify(category)
-      //   : category;
-      // // const ingredientsArray = Array.isArray(ingredients_list) ? ingredients_list : [ingredients_list];
-      // console.log(categoryArray, "ARRAYYYY");
-
-      // Declare category before using it in the requestBody
-      // const { category: categoryToRemove, ...bodyWithoutCategory } =
-      //   requestBody;
-      // console.log("CATEGORY", bodyWithoutCategory);
-
       const response = await fetch(`${process.env.BASE_URL}/api/save-recipe`, {
         method: "POST",
         headers: {
@@ -81,7 +54,7 @@ export default function AddRecipe({ handleDropDown }: any) {
         body: JSON.stringify({
           title,
           introduction,
-          category,
+          category: [category],
           ingredients_list,
           preparation_time,
           servings,
@@ -239,7 +212,7 @@ export default function AddRecipe({ handleDropDown }: any) {
                               id="about"
                               as="textarea"
                               name="introduction"
-                              //   type="introduction"
+                              type="introduction"
                               rows={3}
                               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                               // defaultValue={""}
@@ -471,60 +444,3 @@ export default function AddRecipe({ handleDropDown }: any) {
     </div>
   );
 }
-
-// {formFields.map((field) => (
-//   <div key={field.name} className="mb-6">
-//     <label
-//       className="block text-lg font-semibold text-gray-700 mb-2"
-//       htmlFor={field.name}
-//     >
-//       {field.label}
-//     </label>
-//     <input
-//       id={field.name}
-//       className="w-full p-4 border placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-//       placeholder={field.label}
-//       type={field.type}
-//       name={field.name}
-//       value={formData[field.name] as string}
-//       onChange={handleChange}
-//     />
-//   </div>
-// ))}
-
-// return (
-//   <div
-//     onClick={handleAddRecipe}
-//     className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-[1000]"
-//   >
-//     <div onClick={(e) => e.stopPropagation()} className="relative w-[900px]">
-//       <div className="absolute inset-0 bg-[url('/images/recipes.jpg')] bg-cover bg-no-repeat bg-left blur-sm"></div>
-//       <div className="relative flex flex-col pl-12 overflow-y-scroll max-h-[600px] backdrop-blur-sm rounded-lg">
-//         <div
-//           onClick={() => handleAddRecipe()}
-//           className="text-white text-3xl relative "
-//         >
-//           <IoMdClose className="absolute right-6 top-4 cursor-pointer" />
-//         </div>
-//         <h1
-//           className={`font-bold text-4xl my-8 text-[#fff] ${oleo.className}`}
-//         >
-//           Share your Favourite Recipe
-//         </h1>
-
-//         <form
-//           // onSubmit={handleSubmit}
-//           className="w-[600px] mx-auto px-16 py-4 my-4 bg-white shadow-lg rounded-lg"
-//         >
-
-//           <button
-//             type="submit"
-//             className="w-96 py-4 mt-6 text-lg font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-//           >
-//             Submit
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   </div>
-// );

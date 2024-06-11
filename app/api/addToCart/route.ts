@@ -1,58 +1,34 @@
-import {  getSession } from "@auth0/nextjs-auth0";
-import { sql } from "@vercel/postgres";
-import {  NextResponse } from "next/server";
+import { sql } from '@vercel/postgres';
+import { NextResponse } from 'next/server';
 
-export const POST = async (request: Request) => {
-  const session = await getSession()
-  const body = await request.json()
-  
-  const user = session?.user;
-  const userId = user?.sub;
-  
-    try {
-      console.log("body", request)
-      const data = await sql`SELECT * FROM carts WHERE product_id = ${body.product_id} AND user_id = ${userId};`;
-  
-      if (data.rows.length > 0) {
-        await sql`UPDATE carts SET quantity = quantity + 1 WHERE product_id = ${body.product_id} AND user_id = ${userId};`;
-  
-        const quantity = await sql`SELECT SUM(quantity) AS total_quantity 
-        FROM carts 
-        WHERE user_id = ${userId}`;
+export async function POST(request: Request) {
+  const { userId, productId, quantity } = await request.json();
+  console.log("USERID", userId)
 
-  
-        return NextResponse.json(
-          {
-            msg: "update product successfully",
-            quantity: quantity.rows[0].total_quantity,
-          },
-          { status: 200 }
-        );
-      }
-  
-      await sql`INSERT INTO carts (user_id, product_id, quantity, added_on)
-          VALUES (${userId}, ${
-        body.product_id
-      }, ${1}, CURRENT_TIMESTAMP);`;
-  
-      const quantity = await sql`SELECT SUM(quantity) AS total_quantity 
-        FROM carts 
-        WHERE user_id = ${userId}`;
-  
-      return NextResponse.json(
-        {
-          msg: "Product is added successfully!",
-          quantity: quantity.rows[0].total_quantity,
-        },
-        { status: 201 }
-      );
-    } catch (error) {
-      console.error("Failed to add product:", error);
-      return new Response("Failed to add product", {
-        status: 400,
-      });
+  try {
+    // Check if the cart item already exists
+    const existingCartItem = await sql`
+      SELECT * FROM carts WHERE user_id = ${userId} AND product_id = ${productId}
+    `;
+
+    if (existingCartItem.rowCount > 0) {
+      // Update quantity if the cart item already exists
+      await sql`
+        UPDATE carts SET quantity = quantity + ${quantity} 
+        WHERE user_id = ${userId} AND product_id = ${productId}
+      `;
+    } else {
+      // Insert a new cart item if it doesn't exist
+      await sql`
+        INSERT INTO carts (user_id, product_id, quantity) 
+        VALUES (${userId}, ${productId}, ${quantity})
+      `;
     }
-  };
 
+    return NextResponse.json({ success: true, message: 'Product added to cart' });
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+    return NextResponse.json({ success: false, error: 'Failed to add product to cart' }, { status: 500 });
+  }
+}
 
-  

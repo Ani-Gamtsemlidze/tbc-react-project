@@ -27,7 +27,7 @@ export default function ProductsCategories() {
         <Link
           href={`/products/product_category/${category.name}`}
           key={category.id}
-          className=" text-[#27343A]"
+          className=" text-[#27343A] dark:text-mainColor"
         >
           <h1 className={`text-xl ${inter.className}`}>{category.name}</h1>
         </Link>

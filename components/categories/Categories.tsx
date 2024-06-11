@@ -35,7 +35,7 @@ export default function Categories() {
   };
 
   return (
-    <div className="flex  flex-wrap justify-start dark:bg-gray-700 mt-6">
+    <div className="flex  flex-wrap justify-start  mt-6">
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
@@ -59,7 +59,7 @@ export default function Categories() {
                 height={400}
                 alt="recipe image"
               />
-              <h1 className="font-bold text-2xl  text-[#27343a] uppercase mt-4">
+              <h1 className="font-bold text-2xl dark:text-mainColor text-[#27343a] uppercase mt-4">
                 {category.name}
               </h1>
             </Link>

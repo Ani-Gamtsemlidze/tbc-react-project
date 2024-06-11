@@ -263,26 +263,45 @@ export async function editUserInfo(id: string, editUser:any) {
   }
 }
 
-export async function addToCart (productId: number) {
-  try {
-      const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
+// export async function addToCart (productId: number) {
+//   try {
+//       const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
         
-        method: "POST",
-        body: JSON.stringify({ product_id: productId }),
-      });
-      if (response.ok) {
-        // const data = await response.json();
-        // setCartTotalCookie(data.quantity);
-      } else {
-        console.error("Error adding product to cart. Status:", response.status);
-      }
-    } catch (error) {
-      console.error("Error adding product to cart:", error);
-    }
+//         method: "POST",
+//         body: JSON.stringify({ product_id: productId }),
+//       });
+//       if (response.ok) {
+//         // const data = await response.json();
+//         // setCartTotalCookie(data.quantity);
+//       } else {
+//         console.error("Error adding product to cart. Status:", response.status);
+//       }
+//     } catch (error) {
+//       console.error("Error adding product to cart:", error);
+//     }
+// }
+
+
+export async function addToCart(userId: string, productId: number, quantity: number) {
+  const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId, productId, quantity }),
+  });
+
+  const data = await response.json();
+  if (data.success) {
+    console.log('Product added to cart');
+  } else {
+    console.error('Failed to add product to cart:', data.error);
+  }
 }
 
 
-export async function getCarts(user_id: number) {
+export async function getCarts(user_id: string) {
+  console.log("CARTS", user_id )
   try {
 
     const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {

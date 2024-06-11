@@ -31,7 +31,7 @@ export default function Contact({ params }: Params) {
   // };
 
   return (
-    <div className="sm:p-10 my-auto bg-mainBackground">
+    <div className="sm:p-10 my-auto bg-mainColor">
       <section className="mx-auto bg-white max-w-screen-xl md:rounded-md md:border md:shadow-lg">
         <div className="grid grid-cols-4 text-gray-800 lg:grid-cols-3">
           <CompanyContact />

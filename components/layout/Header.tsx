@@ -20,7 +20,7 @@ export default function Header() {
         <div className="flex items-center w-full justify-between ">
           <div className="flex">
             <Link
-              className={`font-bold text-3xl text-[#035C41] leading-normal mx-4 ${merienda.className}`}
+              className={`font-bold text-3xl dark:text-mainColor text-[#035C41] leading-normal mx-4 ${merienda.className}`}
               href="/"
             >
               Veggy
