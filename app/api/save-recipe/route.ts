@@ -5,39 +5,43 @@ export async function POST(request: Request) {
   const {
     title,
     introduction,
-    categoryJson,
-    ingredientsListJson,
+    category,
+    ingredients_list,
     preparation_time,
+    // storage_instructions,
     servings,
-    instructionsJson,
+    instructions,
     tips_and_variations,
     nutritional_information,
-    storage_instructions,
     image_url,
+    sub
   } = await request.json();
 
-  try {
-    // const categoryArray = Array.isArray(category) ? category : [category];
-    // const categoryJson = JSON.stringify(category);
+  // console.log(preparation_time, "parseInt(preparation_time)")
+  const ingredientsArray = ingredients_list.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
+  const instructionsArray = instructions.split('\n').filter((instruction: string) => instruction.trim() !== '');
+  const imagesArray = image_url.split('\n').filter((imageUrl: string) => imageUrl.trim() !== '');
 
+
+  try {
     await sql`
-        INSERT INTO recipes_ ( title, introduction, category, ingredients_list, preparation_time, servings, instructions, tips_and_variations, nutritional_information, storage_instructions, images)
+        INSERT INTO recipes ( title, introduction, category, ingredients_list, preparation_time, servings, instructions, tips_and_variations, nutritional_information, images, user_id)
         VALUES (
           ${title}, 
           ${introduction}, 
-          ${categoryJson}, 
-          ${ingredientsListJson}, 
+          ${category}, 
+          ${ingredientsArray},  
           ${preparation_time}, 
           ${servings}, 
-          ${instructionsJson}, 
+          ${instructionsArray}, 
           ${tips_and_variations}, 
           ${nutritional_information}, 
-          ${storage_instructions}, 
-          ${image_url}
+          ${imagesArray},
+          ${sub}
         )
       `;
 
-    const recipes = await sql`SELECT * FROM recipes_`;
+    const recipes = await sql`SELECT * FROM recipes`;
     const successMessage = "Recipe created successfully";
     return NextResponse.json({ recipes, successMessage }, { status: 200 });
   } catch (error) {

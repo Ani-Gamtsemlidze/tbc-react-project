@@ -23,16 +23,16 @@ export default function ProductsCard({ data }: any) {
     }
   };
   return (
-    <div className=" grid grid-cols-2 gap-6 ml-8 w-full">
+    <div className=" grid grid-cols-2 gap-6 ml-8 max-w-[700px]">
       {data &&
         data.map((product: any) => (
-          <div className="" key={product.id}>
+          <div className=" border-gray-400 border rounded-md" key={product.id}>
             <Link
               className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
               href={`/products/${product.id}`}
             >
               <Image
-                className="peer absolute top-0 right-0 h-full w-full object-cover"
+                className="peer absolute top-0 right-0  w-full  h-full object-cover"
                 src={product.images[2]}
                 alt="product image"
                 width={400}
@@ -74,48 +74,3 @@ export default function ProductsCard({ data }: any) {
     </div>
   );
 }
-
-// <div className="products-scroll flex justify-center flex-wrap px-10 py-4">
-//   {itemsData &&
-//     itemsData.map((product: any) => (
-//       <div key={product.id} className="flex grow-0 shrink-0 basis-[27%]">
-//         <div className=" border-2 dark:bg-slate-700 rounded-md  mr-4 my-2">
-//           <div className="w-80 h-52">
-//             <Image
-//               className="w-full h-full object-cover rounded"
-//               src={product.images[2]}
-//               alt={product.title}
-//               width={200}
-//               height={200}
-//             />
-//           </div>
-//           <div className="w-80">
-//             <div className="px-4 dark:text-[#94a3b8]">
-//               <div className="my-4">
-//                 <h1 className="text-xl font-bold text-[#141414]">
-//                   {product.title}
-//                 </h1>
-//                 <span className="text-sm font-bold">
-//                   Price: ${product.price}
-//                 </span>
-//               </div>
-//               <div className="mb-3">
-//                 <p className="text-sm text-black">
-//                   {product.description.slice(0, 180)}...
-//                 </p>
-//               </div>
-//             </div>
-//             <div className="my-4 w-32">
-//               <button
-//                 onClick={() => router.push(`products/${product.id}`)}
-//                 className="rounded py-2 mx-2 px-2  text-[#B85042] dark:text-[#e2e8f0] font-bold flex flex-start cursor-pointer transition"
-//               >
-//                 View More
-//               </button>
-//             </div>
-// <Cart addProduct={() => addProduct(product.id)} />
-//           </div>
-//         </div>
-//       </div>
-//     ))}
-// </div>

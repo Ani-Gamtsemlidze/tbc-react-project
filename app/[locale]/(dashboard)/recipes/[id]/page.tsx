@@ -10,6 +10,7 @@ export default async function Page({
   unstable_setRequestLocale(params.locale);
   const { id } = params;
   const recipeData = await getRecipe(id);
+  console.log(recipeData, "RECIPEDATA");
 
   return <InnerBlog recipeData={recipeData[0]} />;
 }

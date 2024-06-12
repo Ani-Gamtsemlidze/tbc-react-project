@@ -6,8 +6,8 @@ export const revalidate = 0;
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     try {
         const result = await sql`
-            SELECT * FROM recipes
-            WHERE category @> ${`["${params.id}"]`};`;
+        SELECT * FROM recipes
+        WHERE ${params.id} = ANY(category);`;
 
         const rows = result.rows;
 

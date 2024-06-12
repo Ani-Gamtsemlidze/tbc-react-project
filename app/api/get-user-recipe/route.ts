@@ -8,8 +8,8 @@ export async function GET(
   const sub = params?.sub;
   try {
     const recipes = await sql`
-      SELECT * FROM recipes_
-      WHERE sub = ${sub}
+      SELECT * FROM recipes
+      WHERE user_id = ${sub}
     `;
 
     return NextResponse.json({ recipes }, { status: 200 });

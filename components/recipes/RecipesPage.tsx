@@ -19,7 +19,7 @@ import { RecipesSearch } from "../search/RecipesSearch";
 
 export interface Recipe {
   id: string;
-  images: string[];
+  images: string;
   category: string[];
   preparation_time: number;
   title: string;
@@ -141,6 +141,7 @@ export default function RecipesPage() {
             <AllCategories />
           </ul>
         </div>
+
         <RecipeCard data={data} />
       </div>
     </div>

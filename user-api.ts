@@ -1,7 +1,6 @@
 "use server"
 
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 // import { RecipeData } from "./components/recipes/AddRecipe";
 
 export interface User {
@@ -23,7 +22,9 @@ export async function getUsers(){
 export async function getRecipe(id: number) {
   try {
     const url = `${process.env.BASE_URL}/api/get-single-recipe/${id}`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      cache: "no-store", 
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -107,13 +108,24 @@ export async function getProductsCategory(category: string) {
 // }
 
 
+// export async function getRecipes(){
+  
+//     const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
+//     const {recipes} = await response.json()
+    
+//     // console.log(recipes, "recipes vrecipes recipes ")
+   
+//     return recipes;
+// }
+
 export async function getRecipes(){
   
-    const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
-    const {recipes} = await response.json()
-   
-    return recipes?.rows;
+  const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
+  const {recipes} = await response.json()
+ 
+  return recipes?.rows;
 }
+
 
 
 export async function getProducts(){
@@ -263,24 +275,6 @@ export async function editUserInfo(id: string, editUser:any) {
   }
 }
 
-// export async function addToCart (productId: number) {
-//   try {
-//       const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
-        
-//         method: "POST",
-//         body: JSON.stringify({ product_id: productId }),
-//       });
-//       if (response.ok) {
-//         // const data = await response.json();
-//         // setCartTotalCookie(data.quantity);
-//       } else {
-//         console.error("Error adding product to cart. Status:", response.status);
-//       }
-//     } catch (error) {
-//       console.error("Error adding product to cart:", error);
-//     }
-// }
-
 
 export async function addToCart(userId: string, productId: number, quantity: number) {
   const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
@@ -321,7 +315,7 @@ export async function getCarts(user_id: string) {
 }
 
 
-export async function updateCart(productId: number, quantity: number, change: string) {
+export async function updateCart(userId: string,productId: number, quantity: number) {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-cart`, {
       cache: "no-store",  
@@ -329,7 +323,7 @@ export async function updateCart(productId: number, quantity: number, change: st
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ product_id: productId, quantity, change })
+      body: JSON.stringify({user_id: userId,product_id: productId, quantity })
     });
 
     if (!response.ok) {
@@ -346,7 +340,7 @@ export async function updateCart(productId: number, quantity: number, change: st
 
 
 
-export const deleteProducts = async (userId: number) => {
+export const deleteProducts = async (userId: string) => {
   await fetch(`${process.env.BASE_URL}/api/update-cart`, {
     method: "DELETE",
     headers: {
@@ -354,7 +348,6 @@ export const deleteProducts = async (userId: number) => {
     },
     body: JSON.stringify({ user_id: userId })
   });
-  cookies().delete("cart_total")
 };
 
   

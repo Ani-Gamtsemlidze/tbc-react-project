@@ -8,19 +8,19 @@ export async function POST(request: Request) {
   try {
     // Check if the cart item already exists
     const existingCartItem = await sql`
-      SELECT * FROM carts WHERE user_id = ${userId} AND product_id = ${productId}
+      SELECT * FROM carts_ WHERE user_id = ${userId} AND product_id = ${productId}
     `;
 
     if (existingCartItem.rowCount > 0) {
       // Update quantity if the cart item already exists
       await sql`
-        UPDATE carts SET quantity = quantity + ${quantity} 
-        WHERE user_id = ${userId} AND product_id = ${productId}
+        UPDATE carts_ SET quantity = quantity + ${quantity} 
+        WHERE user_id_ = ${userId} AND product_id = ${productId}
       `;
     } else {
       // Insert a new cart item if it doesn't exist
       await sql`
-        INSERT INTO carts (user_id, product_id, quantity) 
+        INSERT INTO carts_ (user_id, product_id, quantity) 
         VALUES (${userId}, ${productId}, ${quantity})
       `;
     }
