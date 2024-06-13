@@ -7,7 +7,6 @@ import { acme, adamina } from "../../app/fonts";
 
 import ProductsCategories from "./ProductsCategories";
 import ProductsSearch from "./ProductsSearch";
-import ItemBucket from "./ItemBucket";
 
 export interface Product {
   id: number;
@@ -99,8 +98,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
           Vegan Products
         </h1> */}
         <div className="flex items-center justify-center">
-          <ProductsSearch productsData={productsData} />
-          <ItemBucket />
+          {/* <ItemBucket /> */}
         </div>
       </div>
       {/* <div>
@@ -160,8 +158,9 @@ export default function ProductsPage({ productsData }: HomePageProps) {
         </div>
       </div>
       <div className="flex my-12 ">
-        <div className="flex flex-col">
-          <div className="ml-8">
+        <div className="flex flex-col pl-12">
+          <ProductsSearch productsData={productsData} />
+          <div className=" mt-8 ">
             <h1
               className={`font-bol dark:text-mainColor text-[#035C41] text-3xl  ${acme.className} `}
             >

@@ -18,15 +18,15 @@ import TextareaField from "../recipeForm/TextareaFild";
 export interface RecipeData {
   title: string;
   introduction: string;
-  category: string;
-  ingredients_list: string;
+  category: string[];
+  ingredients_list: string[];
   preparation_time: string;
   servings: string;
-  instructions: string;
+  instructions: string[];
   tips_and_variations: string;
   nutritional_information: string;
   storage_instructions: string;
-  image: string;
+  image: string[];
 }
 
 export default function AddRecipe({ handleDropDown }: any) {
@@ -137,15 +137,15 @@ export default function AddRecipe({ handleDropDown }: any) {
               initialValues={{
                 title: "",
                 introduction: "",
-                category: "",
-                ingredients_list: "",
+                category: [],
+                ingredients_list: [],
                 preparation_time: "",
                 servings: "",
-                instructions: "",
+                instructions: [],
                 tips_and_variations: "",
                 nutritional_information: "",
                 storage_instructions: "",
-                image: "",
+                image: [],
                 user_id: "",
               }}
               validationSchema={Yup.object({

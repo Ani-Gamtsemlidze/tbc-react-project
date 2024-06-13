@@ -122,7 +122,7 @@ export default function ItemBucket() {
   // }
 
   return (
-    <div className="flex relative" onClick={handleDropDown}>
+    <div className="flex relative mx-4" onClick={handleDropDown}>
       <BsCart className="text-3xl cursor-pointer text-[#16442a]" />
       <div className="relative cursor-pointer">
         <CartQuantity quantity={dataQuantity} />

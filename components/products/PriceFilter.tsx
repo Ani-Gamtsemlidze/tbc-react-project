@@ -22,13 +22,13 @@ export default function PriceFilter() {
   };
 
   return (
-    <div className="ml-4">
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <div className="">
+      <FormControl className="price_input" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel className="" id="demo-controlled-open-select-label">
           Price
         </InputLabel>
         <Select
-          className="w-40"
+          className=""
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           open={open}

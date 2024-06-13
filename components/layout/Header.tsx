@@ -8,6 +8,7 @@ import LoginBtn from "../login/LoginBtn";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { merienda } from "../../app/fonts";
 import useDropdown from "../../hooks";
+import ItemBucket from "../products/ItemBucket";
 
 export default function Header() {
   const { user } = useUser();
@@ -31,6 +32,8 @@ export default function Header() {
           <div className="flex items-center mt-6">
             <div className="flex items-center mb-4">
               <ThemeSwitch />
+
+              <ItemBucket />
               <div className="ml-4 border-l border-l-slate-600 pl-2">
                 {user ? (
                   <div ref={popupRef}>

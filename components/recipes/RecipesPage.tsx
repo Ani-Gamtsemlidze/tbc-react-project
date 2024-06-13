@@ -16,6 +16,7 @@ import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 import useDropdown from "../../hooks";
 import { RecipesSearch } from "../search/RecipesSearch";
+// import { useUser } from "@auth0/nextjs-auth0/client";
 
 export interface Recipe {
   id: string;
@@ -27,42 +28,11 @@ export interface Recipe {
 
 export default function RecipesPage() {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  // const { user } = useUser();
   console.log(popupRef);
   const [data, setData] = useState([]);
   // const [isAddRecipe, SetIsAddRecipe] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   function handleClickOutside(event: MouseEvent) {
-  //     if (
-  //       popupRef.current &&
-  //       !popupRef.current.contains(event.target as Node)
-  //     ) {
-  //       SetIsAddRecipe(false);
-  //     }
-  //   }
-
-  //   if (isAddRecipe) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   }
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isAddRecipe]);
-
-  // useEffect(() => {
-  //   if (isAddRecipe) {
-  //     document.body.classList.add("overflow-hidden");
-  //   } else {
-  //     document.body.classList.remove("overflow-hidden");
-  //   }
-  //   return () => {
-  //     document.body.classList.remove("overflow-hidden");
-  //   };
-  // }, [isAddRecipe]);
 
   useEffect(() => {
     fetchRecipes();

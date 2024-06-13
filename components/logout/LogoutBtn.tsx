@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ImProfile } from "react-icons/im";
 
 import { IoMdLogOut } from "react-icons/io";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 import { getUser } from "../../user-api";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -55,6 +56,7 @@ export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
           />
           {isDropDown && (
             <ul
+              onClick={(e) => e.stopPropagation()}
               id="dropdown"
               className=" bg-white dark:bg-slate-800 border border-greenColor shadow-md  rounded  absolute top-14 right-[-8] z-50 py-4 w-60 min-h-60"
             >
@@ -70,9 +72,9 @@ export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
               </div>
               <div className="mt-4">
                 <li
-                  className={` border-b border-b-gray-400 mx-3 text-black  dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
+                  className={` border-b text-[#64a643] border-b-gray-400 mx-3 dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
                 >
-                  <ImProfile />
+                  <FaRegCircleUser className="text-xl" />
                   <Link
                     href={"/profile"}
                     className="   text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
@@ -82,9 +84,20 @@ export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
                   </Link>
                 </li>
                 <li
-                  className={` border-b border-b-gray-400 mx-3 text-black dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
+                  className={` border-b border-b-gray-400 mx-3 text-[#64a643]  dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
                 >
-                  <IoMdLogOut />
+                  <ImProfile className="text-lg" />
+                  <Link
+                    href={"/myrecipes"}
+                    className="   text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
+                  >
+                    My Recipes
+                  </Link>
+                </li>
+                <li
+                  className={` border-b border-b-gray-400 mx-3 text-[#B85042] dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
+                >
+                  <IoMdLogOut className="text-xl" />
 
                   <a
                     href="/api/auth/logout"

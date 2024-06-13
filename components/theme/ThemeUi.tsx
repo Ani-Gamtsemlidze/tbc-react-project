@@ -45,7 +45,11 @@ export default function ThemeUi({
       {mounted && (
         <div className="relative z-10">
           <button onClick={handleDropDown}>
-            {isDarkTheme ? <FiMoon /> : <FiSun />}
+            {isDarkTheme ? (
+              <FiMoon className="text-2xl" />
+            ) : (
+              <FiSun className="text-2xl" />
+            )}
           </button>
           {isDropDown && (
             <div ref={popupRef}>

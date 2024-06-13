@@ -13,6 +13,8 @@ export async function GET () {
         return NextResponse.json({error}, {status : 500})
     }
 }
+
+
 // export async function GET () {
 //     try {
 //         const recipes = await sql`SELECT * from recipes__ ;` as any
