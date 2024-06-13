@@ -53,27 +53,18 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className=" flex flex-col    bg-mainColor dark:bg-gray-700 relative ">
-      {/* <div className="mt-4 flex items-center justify-center">
-        <h1
-          className={`text-center text-7xl my-6 ${oleo.className} text-[#035C41]`}
-        >
-          <p>Exploring</p>
-          Vegan Recipes
-        </h1>
-
-      </div> */}
+    <div className=" flex flex-col  h-screen  bg-mainColor dark:bg-gray-700 relative ">
       <div className="flex mt-4 mr-6 items-center  justify-end">
         <div
           onClick={handleDropDown}
-          className="bg-[#E895D0] mr-2 justify-center w-48 h-[38px] flex items-center  cursor-pointer rounded-md px-4 py-2 "
+          className="bg-[#E895D0] mr-2 justify-center w-48 h-[38px] flex items-center  cursor-pointer rounded-md px-4 py-6 "
         >
           <MdAddCircleOutline className="text-xl text-white cursor-pointer" />
-          <p
-            className={`text-lg font-bold ml-4 text-white  ${monda.className}`}
+          <button
+            className={`text-lg font-bold ml-4  text-white  ${monda.className}`}
           >
             Add Recipe
-          </p>
+          </button>
         </div>
         <div className=" ">
           <RecipesSearch />

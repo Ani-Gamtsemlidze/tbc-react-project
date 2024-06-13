@@ -21,6 +21,7 @@ import "swiper/css/pagination";
 // }
 
 export default function InnerProduct({ innerProductData }: any) {
+  console.log(innerProductData);
   return (
     <div className="flex flex-col  w-full  bg-mainColor dark:bg-slate-500  ">
       {innerProductData && (

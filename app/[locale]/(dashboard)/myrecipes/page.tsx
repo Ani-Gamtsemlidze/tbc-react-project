@@ -19,7 +19,8 @@ export default async function Page() {
         className={` text-5xl my-12 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
       >
         My Recipes
-      </h1>{" "}
+      </h1>
+
       <UserRecipe data={userRecipes} />
     </div>
   );

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getAllCategories, getRecipes } from "../../user-api";
-// import { useSearch } from "../../hooks";
 
 interface Category {
   id: number;
@@ -59,7 +58,6 @@ export default function SearchPopup({
       console.error("Error fetching users:", error);
     }
   };
-  // const { searchQuery, filteredRecipes, handleSearch } = useSearch(recipesData);
 
   const debounce = (func: (...args: any[]) => void, delay: number) => {
     let timerId: ReturnType<typeof setTimeout>;
