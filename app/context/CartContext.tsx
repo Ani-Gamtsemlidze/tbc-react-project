@@ -1,7 +1,18 @@
-"use client"
-import { useState, useEffect } from "react";
+"use client";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { deleteProducts, getCarts, getProduct, updateCart } from "../user-api";
+import {
+  deleteProducts,
+  getCarts,
+  getProduct,
+  updateCart,
+} from "../../user-api";
 
 interface CartItem {
   product_id: number;
@@ -15,15 +26,28 @@ interface Product {
   images: string[];
 }
 
-const useCart = () => {
+interface CartContextProps {
+  cartData: CartItem[];
+  productsData: Product[];
+  quantity: Record<number, number>;
+  dataQuantity: number;
+  totalPrice: number;
+  fetchCartData: () => void;
+  handleQuantityChange: (productId: number, change: number) => Promise<void>;
+  handleRemoveProducts: () => Promise<void>;
+}
+
+const CartContext = createContext<CartContextProps | undefined>(undefined);
+
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartData, setCartData] = useState<CartItem[]>([]);
   const [productsData, setProductsData] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState<Record<number, number>>({});
   const { user } = useUser();
 
   useEffect(() => {
-    fetchCartData(); // Fetch cart data when the component mounts
-  }, []);
+    fetchCartData();
+  }, [user]);
 
   useEffect(() => {
     if (cartData.length > 0) {
@@ -63,6 +87,7 @@ const useCart = () => {
 
   const handleQuantityChange = async (productId: number, change: number) => {
     const newQuantity = (quantity[productId] || 0) + change;
+    console.log(newQuantity);
     if (newQuantity >= 0) {
       try {
         const response = await updateCart(user!.sub!, productId, newQuantity);
@@ -71,7 +96,7 @@ const useCart = () => {
             ...prevQuantity,
             [productId]: newQuantity,
           }));
-          fetchCartData(); // Fetch cart data after updating the quantity
+          fetchCartData();
         } else {
           console.error("Failed to update product quantity:", response.msg);
         }
@@ -82,28 +107,53 @@ const useCart = () => {
   };
 
   const handleRemoveProducts = async () => {
-    return await deleteProducts(user?.sub!);
+    try {
+      await deleteProducts(user?.sub!);
+      // Reset state after deletion
+      setCartData([]);
+      setProductsData([]);
+      setQuantity({});
+    } catch (error) {
+      console.error("Error removing products:", error);
+    }
   };
 
-  const dataQuantity = cartData.reduce((total, item) => total + item.quantity, 0);
+  const dataQuantity = cartData.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   const totalPrice = cartData
     .map((cartItem) => {
-      const product = productsData.find((product) => product.id === cartItem.product_id);
+      const product = productsData.find(
+        (product) => product.id === cartItem.product_id
+      );
       return product ? product.price * cartItem.quantity : 0;
     })
     .reduce((total, price) => total + price, 0);
 
-  return {
-    cartData,
-    productsData,
-    quantity,
-    dataQuantity,
-    totalPrice,
-    fetchCartData,
-    handleQuantityChange,
-    handleRemoveProducts,
-  };
+  return (
+    <CartContext.Provider
+      value={{
+        cartData,
+        productsData,
+        quantity,
+        dataQuantity,
+        totalPrice,
+        fetchCartData,
+        handleQuantityChange,
+        handleRemoveProducts,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
-export default useCart;
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+};

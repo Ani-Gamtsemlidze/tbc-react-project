@@ -139,19 +139,12 @@ import { BsCart } from "react-icons/bs";
 import CartItems from "./CartItems";
 import useDropdown from "../../hooks";
 import CartQuantity from "./CartQuantity";
-import useCart from "../../hooks/useCart";
+import { useCart } from "../../app/context/CartContext";
 
 export default function ItemBucket() {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
-  const {
-    cartData,
-    productsData,
-    dataQuantity,
-    totalPrice,
-    handleQuantityChange,
-    handleRemoveProducts,
-  } = useCart();
-  console.log(cartData, "CARTDATA");
+  const { dataQuantity } = useCart();
+  console.log(dataQuantity, "CARTDATA");
 
   return (
     <div className="flex relative mx-4">
@@ -164,16 +157,7 @@ export default function ItemBucket() {
       </div>
       {isDropDown && (
         <div ref={popupRef}>
-          <CartItems
-            handleDropDown={handleDropDown}
-            productsData={productsData}
-            cartData={cartData}
-            handleQuantityChange={handleQuantityChange}
-            dataQuantity={dataQuantity}
-            isCartOpen={isDropDown}
-            totalPrice={totalPrice}
-            handleRemoveProducts={handleRemoveProducts}
-          />
+          <CartItems handleDropDown={handleDropDown} />
         </div>
       )}
     </div>

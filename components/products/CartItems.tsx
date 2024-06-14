@@ -6,15 +6,17 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { roboto_mono } from "../../app/fonts";
 import { IoBagCheckOutline } from "react-icons/io5";
 import Link from "next/link";
+import { useCart } from "../../app/context/CartContext";
 
-export default function CartItems({
-  productsData,
-  handleDropDown,
-  dataQuantity,
-  cartData,
-  totalPrice,
-  handleQuantityChange,
-}: any) {
+export default function CartItems({ handleDropDown }: any) {
+  const {
+    cartData,
+    productsData,
+    dataQuantity,
+    totalPrice,
+    handleQuantityChange,
+    // handleRemoveProducts,
+  } = useCart();
   return (
     <>
       <div
@@ -84,8 +86,13 @@ export default function CartItems({
               );
             })}
           </div>
+          <div className="m-10 grid w-52 gap-5">
+            <button className="focus:ring outline-none rounded-lg text-white bg-gray-500 px-8 py-2 font-bold active:scale-95 hover:opacity-90">
+              Clear Cart
+            </button>
+          </div>
           <div className="px-8">
-            <div className="mt-32 mb-6 flex justify-between">
+            <div className=" mb-6 flex justify-between">
               <div
                 className={`flex flex-col justify-start ${roboto_mono.className} `}
               >

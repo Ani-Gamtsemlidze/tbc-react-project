@@ -1,26 +1,14 @@
 "use client";
 
-import ProductsCard from "./ProductsCard";
+import ProductsCard, { Product } from "./ProductsCard";
 import { acme, adamina } from "../../app/fonts";
 
 import ProductsCategories from "./ProductsCategories";
 import ProductsSearch from "./ProductsSearch";
 
-export interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  images: string[];
-}
-
 interface HomePageProps {
-  productsData: {
-    products: Product[];
-  };
+  productsData: Product[];
 }
-
-export type SelectedProducts = { [key: number]: number };
 
 export default function ProductsPage({ productsData }: HomePageProps) {
   return (

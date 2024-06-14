@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { getProductsCategory } from "../../user-api";
-import { Recipe } from "../recipes/RecipesPage";
 import { acme, adamina, oleo } from "../../app/fonts";
 import ProductsCard from "../products/ProductsCard";
 import ProductsCategories from "../products/ProductsCategories";
@@ -12,7 +11,7 @@ interface CategoryProps {
 }
 
 export default function ProductsCategory({ categoryName }: CategoryProps) {
-  const [data, setData] = useState<Recipe[]>([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchCategory = async (category: string) => {
