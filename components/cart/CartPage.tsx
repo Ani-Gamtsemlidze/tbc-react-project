@@ -8,8 +8,10 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useCart } from "../../app/context/CartContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
+  const router = useRouter();
   const {
     cartData,
     productsData,
@@ -18,6 +20,33 @@ export default function CartPage() {
     handleQuantityChange,
     // handleRemoveProducts,
   } = useCart();
+
+  const checkoutData = cartData.map((item) => ({
+    productId: item.product_id,
+    quantity: item.quantity,
+  }));
+
+  checkoutData.forEach((item) => {
+    console.log(item.quantity);
+  });
+  const checkout = async () => {
+    await fetch(`${process.env.BASE_URL}/api/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ products: productsData, checkoutData }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.url) {
+          // window.location.href = response.url;
+          router.push(`${response.url}`);
+        }
+      });
+  };
 
   console.log(cartData, dataQuantity, "cart page");
 
@@ -87,7 +116,10 @@ export default function CartPage() {
               <span className="text-2xl ">$ {Math.floor(totalPrice)} USD</span>
             </div>
 
-            <button className="bg-[#145f48] mt-8 mx-auto text-white flex items-center justify-center py-4 w-52 rounded-3xl shadow-md hover:bg-green-600 transition duration-200">
+            <button
+              onClick={checkout}
+              className="bg-[#145f48] mt-8 mx-auto text-white flex items-center justify-center py-4 w-52 rounded-3xl shadow-md hover:bg-green-600 transition duration-200"
+            >
               <IoBagCheckOutline className="text-2xl mr-3" />
               Checkout
             </button>
