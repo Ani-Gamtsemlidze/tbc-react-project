@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import {
+  deleteCartItem,
   deleteProducts,
   getCarts,
   getProduct,
@@ -33,6 +34,7 @@ interface CartContextProps {
   dataQuantity: number;
   totalPrice: number;
   fetchCartData: () => void;
+  handleRemoveItem: (productId: number) => Promise<void>;
   handleQuantityChange: (productId: number, change: number) => Promise<void>;
   handleRemoveProducts: () => Promise<void>;
 }
@@ -106,6 +108,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const handleRemoveItem = async (productId: number) => {
+    try {
+      await deleteCartItem(user!.sub!, productId);
+      fetchCartData();
+    } catch (error) {
+      console.error("Error removing product:", error);
+    }
+  };
+
   const handleRemoveProducts = async () => {
     try {
       await deleteProducts(user?.sub!);
@@ -143,6 +154,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         fetchCartData,
         handleQuantityChange,
         handleRemoveProducts,
+        handleRemoveItem,
       }}
     >
       {children}

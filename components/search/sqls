@@ -143,3 +143,10 @@ CREATE TABLE carts (
 UPDATE products
 SET images = '{"https://bst393o16jrclv3y.public.blob.vercel-storage.com/products_images/milk-alternative/vegan-mozzarella-cheese-balls-4-98U45gwvV9veF01LxhVqvy46CBK2l5.jpeg", "https://bst393o16jrclv3y.public.blob.vercel-storage.com/products_images/milk-alternative/IMG_9891-ZQGB0462BrmLPE4wFIOYHFPGYCrGul.jpg", "https://bst393o16jrclv3y.public.blob.vercel-storage.com/products_images/milk-alternative/A009450_20240409215607_1920x1920-Z89KZUTRDgdkDLzCgHaO344xnZZuVi.jpg"}'
 WHERE title= 'Vegan Mozzarella Cheese';
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) REFERENCES users(id),
+    products TEXT[],
+    created_at TIMESTAMP DEFAULT current_timestamp
+);

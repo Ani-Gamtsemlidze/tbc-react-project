@@ -9,8 +9,12 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import { useCart } from "../../app/context/CartContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { addToOrder } from "../../user-api";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function CartPage() {
+  const { user } = useUser();
+
   const router = useRouter();
   const {
     cartData,
@@ -18,7 +22,8 @@ export default function CartPage() {
     dataQuantity,
     totalPrice,
     handleQuantityChange,
-    // handleRemoveProducts,
+    handleRemoveProducts,
+    handleRemoveItem,
   } = useCart();
 
   const checkoutData = cartData.map((item) => ({
@@ -29,6 +34,22 @@ export default function CartPage() {
   checkoutData.forEach((item) => {
     console.log(item.quantity);
   });
+
+  console.log(checkoutData, "productsDat");
+
+  const hadnleAddToOrder = async () => {
+    if (!user) {
+      console.error("User not authenticated");
+      return;
+    }
+    try {
+      const result = await addToOrder(user!.sub!, checkoutData);
+      console.log("Product added to order:", result);
+    } catch (error) {
+      console.error("Error adding product to order:", error);
+    }
+  };
+
   const checkout = async () => {
     await fetch(`${process.env.BASE_URL}/api/checkout`, {
       method: "POST",
@@ -42,10 +63,11 @@ export default function CartPage() {
       })
       .then((response) => {
         if (response.url) {
-          // window.location.href = response.url;
           router.push(`${response.url}`);
         }
       });
+    hadnleAddToOrder();
+    handleRemoveProducts();
   };
 
   console.log(cartData, dataQuantity, "cart page");
@@ -80,7 +102,7 @@ export default function CartPage() {
                       </h1>
                       <p className="text-black text-xl">$ {product.price}</p>
                     </div>
-                    <div>
+                    <div onClick={() => handleRemoveItem(product.id)}>
                       <AiTwotoneDelete className="text-xl" />
                     </div>
                     <div className="border rounded-lg w-32 py-2 flex items-center justify-between">
@@ -107,6 +129,8 @@ export default function CartPage() {
             <div className="mb-4 w-20 rounded-md bg-greenColor px-2 py-1 text-sm font-medium text-white">
               Payment
             </div>
+            <button onClick={hadnleAddToOrder}>try</button>
+
             <div className="flex items-center justify-between">
               <p className="mb-2 text-2xl">Total Products</p>
               <span className="text-2xl ">{dataQuantity}</span>
@@ -130,6 +154,7 @@ export default function CartPage() {
           <p className="text-2xl font-semibold text-gray-600">
             Your cart is empty.
           </p>
+
           <Link
             href={`${process.env.BASE_URL}/products`}
             className="mt-4 bg-[#145f48] text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-200"

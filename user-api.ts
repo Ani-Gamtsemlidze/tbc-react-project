@@ -157,6 +157,14 @@ export async function getProducts(){
  
   return products?.rows;
 }
+export async function getOrderProducts(id: string){
+  const response = await fetch(`${process.env.BASE_URL}/api/get-order-products/${id}`, {
+    cache: "no-store",  
+    method: "GET",
+  });
+    const {products}= await response.json()
+  return products?.rows;
+}
 
 export async function getProduct(id: number) {
   try {
@@ -332,6 +340,23 @@ export async function addToCart(userId: string, productId: number, quantity: num
     console.error('Failed to add product to cart:', data.error);
   }
 }
+export async function addToOrder(userId: string, products: any) {
+  console.log(products)
+  const response = await fetch(`${process.env.BASE_URL}/api/addToOrder`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId, products }),
+  });
+
+  const data = await response.json();
+  if (data.success) {
+    console.log('Product added to order');
+  } else {
+    console.error('Failed to add product to order:', data.error);
+  }
+}
 
 
 export async function getCarts(user_id: string) {
@@ -393,6 +418,16 @@ export const deleteProducts = async (userId: string) => {
 export const deleteUserRecipe = async (productId: number, userId: string) => {
   console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/update-user-recipe/${userId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id: productId })
+  });
+};
+export const deleteCartItem = async (userId: string, productId: number, ) => {
+  console.log(productId)
+  await fetch(`${process.env.BASE_URL}/api/get-cart/${userId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"

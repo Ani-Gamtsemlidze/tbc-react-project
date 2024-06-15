@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { CartProvider } from "../context/CartContext";
+import { AdminProvider } from "../context/AdminContext";
 
 export const metadata = {
   title: "Create Next App",
@@ -44,9 +45,11 @@ export default async function RootLayout({
           <NextIntlClientProvider locale={params.locale} messages={messages}>
             <Providers>
               <CartProvider>
-                <div className="flex flex-col justify-between h-screen">
-                  {children}
-                </div>
+                <AdminProvider>
+                  <div className="flex flex-col justify-between h-screen">
+                    {children}
+                  </div>
+                </AdminProvider>
               </CartProvider>
             </Providers>
           </NextIntlClientProvider>

@@ -6,6 +6,9 @@ import Cart from "./Cart";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useCart } from "../../app/context/CartContext";
 import { addToCart } from "../../user-api";
+import { useAdmin } from "../../app/context/AdminContext";
+// import { AiFillEdit } from "react-icons/ai";
+import { HiDotsHorizontal } from "react-icons/hi";
 
 export interface Product {
   id: number;
@@ -23,6 +26,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
   console.log(data);
   const { user } = useUser();
   const { fetchCartData } = useCart();
+  const { isAdmin } = useAdmin();
 
   const handleAddToCart = async (productId: number) => {
     if (!user) {
@@ -87,7 +91,12 @@ export default function ProductsCard({ data }: ProductsCardProps) {
                   </span>
                 </p>
               </div>
-              <Cart addProduct={() => handleAddToCart(product.id)} />
+              <div className="flex items-center justify-between">
+                <Cart addProduct={() => handleAddToCart(product.id)} />
+                {isAdmin && (
+                  <HiDotsHorizontal className="text-2xl text-greenColor font-bold" />
+                )}
+              </div>
             </div>
           </div>
         ))}

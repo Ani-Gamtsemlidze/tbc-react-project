@@ -17,10 +17,10 @@ const Success = () => {
         </span>
         <div className="mt-8 flex flex-col justify-center space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
           <Link
-            href={`${process.env.BASE_URL}/`}
+            href={`${process.env.BASE_URL}/orders`}
             className="whitespace-nowrap rounded-md bg-gray-200 px-4 py-3 font-medium"
           >
-            Return to Home
+            My Orders
           </Link>
           <Link
             href={`${process.env.BASE_URL}/`}
