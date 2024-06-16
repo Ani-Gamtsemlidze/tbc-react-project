@@ -8,11 +8,11 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 import { Formik, FormikErrors, Form } from "formik";
 import { getAllCategories } from "../../user-api";
-import UploadRecipeImage from "./UploadRecipeImage";
 import FormField from "../recipeForm/FormField";
 import SelectField from "../recipeForm/SelectField";
 import NumberInputField from "../recipeForm/NumberInputField";
 import TextareaField from "../recipeForm/TextareaFild";
+import UploadImages from "./UploadImages";
 // import { useTranslations } from "next-intl";
 
 export interface RecipeData {
@@ -33,13 +33,14 @@ export default function AddRecipe({ handleDropDown }: any) {
   // const t = useTranslations("Contact");
 
   const [allCategories, setAllCategories] = useState([]);
-  const [recipeImageUrl, setRecipeImageUrl] = useState<string | null>("");
+  const [recipeImageUrl, setRecipeImageUrl] = useState<string[]>([]);
   useEffect(() => {
     fetchAllCategories();
   }, []);
-  const handleImageUpload = (url: string) => {
-    setRecipeImageUrl(url);
+  const handleImageUpload = (urls: string[]) => {
+    setRecipeImageUrl(urls);
   };
+
   console.log(recipeImageUrl);
 
   const fetchAllCategories = async () => {
@@ -70,7 +71,6 @@ export default function AddRecipe({ handleDropDown }: any) {
       nutritional_information,
       storage_instructions,
     } = values;
-    // event.preventDefault();
     console.log(setErrors);
 
     try {
@@ -252,8 +252,8 @@ export default function AddRecipe({ handleDropDown }: any) {
                           </label>
                           <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                             <div className="text-center">
-                              <UploadRecipeImage
-                                onImageUpload={handleImageUpload}
+                              <UploadImages
+                                onImagesUpload={handleImageUpload}
                               />
                               <p className="text-xs leading-5 text-gray-600">
                                 PNG, JPG, GIF up to 10MB

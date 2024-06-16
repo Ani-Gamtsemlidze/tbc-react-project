@@ -322,6 +322,27 @@ export async function editRecipeInfo(id: string, editRecipe:any) {
     throw error; 
   }
 }
+export async function editProductInfo(id: string, editedProduct:any) {
+  console.log(editedProduct, "EDITEDPRODUCT")
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/api/update-product-info/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(editedProduct),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to edit product");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error updating product:", error);
+    throw error; 
+  }
+}
 
 
 export async function addToCart(userId: string, productId: number, quantity: number) {
@@ -455,3 +476,5 @@ export async function changePictureAction(sub: string, picture: string) {
   });
   revalidatePath("/Profile");
 }
+
+

@@ -51,7 +51,7 @@ export default function InnerProduct({ innerProductData }: any) {
             </div>
             <div className=" ml-6 hover:transform hover:scale-105 transition-transform duration-300 bg-[#c6a4e3] w-[570px] h-[682px] rounded-2xl flex items-center justify-center">
               <Image
-                src={innerProductData.images[2]}
+                src={innerProductData.images[1]}
                 alt={innerProductData.title}
                 width={384}
                 height={384}

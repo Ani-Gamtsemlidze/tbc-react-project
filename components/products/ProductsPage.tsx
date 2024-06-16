@@ -8,6 +8,7 @@ import ProductsSearch from "./ProductsSearch";
 import { MdAddCircleOutline } from "react-icons/md";
 import useDropdown from "../../hooks";
 import AddProduct from "./AddProduct";
+import { useAdmin } from "../../app/context/AdminContext";
 
 interface HomePageProps {
   productsData: Product[];
@@ -15,34 +16,39 @@ interface HomePageProps {
 
 export default function ProductsPage({ productsData }: HomePageProps) {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  const { isAdmin } = useAdmin();
 
   return (
     <div className="flex flex-col  bg-mainColor dark:bg-gray-700 relative">
       {/* <div className="flex items-center justify-center">
         <div className="flex items-center justify-center"></div>
       </div> */}
-      <div className="flex justify-end w-full mt-6">
-        <div
-          onClick={handleDropDown}
-          className="bg-[#E895D0] mr-2 justify-center w-48 h-[38px] flex items-center  cursor-pointer rounded-md px-4 py-6 "
-        >
-          <MdAddCircleOutline className="text-xl text-white cursor-pointer" />
-          <button
-            className={`text-lg font-bold ml-4  text-white  ${monda.className}`}
-          >
-            Add Product
-          </button>
-        </div>
-      </div>
-      <div className="text-center my-8">
-        <div className="flex items-center justify-center ">
-          {isDropDown && (
-            <div ref={popupRef}>
-              <AddProduct handleDropDown={handleDropDown} />
+      {isAdmin && (
+        <>
+          <div className="flex justify-end w-full mt-6">
+            <div
+              onClick={handleDropDown}
+              className="bg-[#E895D0] mr-2 justify-center w-48 h-[38px] flex items-center  cursor-pointer rounded-md px-4 py-6 "
+            >
+              <MdAddCircleOutline className="text-xl text-white cursor-pointer" />
+              <button
+                className={`text-lg font-bold ml-4  text-white  ${monda.className}`}
+              >
+                Add Product
+              </button>
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+          <div className="text-center my-8">
+            <div className="flex items-center justify-center ">
+              {isDropDown && (
+                <div ref={popupRef}>
+                  <AddProduct handleDropDown={handleDropDown} />
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="flex justify-center ">
         <div className="mt-24 ">

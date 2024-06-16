@@ -144,7 +144,6 @@ import { useCart } from "../../app/context/CartContext";
 export default function ItemBucket() {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
   const { dataQuantity } = useCart();
-  console.log(dataQuantity, "CARTDATA");
 
   return (
     <div className="flex relative mx-4">

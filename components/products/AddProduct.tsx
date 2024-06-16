@@ -1,76 +1,58 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { oleo } from "../../app/fonts";
 import { IoMdClose } from "react-icons/io";
-
 import * as Yup from "yup";
 import { useUser } from "@auth0/nextjs-auth0/client";
-
-import { Formik, FormikErrors, Form } from "formik";
+import { Formik, Form } from "formik";
 import { getProductsCategories } from "../../user-api";
-// import UploadRecipeImage from "./UploadRecipeImage";
 import FormField from "../recipeForm/FormField";
 import SelectField from "../recipeForm/SelectField";
 import NumberInputField from "../recipeForm/NumberInputField";
 import TextareaField from "../recipeForm/TextareaFild";
-// import { useTranslations } from "next-intl";
+import { oleo } from "../../app/fonts";
+import UploadImages from "../recipes/UploadImages";
 
-export interface RecipeData {
+export interface ProductData {
   title: string;
   description: string;
-  category: string[];
+  categories: string[];
   ingredients: string[];
   price: string;
-  tips_and_variations: string;
   nutrients: string;
-  image: string[];
+  images: string[];
 }
 
-export default function AddProduct({ handleDropDown }: any) {
-  // const t = useTranslations("Contact");
-
+export default function AddRecipe({ handleDropDown }: any) {
   const [allCategories, setAllCategories] = useState([]);
-  //   const [recipeImageUrl, setRecipeImageUrl] = useState<string | null>("");
+  const [recipeImages, setRecipeImages] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchProductsCategories();
+    fetchAllCategories();
   }, []);
-  //   const handleImageUpload = (url: string) => {
-  //     setRecipeImageUrl(url);
-  //   };
-  //   console.log(recipeImageUrl);
 
-  const fetchProductsCategories = async () => {
+  const fetchAllCategories = async () => {
     try {
       const categories = await getProductsCategories();
       setAllCategories(categories);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching categories:", error);
     }
   };
 
   const { user }: any = useUser();
-  const handleSubmit = async (
-    values: RecipeData,
-    setErrors: (errors: FormikErrors<RecipeData>) => void,
-    setSubmitting: (isSubmitting: boolean) => void
-  ) => {
-    console.log(values);
-    const {
-      title,
-      description,
-      category,
-      ingredients,
-      price,
 
-      tips_and_variations,
-      nutrients,
-    } = values;
-    // event.preventDefault();
-    console.log(setErrors);
+  const handleSubmit = async (
+    values: ProductData,
+    {
+      setErrors,
+      setSubmitting,
+    }: { setErrors: Function; setSubmitting: Function }
+  ) => {
+    const { title, description, categories, ingredients, price, nutrients } =
+      values;
 
     try {
-      const response = await fetch(`${process.env.BASE_URL}/api/save-recipe`, {
+      const response = await fetch(`${process.env.BASE_URL}/api/save-product`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,13 +60,12 @@ export default function AddProduct({ handleDropDown }: any) {
         body: JSON.stringify({
           title,
           description,
-          category: [category],
+          categories: [categories],
           ingredients,
           price,
-          tips_and_variations,
           nutrients,
           sub: user.sub,
-          //   image_url: recipeImageUrl,
+          images: recipeImages, // Pass the uploaded image URLs here
         }),
       });
 
@@ -93,17 +74,22 @@ export default function AddProduct({ handleDropDown }: any) {
       }
 
       const data = await response.json();
-      return data;
+      console.log("Recipe saved successfully:", data);
+      // Optionally handle success, e.g., redirect user or show a success message
     } catch (error) {
-      // console.error("Error creating recipe:", error);
-      return { success: false, error: error };
+      console.error("Error creating recipe:", error);
+      setErrors({ submit: "Failed to save recipe. Please try again." });
     } finally {
       setSubmitting(false);
     }
   };
 
+  const handleImageUpload = (urls: string[]) => {
+    setRecipeImages(urls); // Update recipeImages state with uploaded image URLs
+  };
+
   return (
-    <div className="flex flex-col pl-12  overflow-y-scroll  bg-slate-200 w-[650px] h-screen text-black fixed top-0 right-0 z-[100]">
+    <div className="flex flex-col pl-12 overflow-y-scroll bg-slate-200 w-[650px] h-screen text-black fixed top-0 right-0 z-[100]">
       <div
         onClick={handleDropDown}
         className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-[1000]"
@@ -123,39 +109,39 @@ export default function AddProduct({ handleDropDown }: any) {
             <h1
               className={`font-bold text-4xl my-8 text-[#fff] ${oleo.className}`}
             >
-              Upload Product
+              Share your Favourite Recipe
             </h1>
 
             <Formik
               initialValues={{
                 title: "",
                 description: "",
-                category: [],
+                categories: [],
                 ingredients: [],
                 price: "",
-                servings: "",
-                instructions: [],
-                tips_and_variations: "",
                 nutrients: "",
-                storage_instructions: "",
-                image: [],
-                user_id: "",
+                images: [],
               }}
               validationSchema={Yup.object({
                 title: Yup.string()
-                  .min(3, "name must be et list 2 character")
-                  .max(150, "name must be et maximum 150")
-                  .required("required"),
-                description: Yup.string().min(60).max(250).required("required"),
-                ingredients: Yup.string().required("required"),
-                price: Yup.string().required("required"),
-                servings: Yup.string().required("required"),
+                  .min(2, "Title must be at least 2 characters")
+                  .max(150, "Title must be at most 150 characters")
+                  .required("Required"),
+                description: Yup.string()
+                  .min(10, "Description must be at least 10 characters")
+                  .max(250, "Description must be at most 250 characters")
+                  .required("Required"),
+                categories: Yup.string()
+                  .min(1, "Please select at least one category")
+                  .required("Required"),
+                ingredients: Yup.string()
+                  .min(1, "Please enter at least one ingredient")
+                  .required("Required"),
+                price: Yup.string().required("Required"),
+                nutrients: Yup.string().required("Required"),
               })}
               onSubmit={(values, { setSubmitting, setErrors }) => {
-                // alert("error");
-
-                // console.log("dddd");
-                handleSubmit(values, setErrors, setSubmitting);
+                handleSubmit(values, { setErrors, setSubmitting });
               }}
             >
               {({ isSubmitting }) => (
@@ -173,7 +159,7 @@ export default function AddProduct({ handleDropDown }: any) {
                         </div>
                         <SelectField
                           label="Recipe Category"
-                          name="category"
+                          name="categories"
                           options={allCategories.map((item: any) => ({
                             value: item.name,
                             label: item.name,
@@ -194,15 +180,8 @@ export default function AddProduct({ handleDropDown }: any) {
                           rows={4}
                         />
 
-                        <TextareaField
-                          label="Instructions"
-                          name="instructions"
-                          placeholder="Enter instructions, each on a new line"
-                          rows={4}
-                        />
-
                         <NumberInputField
-                          label="price"
+                          label="Price"
                           name="price"
                           placeholder="Enter price"
                         />
@@ -221,16 +200,16 @@ export default function AddProduct({ handleDropDown }: any) {
                           >
                             Cover photo
                           </label>
-                          {/* <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                          <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                             <div className="text-center">
-                              <UploadRecipeImage
-                                onImageUpload={handleImageUpload}
+                              <UploadImages
+                                onImagesUpload={handleImageUpload}
                               />
                               <p className="text-xs leading-5 text-gray-600">
                                 PNG, JPG, GIF up to 10MB
                               </p>
                             </div>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -240,9 +219,9 @@ export default function AddProduct({ handleDropDown }: any) {
                     <button
                       disabled={isSubmitting}
                       type="submit"
-                      className="w-96 py-4 mt-6 text-lg  font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-96 py-4 mt-6 text-lg font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                     >
-                      {isSubmitting ? "loading" : "Save"}
+                      {isSubmitting ? "Saving..." : "Save"}
                     </button>
                   </div>
                 </Form>
