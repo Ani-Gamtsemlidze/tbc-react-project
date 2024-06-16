@@ -1,10 +1,25 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { monda, oleo } from "../../app/fonts";
 import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import { IoMdShare } from "react-icons/io";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+} from "react-share";
+import { addToCart } from "../../products-api/products-api";
+import { useCart } from "../../app/context/CartContext";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import Cart from "./Cart";
+
+// import useDropdown from "../../hooks";
 
 // export interface InnerProductData {
 //   title: string;
@@ -21,7 +36,34 @@ import "swiper/css/pagination";
 // }
 
 export default function InnerProduct({ innerProductData }: any) {
+  const { fetchCartData } = useCart();
+  const { user } = useUser();
+
+  const handleAddToCart = async (productId: number) => {
+    if (!user) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    try {
+      const quantity = 1;
+
+      const result = await addToCart(user!.sub!, productId, quantity);
+      console.log("DATAID", innerProductData);
+      fetchCartData();
+      console.log("Product added to cart:", result);
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
   console.log(innerProductData);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const { handleDropDown } = useDropdown();
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div className="flex flex-col  w-full  bg-mainColor dark:bg-slate-500  ">
       {innerProductData && (
@@ -59,11 +101,50 @@ export default function InnerProduct({ innerProductData }: any) {
               />
             </div>
             <div>
-              <div className="ml-12">
-                <div className="bg-[#035C41] max-w-60 px-6 rounded-2xl  mt-4 py-2   ">
-                  <p className="text-white text-center">
-                    {innerProductData.categories}
-                  </p>
+              <div className="ml-12 ">
+                <div className=" mt-4 flex items-center">
+                  <div className="bg-[#035C41] max-w-60 px-6 rounded-2xl   py-2   ">
+                    <p className="text-white text-center">
+                      {innerProductData.categories}
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <IoMdShare
+                      className="text-3xl ml-4 text-greenColor cursor-pointer"
+                      onClick={toggleDropdown}
+                    />
+                    <div className="">
+                      {isDropdownOpen && (
+                        <div className="absolute flex justify-center right-[50%] translate-x-[50%] mt-4 w-48 bg-white rounded-lg shadow-lg border border-gray-200 divide-y divide-gray-200 z-10">
+                          <div className="p-2">
+                            <FacebookShareButton
+                              url={`https://example.com/products/${innerProductData.id}`}
+                              title={innerProductData.title}
+                            >
+                              <FacebookIcon size={32} round />
+                            </FacebookShareButton>
+                          </div>
+                          <div className="p-2">
+                            <TwitterShareButton
+                              url={`https://example.com/products/${innerProductData.id}`}
+                              title={innerProductData.title}
+                            >
+                              <TwitterIcon size={32} round />
+                            </TwitterShareButton>
+                          </div>
+                          <div className="p-2">
+                            <LinkedinShareButton
+                              url={`https://example.com/products/${innerProductData.id}`}
+                              title={innerProductData.title}
+                              summary={innerProductData.description}
+                            >
+                              <LinkedinIcon size={32} round />
+                            </LinkedinShareButton>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 <h1
                   className={`text-7xl font-bold  mt-8 w-[700px] text-[#035C41] leading-snug	 ${monda.className}`}
@@ -114,11 +195,14 @@ export default function InnerProduct({ innerProductData }: any) {
                       </ul>
                     </div>
                   </div>
-                  <div className="text-center">Add To Cart</div>
+                  <Cart
+                    addProduct={() => handleAddToCart(innerProductData.id)}
+                  />
                 </div>
               </div>
             </div>
           </div>
+          {/* <ImagesPreview innerProductData={innerProductData} /> */}
         </div>
       )}
     </div>

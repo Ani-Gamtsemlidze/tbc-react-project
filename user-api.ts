@@ -10,7 +10,6 @@ export interface User {
   email:string;
 }
 
-
 export async function getUsers(){
   
     const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
@@ -148,15 +147,7 @@ export async function getRecipes(){
 
 
 
-export async function getProducts(){
-  const response = await fetch(`${process.env.BASE_URL}/api/get-products`, {
-    cache: "no-store",  
-    method: "GET",
-  });
-    const {products} = await response.json()
- 
-  return products?.rows;
-}
+
 export async function getOrderProducts(id: string){
   const response = await fetch(`${process.env.BASE_URL}/api/get-order-products/${id}`, {
     cache: "no-store",  
@@ -322,8 +313,8 @@ export async function editRecipeInfo(id: string, editRecipe:any) {
     throw error; 
   }
 }
-export async function editProductInfo(id: string, editedProduct:any) {
-  console.log(editedProduct, "EDITEDPRODUCT")
+export async function editProductInfo(id: string, editedProduct: any) {
+  console.log(id, "EDITEDPRODUCT");
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-product-info/${id}`, {
       method: "PUT",
@@ -340,27 +331,11 @@ export async function editProductInfo(id: string, editedProduct:any) {
     return response.json();
   } catch (error) {
     console.error("Error updating product:", error);
-    throw error; 
+    throw error;
   }
 }
 
 
-export async function addToCart(userId: string, productId: number, quantity: number) {
-  const response = await fetch(`${process.env.BASE_URL}/api/addToCart`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userId, productId, quantity }),
-  });
-
-  const data = await response.json();
-  if (data.success) {
-    console.log('Product added to cart');
-  } else {
-    console.error('Failed to add product to cart:', data.error);
-  }
-}
 export async function addToOrder(userId: string, products: any) {
   console.log(products)
   const response = await fetch(`${process.env.BASE_URL}/api/addToOrder`, {
@@ -446,6 +421,18 @@ export const deleteUserRecipe = async (productId: number, userId: string) => {
     body: JSON.stringify({ id: productId })
   });
 };
+export const deleteProductAdmin = async (productId: number, userId: string) => {
+  console.log(productId, userId, "DELETEPRODUCT")
+  await fetch(`${process.env.BASE_URL}/api/update-product-info/${userId}`, {
+    cache: 'force-cache',
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id: productId })
+  });
+};
+
 export const deleteCartItem = async (userId: string, productId: number, ) => {
   console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/get-cart/${userId}`, {

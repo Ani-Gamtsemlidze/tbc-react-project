@@ -76,7 +76,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
             </ul>
           </div>
         </div>
-        <div className="flex  ml-36">
+        <div className="flex w-full ml-36">
           <ProductsCard data={productsData} />
         </div>
       </div>

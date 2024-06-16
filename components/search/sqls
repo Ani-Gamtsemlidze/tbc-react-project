@@ -150,3 +150,13 @@ CREATE TABLE orders (
     products TEXT[],
     created_at TIMESTAMP DEFAULT current_timestamp
 );
+
+CREATE TABLE reviews (
+    review_id SERIAL PRIMARY KEY,
+     user_id VARCHAR NOT NULL REFERENCES users_info(user_id),
+    product_id INTEGER NOT NULL REFERENCES products(id),
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+SELECT AVG(rating) AS average_rating FROM reviews WHERE product_id = <product_id>;

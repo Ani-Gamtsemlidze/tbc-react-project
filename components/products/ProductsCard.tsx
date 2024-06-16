@@ -1,18 +1,23 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cart from "./Cart";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useCart } from "../../app/context/CartContext";
-import { addToCart } from "../../user-api";
 import { useAdmin } from "../../app/context/AdminContext";
-// import { AiFillEdit } from "react-icons/ai";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin3Fill } from "react-icons/ri";
 import useDropdown from "../../hooks";
 import EditProductForm from "./EditProductForm";
+// import { HiMiniStar } from "react-icons/hi2";
+import {
+  addRating,
+  addToCart,
+  getAverageRating,
+} from "../../products-api/products-api";
+import BasicRating from "./Rating";
 
 export interface Product {
   id: number;
@@ -20,6 +25,7 @@ export interface Product {
   price: number;
   description: string;
   images: string[];
+  averageRating?: number;
 }
 
 interface ProductsCardProps {
@@ -27,13 +33,32 @@ interface ProductsCardProps {
 }
 
 export default function ProductsCard({ data }: ProductsCardProps) {
-  console.log(data);
   const { user } = useUser();
   const { fetchCartData } = useCart();
   const { isAdmin } = useAdmin();
   const { isDropDown, handleDropDown } = useDropdown();
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
   const [showEditForm, setShowEditForm] = useState(false);
+  // const [averageRatings, setAverageRatings] = useState<{
+  //   [productId: number]: number;
+  // }>({});
+  const [ratings, setRatings] = useState<{
+    [productId: number]: number | null;
+  }>({});
+  // const [ratedProducts, setRatedProducts] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    const fetchInitialAverageRatings = async () => {
+      const initialAverageRatings: { [productId: number]: number } = {};
+      for (const product of data) {
+        const avgRating = await getAverageRating(product.id);
+        initialAverageRatings[product.id] = avgRating;
+      }
+      // setAverageRatings(initialAverageRatings);
+    };
+
+    fetchInitialAverageRatings();
+  }, [data]);
 
   const handleAddToCart = async (productId: number) => {
     if (!user) {
@@ -43,9 +68,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
 
     try {
       const quantity = 1;
-
-      const result = await addToCart(user!.sub!, productId, quantity);
-      console.log("DATAID", data);
+      const result = await addToCart(user.sub!, productId, quantity);
       fetchCartData();
       console.log("Product added to cart:", result);
     } catch (error) {
@@ -53,8 +76,29 @@ export default function ProductsCard({ data }: ProductsCardProps) {
     }
   };
 
+  const handleAddRating = async (productId: number, ratingValue: number) => {
+    if (!user) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    try {
+      const result = await addRating(user.sub!, productId, ratingValue);
+      // const updatedAverageRating = await getAverageRating(productId);
+
+      // setAverageRatings((prev) => ({
+      //   ...prev,
+      //   [productId]: updatedAverageRating,
+      // }));
+      // setRatedProducts((prev) => new Set(prev).add(productId));
+
+      console.log("Product rating added:", result);
+    } catch (error) {
+      console.error("Error adding product rating:", error);
+    }
+  };
+
   const handleEditClick = (id: number) => {
-    // e.stopPropagation();
     if (selectedRecipeId === id && isDropDown) {
       setSelectedRecipeId(null);
       handleDropDown();
@@ -77,11 +121,24 @@ export default function ProductsCard({ data }: ProductsCardProps) {
     handleDropDown();
   };
 
+  const handleRatingChange = (productId: number, newValue: number | null) => {
+    setRatings((prevRatings) => ({
+      ...prevRatings,
+      [productId]: newValue,
+    }));
+    if (newValue !== null) {
+      handleAddRating(productId, newValue);
+    }
+  };
+
   return (
-    <div className="grid grid-cols-2 gap-6 ml-8 max-w-[700px]">
+    <div className="flex gap-6 ml-8 w-full ">
       {data &&
         data.map((product) => (
-          <div className="border-gray-400 border rounded-md" key={product.id}>
+          <div
+            className="border-gray-400 w-[400px] border rounded-md"
+            key={product.id}
+          >
             <Link
               className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
               href={`/products/${product.id}`}
@@ -124,6 +181,24 @@ export default function ProductsCard({ data }: ProductsCardProps) {
               </div>
               <div className="flex items-center justify-between">
                 <Cart addProduct={() => handleAddToCart(product.id)} />
+                {/* {ratedProducts.has(product.id) ? (
+                  <div className="flex items-center">
+                    <HiMiniStar className="text-3xl text-greenColor" />
+                    <p className="text-sm text-gray-500">
+                      {averageRatings[product.id] !== undefined
+                        ? Math.floor(averageRatings[product.id])
+                        : "No ratings yet"}
+                    </p>
+                  </div>
+                ) : ( */}
+                <BasicRating
+                  value={ratings[product.id] || 2}
+                  setValue={(newValue: any) =>
+                    handleRatingChange(product.id, newValue)
+                  }
+                />
+                {/* )} */}
+
                 {isAdmin && (
                   <HiDotsHorizontal
                     onClick={() => handleEditClick(product.id)}

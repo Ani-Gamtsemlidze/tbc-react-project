@@ -47,12 +47,12 @@
 //   return <InnerProduct innerProductData={innerProductData[0]} />;
 // }
 
-import { getProduct, getProducts } from "../../../../../user-api";
+import { getProduct } from "../../../../../user-api";
 import InnerProduct from "../../../../../components/products/InnerProduct";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { getProducts } from "../../../../../products-api/products-api";
 
-export const dynamic = "force-dynamic";
-interface PageParams {
+export interface PageParams {
   params: { id: number; locale: string };
 }
 

@@ -13,22 +13,22 @@ export async function PUT(request: NextRequest) {
       ingredients,
       price,
       nutrients,
-      images,
+      imagesArray,
     } = await request.json();
 
     // Extract userId from the request URL
     const userId = request.nextUrl.pathname.split("/").pop();
 
-    // Split ingredients into array and filter out empty lines
-    // const ingredientsArray = ingredients.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
-
-    // // Filter out empty image URLs
-    // const imagesArray = images.filter((imageUrl: string) => imageUrl.trim() !== '');
-
     // Validate required fields
     if (!id || !title || !userId) {
       throw new Error("ID, title, or user ID is missing in the request body.");
     }
+
+    // Split ingredients into array and filter out empty lines
+    const ingredientsArray = ingredients.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
+
+    // Filter out empty image URLs
+    // const imagesArray = images.filter((imageUrl: string) => imageUrl.trim() !== '');
 
     // Update the product in the database
     await sql`
@@ -37,10 +37,10 @@ export async function PUT(request: NextRequest) {
         title = ${title}, 
         description = ${description}, 
         categories = ${categories}, 
-        ingredients = ${ingredients}, 
+        ingredients = ${ingredientsArray}, 
         price = ${price}, 
         nutrients = ${nutrients}, 
-        images = ${images}
+        images = ${imagesArray}
       WHERE 
         sub = ${userId} AND id = ${id}
     `;
@@ -57,22 +57,23 @@ export async function PUT(request: NextRequest) {
 }
 
 
-// export async function DELETE (request: NextRequest) {
-//   const userId = request.nextUrl.pathname.split("/").pop();
-//   console.log(userId)
-//   try {
+export async function DELETE (request: NextRequest) {
+  
+  const userId = request.nextUrl.pathname.split("/").pop();
+  console.log(userId)
+  try {
 
-//     const {    
-//       id
-//     } = await request.json();
-//     console.log("userId", userId, id)
-//     await sql`
-//     DELETE FROM recipes
-//     WHERE user_id = ${userId}  AND id = ${id} ;
-//   `;
-//   return NextResponse.json({ message: "Recipe deleted successfully" }, { status: 200 });
-//   } catch (error) {
-//   console.error("Error deleting recipe:", error);
-//   return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-// }
-// }
+    const {    
+      id
+    } = await request.json();
+    console.log("userId", userId, id)
+    await sql`
+    DELETE FROM products
+    WHERE sub = ${userId}  AND id = ${id} ;
+  `;
+  return NextResponse.json({ message: "product deleted successfully" }, { status: 200 });
+  } catch (error) {
+  console.error("Error deleting product:", error);
+  return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+}
+}

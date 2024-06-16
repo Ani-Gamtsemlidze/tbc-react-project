@@ -5,12 +5,12 @@ import * as Yup from "yup";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { Formik, Form } from "formik";
 import { getProductsCategories } from "../../user-api";
-import FormField from "../recipeForm/FormField";
 import SelectField from "../recipeForm/SelectField";
 import NumberInputField from "../recipeForm/NumberInputField";
 import TextareaField from "../recipeForm/TextareaFild";
 import { oleo } from "../../app/fonts";
 import UploadImages from "../recipes/UploadImages";
+import FormField from "../recipeForm/FormField";
 
 export interface ProductData {
   title: string;
@@ -52,22 +52,25 @@ export default function AddRecipe({ handleDropDown }: any) {
       values;
 
     try {
-      const response = await fetch(`${process.env.BASE_URL}/api/save-product`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          categories: [categories],
-          ingredients,
-          price,
-          nutrients,
-          sub: user.sub,
-          images: recipeImages, // Pass the uploaded image URLs here
-        }),
-      });
+      const response = await fetch(
+        `${process.env.BASE_URL}/api/products/save-product`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            description,
+            categories: [categories],
+            ingredients,
+            price,
+            nutrients,
+            sub: user.sub,
+            images: recipeImages,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to create recipe");
@@ -75,7 +78,6 @@ export default function AddRecipe({ handleDropDown }: any) {
 
       const data = await response.json();
       console.log("Recipe saved successfully:", data);
-      // Optionally handle success, e.g., redirect user or show a success message
     } catch (error) {
       console.error("Error creating recipe:", error);
       setErrors({ submit: "Failed to save recipe. Please try again." });
@@ -109,7 +111,7 @@ export default function AddRecipe({ handleDropDown }: any) {
             <h1
               className={`font-bold text-4xl my-8 text-[#fff] ${oleo.className}`}
             >
-              Share your Favourite Recipe
+              Add Product
             </h1>
 
             <Formik
