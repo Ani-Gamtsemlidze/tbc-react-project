@@ -16,6 +16,7 @@ import {
   addRating,
   addToCart,
   getAverageRating,
+  getUserRating,
 } from "../../products-api/products-api";
 import BasicRating from "./Rating";
 
@@ -82,6 +83,8 @@ export default function ProductsCard({ data }: ProductsCardProps) {
       return;
     }
 
+    const userRating = await getUserRating(productId);
+    console.log("User rating:", userRating);
     try {
       const result = await addRating(user.sub!, productId, ratingValue);
       // const updatedAverageRating = await getAverageRating(productId);
@@ -97,6 +100,18 @@ export default function ProductsCard({ data }: ProductsCardProps) {
       console.error("Error adding product rating:", error);
     }
   };
+
+  useEffect(() => {
+    const initialRatings: { [productId: number]: number | null } = {};
+    data.forEach((product) => {
+      const storedRating = localStorage.getItem(`rating_${product.id}`);
+      initialRatings[product.id] = storedRating
+        ? JSON.parse(storedRating)
+        : null;
+    });
+
+    setRatings(initialRatings);
+  }, [data]);
 
   const handleEditClick = (id: number) => {
     if (selectedRecipeId === id && isDropDown) {
@@ -122,6 +137,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
   };
 
   const handleRatingChange = (productId: number, newValue: number | null) => {
+    localStorage.setItem(`rating_${productId}`, JSON.stringify(newValue));
     setRatings((prevRatings) => ({
       ...prevRatings,
       [productId]: newValue,

@@ -17,8 +17,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex items-center bg-[#fff] dark:bg-[#161D2F] py-1 px-8">
-        <div className="flex items-center w-full justify-between ">
+      <header className="flex items-center bg-mainColor dark:bg-[#161D2F] py-1 px-8 sticky top-0 z-50">
+        <div className="flex items-center w-full justify-between">
           <div className="flex">
             <Link
               className={`font-bold text-3xl dark:text-mainColor text-[#035C41] leading-normal mx-4 ${merienda.className}`}
@@ -32,7 +32,6 @@ export default function Header() {
           <div className="flex items-center mt-6">
             <div className="flex items-center mb-4">
               <ThemeSwitch />
-
               <ItemBucket />
               <div className="ml-4 border-l border-l-slate-600 pl-2">
                 {user ? (

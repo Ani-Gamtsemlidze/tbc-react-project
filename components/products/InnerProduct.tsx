@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { monda, oleo } from "../../app/fonts";
 import Image from "next/image";
 
@@ -14,7 +14,9 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from "react-share";
-import { addToCart } from "../../products-api/products-api";
+import { HiMiniStar } from "react-icons/hi2";
+
+import { addToCart, getAverageRating } from "../../products-api/products-api";
 import { useCart } from "../../app/context/CartContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Cart from "./Cart";
@@ -37,7 +39,23 @@ import Cart from "./Cart";
 
 export default function InnerProduct({ innerProductData }: any) {
   const { fetchCartData } = useCart();
+  const [averageRatings, setAverageRatings] = useState<{
+    [productId: number]: number;
+  }>({});
   const { user } = useUser();
+
+  useEffect(() => {
+    const fetchInitialAverageRatings = async () => {
+      const initialAverageRatings: { [productId: number]: number } = {};
+      // for (const product of innerProductData) {
+      const avgRating = await getAverageRating(innerProductData.id);
+      initialAverageRatings[innerProductData.id] = avgRating;
+      // }
+      setAverageRatings(initialAverageRatings);
+    };
+
+    fetchInitialAverageRatings();
+  }, [innerProductData]);
 
   const handleAddToCart = async (productId: number) => {
     if (!user) {
@@ -58,6 +76,10 @@ export default function InnerProduct({ innerProductData }: any) {
   };
   console.log(innerProductData);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  console.log(
+    typeof averageRatings[innerProductData.id],
+    averageRatings[innerProductData.id]
+  );
   // const { handleDropDown } = useDropdown();
 
   const toggleDropdown = () => {
@@ -145,6 +167,14 @@ export default function InnerProduct({ innerProductData }: any) {
                       )}
                     </div>
                   </div>
+                  <div className="ml-3 flex items-center">
+                    <HiMiniStar className="text-3xl mr-2 text-greenColor" />
+                    <p className="text-2xl text-gray-500">
+                      {averageRatings[innerProductData.id] !== undefined
+                        ? Number(averageRatings[innerProductData.id]).toFixed(2)
+                        : "No ratings yet"}
+                    </p>
+                  </div>
                 </div>
                 <h1
                   className={`text-7xl font-bold  mt-8 w-[700px] text-[#035C41] leading-snug	 ${monda.className}`}
@@ -179,18 +209,18 @@ export default function InnerProduct({ innerProductData }: any) {
                         Nutrients:
                       </h2>
                       <ul className="list-disc list-inside text-left mt-6">
-                        <li className="text-xl  leading-relaxed  font-bold">
-                          Fat: {innerProductData.nutrients.fat}g
+                        <li className="text-xl leading-relaxed font-bold">
+                          Fat: {innerProductData?.nutrients?.fat}g
                         </li>
-                        <li className="text-xl  leading-relaxed  font-bold">
-                          Protein: {innerProductData.nutrients.protein}g
+                        <li className="text-xl leading-relaxed font-bold">
+                          Protein: {innerProductData?.nutrients?.protein}g
                         </li>
-                        <li className="text-xl  leading-relaxed  font-bold">
-                          Calories: {innerProductData.nutrients.calories}kcal
+                        <li className="text-xl leading-relaxed font-bold">
+                          Calories: {innerProductData?.nutrients?.calories}kcal
                         </li>
-                        <li className="text-xl  leading-relaxed  font-bold">
+                        <li className="text-xl leading-relaxed font-bold">
                           Carbohydrates:{" "}
-                          {innerProductData.nutrients.carbohydrates}g
+                          {innerProductData?.nutrients?.carbohydrates}g
                         </li>
                       </ul>
                     </div>
