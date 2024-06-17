@@ -35,8 +35,6 @@ export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
       const userData = await getUser(userId);
       setUserInfo(userData[0]);
     }
-    // const avatar = await getPicture(user?.sub);
-    // setPicture(avatar[0].picture);
   };
   console.log(userInfo);
 
@@ -45,7 +43,7 @@ export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
       <div className="flex items-center">
         <div
           onClick={handleDropDown}
-          className="w-12 h-12 rounded-full border-2 border-greenColor  flex items-center justify-center relative"
+          className="w-12 h-12 rounded-full border-2 border-greenColor dark:border-darkTextMain flex items-center justify-center relative"
         >
           <Image
             className="w-10 h-10 object-cover rounded-full cursor-pointer "

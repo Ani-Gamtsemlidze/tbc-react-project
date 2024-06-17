@@ -17,11 +17,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex items-center shadow-custom bg-mainColor dark:bg-[#161D2F] py-1 px-8 sticky top-0 z-50">
+      <header className="flex items-center shadow-custom dark:shadow-customDark bg-mainColor dark:bg-darkBgColor  py-1 px-8 sticky top-0 z-50">
         <div className="flex items-center w-full justify-between">
           <div className="flex">
             <Link
-              className={`font-bold text-3xl dark:text-mainColor text-[#035C41] leading-normal mx-4 ${merienda.className}`}
+              className={`font-bold text-3xl dark:text-darkTextMain text-[#035C41] leading-normal mx-4 ${merienda.className}`}
               href="/"
             >
               Veggy
@@ -31,8 +31,10 @@ export default function Header() {
           </div>
           <div className="flex items-center mt-6">
             <div className="flex items-center mb-4">
-              <ThemeSwitch />
-              <ItemBucket />
+              <div className="flex items-center justify-center">
+                <ThemeSwitch />
+                <ItemBucket />
+              </div>
               <div className="ml-4 border-l border-l-slate-600 pl-2">
                 {user ? (
                   <div ref={popupRef}>

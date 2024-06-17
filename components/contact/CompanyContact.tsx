@@ -58,8 +58,10 @@ export default function CompanyContact() {
   ];
 
   return (
-    <div className="col-span-4 px-8 py-10  text-gray-800 md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
-      <h2 className="mb-8 text-2xl font-bold text-greenColor">Contact us</h2>
+    <div className="col-span-4 px-8 py-10  text-gray-800 dark:text-darkTextColor md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
+      <h2 className="mb-8 text-2xl font-bold text-greenColor dark:text-darkTextColor">
+        Contact us
+      </h2>
       <ul className="flex  flex-col justify-center">
         {contactItems.map((item, index) => (
           <ContactItem key={index} {...item} />

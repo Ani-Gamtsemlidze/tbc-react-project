@@ -109,11 +109,11 @@ export default function SearchPopup({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white w-[650px] max-h-[410px] overflow-y-auto rounded-2xl fixed"
+            className="bg-white dark:bg-darkBgColor w-[650px] max-h-[410px] overflow-y-auto rounded-2xl fixed"
           >
             <form className="relative flex ml-12 mt-8 items-center">
               <input
-                className="transition w-[500px] py-3  hover:placeholder-[#16442a] focus:border-[#16442a] hover:text-[#16442a] border-[rgb(227,227,227  hover:border-[#16442a] rounded-md  border cursor-pointer p-2 bg-transparent placeholder-black focus:outline-none pl-12 text-black "
+                className="transition w-[500px] py-3 dark:hover:placeholder:text-darkTextColor  hover:placeholder-[#16442a] dark:focus:border-darkTextColor dark:text-darkTextColor dark:hover:border-darkTextColor focus:border-[#16442a] hover:text-[#16442a] border-[rgb(227,227,227)  hover:border-[#16442a] rounded-md  border cursor-pointer p-2 bg-transparent dark:placeholder:text-darkTextColor placeholder-black focus:outline-none pl-12 text-black "
                 id="search"
                 type="text"
                 onChange={(e) => handleSearch(e)}
@@ -128,7 +128,9 @@ export default function SearchPopup({
               <CiSearch className="absolute top-[50%] translate-y-[-50%] left-[18px]" />
             </form>
             <div className="">
-              <h3 className={`${oleo.className} ml-12 mt-6 mb-2 text-2xl`}>
+              <h3
+                className={`${oleo.className} ml-12 mt-6 mb-2 text-2xl dark:text-darkTextColor`}
+              >
                 Categories
               </h3>
               <div className="flex flex-wrap  items-center justify-center my-4 ">
@@ -136,7 +138,7 @@ export default function SearchPopup({
                   ? filteredRecipes.map((recipe: Recipe, index: number) => (
                       <Link
                         href={`/recipes/${recipe.id}`}
-                        className="flex items-center mx-12 w-full my-4 transition hover:bg-[rgb(244,244,244)] rounded-lg "
+                        className="flex items-center mx-12 w-full my-4 transition dark:hover:bg-darkSecondaryColor hover:bg-[rgb(244,244,244)] rounded-lg "
                         key={index}
                       >
                         <div className="items-start">
@@ -148,10 +150,10 @@ export default function SearchPopup({
                             height={400}
                           />
                         </div>
-                        <h1 className="text-[#16442a] font-bold text-xl ml-4">
+                        <h1 className="text-[#16442a] dark:text-darkTextColor font-bold text-xl ml-4">
                           {recipe.title}
                         </h1>
-                        <p className="text-black text-xl border-l ml-3 pl-3">
+                        <p className="text-black dark:text-darkTextColor text-xl border-l ml-3 pl-3">
                           {recipe.category}
                         </p>
                       </Link>
@@ -160,7 +162,7 @@ export default function SearchPopup({
                       <Link
                         href={`/recipes/category/${category.name}`}
                         key={category.id}
-                        className=" inline-block grow-0 shrink-0 basis-[27%] border transition hover:bg-[rgb(244,244,244)] border-b-[rgb(227,227,227)] rounded-lg w-36 ml-2 h-28  mt-2"
+                        className=" inline-block grow-0 shrink-0 basis-[27%] border transition  dark:hover:bg-darkSecondaryColor hover:bg-[rgb(244,244,244)] border-b-[rgb(227,227,227)] rounded-lg w-36 ml-2 h-28  mt-2"
                       >
                         <Image
                           className="w-14 h-14 object-cover rounded-full mx-auto mt-3"

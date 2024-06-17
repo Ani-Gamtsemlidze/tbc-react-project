@@ -26,9 +26,9 @@ export default function AllCategories() {
         <Link
           href={`/recipes/category/${category.name}`}
           key={category.id}
-          className=" text-[#27343A]"
+          className=" dark:text-darkTextColor text-[#27343A]"
         >
-          <h1 className={`text-xl ${inter.className}`}>{category.name}</h1>
+          <h1 className={`text-xl  ${inter.className}`}>{category.name}</h1>
         </Link>
       ))}
     </div>

@@ -76,7 +76,7 @@ export default function RecipeCard({ data }: any) {
                 href={`${process.env.BASE_URL}/recipes/${recipe.id}`}
                 className="text-2xl  "
               >
-                <h3 className=" max-w-[90%] text-2xl underline-opening">
+                <h3 className=" max-w-[90%] text-2xl dark:text-darkTextColor underline-opening">
                   {recipe.title}
                 </h3>
 
@@ -90,9 +90,9 @@ export default function RecipeCard({ data }: any) {
             <div className="flex items-center justify-between">
               <Link
                 href={`${process.env.BASE_URL}/recipes/category/${recipe.category}`}
-                className="bg-[#E895D0] min-w-24 rounded-2xl px-6 mt-4 py-1  "
+                className="bg-[#E895D0] dark:bg-darkSecondaryColor min-w-24 rounded-2xl px-6 mt-4 py-1  "
               >
-                <span className="text-[#27343A] text-center">
+                <span className="text-[#27343A] dark:text-darkTextColor text-center">
                   {recipe.category}
                 </span>
               </Link>
@@ -147,7 +147,7 @@ export default function RecipeCard({ data }: any) {
                 </div>
               )} */}
               <div className=" mt-4">
-                <p className="text-[#27343A] text-center">
+                <p className="text-[#27343A] dark:text-darkTextColor text-center">
                   {recipe.preparation_time}
                 </p>
               </div>

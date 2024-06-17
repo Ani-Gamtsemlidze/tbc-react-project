@@ -148,7 +148,7 @@ export default function ItemBucket() {
   return (
     <div className="flex relative mx-4">
       <BsCart
-        className="text-3xl cursor-pointer text-[#16442a]"
+        className="text-3xl cursor-pointer text-[#16442a] dark:text-darkTextMain"
         onClick={handleDropDown}
       />
       <div className="relative cursor-pointer">

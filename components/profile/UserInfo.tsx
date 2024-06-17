@@ -26,9 +26,12 @@ export default function UserInfo({ userData }: any) {
   }
 
   return (
-    <div className="m-10 max-w-sm relative">
-      <div className="rounded-lg w-96 border bg-white px-4 pt-8 pb-10 shadow-lg">
-        <div className="relative mx-auto w-36 rounded-full">
+    <div className="m-6 max-w-sm relative">
+      <div className="rounded-lg w-96 border bg-white dark:bg-darkBgColor dark:border-darkSecondaryColor px-4 pt-8 pb-10 shadow-lg">
+        <div
+          onClick={handleUploadPicture}
+          className="relative mx-auto w-36 rounded-full"
+        >
           {/* <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span> */}
           <Image
             src={user?.picture}
@@ -38,21 +41,18 @@ export default function UserInfo({ userData }: any) {
             // quality={100}
             alt="image"
           />
-          <div
-            onClick={handleUploadPicture}
-            className="absolute cursor-pointer rounded-full top-0 left-0 inset-0 w-40 h-40 z-50 flex justify-center items-center bg-[rgb(3,92,65)] bg-opacity-40   opacity-0 transition-opacity duration-300 hover:opacity-100"
-          >
-            <FaCloudUploadAlt className="text-white w-9 h-9" />
+          <div className="absolute cursor-pointer rounded-full top-0 left-0 inset-0 w-40 h-40 z-50 flex justify-center items-center bg-[rgb(3,92,65)] bg-opacity-40   opacity-0 transition-opacity duration-300 hover:opacity-100">
+            <FaCloudUploadAlt className="text-white dark:text-darkTextColor w-9 h-9" />
           </div>
         </div>
-        {isUpload && <AvatarUploadPage />}
-        <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900">
+        {isUpload && <AvatarUploadPage setIsUpload={setIsUpload} />}
+        <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900 dark:text-darkTextColor">
           {user?.firstname} {user?.lastname}
         </h1>
-        <h3 className="font-lg text-semibold text-center leading-6 text-gray-600">
+        <h3 className="font-lg text-semibold text-center leading-6 text-gray-600 dark:text-darkTextColor">
           {user?.email}
         </h3>
-        <ul className="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
+        <ul className="mt-3 divide-y rounded bg-gray-100 dark:bg-darkSecondaryColor dark:text-darkTextColor py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
           <li className="flex items-center py-3 text-sm">
             <span>Nickname</span>
             <span className="ml-auto">{user?.nickname}</span>

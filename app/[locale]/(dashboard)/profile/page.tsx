@@ -22,7 +22,7 @@ export default async function Profile({ params }: Params) {
   // console.log("USERDATA", userData);
 
   return (
-    <section className="flex justify-center bg-mainColor h-screen dark:bg-slate-500 ">
+    <section className="flex justify-center bg-mainColor h-screen dark:bg-darkContentColor ">
       <div className="flex  ">
         <div className="flex  w-96 p-4 gap-12">
           <UserInfo userData={userData} />

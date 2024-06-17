@@ -43,34 +43,38 @@ export default function ProfileForm({ userData }: any) {
     <div className="lg:m-10">
       <form
         onSubmit={handleSave}
-        className="relative border h-[600px] ml-12 border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
+        className="relative border h-[600px] ml-12 border-gray-100 dark:border-darkSecondaryColor dark:bg-darkBgColor space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
       >
-        <h1 className="mb-6 text-xl font-semibold lg:text-2xl">
+        <h1 className="mb-6 text-xl dark:text-darkTextColor font-semibold lg:text-2xl">
           Hello, {editedUser?.firstname?.toUpperCase()}
         </h1>
 
         <div className="grid gap-3 md:grid-cols-2">
           <div>
-            <label className=""> First Name </label>
+            <label className="dark:text-darkTextColor"> First Name </label>
             <input
               type="text"
               placeholder="Your Name"
               value={editedUser?.firstname}
-              className={`mt-2 pl-4  h-12 w-full rounded-md bg-gray-100 px-31  ${
-                !isEditing ? " text-gray-500" : "text-black"
+              className={`mt-2 pl-4  h-12 w-full rounded-md bg-gray-100 dark:bg-darkSecondaryColor px-31  ${
+                !isEditing
+                  ? " text-gray-500 dark:text-gray-100"
+                  : "text-black dark:text-darkTextColor"
               } `}
               onChange={(e) => handleInputChange(e, "firstname")}
               readOnly={!isEditing}
             />
           </div>
           <div>
-            <label className=""> Last Name </label>
+            <label className="dark:text-darkTextColor"> Last Name </label>
             <input
               type="text"
               placeholder="Last  Name"
               value={editedUser && editedUser?.lastname}
-              className={`mt-2  pl-4  h-12 w-full rounded-md bg-gray-100 px-31  ${
-                !isEditing ? " text-gray-500" : "text-black"
+              className={`mt-2  pl-4  h-12 w-full rounded-md bg-gray-100 dark:bg-darkSecondaryColor px-31  ${
+                !isEditing
+                  ? " text-gray-500 dark:text-gray-100"
+                  : "text-black dark:text-darkTextColor"
               } `}
               readOnly={!isEditing}
               onChange={(e) => handleInputChange(e, "lastname")}
@@ -78,26 +82,30 @@ export default function ProfileForm({ userData }: any) {
           </div>
         </div>
         <div>
-          <label className=""> Nickname </label>
+          <label className="dark:text-darkTextColor"> Nickname </label>
           <input
             type="text"
             placeholder="Nickname"
             onChange={(e) => handleInputChange(e, "nickname")}
             value={editedUser?.nickname}
-            className={`mt-2 pl-4  h-12 w-full rounded-md bg-gray-100 px-31  ${
-              !isEditing ? " text-gray-500" : "text-black"
+            className={`mt-2 pl-4  h-12 w-full rounded-md bg-gray-100 dark:bg-darkSecondaryColor px-31  ${
+              !isEditing
+                ? " text-gray-500 dark:text-gray-100"
+                : "text-black dark:text-darkTextColor"
             } `}
             readOnly={!isEditing}
           />
         </div>
         <div>
-          <label className=""> Email Address </label>
+          <label className="dark:text-darkTextColor"> Email Address </label>
           <input
             type="email"
             placeholder="Info@example.com"
             value={editedUser?.email}
-            className={`mt-2 pl-4  h-12 w-full rounded-md bg-gray-100 px-31  ${
-              !isEditing ? " text-gray-500" : "text-black"
+            className={`mt-2 pl-4  h-12 w-full rounded-md bg-gray-100 dark:bg-darkSecondaryColor px-31  ${
+              !isEditing
+                ? " text-gray-500 dark:text-gray-100"
+                : "text-black dark:text-darkTextColor"
             } `}
             onChange={(e) => handleInputChange(e, "email")}
             readOnly={!isEditing}
@@ -108,7 +116,9 @@ export default function ProfileForm({ userData }: any) {
             type="button"
             onClick={handleEditClick}
             className={`mt-5 w-full rounded-md p-2  ${
-              isEditing ? "bg-slate-500" : "bg-blue-600"
+              isEditing
+                ? "bg-slate-500"
+                : "bg-greenColor dark:bg-darkSecondaryColor"
             } text-center font-semibold text-white`}
           >
             Edit
@@ -117,7 +127,9 @@ export default function ProfileForm({ userData }: any) {
             type="submit"
             disabled={!isEditing}
             className={`mt-5 w-full rounded-md p-2  ${
-              isEditing ? "bg-blue-600" : "bg-slate-500"
+              isEditing
+                ? "bg-greenColor dark:bg-darkSecondaryColor "
+                : "bg-slate-500"
             } text-center font-semibold text-white`}
           >
             Save Changes

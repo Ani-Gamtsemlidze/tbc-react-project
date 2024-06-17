@@ -2,7 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 const useDropdown = () => {
   const [isDropDown, setIsDropDown] = useState(false);
-  const popupRef = useRef< HTMLDivElement>(null);
+  const popupRef = useRef< HTMLDivElement | HTMLUListElement>(null);
+  const ulRef = useRef<HTMLUListElement>(null);
 
   // Handle body overflow class
   useEffect(() => {
@@ -18,10 +19,11 @@ const useDropdown = () => {
 
   // Handle click outside for all dropdowns
   const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (
-      popupRef.current &&
-      !popupRef.current.contains(event.target as Node)
-    ) {
+    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+      console.log("Clicked outside, closing all dropdowns");
+      setIsDropDown(false);
+    }
+    if (ulRef.current && !ulRef.current.contains(event.target as Node)) {
       console.log("Clicked outside, closing all dropdowns");
       setIsDropDown(false);
     }
@@ -43,7 +45,7 @@ const useDropdown = () => {
     setIsDropDown(!isDropDown);
   };
 
-  return { isDropDown, handleDropDown, popupRef };
+  return { isDropDown, handleDropDown, popupRef, ulRef };
 };
 
 export default useDropdown;

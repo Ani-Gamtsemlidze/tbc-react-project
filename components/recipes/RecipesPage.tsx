@@ -9,6 +9,7 @@ import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 import useDropdown from "../../hooks";
 import { RecipesSearch } from "../search/RecipesSearch";
+import AddRecipeForm from "./AddRecipeForm";
 
 export interface Recipe {
   id: string;
@@ -19,7 +20,7 @@ export interface Recipe {
 }
 
 export default function RecipesPage() {
-  const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  // const { isDropDown, handleDropDown, popupRef } = useDropdown();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -70,9 +71,11 @@ export default function RecipesPage() {
       </div> */}
 
       <div className="my-6">
-        <p className="text-center text-3xl text-[#035C41]">Explore</p>
+        <p className="text-center text-3xl text-[#035C41] dark:text-darkTextColor">
+          Explore
+        </p>
         <h1
-          className={`text-center text-7xl ${acme.className} my-6 text-[#035C41]`}
+          className={`text-center text-7xl ${acme.className} my-6 text-[#035C41] dark:text-darkTextColor`}
         >
           All Recipes
         </h1>
@@ -81,38 +84,22 @@ export default function RecipesPage() {
       <div className="max-w-[1200px] mx-auto flex justify-center">
         <div className="mr-4">
           <div className="sticky top-32">
+            <AddRecipeForm />
             <div className="flex flex-col  items-center justify-start">
-              <div
-                onClick={handleDropDown}
-                className="bg-[#E895D0] mb-4  justify-center w-52 h-[38px] flex items-center cursor-pointer rounded-md px-4 py-6"
-              >
-                <MdAddCircleOutline className="text-xl text-white cursor-pointer" />
-                <button
-                  className={`text-lg font-bold ml-4 text-white ${monda.className}`}
-                >
-                  Add Recipe
-                </button>
-              </div>
               <div className="w-full">
                 <RecipesSearch />
               </div>
             </div>
-            {isDropDown && (
-              <div className=" dropdown-recipe text-center my-4">
-                <div className="flex items-center justify-center">
-                  <div ref={popupRef}>
-                    <AddRecipe handleDropDown={handleDropDown} />
-                  </div>
-                </div>
-              </div>
-            )}
+
             <div className="mt-4">
               <h1
-                className={`font-bold text-[#035C41] text-3xl ${acme.className}`}
+                className={`font-bold text-[#035C41] text-3xl ${acme.className} dark:text-darkTextColor`}
               >
                 Categories
               </h1>
-              <ul className={`flex flex-col text-xl ${adamina.className}`}>
+              <ul
+                className={`flex flex-col text-xl ${adamina.className} dark:text-darkTextColor`}
+              >
                 <AllCategories />
               </ul>
             </div>
