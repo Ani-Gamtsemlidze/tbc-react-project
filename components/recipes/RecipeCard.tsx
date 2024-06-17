@@ -54,22 +54,48 @@ export default function RecipeCard({ data }: any) {
   // };
 
   return (
-    <div className="flex flex-wrap justify-start ml-36">
+    <div className="flex  flex-wrap justify-center ">
       {data &&
         data.map((recipe: Recipe) => (
-          <div key={recipe.id} className="ml-8">
-            <Image
-              className="w-64 h-56 rounded-md object-cover"
-              src={recipe?.images?.[0] ?? "/images/dessert.jpg"}
-              width={400}
-              height={400}
-              alt="recipe image"
-            />
+          <div key={recipe.id} className="w-[33.3%] py-0 px-2 mb-8">
+            <Link
+              className="w-full h-[230px] block"
+              href={`${process.env.BASE_URL}/recipes/${recipe.id}`}
+            >
+              <Image
+                className="w-full h-full rounded-md object-cover hover:transform hover:scale-105 transition-transform duration-300"
+                src={recipe?.images?.[0] ?? "/images/dessert.jpg"}
+                width={400}
+                height={400}
+                alt="recipe image"
+              />
+            </Link>
+
+            <div className="mt-1 ">
+              <Link
+                href={`${process.env.BASE_URL}/recipes/${recipe.id}`}
+                className="text-2xl  "
+              >
+                <h3 className=" max-w-[90%] text-2xl underline-opening">
+                  {recipe.title}
+                </h3>
+
+                {/* <p className="text-lg my-4 w-52 group relative ">
+                  <span>{recipe.title}</span>
+                  <span className="absolute -bottom-1 left-0 w-0 transition-all h-[1px] bg-greenColor group-hover:w-56"></span>
+                </p> */}
+              </Link>
+            </div>
 
             <div className="flex items-center justify-between">
-              <div className="bg-[#E895D0] min-w-24 rounded-2xl px-6 mt-4 py-1  ">
-                <p className="text-[#27343A] text-center">{recipe.category}</p>
-              </div>
+              <Link
+                href={`${process.env.BASE_URL}/recipes/category/${recipe.category}`}
+                className="bg-[#E895D0] min-w-24 rounded-2xl px-6 mt-4 py-1  "
+              >
+                <span className="text-[#27343A] text-center">
+                  {recipe.category}
+                </span>
+              </Link>
               {isAdmin && (
                 <div
                   // onClick={(e) => handleEditClick(recipe.id, e)}
@@ -125,15 +151,6 @@ export default function RecipeCard({ data }: any) {
                   {recipe.preparation_time}
                 </p>
               </div>
-            </div>
-
-            <div className="mt-4 w-48">
-              <Link
-                href={`${process.env.BASE_URL}/recipes/${recipe.id}`}
-                className="text-2xl"
-              >
-                {recipe.title}
-              </Link>
             </div>
           </div>
         ))}

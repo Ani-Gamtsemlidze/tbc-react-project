@@ -11,6 +11,9 @@ module.exports = {
         mainColor: "#fff7ec",
         greenColor: "#035C41",
       },
+      boxShadow: {
+        custom: "2px -3px 4px 4px #035c4147",
+      },
     },
   },
   plugins: [],

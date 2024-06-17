@@ -22,7 +22,7 @@ export default function CartItems({ handleDropDown }: any) {
     <>
       <div
         onClick={handleDropDown}
-        className="bg-[rgba(0,0,0,0.7)] flex h-screen top-0 w-screen right-0 z-50 fixed"
+        className="bg-[rgba(0,0,0,0.7)] overflow-auto flex h-screen top-0 w-screen right-0 z-50 fixed"
       >
         {cartData.length === 0 ? (
           <div className="bg-white w-[300px] rounded-lg h-[300px] top-24 right-24 z-50 absolute">
@@ -33,7 +33,7 @@ export default function CartItems({ handleDropDown }: any) {
         ) : (
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white w-[700px] rounded-lg h-[700px] top-6 right-6 z-50 absolute justify-between flex flex-col"
+            className="fade-animation bg-white max-w-[700px] rounded-lg min-h-[635px] top-6 right-6 z-50 absolute justify-between flex flex-col"
           >
             <div>
               <div
@@ -121,11 +121,11 @@ export default function CartItems({ handleDropDown }: any) {
                 <Link
                   href={`${process.env.BASE_URL}/cart`}
                   // onClick={handleRemoveProducts}
-                  className="bg-[#145f48] text-white text-center  py-6 w-80 rounded-3xl shadow-md hover:bg-green-600 transition duration-200"
+                  className="bg-[#145f48] text-white text-center  py-3 w-80 rounded-3xl shadow-md hover:bg-green-600 transition duration-200"
                 >
                   View Cart
                 </Link>
-                <button className="bg-[#145f48] mx-auto text-white flex items-center justify-center py-6 w-80 ml-3 rounded-3xl shadow-md hover:bg-green-600 transition duration-200">
+                <button className="bg-[#145f48] mx-auto text-white flex items-center justify-center py-3 w-80 ml-3 rounded-3xl shadow-md hover:bg-green-600 transition duration-200">
                   <IoBagCheckOutline className="text-2xl mr-3" />
                   Checkout
                 </button>

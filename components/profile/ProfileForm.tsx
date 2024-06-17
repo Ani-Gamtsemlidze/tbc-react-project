@@ -46,7 +46,7 @@ export default function ProfileForm({ userData }: any) {
         className="relative border h-[600px] ml-12 border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
       >
         <h1 className="mb-6 text-xl font-semibold lg:text-2xl">
-          Hello, {editedUser?.firstname.toUpperCase()}
+          Hello, {editedUser?.firstname?.toUpperCase()}
         </h1>
 
         <div className="grid gap-3 md:grid-cols-2">

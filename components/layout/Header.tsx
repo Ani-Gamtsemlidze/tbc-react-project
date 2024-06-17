@@ -17,7 +17,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex items-center bg-mainColor dark:bg-[#161D2F] py-1 px-8 sticky top-0 z-50">
+      <header className="flex items-center shadow-custom bg-mainColor dark:bg-[#161D2F] py-1 px-8 sticky top-0 z-50">
         <div className="flex items-center w-full justify-between">
           <div className="flex">
             <Link

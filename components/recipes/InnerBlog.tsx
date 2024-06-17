@@ -13,31 +13,33 @@ function InnerBlog({ recipeData }: any) {
             <p>Exploring</p>
             Vegan Recipes
           </h1>
-          <div className="flex my-12 pl-12 bg-[#035C41]">
-            <div className="hover:transform hover:scale-105 transition-transform duration-300 bg-[#c6a4e3] w-[570px] h-[682px] rounded-2xl flex items-center justify-center">
-              <Image
-                src={recipeData?.images?.[0] ?? "/images/dessert.jpg"}
-                alt={recipeData.title}
-                width={384}
-                height={384}
-                className="w-[420px] h-[500px] object-cover rounded-2xl"
-              />
-            </div>
-            <div className="flex flex-col items-start text-white ml-10 mt-12">
-              <div className="bg-[#E895D0] min-w-24 rounded-2xl mt-4 py-1">
-                <p className="text-[#27343A] text-center">
-                  {recipeData.category}
-                </p>
+          <div className="flex my-12 bg-[#035C41]">
+            <div className="max-w-[1200px] flex mx-auto py-8 px-0">
+              <div className="hover:transform hover:scale-105 transition-transform duration-300 rounded-2xl flex  justify-center">
+                <Image
+                  src={recipeData?.images?.[0] ?? "/images/dessert.jpg"}
+                  alt={recipeData.title}
+                  width={400}
+                  height={400}
+                  className="w-[390px] h-[270px] object-cover rounded-2xl max-w-[max-content] "
+                />
               </div>
-              <h1
-                className={`text-7xl font-bold mt-8 w-[700px] first-line:text-[#E895D0] leading-snug ${monda.className}`}
-              >
-                {recipeData.title}
-              </h1>
-              <div className="">
-                <p className="text-2xl ">{recipeData.introduction}</p>
+              <div className="flex flex-col items-start text-white ml-10">
+                <div className="bg-[#E895D0] min-w-24 rounded-2xl mt-4 py-1">
+                  <p className="text-[#27343A] text-center">
+                    {recipeData.category}
+                  </p>
+                </div>
+                <h1
+                  className={`text-5xl mt-3 font-bold mb-5 w-[700px] leading-tight ${monda.className}`}
+                >
+                  {recipeData.title}
+                </h1>
+                <div className="">
+                  <p className="text-2xl ">{recipeData.introduction}</p>
+                </div>
+                <p className="text-xl mt-8">{recipeData.servings}</p>
               </div>
-              <p className="text-xl mt-8">{recipeData.servings}</p>
             </div>
           </div>
           <div className="ml-24">
@@ -47,10 +49,10 @@ function InnerBlog({ recipeData }: any) {
             <p className="font-bold text-3xl text-[#035C41] mt-10">
               What you need
             </p>
-            <ul>
+            <ul className="my-4 pl-6">
               {recipeData.ingredients_list.map(
                 (ingredient: string, index: number) => (
-                  <li className="font-bold text-2xl leading-snug" key={index}>
+                  <li className=" list-disc text-xl leading-snug" key={index}>
                     <p>{ingredient}</p>
                   </li>
                 )
@@ -73,13 +75,16 @@ function InnerBlog({ recipeData }: any) {
                 className="w-96 h-96 object-cover rounded ml-4 hover:transform hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <p className="font-bold text-3xl text-[#035C41] mt-10">
+            <h3 className="font-bold text-3xl text-[#035C41] mt-10">
               How to make it
-            </p>
-            <ul>
+            </h3>
+            <ul className="my-4 pl-5">
               {recipeData.instructions.map(
                 (ingredient: string, index: number) => (
-                  <li className="font-bold text-2xl leading-snug" key={index}>
+                  <li
+                    className=" list-decimal text-xl leading-snug"
+                    key={index}
+                  >
                     <p>{ingredient}</p>
                   </li>
                 )
