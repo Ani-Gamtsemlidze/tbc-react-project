@@ -13,7 +13,7 @@ export async function PUT(request: NextRequest) {
       throw new Error("Name, email, or age is missing in the request body.");
     }
 
-    await sql`UPDATE users SET firstname = ${given_name}, email = ${email}, lastname = ${family_name},
+    await sql`UPDATE users_info SET firstname = ${given_name}, email = ${email}, lastname = ${family_name},
     nickname = ${nickname}
     WHERE user_id = ${id}}`;
 

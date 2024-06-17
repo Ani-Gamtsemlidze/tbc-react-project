@@ -91,6 +91,7 @@ export async function getCategory(categoryName: string) {
   }
 }
 export async function getProductsCategory(category: string) {  
+  console.log(category, "ISCATEGORYARRAY")
   try {
     const url = `${process.env.BASE_URL}/api/get-products-category/${category}`;
     const response = await fetch(url);
@@ -100,7 +101,7 @@ export async function getProductsCategory(category: string) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching recipes:', error);
+    console.error('Error fetching category data:', error);
     throw error;
   }
 }
@@ -424,7 +425,6 @@ export const deleteUserRecipe = async (productId: number, userId: string) => {
 export const deleteProductAdmin = async (productId: number, userId: string) => {
   console.log(productId, userId, "DELETEPRODUCT")
   await fetch(`${process.env.BASE_URL}/api/update-product-info/${userId}`, {
-    cache: 'force-cache',
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"

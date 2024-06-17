@@ -53,7 +53,7 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className=" flex flex-col  h-screen  bg-mainColor dark:bg-gray-700 relative ">
+    <div className=" flex flex-col   bg-mainColor dark:bg-gray-700 relative ">
       <div className="flex mt-4 mr-6 items-center  justify-end">
         <div
           onClick={handleDropDown}

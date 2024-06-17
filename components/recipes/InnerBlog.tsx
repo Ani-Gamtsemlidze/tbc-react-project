@@ -59,14 +59,14 @@ function InnerBlog({ recipeData }: any) {
 
             <div className="flex">
               <Image
-                src={recipeData?.images?.[0] ?? "/images/dessert.jpg"}
+                src={recipeData?.images?.[1] ?? "/images/dessert.jpg"}
                 alt={recipeData.title}
                 width={384}
                 height={384}
                 className="w-96 h-96 object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
               />
               <Image
-                src={recipeData?.images?.[0] ?? "/images/dessert.jpg"}
+                src={recipeData?.images?.[2] ?? "/images/dessert.jpg"}
                 alt={recipeData.title}
                 width={384}
                 height={384}

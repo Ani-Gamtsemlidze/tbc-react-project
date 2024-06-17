@@ -19,6 +19,7 @@ import {
   getUserRating,
 } from "../../products-api/products-api";
 import BasicRating from "./Rating";
+import { deleteProductAdmin } from "../../user-api";
 
 export interface Product {
   id: number;
@@ -47,6 +48,14 @@ export default function ProductsCard({ data }: ProductsCardProps) {
     [productId: number]: number | null;
   }>({});
   // const [ratedProducts, setRatedProducts] = useState<Set<number>>(new Set());
+
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: number
+  ) => {
+    e.preventDefault();
+    await deleteProductAdmin(id, user?.sub as string);
+  };
 
   useEffect(() => {
     const fetchInitialAverageRatings = async () => {
@@ -148,11 +157,11 @@ export default function ProductsCard({ data }: ProductsCardProps) {
   };
 
   return (
-    <div className="flex gap-6 ml-8 w-full ">
+    <div className="flex flex-wrap   gap-6 ml-8 w-full ">
       {data &&
         data.map((product) => (
           <div
-            className="border-gray-400 w-[400px] border rounded-md"
+            className="border-gray-400 grow-0 shrink-0 basis-[27%]  border rounded-md"
             key={product.id}
           >
             <Link
@@ -235,16 +244,16 @@ export default function ProductsCard({ data }: ProductsCardProps) {
                           onClick={(e) => handleEditFormOpen(e, product.id)}
                           className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
                         >
-                          Edit Recipe
+                          Edit Product
                         </button>
                       </li>
                       <li className="border-b border-b-gray-400 mx-3 text-[#B85042] dark:text-[#CBD5E1] flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
                         <RiDeleteBin3Fill className="text-xl" />
                         <button
-                          // onClick={(e) => handleDelete(e, recipe.id)}
+                          onClick={(e) => handleDelete(e, product.id)}
                           className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
                         >
-                          Delete Recipe
+                          Delete Product
                         </button>
                       </li>
                     </ul>

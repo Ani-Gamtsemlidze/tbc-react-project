@@ -160,3 +160,5 @@ CREATE TABLE reviews (
 );
 
 SELECT AVG(rating) AS average_rating FROM reviews WHERE product_id = <product_id>;
+
+https://tbc-react-project-ani-gamtsemlidzes-projects.vercel.app/
