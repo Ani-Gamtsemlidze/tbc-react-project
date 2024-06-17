@@ -49,31 +49,31 @@
 
 import { getProduct } from "../../../../../user-api";
 import InnerProduct from "../../../../../components/products/InnerProduct";
-import { unstable_setRequestLocale } from "next-intl/server";
-import { getProducts } from "../../../../../products-api/products-api";
+// import { unstable_setRequestLocale } from "next-intl/server";
+// import { getProducts } from "../../../../../products-api/products-api";
 
 export interface PageParams {
   params: { id: number; locale: string };
 }
 
-export async function generateStaticParams({ params }: PageParams) {
-  unstable_setRequestLocale(params.locale);
+// export async function generateStaticParams({ params }: PageParams) {
+//   unstable_setRequestLocale(params.locale);
 
-  try {
-    // Fetch products from your database or API
-    const products = await getProducts(); // Adjust getProduct to fetch all products
+//   try {
+//     // Fetch products from your database or API
+//     const products = await getProducts(); // Adjust getProduct to fetch all products
 
-    const staticParams = products.map((product: any) => ({
-      params: {
-        id: product.id.toString(), // Assuming product.id is a number
-      },
-    }));
-    return staticParams;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-}
+//     const staticParams = products.map((product: any) => ({
+//       params: {
+//         id: product.id.toString(), // Assuming product.id is a number
+//       },
+//     }));
+//     return staticParams;
+//   } catch (error) {
+//     console.error("Error fetching products:", error);
+//     return [];
+//   }
+// }
 
 export default async function Page({ params }: PageParams) {
   const { id } = params;

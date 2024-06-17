@@ -1,28 +1,29 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 import { InnerBlog } from "../../../../../components/recipes/InnerBlog";
-import { getRecipe, getRecipes } from "../../../../../user-api";
+import { getRecipe } from "../../../../../user-api";
 
 interface PageParams {
   params: { id: number; locale: string };
 }
 
-export async function generateStaticParams({ params }: PageParams) {
-  unstable_setRequestLocale(params.locale);
+// export async function generateStaticParams({ params }: PageParams) {
+//   unstable_setRequestLocale(params.locale);
 
-  try {
-    const recipes = await getRecipes();
+//   try {
+//     const recipes = await getRecipes();
 
-    const staticParams = recipes.map((recipe: any) => ({
-      params: {
-        id: recipe.id.toString(),
-      },
-    }));
-    return staticParams;
-  } catch (error) {
-    console.error("Error fetching recipes:", error);
-    return [];
-  }
-}
+//     const staticParams = recipes.map((recipe: any) => ({
+//       params: {
+//         id: recipe.id.toString(),
+//         locale: params.locale,
+//       },
+//     }));
+//     return staticParams;
+//   } catch (error) {
+//     console.error("Error fetching recipes:", error);
+//     return [];
+//   }
+// }
 
 export default async function Page({ params }: PageParams) {
   const { id } = params;

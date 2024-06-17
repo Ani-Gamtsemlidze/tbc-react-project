@@ -20,7 +20,8 @@ export async function POST(request: Request) {
   // console.log(preparation_time, "parseInt(preparation_time)")
   const ingredientsArray = ingredients_list.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
   const instructionsArray = instructions.split('\n').filter((instruction: string) => instruction.trim() !== '');
-  const imagesArray = image_url.split('\n').filter((imageUrl: string) => imageUrl.trim() !== '');
+  const imagesArray = image_url.filter((imageUrl: string) => imageUrl.trim() !== '');
+
 
 
   try {

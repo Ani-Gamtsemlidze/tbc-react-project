@@ -1,13 +1,10 @@
 "use client";
 import { getRecipes } from "../../user-api";
 import { useEffect, useState } from "react";
-import { acme, adamina, monda } from "../../app/fonts";
-import { MdAddCircleOutline } from "react-icons/md";
-import AddRecipe from "./AddRecipe";
+import { acme, adamina } from "../../app/fonts";
 import AllCategories from "../categories/AllCategories";
 import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
-import useDropdown from "../../hooks";
 import { RecipesSearch } from "../search/RecipesSearch";
 import AddRecipeForm from "./AddRecipeForm";
 
