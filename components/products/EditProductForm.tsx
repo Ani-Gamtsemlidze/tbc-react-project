@@ -113,20 +113,6 @@ export default function EditProductForm({ productId }: { productId: number }) {
             readOnly={!isEditing}
           />
         </div>
-        {/*
-        <div>
-          <label> Servings </label>
-          <input
-            type="text"
-            placeholder="Servings"
-            value={editedProduct.servings}
-            className={`mt-2 pl-4 h-12 w-full rounded-md bg-gray-100 px-31 ${
-              !isEditing ? " text-gray-500" : "text-black"
-            }`}
-            onChange={(e) => handleInputChange(e, "servings")}
-            readOnly={!isEditing}
-          />
-        </div> */}
 
         <div>
           <label> Nutritional Information </label>

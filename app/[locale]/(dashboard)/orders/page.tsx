@@ -1,13 +1,13 @@
-import { getSession } from "@auth0/nextjs-auth0";
-import { getOrderProducts } from "../../../../user-api";
-import OrderProducts from "../../../../components/products/OrderProducts";
+import { OrdersList } from "../../../../components/orders/OrderList";
+import { getOrders } from "../../../../user-api";
 
-export default async function Page() {
-  const session = await getSession();
-  const products = await getOrderProducts(session?.user?.sub);
+// import OrdersList from "@/components/userOrders/OrderList";
+export default async function Orders() {
+  const orders = await getOrders();
+  console.log(orders, "orders");
   return (
-    <div className="bg-mainColor h-screen">
-      <OrderProducts products={products} />
-    </div>
+    <>
+      <OrdersList orders={orders} />
+    </>
   );
 }

@@ -16,7 +16,6 @@ import {
   addRating,
   addToCart,
   getAverageRating,
-  getUserRating,
 } from "../../products-api/products-api";
 import BasicRating from "./Rating";
 import { deleteProductAdmin } from "../../user-api";
@@ -92,21 +91,21 @@ export default function ProductsCard({ data }: ProductsCardProps) {
       return;
     }
 
-    const userRating = await getUserRating(productId);
-    console.log("User rating:", userRating);
     try {
+      // const userRating = await getUserRating(productId);
+      // console.log("User rating:", userRating);
+
       const result = await addRating(user.sub!, productId, ratingValue);
-      // const updatedAverageRating = await getAverageRating(productId);
-
-      // setAverageRatings((prev) => ({
-      //   ...prev,
-      //   [productId]: updatedAverageRating,
-      // }));
-      // setRatedProducts((prev) => new Set(prev).add(productId));
-
       console.log("Product rating added:", result);
+
+      // Update local state or perform any additional actions after rating is added
+      setRatings((prevRatings) => ({
+        ...prevRatings,
+        [productId]: ratingValue,
+      }));
     } catch (error) {
       console.error("Error adding product rating:", error);
+      // Handle error gracefully, show error message to user, etc.
     }
   };
 
@@ -170,14 +169,14 @@ export default function ProductsCard({ data }: ProductsCardProps) {
             >
               <Image
                 className="peer absolute top-0 right-0 w-full h-full object-cover"
-                src={product.images[1]}
+                src={product.images[0]}
                 alt="product image"
                 width={400}
                 height={400}
               />
               <Image
                 className="peer absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-700 hover:right-0 peer-hover:right-0"
-                src={product.images[0]}
+                src={product.images[1]}
                 alt="product image"
                 width={400}
                 height={400}
@@ -206,23 +205,12 @@ export default function ProductsCard({ data }: ProductsCardProps) {
               </div>
               <div className="flex items-center justify-between">
                 <Cart addProduct={() => handleAddToCart(product.id)} />
-                {/* {ratedProducts.has(product.id) ? (
-                  <div className="flex items-center">
-                    <HiMiniStar className="text-3xl text-greenColor" />
-                    <p className="text-sm text-gray-500">
-                      {averageRatings[product.id] !== undefined
-                        ? Math.floor(averageRatings[product.id])
-                        : "No ratings yet"}
-                    </p>
-                  </div>
-                ) : ( */}
                 <BasicRating
                   value={ratings[product.id] || 2}
                   setValue={(newValue: any) =>
                     handleRatingChange(product.id, newValue)
                   }
                 />
-                {/* )} */}
 
                 {isAdmin && (
                   <HiDotsHorizontal

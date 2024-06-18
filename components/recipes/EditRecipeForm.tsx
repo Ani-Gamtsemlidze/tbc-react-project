@@ -124,7 +124,7 @@ export default function EditRecipeForm({ recipeId }: { recipeId: number }) {
           <label> Ingredients </label>
           <textarea
             placeholder="Ingredients"
-            value={editedRecipe.ingredients_list.join("\n")}
+            value={editedRecipe.ingredients_list?.join("\n")}
             className={`mt-2 pl-4 h-12 w-full rounded-md bg-gray-100 px-31 ${
               !isEditing ? " text-gray-500" : "text-black"
             }`}

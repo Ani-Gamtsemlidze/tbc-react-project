@@ -25,7 +25,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Split ingredients into array and filter out empty lines
-    const ingredientsArray = ingredients.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
+    // const ingredientsArray = ingredients.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
 
     // Filter out empty image URLs
     // const imagesArray = images.filter((imageUrl: string) => imageUrl.trim() !== '');
@@ -37,7 +37,7 @@ export async function PUT(request: NextRequest) {
         title = ${title}, 
         description = ${description}, 
         categories = ${categories}, 
-        ingredients = ${ingredientsArray}, 
+        ingredients = ${ingredients}, 
         price = ${price}, 
         nutrients = ${nutrients}, 
         images = ${imagesArray}

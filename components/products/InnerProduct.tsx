@@ -49,6 +49,7 @@ export default function InnerProduct({ innerProductData }: any) {
       const initialAverageRatings: { [productId: number]: number } = {};
       // for (const product of innerProductData) {
       const avgRating = await getAverageRating(innerProductData.id);
+      console.log(avgRating, "RATING");
       initialAverageRatings[innerProductData.id] = avgRating;
       // }
       setAverageRatings(initialAverageRatings);
@@ -99,14 +100,14 @@ export default function InnerProduct({ innerProductData }: any) {
           <div className="flex ">
             <div className="flex flex-col justify-center my-8 ml-12">
               <Image
-                src={innerProductData.images[1]}
+                src={innerProductData.images[2]}
                 alt={innerProductData.title}
                 width={384}
                 height={384}
                 className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
               />
               <Image
-                src={innerProductData.images[0]}
+                src={innerProductData.images[1]}
                 alt={innerProductData.title}
                 width={384}
                 height={384}
@@ -115,7 +116,7 @@ export default function InnerProduct({ innerProductData }: any) {
             </div>
             <div className=" ml-6 hover:transform hover:scale-105 transition-transform duration-300 bg-[#c6a4e3] w-[570px] h-[682px] rounded-2xl flex items-center justify-center">
               <Image
-                src={innerProductData.images[1]}
+                src={innerProductData.images[0]}
                 alt={innerProductData.title}
                 width={384}
                 height={384}
