@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+ console.log(process.env.STRIPE_SECRET_KEY,"process.env.STRIPE_SECRET_KEY")
 
 const getActiveProducts = async () => {
   const checkProducts = await stripe.products.list();
