@@ -6,10 +6,17 @@
 // import "swiper/css/navigation";
 // import { Autoplay } from "swiper/modules";
 
+import { Metadata } from "next";
 import Categories from "../../../components/categories/Categories";
 // import RandomQuoteGenerator from "../../../components/home/RandomQuote";
 import ProductsSlider from "../../../components/products/ProductsSlider";
 import { oleo } from "../../fonts";
+
+export const metadata: Metadata = {
+  title: "Discover the Vegan Lifestyle at Veggie Vibes",
+  description:
+    "Explore vegan products, trending categories, and delicious recipes at Veggie Vibes",
+};
 
 export default async function Home() {
   return (

@@ -3,12 +3,33 @@ import React from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useTranslations } from "next-intl";
 
-const OrdersList = ({ orders }: { orders: any }) => {
+interface Order {
+  latest_charge: {
+    id: string;
+    billing_details: {
+      email: string;
+      name: string;
+    };
+    amount: number;
+    amount_refunded: number;
+    receipt_url: string;
+  };
+  amount: number;
+  metadata: {
+    phone: string | null;
+  };
+}
+
+interface OrdersListProps {
+  orders: Order[];
+}
+
+const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
   const { user } = useUser();
   const t = useTranslations("orders");
 
   const filteredOrders = orders.filter(
-    (order: any) =>
+    (order) =>
       order.latest_charge &&
       order.latest_charge.billing_details &&
       order.latest_charge.billing_details.email === user?.email
@@ -18,7 +39,7 @@ const OrdersList = ({ orders }: { orders: any }) => {
 
   return (
     <div className="bg-mainColor min-h-screen rounded-lg shadow-md overflow-hidden divide-y divide-gray-200">
-      {filteredOrders.map((order: any) => (
+      {filteredOrders.map((order) => (
         <div key={order.latest_charge.id} className="p-4">
           <div className="flex justify-between items-center mb-2">
             <p className="text-lg font-semibold">

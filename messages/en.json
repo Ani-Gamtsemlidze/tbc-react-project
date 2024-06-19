@@ -7,6 +7,13 @@
       "productSearch":"Search For Products",
       "sort": "Sort"
     },
+    "HeaderProfile":{
+      "profile": "Profile",
+      "myRecipes":"My Recipes",
+      "orders": "My Orders",
+      "logout":"Logout"
+
+    },
     "Navigation": {
       "home": "Home",
       "profile":"Profile",

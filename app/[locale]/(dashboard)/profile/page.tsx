@@ -3,6 +3,7 @@ import { getUser } from "../../../../user-api";
 import { getSession } from "@auth0/nextjs-auth0";
 import UserInfo from "../../../../components/profile/UserInfo";
 import ProfileForm from "../../../../components/profile/ProfileForm";
+import { Metadata } from "next";
 
 interface Params {
   params: {
@@ -10,17 +11,17 @@ interface Params {
   };
 }
 
-export const revalidate = 0;
+export const metadata: Metadata = {
+  title: "Veggie User- Veggie Vibes",
+  description: "Explore and manage your profile on Veggie Vibes",
+};
 
 export default async function Profile({ params }: Params) {
   unstable_setRequestLocale(params.locale);
   const session = await getSession();
   const user = session?.user;
 
-  // const pictureUrl = await getPicture(user?.sub);
-
   const userData = await getUser(user?.sub);
-  // console.log("USERDATA", userData);
 
   return (
     <section className="flex justify-center bg-mainColor h-screen dark:bg-darkContentColor ">

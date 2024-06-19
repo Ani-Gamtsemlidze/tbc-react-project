@@ -21,23 +21,29 @@ import { useCart } from "../../app/context/CartContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import AddToCart from "./AddToCart";
 
-// import useDropdown from "../../hooks";
+interface Nutrients {
+  fat: number;
+  protein: number;
+  calories: number;
+  carbohydrates: number;
+}
 
-// export interface InnerProductData {
-//   title: string;
-//   category: string;
-//   rating: number;
-//   price: number;
-//   description: string;
-//   thumbnail: string;
-//   images: string[];
-// }
+interface InnerProductData {
+  id: number;
+  title: string;
+  categories: string;
+  images: string[];
+  price: number;
+  description: string;
+  ingredients: string[];
+  nutrients: Nutrients;
+}
 
-// interface InnerProductProps {
-//   innerProductData: InnerProductData;
-// }
+interface InnerProductProps {
+  innerProductData: InnerProductData;
+}
 
-export default function InnerProduct({ innerProductData }: any) {
+export default function InnerProduct({ innerProductData }: InnerProductProps) {
   const { fetchCartData } = useCart();
   const [averageRatings, setAverageRatings] = useState<{
     [productId: number]: number;
@@ -194,7 +200,7 @@ export default function InnerProduct({ innerProductData }: any) {
                       </h2>
                       <ul className="list-disc list-inside text-left mt-6">
                         {innerProductData.ingredients.map(
-                          (ingredient: string[], index: number) => (
+                          (ingredient, index) => (
                             <li
                               key={index}
                               className="text-xl leading-relaxed font-bold "

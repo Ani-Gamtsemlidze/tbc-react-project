@@ -2,10 +2,8 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { ImProfile } from "react-icons/im";
-
 import { IoMdLogOut } from "react-icons/io";
 import { FaRegCircleUser } from "react-icons/fa6";
-
 import { getUser } from "../../user-api";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
@@ -20,36 +18,38 @@ export interface User {
   picture?: any;
 }
 
-export default function HeaderProfile() {
-  const t = useTranslations("Header");
+const HeaderProfile = () => {
+  const t = useTranslations("HeaderProfile");
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const { user } = useUser();
-  const { isDropDown, handleDropDown } = useDropdown();
+
+  const { isDropDown, handleDropDown, popupRef } = useDropdown();
 
   useEffect(() => {
     if (user?.sub) {
       fetchUser(user.sub);
     }
-  }, []);
+  }, [user]);
 
   const fetchUser = async (userId: string) => {
-    if (user) {
+    try {
       const userData = await getUser(userId);
       setUserInfo(userData[0]);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
     }
   };
-  console.log(userInfo);
 
   return (
     <>
       <div className="flex items-center">
         <div
           onClick={handleDropDown}
-          className="w-12 h-12 rounded-full border-2 border-greenColor dark:border-darkTextMain flex items-center justify-center relative"
+          className="w-12 h-12 rounded-full border-2 border-greenColor dark:border-darkTextMain flex items-center justify-center relative cursor-pointer"
         >
           {userInfo?.picture ? (
             <Image
-              className={`w-10 h-10 object-cover rounded-full cursor-pointer`}
+              className="w-10 h-10 object-cover rounded-full cursor-pointer"
               src={userInfo.picture}
               alt="avatar"
               width={400}
@@ -59,62 +59,63 @@ export default function HeaderProfile() {
             <div className="w-10 h-10 rounded-full bg-gray-200" />
           )}
           {isDropDown && (
-            <ul
-              onClick={(e) => e.stopPropagation()}
-              id="dropdown"
-              className=" bg-white dark:bg-slate-800 border border-greenColor shadow-md  rounded  absolute top-14 right-[-8] z-50 py-4 w-60 min-h-60"
+            <div
+              ref={popupRef}
+              className="bg-white dark:bg-slate-800 border border-greenColor shadow-md rounded absolute top-14 right-[-8] z-50 py-4 w-60 min-h-60"
             >
               <div className="flex justify-center flex-col">
-                <div className="flex  mt-2 mx-auto">
-                  <p className="text-lg  ">
+                <div className="flex mt-2 mx-auto">
+                  <p className="text-lg">
                     {userInfo?.firstname} {userInfo?.lastname}
                   </p>
                 </div>
-                <p className="text-center text-sm text-gray-400 ">
+                <p className="text-center text-sm text-gray-400">
                   {userInfo?.email}
                 </p>
               </div>
-              <div className="mt-4">
-                <li
-                  className={` border-b text-[#64a643] border-b-gray-400 mx-3 dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
-                >
-                  <FaRegCircleUser className="text-xl" />
-                  <Link
-                    href={"/profile"}
-                    className="   text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
-                  >
-                    Profile
-                    {/* {t("profile")} */}
-                  </Link>
-                </li>
-                <li
-                  className={` border-b border-b-gray-400 mx-3 text-[#64a643]  dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
-                >
-                  <ImProfile className="text-lg" />
-                  <Link
-                    href={"/myrecipes"}
-                    className="   text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
-                  >
-                    My Recipes
-                  </Link>
-                </li>
-                <li
-                  className={` border-b border-b-gray-400 mx-3 text-[#B85042] dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2`}
-                >
-                  <IoMdLogOut className="text-xl" />
-
-                  <a
-                    href="/api/auth/logout"
-                    className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
-                  >
-                    {t("logout")}
-                  </a>
-                </li>
+              <div className="mt-4" ref={popupRef}>
+                {renderDropdownItem(
+                  <FaRegCircleUser className="text-xl text-greenColor" />,
+                  t("profile"),
+                  "/profile"
+                )}
+                {renderDropdownItem(
+                  <ImProfile className="text-lg text-greenColor" />,
+                  t("myRecipes"),
+                  "/myrecipes"
+                )}
+                {renderDropdownItem(
+                  <ImProfile className="text-lg text-greenColor" />,
+                  t("orders"),
+                  "/orders"
+                )}
+                {renderDropdownItem(
+                  <IoMdLogOut className="text-xl text-red-900" />,
+                  t("logout"),
+                  "/api/auth/logout"
+                )}
               </div>
-            </ul>
+            </div>
           )}
         </div>
       </div>
     </>
   );
-}
+
+  function renderDropdownItem(icon: JSX.Element, text: string, href: string) {
+    return (
+      <Link
+        onClick={handleDropDown} // Close dropdown when a link is clicked
+        href={href}
+        className="border-b border-b-gray-400 mx-3 flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2"
+      >
+        {icon}
+        <span className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]">
+          {text}
+        </span>
+      </Link>
+    );
+  }
+};
+
+export default HeaderProfile;

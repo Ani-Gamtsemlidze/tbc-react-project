@@ -8,12 +8,18 @@
     "productSearch":"ძებნა"
 
   },
+  "HeaderProfile":{
+    "profile": "პროფილი",
+    "myRecipes":"ჩემი რეცეპტები",
+    "orders": "ჩემი შეკვეთები",
+    "logout":"გამოსვლა"
+  },
   "Navigation": {
     "home": "მთავარი",
     "profile":"პროფილი",
     "contact": "კონტაქტი",
     "recipes": "რეცეპტები",
-    "products":"პროდუქტები",    "tvshows":"სერიალები"
+    "products":"პროდუქტები"
   },
   "Footer":{
     "email":"ელ-ფოსტა",

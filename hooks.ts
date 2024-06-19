@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 const useDropdown = () => {
   const [isDropDown, setIsDropDown] = useState(false);
-  const popupRef = useRef< HTMLDivElement>(null);
+  const popupRef = useRef< HTMLDivElement >(null);
   const ulRef = useRef<HTMLUListElement>(null);
 
   // Handle body overflow class
@@ -44,7 +44,7 @@ const useDropdown = () => {
     setIsDropDown(!isDropDown);
   };
 
-  return { isDropDown, handleDropDown, popupRef, ulRef };
+  return { isDropDown, handleDropDown, popupRef };
 };
 
 export default useDropdown;

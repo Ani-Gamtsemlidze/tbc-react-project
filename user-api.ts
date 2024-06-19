@@ -2,15 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { User } from "./components/profile/UserInfo";
-// import { RecipeData } from "./components/recipes/AddRecipe";
 
-// export interface User {
-//   firstname?: string;
-//   lastname?: string;
-//   email?: string;
-//   nickname?: string;
-//   picture?: any;
-// }
+
 
 export async function getUsers(){
   
@@ -345,26 +338,6 @@ export async function editProductInfo(id: string, editedProduct: any) {
     throw error;
   }
 }
-
-
-export async function addToOrder(userId: string, products: any) {
-  console.log(products)
-  const response = await fetch(`${process.env.BASE_URL}/api/addToOrder`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userId, products }),
-  });
-
-  const data = await response.json();
-  if (data.success) {
-    console.log('Product added to order');
-  } else {
-    console.error('Failed to add product to order:', data.error);
-  }
-}
-
 
 export async function getCarts(user_id: string) {
   console.log("CARTS", user_id )
