@@ -12,8 +12,7 @@ import HeaderProfile from "../profile/HeaderProfile";
 
 export default function Header() {
   const { user } = useUser();
-  const { isDropDown, handleDropDown, popupRef } = useDropdown();
-  console.log(popupRef);
+  const { popupRef } = useDropdown();
 
   return (
     <>
@@ -38,10 +37,7 @@ export default function Header() {
               <div className="ml-4 border-l border-l-slate-600 pl-2">
                 {user ? (
                   <div ref={popupRef}>
-                    <HeaderProfile
-                      isDropDown={isDropDown}
-                      handleDropDown={handleDropDown}
-                    />
+                    <HeaderProfile />
                   </div>
                 ) : (
                   <LoginBtn />

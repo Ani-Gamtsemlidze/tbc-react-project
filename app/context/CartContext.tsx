@@ -38,7 +38,7 @@ interface CartContextProps {
   handleRemoveItem: (productId: number) => Promise<void>;
   handleQuantityChange: (productId: number, change: number) => Promise<void>;
   handleRemoveProducts: () => Promise<void>;
-  checkout: any;
+  checkout: () => Promise<void>;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);

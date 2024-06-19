@@ -2,8 +2,10 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { VscSend } from "react-icons/vsc";
+import { useTranslations } from "next-intl";
 
 export default function ContactForm() {
+  const t = useTranslations("Contact");
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -31,10 +33,10 @@ export default function ContactForm() {
   return (
     <div className="order-first col-span-4 max-w-screen-md px-8 py-10 md:order-last md:col-span-2 md:px-10 md:py-12">
       <h2 className="mb-8 text-2xl text-greenColor dark:text-darkTextColor font-bold">
-        Get in touch
+        {t("getInTouch")}
       </h2>
       <p className="mt-2 mb-4 font-sans text-sm tracking-normal dark:text-darkTextColor">
-        ask us a question.
+        {t("askQuestion")}
       </p>
       <form onSubmit={formik.handleSubmit}>
         <div className="md:col-gap-4 mb-5 grid md:grid-cols-2 gap-4">
@@ -46,7 +48,7 @@ export default function ContactForm() {
                   : "border-black"
               }`}
               type="text"
-              placeholder="Name"
+              placeholder={t("name")}
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -67,7 +69,7 @@ export default function ContactForm() {
                   : "border-black"
               }`}
               type="email"
-              placeholder="Email"
+              placeholder={t("email")}
               name="email"
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -89,7 +91,7 @@ export default function ContactForm() {
                 : "border-black"
             }`}
             type="text"
-            placeholder="Subject"
+            placeholder={t("subject")}
             name="subject"
             value={formik.values.subject}
             onChange={formik.handleChange}
@@ -109,7 +111,7 @@ export default function ContactForm() {
                 ? "border-red-600"
                 : "border-black"
             }`}
-            placeholder="Question"
+            placeholder={t("question")}
             name="question"
             value={formik.values.question}
             onChange={formik.handleChange}

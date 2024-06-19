@@ -14,7 +14,8 @@ export const revalidate = 0;
 
 export default async function Profile({ params }: Params) {
   unstable_setRequestLocale(params.locale);
-  const { user }: any = await getSession();
+  const session = await getSession();
+  const user = session?.user;
 
   // const pictureUrl = await getPicture(user?.sub);
 

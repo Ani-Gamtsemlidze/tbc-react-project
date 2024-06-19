@@ -31,15 +31,19 @@
     "button": "შეინახეთ ცვლილებები"
   },
   "Contact":{
-    "message":"გამოგვიგზავნეთ შეტყობინება",
+    "contactUs":"დაგვიკავშირდით",
     "name":"სახელი",
     "name-label":"სრული სახელი",
     "email":"ელ-ფოსტა",
-    "email-label":"ელ-ფოსტა",
+    "phone":"საკონტაქტო ნომერი",
     "subject":"საკითხი",
     "textarea":"შეტყობინება",
+    "question": "კითხვა",
     "send-button":" გაგზავნა",
-    "contact-us":"დაგვიკავშირდით"
+    "getInTouch": "",
+    "askQuestion":"დაგვისვით შეკითხვა"
+
+
   },
   "Blogs":{
     "blogs":"ბლოგები"
@@ -54,9 +58,16 @@
     "checkout": "შეკვეთის გაფორმება",
     "emptyMessage": "კალათა ცარიელია",
     "continueMessage":"მთავარი გვერდი"
-
-
-
+  },
+  "userRecipes":{
+    "myRecipes": "ჩემი რეცეპტები"
+  },
+  "orders": {
+    "orderAmount": "ჯამური ღირებულება",
+    "phone":"ტელეფონი",
+    "name": "სახელი",
+    "viewReceipt":"ქვითრის ნახვა",
+    "noOrder": "შეკვეთები არ მოიძებნა"
 
   },
   "Login":{

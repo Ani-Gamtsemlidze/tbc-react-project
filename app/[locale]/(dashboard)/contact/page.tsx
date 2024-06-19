@@ -1,13 +1,19 @@
-import CompanyContact from "../../../../components/contact/CompanyContact";
-
 import { unstable_setRequestLocale } from "next-intl/server";
 import ContactForm from "../../../../components/contact/ContactForm";
+import { Metadata } from "next";
+import { CompanyContact } from "../../../../components/contact/CompanyContact";
 
 interface Params {
   params: {
     locale: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: "Contact Us- Veggie Vibes",
+  description:
+    "Contact us for inquiries, support, or any other questions. Fill out our contact form or find our company's contact details.",
+};
 
 export default function Contact({ params }: Params) {
   unstable_setRequestLocale(params.locale);

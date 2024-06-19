@@ -1,22 +1,34 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
  console.log(process.env.STRIPE_SECRET_KEY,"process.env.STRIPE_SECRET_KEY")
 
-const getActiveProducts = async () => {
+
+ interface Product {
+  id: string;
+  title: string;
+  price: number;
+}
+
+interface CheckoutDataItem {
+  id: string;
+  quantity: number;
+}
+
+const getActiveProducts = async (): Promise<Stripe.Product[]> => {
   const checkProducts = await stripe.products.list();
-  const availableProducts = checkProducts.data.filter(
-    (product: any) => product.active === true
-  );
-  return availableProducts;
+  const availableProducts = checkProducts.data.filter((product: any) => product.active === true);  return availableProducts;
 };
 
-export const POST = async (request: any) => {
-  const { products, checkoutData } = await request.json();
-  const data = products;
-  console.log(checkoutData, "QUANTITY")
 
-  const stripeQuantities = checkoutData.map((item: any) => item.quantity);
+
+export const POST = async (request: NextRequest) => {
+  const { products, checkoutData }: { products: Product[]; checkoutData: CheckoutDataItem[] } = await request.json();
+
+  const data = products;
+
+  const stripeQuantities = checkoutData.map((item) => item.quantity);
 
   let activeProducts = await getActiveProducts();
 
@@ -43,15 +55,14 @@ export const POST = async (request: any) => {
   }
 
   activeProducts = await getActiveProducts();
-  let stripeItems: any = [];
+  const stripeItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-  for (const product of data) {
-    const stripeProduct = activeProducts?.find(
-      (prod: any) => prod?.name?.toLowerCase() == product?.title?.toLowerCase()
+  for (const product of products) {
+    const stripeProduct = activeProducts.find(
+      (prod) => prod.name.toLowerCase() === product.title.toLowerCase()
     );
-
     if (stripeProduct) {
-        const quantityIndex = data.findIndex((item: any) => item.id === product.id);
+        const quantityIndex = data.findIndex((item) => item.id === product.id);
         const quantity = stripeQuantities[quantityIndex];
   
         stripeItems.push({

@@ -4,6 +4,7 @@ import { LuPhone } from "react-icons/lu";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
 
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 interface ContactItemProps {
   icon: JSX.Element;
@@ -25,21 +26,22 @@ function ContactItem({ icon, text, label, iconLink }: ContactItemProps) {
   );
 }
 
-export default function CompanyContact() {
+const CompanyContact = async () => {
+  const t = await getTranslations("Contact");
   const contactItems: ContactItemProps[] = [
     {
       icon: <MdOutlineMarkEmailRead className="text-3xl" />,
       text: "vegan.vibes@gmail.com",
       link: "https://mail.google.com/",
       iconLink: "https://mail.google.com/",
-      label: "email",
+      label: t("email"),
     },
     {
       icon: <LuPhone className="text-2xl" />,
       text: "+995 555 55 55 55",
       link: "tel:+995 555 55 55 55",
       iconLink: "tel:+995 555 55 55 55",
-      label: "phone",
+      label: t("phone"),
     },
     {
       icon: <CiFacebook className="text-3xl" />,
@@ -60,7 +62,7 @@ export default function CompanyContact() {
   return (
     <div className="col-span-4 px-8 py-10  text-gray-800 dark:text-darkTextColor md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
       <h2 className="mb-8 text-2xl font-bold text-greenColor dark:text-darkTextColor">
-        Contact us
+        {t("contactUs")}
       </h2>
       <ul className="flex  flex-col justify-center">
         {contactItems.map((item, index) => (
@@ -69,4 +71,5 @@ export default function CompanyContact() {
       </ul>
     </div>
   );
-}
+};
+export { CompanyContact };

@@ -5,11 +5,10 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { User } from "./UserInfo";
 import { editUserInfo } from "../../user-api";
 
-export default function ProfileForm({ userData }: any) {
-  const { user }: any = useUser();
-
+export default function ProfileForm({ userData }: { userData: User[] }) {
+  const { user } = useUser();
   const userInfo = userData[0] as User;
-  const [editedUser, setEditedUser] = useState<any>(userInfo || {});
+  const [editedUser, setEditedUser] = useState<User>(userInfo || {});
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const handleEditClick = () => {
@@ -19,6 +18,10 @@ export default function ProfileForm({ userData }: any) {
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      if (!user || !user.sub) {
+        throw new Error("User or user.sub is undefined");
+      }
+
       await editUserInfo(user.sub, editedUser);
       setIsEditing(false);
       console.log("User updated successfully");

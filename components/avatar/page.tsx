@@ -7,13 +7,20 @@ import Image from "next/image";
 
 export default function AvatarUploadPage({ setIsUpload }: any) {
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const { user }: any = useUser();
+  const { user } = useUser();
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [loading, setLoading] = useState(false);
 
+  if (!user || !user.sub) {
+    throw new Error("User or user.sub is undefined");
+  }
+
   useEffect(() => {
+    if (!user.sub) {
+      throw new Error("User or user.sub is undefined");
+    }
     if (blob && user?.sub.length > 0) {
-      changePictureAction(user.sub, blob?.url).then(() => {
+      changePictureAction(user?.sub, blob?.url).then(() => {
         setIsUpload(false); // Close the upload box after successful upload
       });
     }

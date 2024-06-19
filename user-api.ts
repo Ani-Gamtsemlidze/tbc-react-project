@@ -1,14 +1,16 @@
 "use server"
 
 import { revalidatePath } from "next/cache";
+import { User } from "./components/profile/UserInfo";
 // import { RecipeData } from "./components/recipes/AddRecipe";
 
-export interface User {
-  id:number;
-  age:number;
-  name:string;
-  email:string;
-}
+// export interface User {
+//   firstname?: string;
+//   lastname?: string;
+//   email?: string;
+//   nickname?: string;
+//   picture?: any;
+// }
 
 export async function getUsers(){
   
@@ -282,7 +284,7 @@ export async function deleteUser (id:number) {
 // }
 
 
-export async function editUserInfo(id: string, editUser:any) {
+export async function editUserInfo(id: string, editUser:User) {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-user-info/${id}`, {
       method: "PUT",
@@ -412,6 +414,7 @@ export async function updateCart(userId: string,productId: number, quantity: num
 
 export const deleteProducts = async (userId: string) => {
   await fetch(`${process.env.BASE_URL}/api/update-cart`, {
+    cache: "no-store",  
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"

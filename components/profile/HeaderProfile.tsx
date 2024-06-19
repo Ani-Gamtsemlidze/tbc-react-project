@@ -10,6 +10,7 @@ import { getUser } from "../../user-api";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import Link from "next/link";
+import useDropdown from "../../hooks";
 
 export interface User {
   firstname?: string;
@@ -19,10 +20,11 @@ export interface User {
   picture?: any;
 }
 
-export default function HeaderProfile({ isDropDown, handleDropDown }: any) {
+export default function HeaderProfile() {
   const t = useTranslations("Header");
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const { user } = useUser();
+  const { isDropDown, handleDropDown } = useDropdown();
 
   useEffect(() => {
     if (user?.sub) {

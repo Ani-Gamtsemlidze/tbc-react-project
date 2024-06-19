@@ -35,19 +35,19 @@
 
     },
     "Contact":{
-      "message":"Send Us a Message",
+      "contactUs":"Contact us",
       "name":"Name",
       "name-label":"Full Name",
       "email":"Email",
       "email-label":"Email Address",
       "subject":"Subject",
+    "phone":"phone",
+
       "textarea":"Message",
       "send-button":"Send Message",
-      "contact-us":"Contact Us",
-      "location":"Suite 293 95409 Grimes Crossing",
-      "phone":"638 891 206",
-      "web":"www.web-site. com",
-      "user-email":"pas-uwufuba91@mail.com"
+      "getInTouch": "Get in Touch",
+    "askQuestion":"ask us a question",
+    "question": "Question"
     },
     "Blogs":{
       "blogs":"BLOGS"
@@ -63,6 +63,17 @@
       "emptyMessage": "Your cart is empty",
       "continueMessage":"Main Page"
 
+    },
+    "userRecipes":{
+      "myRecipes": "My Recipes"
+    },
+    "orders": {
+      "orderAmount": "Order Amount",
+      "phone":"Phone",
+      "name": "Name",
+      "viewReceipt":"View Receipt",
+      "noOrder": "No orders found"
+  
     },
     "Login":{
       "welcome": "Welcome",
