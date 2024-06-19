@@ -1,8 +1,14 @@
 // import { getSession } from "@auth0/nextjs-auth0";
 // import { getCarts } from "../../../../user-api";
 
+import { Metadata } from "next";
 import CartPage from "../../../../components/cart/CartPage";
 import { arvo } from "../../../fonts";
+
+export const metadata: Metadata = {
+  title: "titleeeee",
+  description: "descriptiiiii",
+};
 
 export default async function Page() {
   // const {user}: any = await getSession()

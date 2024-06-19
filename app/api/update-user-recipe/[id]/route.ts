@@ -7,6 +7,9 @@ export async function PUT(request: NextRequest) {
   // Extracting the id from the URL
   const userId = request.nextUrl.pathname.split("/").pop();
 
+  const test =  await request.json();
+
+  console.log(userId , ":ddddddddddddddddddddddddddd")
   try {
     const {    
       id,
@@ -21,7 +24,7 @@ export async function PUT(request: NextRequest) {
         tips_and_variations,
         nutritional_information,
         image_url,
-    } = await request.json();
+    } = test
 
     if (!title || !userId) {
       throw new Error("Name or email is missing in the request body.");
@@ -44,7 +47,7 @@ export async function PUT(request: NextRequest) {
   `;
 
     const recipe = await sql`SELECT * FROM recipes WHERE user_id = ${userId}  AND id = ${id}`;
-
+  console.log(recipe, "adad")
     return NextResponse.json({ recipe }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
