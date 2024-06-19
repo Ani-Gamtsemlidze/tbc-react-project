@@ -52,6 +52,18 @@
     "Blogs":{
       "blogs":"BLOGS"
     },
+    "CartPage": {
+      "header": "cart",
+      "freeShippingNotice": "Add $11.10 worth of items to your order and get free shipping!",
+      "clearCart": " Clear Cart",
+      "payment": "Payment",
+      "totalProducts": "Total Products",
+      "totalPrice": "Total Price",
+      "checkout": "Checkout",
+      "emptyMessage": "Your cart is empty",
+      "continueMessage":"Main Page"
+
+    },
     "Login":{
       "welcome": "Welcome",
       "login": "to our Entertainment Hub!",

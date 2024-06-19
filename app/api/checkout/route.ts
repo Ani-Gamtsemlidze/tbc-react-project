@@ -63,6 +63,7 @@ export const POST = async (request: any) => {
               images: stripeProduct.images,
             },
           },
+          
           quantity: quantity,
         });
       }

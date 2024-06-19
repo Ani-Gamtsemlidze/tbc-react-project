@@ -19,7 +19,7 @@ import { HiMiniStar } from "react-icons/hi2";
 import { addToCart, getAverageRating } from "../../products-api/products-api";
 import { useCart } from "../../app/context/CartContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import Cart from "./Cart";
+import AddToCart from "./AddToCart";
 
 // import useDropdown from "../../hooks";
 
@@ -226,7 +226,7 @@ export default function InnerProduct({ innerProductData }: any) {
                       </ul>
                     </div>
                   </div>
-                  <Cart
+                  <AddToCart
                     addProduct={() => handleAddToCart(innerProductData.id)}
                   />
                 </div>

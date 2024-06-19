@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Navigation from "./Navigation";
-import LogoutBtn from "../logout/LogoutBtn";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import ThemeSwitch from "../theme/ThemeSwitch";
 import LoginBtn from "../login/LoginBtn";
@@ -9,6 +8,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { merienda } from "../../app/fonts";
 import useDropdown from "../../hooks";
 import ItemBucket from "../products/ItemBucket";
+import HeaderProfile from "../profile/HeaderProfile";
 
 export default function Header() {
   const { user } = useUser();
@@ -38,7 +38,7 @@ export default function Header() {
               <div className="ml-4 border-l border-l-slate-600 pl-2">
                 {user ? (
                   <div ref={popupRef}>
-                    <LogoutBtn
+                    <HeaderProfile
                       isDropDown={isDropDown}
                       handleDropDown={handleDropDown}
                     />

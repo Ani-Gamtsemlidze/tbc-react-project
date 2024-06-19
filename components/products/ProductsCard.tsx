@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import Cart from "./Cart";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useCart } from "../../app/context/CartContext";
 import { useAdmin } from "../../app/context/AdminContext";
@@ -19,6 +18,7 @@ import {
 } from "../../products-api/products-api";
 import BasicRating from "./Rating";
 import { deleteProductAdmin } from "../../user-api";
+import AddToCart from "./AddToCart";
 
 export interface Product {
   id: number;
@@ -204,7 +204,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
                 </p>
               </div>
               <div className="flex items-center justify-between">
-                <Cart addProduct={() => handleAddToCart(product.id)} />
+                <AddToCart addProduct={() => handleAddToCart(product.id)} />
                 <BasicRating
                   value={ratings[product.id] || 2}
                   setValue={(newValue: any) =>

@@ -14,6 +14,7 @@ import {
   getProduct,
   updateCart,
 } from "../../user-api";
+import { useRouter } from "next/navigation";
 
 interface CartItem {
   product_id: number;
@@ -37,6 +38,7 @@ interface CartContextProps {
   handleRemoveItem: (productId: number) => Promise<void>;
   handleQuantityChange: (productId: number, change: number) => Promise<void>;
   handleRemoveProducts: () => Promise<void>;
+  checkout: any;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -46,6 +48,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [productsData, setProductsData] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState<Record<number, number>>({});
   const { user } = useUser();
+
+  const router = useRouter();
 
   useEffect(() => {
     fetchCartData();
@@ -129,6 +133,30 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // CHECKOUT
+  const checkoutData = cartData.map((item) => ({
+    productId: item.product_id,
+    quantity: item.quantity,
+  }));
+
+  const checkout = async () => {
+    await fetch(`${process.env.BASE_URL}/api/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ products: productsData, checkoutData }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.url) {
+          router.push(`${response.url}`);
+        }
+      });
+    handleRemoveProducts();
+  };
   const dataQuantity = cartData.reduce(
     (total, item) => total + item.quantity,
     0
@@ -155,6 +183,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         handleQuantityChange,
         handleRemoveProducts,
         handleRemoveItem,
+        checkout,
       }}
     >
       {children}

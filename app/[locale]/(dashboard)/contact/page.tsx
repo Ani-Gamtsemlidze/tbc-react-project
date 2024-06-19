@@ -1,5 +1,3 @@
-// import { useTranslations } from "next-intl";
-
 import CompanyContact from "../../../../components/contact/CompanyContact";
 
 import { unstable_setRequestLocale } from "next-intl/server";
@@ -13,8 +11,6 @@ interface Params {
 
 export default function Contact({ params }: Params) {
   unstable_setRequestLocale(params.locale);
-
-  // const t = useTranslations("Contact");
 
   return (
     <div className="sm:p-10 my-auto bg-mainColor dark:bg-darkContentColor">

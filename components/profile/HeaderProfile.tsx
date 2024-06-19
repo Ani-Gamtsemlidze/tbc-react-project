@@ -19,7 +19,7 @@ export interface User {
   picture?: any;
 }
 
-export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
+export default function HeaderProfile({ isDropDown, handleDropDown }: any) {
   const t = useTranslations("Header");
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const { user } = useUser();
@@ -45,13 +45,17 @@ export default function LogoutBtn({ isDropDown, handleDropDown }: any) {
           onClick={handleDropDown}
           className="w-12 h-12 rounded-full border-2 border-greenColor dark:border-darkTextMain flex items-center justify-center relative"
         >
-          <Image
-            className="w-10 h-10 object-cover rounded-full cursor-pointer "
-            src={userInfo?.picture}
-            alt="avatar"
-            width={400}
-            height={400}
-          />
+          {userInfo?.picture ? (
+            <Image
+              className={`w-10 h-10 object-cover rounded-full cursor-pointer`}
+              src={userInfo.picture}
+              alt="avatar"
+              width={400}
+              height={400}
+            />
+          ) : (
+            <div className="w-10 h-10 rounded-full bg-gray-200" />
+          )}
           {isDropDown && (
             <ul
               onClick={(e) => e.stopPropagation()}

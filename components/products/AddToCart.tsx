@@ -1,6 +1,6 @@
 "use client";
 
-export default function Cart({ addProduct }: any) {
+export default function AddToCart({ addProduct }: any) {
   return (
     <button
       onClick={addProduct}
