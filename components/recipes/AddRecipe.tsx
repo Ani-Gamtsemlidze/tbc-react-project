@@ -78,6 +78,7 @@ export default function AddRecipe({ handleDropDown }: any) {
     try {
       const response = await fetch(`${process.env.BASE_URL}/api/save-recipe`, {
         method: "POST",
+        cache: "no-cache",
         headers: {
           "Content-Type": "application/json",
         },

@@ -1,15 +1,14 @@
 // import { useTranslations } from "next-intl";
 import { CiSearch } from "react-icons/ci";
 import PriceFilter from "./PriceFilter";
-import { useState } from "react";
 import ProductSearchPopUp from "../search/ProductSearchPopup";
 
-export default function ProductsSearch({ productsData }: any) {
+export default function ProductsSearch({
+  productsData,
+  handleOpenSearchBox,
+  isOpen,
+}: any) {
   // const t = useTranslations("Header");
-  const [isOpen, setIsOpen] = useState(false);
-  function handleOpenSearchBox() {
-    setIsOpen(!isOpen);
-  }
 
   return (
     // <div className="flex  mb-4 dark:border-[#B85042] dark:border-t items-center justify-center  dark:bg-slate-700   ">

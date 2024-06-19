@@ -4,7 +4,7 @@ export default function AddToCart({ addProduct }: any) {
   return (
     <button
       onClick={addProduct}
-      className="flex items-center justify-center rounded-md bg-[#035C41] dark:bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#23493e] focus:outline-none focus:ring-4 focus:ring-blue-300"
+      className="flex items-center justify-center rounded-md bg-[#035C41] dark:bg-slate-900 px-5 py-2.5 text-center text-sm font-medium whitespace-nowrap  text-white hover:bg-[#23493e] focus:outline-none focus:ring-4 focus:ring-blue-300"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

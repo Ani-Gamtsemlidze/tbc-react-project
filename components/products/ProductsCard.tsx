@@ -156,11 +156,11 @@ export default function ProductsCard({ data }: ProductsCardProps) {
   };
 
   return (
-    <div className="flex flex-wrap   gap-6 ml-8 w-full ">
+    <div className="flex flex-wrap   gap-[0.6rem]  w-full ">
       {data &&
         data.map((product) => (
           <div
-            className="border-gray-400 grow-0 shrink-0 basis-[27%]  border rounded-md"
+            className="border-gray-400 grow-0 shrink-0 basis-[32%]  border rounded-md mb-4"
             key={product.id}
           >
             <Link

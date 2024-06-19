@@ -9,6 +9,7 @@ import { MdAddCircleOutline } from "react-icons/md";
 import useDropdown from "../../hooks";
 import AddProduct from "./AddProduct";
 import { useAdmin } from "../../app/context/AdminContext";
+import { useState } from "react";
 
 interface HomePageProps {
   productsData: Product[];
@@ -16,6 +17,13 @@ interface HomePageProps {
 
 export default function ProductsPage({ productsData }: HomePageProps) {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
+
+  function handleOpenSearchBox() {
+    setIsOpen(!isOpen);
+  }
+
+  const [isOpen, setIsOpen] = useState(false);
+
   const { isAdmin } = useAdmin();
 
   return (
@@ -62,21 +70,29 @@ export default function ProductsPage({ productsData }: HomePageProps) {
           </h1>
         </div>
       </div>
-      <div className="flex my-12 ">
-        <div className="flex flex-col pl-12">
-          <ProductsSearch productsData={productsData} />
-          <div className=" mt-8 ">
-            <h1
-              className={`font-bol dark:text-mainColor text-[#035C41] text-3xl  ${acme.className} `}
-            >
-              Categories
-            </h1>
-            <ul className={`flex flex-col text-xl ${adamina.className}`}>
-              <ProductsCategories />
-            </ul>
+      <div className="flex my-12 max-w-[1200px] mx-auto">
+        <div className="">
+          <div
+            className={`flex flex-col top-32 ${!isOpen ? "sticky" : "fds "}`}
+          >
+            <ProductsSearch
+              handleOpenSearchBox={handleOpenSearchBox}
+              isOpen={isOpen}
+              productsData={productsData}
+            />
+            <div className=" mt-8 ">
+              <h1
+                className={`font-bol dark:text-mainColor text-[#035C41] text-3xl  ${acme.className} `}
+              >
+                Categories
+              </h1>
+              <ul className={`flex flex-col text-xl ${adamina.className}`}>
+                <ProductsCategories />
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="flex w-full ml-36">
+        <div className="flex w-full ml-6">
           <ProductsCard data={productsData} />
         </div>
       </div>

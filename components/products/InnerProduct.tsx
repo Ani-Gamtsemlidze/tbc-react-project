@@ -1,11 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { monda, oleo } from "../../app/fonts";
-import Image from "next/image";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import { IoMdShare } from "react-icons/io";
+
+import { Swiper as SwiperClass } from "swiper/types";
+
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -45,6 +52,7 @@ interface InnerProductProps {
 
 export default function InnerProduct({ innerProductData }: InnerProductProps) {
   const { fetchCartData } = useCart();
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [averageRatings, setAverageRatings] = useState<{
     [productId: number]: number;
   }>({});
@@ -103,31 +111,84 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
             <p>Exploring</p>
             Vegan Products
           </h1>
-          <div className="flex ">
-            <div className="flex flex-col justify-center my-8 ml-12">
-              <Image
-                src={innerProductData.images[2]}
-                alt={innerProductData.title}
-                width={384}
-                height={384}
-                className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
-              />
-              <Image
-                src={innerProductData.images[1]}
-                alt={innerProductData.title}
-                width={384}
-                height={384}
-                className="w-52  h-52   object-cover rounded mt-3 hover:transform hover:scale-105 transition-transform duration-300 "
-              />
-            </div>
-            <div className=" ml-6 hover:transform hover:scale-105 transition-transform duration-300 bg-[#c6a4e3] w-[570px] h-[682px] rounded-2xl flex items-center justify-center">
-              <Image
-                src={innerProductData.images[0]}
-                alt={innerProductData.title}
-                width={384}
-                height={384}
-                className="w-[420px] h-[500px] object-cover rounded-2xl "
-              />
+          <div className="flex max-w-[1200px] pt-0 px-3 mx-auto pb-8">
+            <div className=" w-full max-w-[600px]">
+              <Swiper
+                // style={{
+                //   "--swiper-navigation-color": "#fff",
+                //   "--swiper-pagination-color": "#fff",
+                // }}
+                spaceBetween={10}
+                navigation={false}
+                thumbs={{ swiper: thumbsSwiper }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper2"
+              >
+                <SwiperSlide>
+                  <Image
+                    src={innerProductData.images[0]}
+                    alt={innerProductData.title}
+                    width={600}
+                    height={600}
+                    className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src={innerProductData.images[1]}
+                    alt={innerProductData.title}
+                    width={600}
+                    height={600}
+                    className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src={innerProductData.images[2]}
+                    alt={innerProductData.title}
+                    width={600}
+                    height={600}
+                    className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                </SwiperSlide>
+              </Swiper>
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={10}
+                slidesPerView={4}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiperThumb"
+              >
+                <SwiperSlide>
+                  <Image
+                    src={innerProductData.images[0]}
+                    alt={innerProductData.title}
+                    width={384}
+                    height={384}
+                    className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src={innerProductData.images[1]}
+                    alt={innerProductData.title}
+                    width={384}
+                    height={384}
+                    className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src={innerProductData.images[2]}
+                    alt={innerProductData.title}
+                    width={384}
+                    height={384}
+                    className="w-52  h-52   object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                </SwiperSlide>
+              </Swiper>
             </div>
             <div>
               <div className="ml-12 ">
@@ -194,7 +255,7 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
               <div className="flex pl-12">
                 <div className="flex flex-col items-start ml-10  w-full ">
                   <div className="flex  w-full items-center justify-between">
-                    <div className="mt-8">
+                    <div className="my-8">
                       <h2 className={`font-bold text-2xl ${monda.className} `}>
                         Ingredients:
                       </h2>
@@ -239,7 +300,6 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
               </div>
             </div>
           </div>
-          {/* <ImagesPreview innerProductData={innerProductData} /> */}
         </div>
       )}
     </div>
