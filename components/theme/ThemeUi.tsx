@@ -17,7 +17,7 @@ export default function ThemeUi({
   handleTheme,
   handleSystemTheme,
 }: ThemeUiProps) {
-  const { isDropDown, handleDropDown, ulRef } = useDropdown();
+  const { isDropDown, handleDropDown } = useDropdown();
   return (
     <>
       {mounted && (
@@ -31,7 +31,7 @@ export default function ThemeUi({
           </button>
           {isDropDown && (
             <ul
-              ref={ulRef}
+              // ref={ulRef}
               id="dropdown"
               className=" bg-white dark:bg-slate-800 border border-gray-200  rounded  absolute top-12 left-[50%] translate-x-[-50%] py-4 w-48"
             >
