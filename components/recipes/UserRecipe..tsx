@@ -127,7 +127,10 @@ export default function UserRecipe({ data }: any) {
                   onClick={(e) => e.stopPropagation()}
                   className="bg-white w-[650px] max-h-[700px] overflow-y-auto rounded-2xl fixed"
                 >
-                  <EditRecipeForm recipeId={selectedRecipeId} />
+                  <EditRecipeForm
+                    closeForm={() => setShowEditForm(false)}
+                    recipeId={selectedRecipeId}
+                  />
                 </div>
               </div>
             )}

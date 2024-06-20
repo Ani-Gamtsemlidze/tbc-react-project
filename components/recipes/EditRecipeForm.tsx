@@ -5,11 +5,17 @@ import { editRecipeInfo, getRecipe } from "../../user-api";
 import { RecipeData } from "./AddRecipe";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import RecipeForm from "./RecipeForm";
+import { toast } from "react-toastify";
 
-export default function EditRecipeForm({ recipeId }: { recipeId: number }) {
+export default function EditRecipeForm({
+  recipeId,
+  closeForm,
+}: {
+  recipeId: number;
+  closeForm: () => void;
+}) {
   const [editedRecipe, setEditedRecipe] = useState<RecipeData | null>(null);
   // const [isEditing, setIsEditing] = useState<boolean>(false);
-  // const [recipeImageUrl, setRecipeImageUrl] = useState<string[]>([]);
 
   console.log(recipeId);
 
@@ -30,8 +36,12 @@ export default function EditRecipeForm({ recipeId }: { recipeId: number }) {
     }
   };
 
-  const handleSave = async (data: any) => {
-    console.log(data, "data");
+  const handleSave = async (
+    data: any,
+    errors: any,
+    setSumiting: (d: boolean) => void
+  ) => {
+    console.log(errors, "errorserrorserrors");
     // e.preventDefault();
     if (!editedRecipe) return;
     try {
@@ -41,29 +51,34 @@ export default function EditRecipeForm({ recipeId }: { recipeId: number }) {
       });
       // setIsEditing(false);
       console.log("Recipe updated successfully");
+      setSumiting(false);
+      toast.success("edited successfully!");
+      closeForm();
     } catch (error) {
       console.error("Error editing recipe:", error);
+      setSumiting(false);
+    } finally {
+      setSumiting(false);
     }
   };
 
   if (!editedRecipe) {
     return <div>Loading...</div>;
   }
-  const handleImageUpload = (urls: string[]) => {
-    console.log(urls);
-    // setRecipeImageUrl(urls);
-  };
 
   return (
     <div className="lg:m-10">
       <RecipeForm
-        handleSubmit={(data: any) => {
-          handleSave(data);
-          console.log("dada");
+        handleSubmit={handleSave}
+        recipeData={{
+          ...editedRecipe,
+          ingredients_list: Array.isArray(editedRecipe?.ingredients_list)
+            ? editedRecipe?.ingredients_list?.join("\n")
+            : editedRecipe?.ingredients_list,
+          instructions: Array.isArray(editedRecipe?.instructions)
+            ? editedRecipe?.instructions?.join("\n")
+            : editedRecipe?.instructions,
         }}
-        handleImageUpload={handleImageUpload}
-        allCategories={[{ value: "1", label: "1" }]}
-        recipeData={editedRecipe}
       />
     </div>
   );

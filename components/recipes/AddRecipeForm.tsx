@@ -22,7 +22,10 @@ export default function AddRecipeForm() {
         // <div className=" dropdown-recipe text-center my-4">
         // <div className="flex items-center justify-center">
         <div ref={popupRef}>
-          <AddRecipe handleDropDown={handleDropDown} />
+          <AddRecipe
+            handleDropDown={handleDropDown}
+            closeForm={handleDropDown}
+          />
         </div>
         // </div>
         // </div>

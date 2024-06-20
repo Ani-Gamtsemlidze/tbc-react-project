@@ -7,53 +7,31 @@ import { IoMdClose } from "react-icons/io";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 import { FormikErrors } from "formik";
-import { getAllCategories } from "../../user-api";
 // import FormField from "../recipeForm/FormField";
 // import SelectField from "../recipeForm/SelectField";
 // import NumberInputField from "../recipeForm/NumberInputField";
 // import TextareaField from "../recipeForm/TextareaFild";
 // import UploadImages from "./UploadImages";
 import RecipeForm from "./RecipeForm";
+import { toast } from "react-toastify";
 // import { useTranslations } from "next-intl";
 
 export interface RecipeData {
   title: string;
   introduction: string;
   category: string[];
-  ingredients_list: string[];
+  ingredients_list: string[] | string;
   preparation_time: string;
   servings: string;
-  instructions: string[];
+  instructions: string[] | string;
   tips_and_variations: string;
   nutritional_information: string;
   storage_instructions: string;
-  image: string[];
+  images: string[];
   id?: any;
 }
 
 export default function AddRecipe({ handleDropDown }: any) {
-  // const t = useTranslations("Contact");
-
-  const [allCategories, setAllCategories] = useState([]);
-  const [recipeImageUrl, setRecipeImageUrl] = useState<string[]>([]);
-  useEffect(() => {
-    fetchAllCategories();
-  }, []);
-  const handleImageUpload = (urls: string[]) => {
-    setRecipeImageUrl(urls);
-  };
-
-  console.log(recipeImageUrl);
-
-  const fetchAllCategories = async () => {
-    try {
-      const categories = await getAllCategories();
-      setAllCategories(categories);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
-
   const { user }: any = useUser();
   const handleSubmit = async (
     values: RecipeData,
@@ -72,6 +50,7 @@ export default function AddRecipe({ handleDropDown }: any) {
       tips_and_variations,
       nutritional_information,
       storage_instructions,
+      images,
     } = values;
     console.log(setErrors);
 
@@ -94,7 +73,7 @@ export default function AddRecipe({ handleDropDown }: any) {
           nutritional_information,
           storage_instructions,
           sub: user.sub,
-          image_url: recipeImageUrl,
+          images,
         }),
       });
       console.log(response, "responseresponseresponse");
@@ -104,6 +83,8 @@ export default function AddRecipe({ handleDropDown }: any) {
       }
 
       const data = await response.json();
+      toast.success("recipe saved successfully!");
+      handleDropDown();
       return data;
     } catch (error) {
       console.log(error, "rrrrrrrrrrrrr");
@@ -138,11 +119,7 @@ export default function AddRecipe({ handleDropDown }: any) {
             >
               Share your Favourite Recipe
             </h1>
-            <RecipeForm
-              handleImageUpload={handleImageUpload}
-              handleSubmit={handleSubmit}
-              allCategories={allCategories}
-            />
+            <RecipeForm handleSubmit={handleSubmit} />
 
             <br />
           </div>

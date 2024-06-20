@@ -1,12 +1,15 @@
 import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import { Providers } from "./providers";
 import { notFound } from "next/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { CartProvider } from "../context/CartContext";
 import { AdminProvider } from "../context/AdminContext";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Create Next App",
@@ -42,6 +45,8 @@ export default async function RootLayout({
     <html lang={params.locale} suppressHydrationWarning>
       <UserProvider>
         <body>
+          <ToastContainer />
+
           <NextIntlClientProvider locale={params.locale} messages={messages}>
             <Providers>
               <CartProvider>
