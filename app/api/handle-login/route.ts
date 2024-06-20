@@ -17,7 +17,7 @@ export async function GET(_request:Request) {
       INSERT INTO users_info (user_id, email, picture, firstname, lastname, nickname)
       VALUES (${sub}, ${email}, ${picture}, ${given_name}, ${family_name}, ${nickname} );
     `;
-    } else {
+    } else {  
       return redirect(`${process.env.BASE_URL}/api/auth/login`);
     }
   } catch (error) {

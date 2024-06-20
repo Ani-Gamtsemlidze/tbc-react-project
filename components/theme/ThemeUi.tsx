@@ -1,6 +1,13 @@
 "use client";
 import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
-import useDropdown from "../../hooks";
+
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
 
 interface ThemeUiProps {
   mounted: boolean;
@@ -17,68 +24,87 @@ export default function ThemeUi({
   handleTheme,
   handleSystemTheme,
 }: ThemeUiProps) {
-  const { isDropDown, handleDropDown } = useDropdown();
   return (
     <>
       {mounted && (
         <div className="relative z-10">
-          <button onClick={handleDropDown}>
-            {isDarkTheme ? (
-              <FiMoon className="text-2xl mt-2 dark:text-darkTextMain" />
-            ) : (
-              <FiSun className="text-2xl mt-2 dark:text-darkTextMain" />
-            )}
-          </button>
-          {isDropDown && (
-            <ul
-              // ref={ulRef}
-              id="dropdown"
-              className=" bg-white dark:bg-slate-800 border border-gray-200  rounded  absolute top-12 left-[50%] translate-x-[-50%] py-4 w-48"
+          <Menu as="div" className="relative">
+            <MenuButton className="inline-flex items-center gap-2 rounded-md text-sm font-semibold text-black dark:text-darkTextMain">
+              {isDarkTheme ? (
+                <FiMoon className="text-2xl mt-2" />
+              ) : (
+                <FiSun className="text-2xl mt-2" />
+              )}
+            </MenuButton>
+            <Transition
+              enter="transition ease-out duration-75"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
             >
-              <li
-                onClick={() => {
-                  handleTheme("light", "light");
-                  handleDropDown();
-                }}
-                className={` text-black dark:text-[#CBD5E1] flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2   ${
-                  localStorage.getItem("active") === "light"
-                    ? "text-[#0EA5E9]"
-                    : ""
-                }`}
-              >
-                <FiSun />
-                <span className="ml-4">Light</span>
-              </li>
-              <li
-                onClick={() => {
-                  handleTheme("dark", "dark");
-                  handleDropDown();
-                }}
-                className={`  text-black  dark:text-[#CBD5E1]  flex my-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2   ${
-                  localStorage.getItem("active") === "dark"
-                    ? "text-[#0EA5E9]"
-                    : ""
-                }`}
-              >
-                <FiMoon />
-                <span className="ml-4">Dark</span>
-              </li>
-              <li
-                onClick={() => {
-                  handleSystemTheme("system", "system");
-                  handleDropDown();
-                }}
-                className={`text-black dark:text-[#CBD5E1]  flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2 ${
-                  localStorage.getItem("active") === "system"
-                    ? "text-[#0EA5E9]"
-                    : ""
-                }`}
-              >
-                <FiMonitor />
-                <span className="ml-4">System</span>
-              </li>
-            </ul>
-          )}
+              <MenuItems className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg py-1 z-50">
+                <MenuItem>
+                  {({ active }) => (
+                    <li
+                      onClick={() => {
+                        handleTheme("light", "light");
+                      }}
+                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 ${
+                        active ? "bg-gray-200 dark:bg-slate-700" : ""
+                      } ${
+                        localStorage.getItem("active") === "light"
+                          ? "text-[#0EA5E9]"
+                          : ""
+                      }`}
+                    >
+                      <FiSun />
+                      <span className="ml-4">Light</span>
+                    </li>
+                  )}
+                </MenuItem>
+                <MenuItem>
+                  {({ active }) => (
+                    <li
+                      onClick={() => {
+                        handleTheme("dark", "dark");
+                      }}
+                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 ${
+                        active ? "bg-gray-200 dark:bg-slate-700" : ""
+                      } ${
+                        localStorage.getItem("active") === "dark"
+                          ? "text-[#0EA5E9]"
+                          : ""
+                      }`}
+                    >
+                      <FiMoon />
+                      <span className="ml-4">Dark</span>
+                    </li>
+                  )}
+                </MenuItem>
+                <MenuItem>
+                  {({ active }) => (
+                    <li
+                      onClick={() => {
+                        handleSystemTheme("system", "system");
+                      }}
+                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 ${
+                        active ? "bg-gray-200 dark:bg-slate-700" : ""
+                      } ${
+                        localStorage.getItem("active") === "system"
+                          ? "text-[#0EA5E9]"
+                          : ""
+                      }`}
+                    >
+                      <FiMonitor />
+                      <span className="ml-4">System</span>
+                    </li>
+                  )}
+                </MenuItem>
+              </MenuItems>
+            </Transition>
+          </Menu>
         </div>
       )}
     </>

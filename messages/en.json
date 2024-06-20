@@ -10,7 +10,7 @@
     "HeaderProfile":{
       "profile": "Profile",
       "myRecipes":"My Recipes",
-      "orders": "My Orders",
+      "orders": "Orders",
       "logout":"Logout"
 
     },

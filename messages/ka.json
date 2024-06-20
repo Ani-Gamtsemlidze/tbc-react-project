@@ -11,7 +11,7 @@
   "HeaderProfile":{
     "profile": "პროფილი",
     "myRecipes":"ჩემი რეცეპტები",
-    "orders": "ჩემი შეკვეთები",
+    "orders": "შეკვეთები",
     "logout":"გამოსვლა"
   },
   "Navigation": {

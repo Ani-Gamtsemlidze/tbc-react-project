@@ -7,6 +7,7 @@ import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 import { RecipesSearch } from "../search/RecipesSearch";
 import AddRecipeForm from "./AddRecipeForm";
+// import useDropdown from "../../hooks";
 
 export interface Recipe {
   id: string;
@@ -17,7 +18,7 @@ export interface Recipe {
 }
 
 export default function RecipesPage() {
-  // const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  // const { isDropDown } = useDropdown();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -80,7 +81,9 @@ export default function RecipesPage() {
 
       <div className="max-w-[1200px] mx-auto flex justify-center">
         <div className="mr-4">
-          <div className="sticky top-32">
+          <div
+          // className={`flex flex-col top-32 ${isDropDown ? "sticky" : " "}`}
+          >
             <AddRecipeForm />
             <div className="flex flex-col  items-center justify-start">
               <div className="w-full">
