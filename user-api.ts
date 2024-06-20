@@ -34,7 +34,7 @@ export async function getUserRecipes(userId: string) {
   try {
     const url = `${process.env.BASE_URL}/api/get-user-recipe/${userId}`;
     const response = await fetch(url, {
-      cache: "no-store", 
+      cache: "no-cache", 
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -67,10 +67,6 @@ export async function getUser(id: string) {
 
 }
 
-
-
-
-
 export async function getCategory(categoryName: string) {  
   try {
     const url = `${process.env.BASE_URL}/api/get-category/${categoryName}`;
@@ -101,37 +97,6 @@ export async function getProductsCategory(category: string) {
   }
 }
 
-// export async function addToBookmarks(userId: number, recipeId: number) {
-//   try {
-//       const url = `${process.env.BASE_URL}/api/save-recipe`;
-//       const response = await fetch(url, {
-//           method: 'POST',
-//           body: JSON.stringify({ userId, recipeId }),
-//           headers: {
-//               'Content-Type': 'application/json'
-//           }
-//       });
-//       if (!response.ok) {
-//           throw new Error(`HTTP error! Status: ${response.status}`);
-//       }
-//       const data = await response.json();
-//       return data;
-//   } catch (error) {
-//       console.error('Error adding recipe to bookmarks:', error);
-//       throw error;
-//   }
-// }
-
-
-// export async function getRecipes(){
-  
-//     const response = await fetch(`${process.env.BASE_URL}/api/get-recipes` );
-//     const {recipes} = await response.json()
-    
-//     // console.log(recipes, "recipes vrecipes recipes ")
-   
-//     return recipes;
-// }
 
 export async function getRecipes(){
   
@@ -280,6 +245,8 @@ export async function deleteUser (id:number) {
 export async function editUserInfo(id: string, editUser:User) {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-user-info/${id}`, {
+    cache:"no-store",
+
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -300,6 +267,8 @@ export async function editUserInfo(id: string, editUser:User) {
 export async function editRecipeInfo(id: string, editRecipe:any) {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-user-recipe/${id}`, {
+    cache:"no-store",
+
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -321,6 +290,8 @@ export async function editProductInfo(id: string, editedProduct: any) {
   console.log(id, "EDITEDPRODUCT");
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-product-info/${id}`, {
+    cache:"no-store",
+
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -399,6 +370,7 @@ export const deleteProducts = async (userId: string) => {
 export const deleteUserRecipe = async (productId: number, userId: string) => {
   console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/update-user-recipe/${userId}`, {
+    cache:"no-store",
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"
@@ -409,6 +381,7 @@ export const deleteUserRecipe = async (productId: number, userId: string) => {
 export const deleteProductAdmin = async (productId: number, userId: string) => {
   console.log(productId, userId, "DELETEPRODUCT")
   await fetch(`${process.env.BASE_URL}/api/update-product-info/${userId}`, {
+    cache:"no-store",
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"
@@ -420,6 +393,7 @@ export const deleteProductAdmin = async (productId: number, userId: string) => {
 export const deleteCartItem = async (userId: string, productId: number, ) => {
   console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/get-cart/${userId}`, {
+    cache:"no-store",
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"
@@ -442,6 +416,7 @@ export async function getPicture(sub: string) {
 
 export async function changePictureAction(sub: string, picture: string) {
   await fetch(`${process.env.BASE_URL}/api/change-picture`, {
+    cache:"no-cache",
     method: "PUT",
     body: JSON.stringify({ sub, picture }),
   });

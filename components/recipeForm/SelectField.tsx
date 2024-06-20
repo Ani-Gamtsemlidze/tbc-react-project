@@ -6,9 +6,16 @@ interface SelectFieldProps {
   label: string;
   name: string;
   options: { value: string; label: string }[];
+  multiple?: boolean;
 }
 
-const SelectField: React.FC<SelectFieldProps> = ({ label, name, options }) => {
+const SelectField: React.FC<SelectFieldProps> = ({
+  label,
+  name,
+  options,
+  // multiple,
+}) => {
+  // const [field] = useField({ name, multiple });
   return (
     <div className="col-span-3">
       <label
@@ -20,10 +27,13 @@ const SelectField: React.FC<SelectFieldProps> = ({ label, name, options }) => {
       <div className="mt-2">
         <Field
           as="select"
+          // multiple={multiple}
+          // {...field}
           id={name}
           name={name}
           className="block w-full rounded-md border-0 py-2 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
         >
+          {/* {!multiple && <option value="">Choose Category</option>} */}
           <option>Choose Category</option>
           {options.map((option) => (
             <option value={option.value} key={option.value}>

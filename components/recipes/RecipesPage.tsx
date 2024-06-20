@@ -7,6 +7,7 @@ import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 import { RecipesSearch } from "../search/RecipesSearch";
 import AddRecipeForm from "./AddRecipeForm";
+import useDropdown from "../../hooks";
 // import useDropdown from "../../hooks";
 
 export interface Recipe {
@@ -18,7 +19,7 @@ export interface Recipe {
 }
 
 export default function RecipesPage() {
-  // const { isDropDown } = useDropdown();
+  const { isDropDown } = useDropdown();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -42,32 +43,6 @@ export default function RecipesPage() {
 
   return (
     <div className="flex flex-col bg-mainColor dark:bg-gray-700 relative">
-      {/* <div className="flex mt-4 mr-6 items-center justify-end">
-        <div
-          onClick={handleDropDown}
-          className="bg-[#E895D0] mr-2 justify-center w-48 h-[38px] flex items-center cursor-pointer rounded-md px-4 py-6"
-        >
-          <MdAddCircleOutline className="text-xl text-white cursor-pointer" />
-          <button
-            className={`text-lg font-bold ml-4 text-white ${monda.className}`}
-          >
-            Add Recipe
-          </button>
-        </div>
-        <div>
-          <RecipesSearch />
-        </div>
-      </div>
-      <div className="text-center my-8">
-        <div className="flex items-center justify-center">
-          {isDropDown && (
-            <div ref={popupRef}>
-              <AddRecipe handleDropDown={handleDropDown} />
-            </div>
-          )}
-        </div>
-      </div> */}
-
       <div className="my-6">
         <p className="text-center text-3xl text-[#035C41] dark:text-darkTextColor">
           Explore
@@ -82,7 +57,7 @@ export default function RecipesPage() {
       <div className="max-w-[1200px] mx-auto flex justify-center">
         <div className="mr-4">
           <div
-          // className={`flex flex-col top-32 ${isDropDown ? "sticky" : " "}`}
+            className={`flex flex-col top-32 ${isDropDown ? " " : "sticky"}`}
           >
             <AddRecipeForm />
             <div className="flex flex-col  items-center justify-start">

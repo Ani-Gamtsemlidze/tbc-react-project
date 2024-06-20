@@ -6,25 +6,55 @@ import TextareaField from "../recipeForm/TextareaFild";
 import NumberInputField from "../recipeForm/NumberInputField";
 import UploadImages from "./UploadImages";
 import { RecipeData } from "./AddRecipe";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { getAllCategories } from "../../user-api";
+import { toast } from "react-toastify";
 
 interface Props {
-  handleImageUpload: any;
-  handleSubmit: any;
-  allCategories: { label: string; value: string }[];
+  handleSubmit: (
+    data: any,
+    setErrors: any,
+    setSubmitting: (d: boolean) => void
+  ) => void;
+
   recipeData?: RecipeData;
 }
 
-const RecipeForm = ({
-  handleImageUpload,
-  handleSubmit,
-  allCategories,
-  recipeData,
-}: Props) => {
+const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
+  const [allCategories, setAllCategories] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [recipeImageUrl, setRecipeImageUrl] = useState<string[]>(
+    recipeData?.images || []
+  );
+  const fetchAllCategories = async () => {
+    try {
+      const categories = await getAllCategories();
+      setAllCategories(categories);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllCategories();
+  }, []);
+
+  const handleImageUpload = (urls: string[]) => {
+    // console.log(urls);
+    setRecipeImageUrl((prev) => [...prev, ...urls]);
+  };
+
+  const handleDeleteImage = (url: string) => {
+    setRecipeImageUrl((prev) => prev.filter((el) => el !== url));
+  };
+
   return (
     <Formik
       initialValues={{
         title: recipeData?.title || "",
-        introduction: recipeData?.instructions || "",
+        introduction: recipeData?.introduction || "",
         category: recipeData?.category || [],
         ingredients_list: recipeData?.ingredients_list || [],
         preparation_time: recipeData?.preparation_time || "",
@@ -33,7 +63,7 @@ const RecipeForm = ({
         tips_and_variations: recipeData?.tips_and_variations || "",
         nutritional_information: recipeData?.nutritional_information || "",
         storage_instructions: recipeData?.storage_instructions || "",
-        image: recipeData?.image || [],
+        image: recipeData?.images || [],
         user_id: "",
       }}
       validationSchema={Yup.object({
@@ -49,11 +79,20 @@ const RecipeForm = ({
       onSubmit={(values, { setSubmitting, setErrors }) => {
         // alert("error");
 
-        // console.log("dddd");
-        handleSubmit(values, setErrors, setSubmitting);
+        if (!recipeImageUrl.length) {
+          toast.error("please upload iamge");
+          console.log("dddd");
+          setSubmitting(false);
+          return;
+        }
+        handleSubmit(
+          { ...values, images: recipeImageUrl },
+          setErrors,
+          setSubmitting
+        );
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors }) => (
         <Form className="w-[600px] mx-auto flex items-center justify-center flex-col px-16 py-4 my-4 bg-white shadow-lg rounded-lg">
           <div className=" relative w-[500px] ">
             <div className="border-b border-gray-900/10 pb-12">
@@ -69,6 +108,7 @@ const RecipeForm = ({
                 <SelectField
                   label="Recipe Category"
                   name="category"
+                  multiple
                   options={allCategories.map((item: any) => ({
                     value: item.name,
                     label: item.name,
@@ -143,6 +183,29 @@ const RecipeForm = ({
                       </p>
                     </div>
                   </div>
+                  {recipeImageUrl.length ? (
+                    <div className=" flex flex-wrap gap-2 mt-4">
+                      {recipeImageUrl.map((el) => {
+                        return (
+                          <div className=" relative " key={el}>
+                            <div
+                              className=" absolute top-1 right-1  w-4 h-4 rounded-full bg-red-500 flex items-center justify-center  text-slate-50  cursor-pointer "
+                              onClick={() => handleDeleteImage(el)}
+                            >
+                              X
+                            </div>
+                            <Image
+                              className=" rounded-md "
+                              src={el}
+                              width={70}
+                              height={70}
+                              alt="img"
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -151,6 +214,11 @@ const RecipeForm = ({
           <div className="mt-6 flex items-center justify-center gap-x-6">
             <button
               disabled={isSubmitting}
+              onClick={() => {
+                if (Object.keys(errors).length) {
+                  toast.error("check require field");
+                }
+              }}
               type="submit"
               className="w-96 py-4 mt-6 text-lg  font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
