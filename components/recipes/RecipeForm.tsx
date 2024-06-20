@@ -82,6 +82,7 @@ const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
         if (!recipeImageUrl.length) {
           toast.error("please upload iamge");
           console.log("dddd");
+          setSubmitting(false);
           return;
         }
         handleSubmit(

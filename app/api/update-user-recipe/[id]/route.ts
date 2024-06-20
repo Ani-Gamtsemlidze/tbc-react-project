@@ -22,7 +22,7 @@ export async function PUT(request: NextRequest) {
       instructions,
       tips_and_variations,
       nutritional_information,
-      image_url,
+      images,
     } = test;
     console.log(test, ":ddddddddddddddddddddddddddd");
 
@@ -32,7 +32,7 @@ export async function PUT(request: NextRequest) {
     const instructionsArray = instructions
       .split("\n")
       ?.filter((instruction: string) => instruction.trim() !== "");
-    const imagesArray = image_url?.filter(
+    const imagesArray = images?.filter(
       (imageUrl: string) => imageUrl.trim() !== ""
     );
 
