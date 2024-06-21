@@ -4,8 +4,8 @@ import { monda } from "../../app/fonts";
 import AddRecipe from "./AddRecipe";
 import useDropdown from "../../hooks";
 
-export default function AddRecipeForm() {
-  const { isDropDown, handleDropDown, popupRef } = useDropdown();
+export default function AddRecipeForm({ isDropDown, handleDropDown }: any) {
+  const { popupRef } = useDropdown();
   console.log(isDropDown);
 
   return (

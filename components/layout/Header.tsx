@@ -1,14 +1,13 @@
 "use client";
-import Link from "next/link";
 import Navigation from "./Navigation";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import ThemeSwitch from "../theme/ThemeSwitch";
 import LoginBtn from "../login/LoginBtn";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { merienda } from "../../app/fonts";
 import useDropdown from "../../hooks";
 import ItemBucket from "../products/ItemBucket";
 import HeaderProfile from "../profile/HeaderProfile";
+import { Logo } from "./Logo";
 
 export default function Header() {
   const { user } = useUser();
@@ -19,13 +18,8 @@ export default function Header() {
       <header className="flex items-center shadow-custom dark:shadow-customDark bg-mainColor dark:bg-darkBgColor  py-1 px-8 sticky top-0 z-50">
         <div className="flex items-center w-full justify-between">
           <div className="flex">
-            <Link
-              className={`font-bold text-3xl dark:text-darkTextMain text-[#035C41] leading-normal mx-4 ${merienda.className}`}
-              href="/"
-            >
-              Veggy
-              <p className="ml-5">Vibes</p>
-            </Link>
+            <Logo />
+
             <Navigation />
           </div>
           <div className="flex items-center mt-6">

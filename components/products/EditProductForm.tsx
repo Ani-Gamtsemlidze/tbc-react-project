@@ -4,6 +4,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { editProductInfo, getProduct } from "../../user-api";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { ProductData } from "./AddProduct";
+import Loading from "../../app/[locale]/loading";
 
 export default function EditProductForm({ productId }: { productId: number }) {
   const [editedProduct, setEditedProduct] = useState<ProductData | null>(null);
@@ -61,7 +62,7 @@ export default function EditProductForm({ productId }: { productId: number }) {
   };
 
   if (!editedProduct) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

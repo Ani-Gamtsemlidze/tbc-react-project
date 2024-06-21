@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="bg-gray-200 h-screen flex items-center justify-center">
+    <div className="bg-mainColor h-screen flex items-center justify-center">
       <div id="cooking">
         <div className="bubble"></div>
         <div className="bubble"></div>

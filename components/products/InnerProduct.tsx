@@ -27,6 +27,8 @@ import { addToCart, getAverageRating } from "../../products-api/products-api";
 import { useCart } from "../../app/context/CartContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import AddToCart from "./AddToCart";
+// import { LuVegan } from "react-icons/lu";
+import { FaLeaf } from "react-icons/fa";
 
 interface Nutrients {
   fat: number;
@@ -61,11 +63,9 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
   useEffect(() => {
     const fetchInitialAverageRatings = async () => {
       const initialAverageRatings: { [productId: number]: number } = {};
-      // for (const product of innerProductData) {
       const avgRating = await getAverageRating(innerProductData.id);
       console.log(avgRating, "RATING");
       initialAverageRatings[innerProductData.id] = avgRating;
-      // }
       setAverageRatings(initialAverageRatings);
     };
 
@@ -95,7 +95,6 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
     typeof averageRatings[innerProductData.id],
     averageRatings[innerProductData.id]
   );
-  // const { handleDropDown } = useDropdown();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -114,10 +113,6 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
           <div className="flex max-w-[1200px] pt-0 px-3 mx-auto pb-8">
             <div className=" w-full max-w-[600px]">
               <Swiper
-                // style={{
-                //   "--swiper-navigation-color": "#fff",
-                //   "--swiper-pagination-color": "#fff",
-                // }}
                 spaceBetween={10}
                 navigation={false}
                 thumbs={{ swiper: thumbsSwiper }}
@@ -259,34 +254,36 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
                       <h2 className={`font-bold text-2xl ${monda.className} `}>
                         Ingredients:
                       </h2>
-                      <ul className="list-disc list-inside text-left mt-6">
+                      <ul className="text-left mt-6">
                         {innerProductData.ingredients.map(
                           (ingredient, index) => (
                             <li
                               key={index}
-                              className="text-xl leading-relaxed font-bold "
+                              className="text-xl leading-relaxed flex items-center  "
                             >
-                              {ingredient}
+                              <FaLeaf className="text-greenColor text-lg" />
+
+                              <span className="ml-3">{ingredient}</span>
                             </li>
                           )
                         )}
                       </ul>
                     </div>
                     <div className="mr-12">
-                      <h2 className={`font-bold text-2xl ${monda.className}`}>
+                      <h2 className={` text-2xl ${monda.className}`}>
                         Nutrients:
                       </h2>
-                      <ul className="list-disc list-inside text-left mt-6">
-                        <li className="text-xl leading-relaxed font-bold">
+                      <ul className=" text-left mt-6">
+                        <li className="text-xl leading-relaxed">
                           Fat: {innerProductData?.nutrients?.fat}g
                         </li>
-                        <li className="text-xl leading-relaxed font-bold">
+                        <li className="text-xl leading-relaxed">
                           Protein: {innerProductData?.nutrients?.protein}g
                         </li>
-                        <li className="text-xl leading-relaxed font-bold">
+                        <li className="text-xl leading-relaxed">
                           Calories: {innerProductData?.nutrients?.calories}kcal
                         </li>
-                        <li className="text-xl leading-relaxed font-bold">
+                        <li className="text-xl leading-relaxed">
                           Carbohydrates:{" "}
                           {innerProductData?.nutrients?.carbohydrates}g
                         </li>

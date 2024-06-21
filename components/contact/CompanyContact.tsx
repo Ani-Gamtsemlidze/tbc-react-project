@@ -6,12 +6,12 @@ import { MdOutlineMarkEmailRead } from "react-icons/md";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
-interface ContactItemProps {
+export interface ContactItemProps {
   icon: JSX.Element;
   text: string;
   link: string;
   iconLink: string;
-  label: string;
+  label?: string;
 }
 
 function ContactItem({ icon, text, label, iconLink }: ContactItemProps) {
