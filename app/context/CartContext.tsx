@@ -15,6 +15,7 @@ import {
   updateCart,
 } from "../../user-api";
 import { useRouter } from "next/navigation";
+import { getProducts } from "../../products-api/products-api";
 
 interface CartItem {
   product_id: number;
@@ -39,6 +40,8 @@ interface CartContextProps {
   handleQuantityChange: (productId: number, change: number) => Promise<void>;
   handleRemoveProducts: () => Promise<void>;
   checkout: () => Promise<void>;
+  fetchAllProducts: () => Promise<void>;
+  allProducts: Product[];
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -47,9 +50,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartData, setCartData] = useState<CartItem[]>([]);
   const [productsData, setProductsData] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState<Record<number, number>>({});
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const { user } = useUser();
 
   const router = useRouter();
+
+  const fetchAllProducts = async () => {
+    try {
+      const products = await getProducts();
+      setAllProducts(products);
+    } catch (error) {
+      console.error("Error fetching all products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   useEffect(() => {
     fetchCartData();
@@ -176,6 +193,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       value={{
         cartData,
         productsData,
+        fetchAllProducts,
         quantity,
         dataQuantity,
         totalPrice,
@@ -183,6 +201,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         handleQuantityChange,
         handleRemoveProducts,
         handleRemoveItem,
+        allProducts,
         checkout,
       }}
     >

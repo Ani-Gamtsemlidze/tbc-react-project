@@ -1,34 +1,20 @@
 import { CiSearch } from "react-icons/ci";
-// import { oleo } from "../../app/fonts";
 import { IoMdClose } from "react-icons/io";
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import { getProducts } from "../../user-api";
+import { Product } from "../products/ProductsCard";
+import { arvo } from "../../app/fonts";
+import { LuPartyPopper } from "react-icons/lu";
 
 export default function ProductSearchPopUp({
   isOpen,
   handleOpenSearchBox,
   productsData,
 }: any) {
-  // const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Product[]>([]);
   console.log(searchQuery);
-
-  // useEffect(() => {
-  //   fetchRecipes();
-  // }, []);
-
-  // const fetchRecipes = async () => {
-  //   try {
-  //     const products = await getProducts();
-  //     setData(products);
-  //     // setFilteredProducts(products);
-  //   } catch (error) {
-  //     console.error("Error fetching users:", error);
-  //   }
-  // };
 
   const debounce = useCallback(
     (func: (...args: any[]) => void, delay: number) => {
@@ -49,7 +35,6 @@ export default function ProductSearchPopUp({
         recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setData(filtered);
-      // setFilteredProducts(filtered || []);
     }, 500),
     [productsData]
   );
@@ -95,12 +80,12 @@ export default function ProductSearchPopUp({
               <CiSearch className="absolute top-[50%] text-xl translate-y-[-50%] left-[18px]" />
             </form>
             <div className="">
-              <div className="flex flex-wrap  items-center justify-center my-4 ">
-                {searchQuery.length !== 0 &&
+              <div className="flex flex-wrap  items-center justify-center my-4 max-h-[400px]  overflow-y-auto">
+                {searchQuery.length !== 0 && data.length > 0 ? (
                   data.map((product: any, index: number) => (
                     <Link
                       href={`/products/${product.id}`}
-                      className="flex items-center mx-12 w-full my-4 transition hover:bg-[rgb(244,244,244)] rounded-lg "
+                      className="flex items-center mx-12 w-full my-4 transition hover:bg-[rgb(244,244,244)] rounded-lg"
                       key={index}
                     >
                       <div className="items-start">
@@ -115,7 +100,6 @@ export default function ProductSearchPopUp({
                       <h1 className="text-[#16442a] font-bold text-xl ml-4">
                         {product.title}
                       </h1>
-
                       <p className="text-black text-xl border-l ml-3 pl-3">
                         {product.categories}
                       </p>
@@ -123,7 +107,16 @@ export default function ProductSearchPopUp({
                         $ {product.price}
                       </p>
                     </Link>
-                  ))}
+                  ))
+                ) : searchQuery.length !== 0 && data.length === 0 ? (
+                  <div className="flex flex-col items-center mt-4">
+                    <LuPartyPopper className="text-4xl text-greenColor mb-4" />
+                    <p className={`text-center  ${arvo.className} text-xl`}>
+                      No Vegan products here...{" "}
+                    </p>
+                    <span>maybe they're having a Party elsewhere?</span>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

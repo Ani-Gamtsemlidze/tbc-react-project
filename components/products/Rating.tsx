@@ -3,9 +3,6 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 
 export default function BasicRating({ value, setValue }: any) {
-  //   const [value, setValue] = React.useState<number | null>(2);
-  console.log(value);
-
   return (
     <Box
       sx={{

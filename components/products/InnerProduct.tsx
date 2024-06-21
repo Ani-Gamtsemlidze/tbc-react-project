@@ -27,15 +27,7 @@ import { addToCart, getAverageRating } from "../../products-api/products-api";
 import { useCart } from "../../app/context/CartContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import AddToCart from "./AddToCart";
-// import { LuVegan } from "react-icons/lu";
 import { FaLeaf } from "react-icons/fa";
-
-interface Nutrients {
-  fat: number;
-  protein: number;
-  calories: number;
-  carbohydrates: number;
-}
 
 interface InnerProductData {
   id: number;
@@ -45,7 +37,7 @@ interface InnerProductData {
   price: number;
   description: string;
   ingredients: string[];
-  nutrients: Nutrients;
+  nutrients: string;
 }
 
 interface InnerProductProps {
@@ -270,24 +262,9 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
                       </ul>
                     </div>
                     <div className="mr-12">
-                      <h2 className={` text-2xl ${monda.className}`}>
-                        Nutrients:
-                      </h2>
-                      <ul className=" text-left mt-6">
-                        <li className="text-xl leading-relaxed">
-                          Fat: {innerProductData?.nutrients?.fat}g
-                        </li>
-                        <li className="text-xl leading-relaxed">
-                          Protein: {innerProductData?.nutrients?.protein}g
-                        </li>
-                        <li className="text-xl leading-relaxed">
-                          Calories: {innerProductData?.nutrients?.calories}kcal
-                        </li>
-                        <li className="text-xl leading-relaxed">
-                          Carbohydrates:{" "}
-                          {innerProductData?.nutrients?.carbohydrates}g
-                        </li>
-                      </ul>
+                      <p className={` text-2xl ${monda.className}`}>
+                        Nutrients: {innerProductData?.nutrients}
+                      </p>
                     </div>
                   </div>
                   <AddToCart

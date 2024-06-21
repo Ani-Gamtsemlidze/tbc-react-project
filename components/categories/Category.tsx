@@ -39,7 +39,7 @@ export default function Category({ categoryName }: CategoryProps) {
       >
         {categoryName} Recipes
       </h1>
-      <div className="flex items-start">
+      <div className="max-w-[1200px] mx-auto flex justify-center">
         <UserFeatures />
         {/* <div className="ml-8">
           <h1

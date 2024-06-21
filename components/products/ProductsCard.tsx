@@ -24,7 +24,7 @@ export interface Product {
   id: number;
   title: string;
   price: number;
-  description: string;
+  description?: string | undefined;
   images: string[];
   averageRating?: number;
 }
@@ -40,13 +40,10 @@ export default function ProductsCard({ data }: ProductsCardProps) {
   const { isDropDown, handleDropDown } = useDropdown();
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
   const [showEditForm, setShowEditForm] = useState(false);
-  // const [averageRatings, setAverageRatings] = useState<{
-  //   [productId: number]: number;
-  // }>({});
+
   const [ratings, setRatings] = useState<{
     [productId: number]: number | null;
   }>({});
-  // const [ratedProducts, setRatedProducts] = useState<Set<number>>(new Set());
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -63,7 +60,6 @@ export default function ProductsCard({ data }: ProductsCardProps) {
         const avgRating = await getAverageRating(product.id);
         initialAverageRatings[product.id] = avgRating;
       }
-      // setAverageRatings(initialAverageRatings);
     };
 
     fetchInitialAverageRatings();
@@ -92,20 +88,14 @@ export default function ProductsCard({ data }: ProductsCardProps) {
     }
 
     try {
-      // const userRating = await getUserRating(productId);
-      // console.log("User rating:", userRating);
-
       const result = await addRating(user.sub!, productId, ratingValue);
       console.log("Product rating added:", result);
-
-      // Update local state or perform any additional actions after rating is added
       setRatings((prevRatings) => ({
         ...prevRatings,
         [productId]: ratingValue,
       }));
     } catch (error) {
       console.error("Error adding product rating:", error);
-      // Handle error gracefully, show error message to user, etc.
     }
   };
 
@@ -193,7 +183,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
                 </h5>
               </Link>
               <p className="text-dm text-slate-900 my-4">
-                {product.description.slice(0, 180)}...
+                {product?.description?.slice(0, 180)}...
               </p>
 
               <div className="mt-2 mb-5 flex items-center justify-between">

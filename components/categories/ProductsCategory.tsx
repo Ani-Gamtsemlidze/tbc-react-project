@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { getProductsCategory } from "../../user-api";
-import { acme, adamina, oleo } from "../../app/fonts";
+import { oleo } from "../../app/fonts";
 import ProductsCard from "../products/ProductsCard";
-import ProductsCategories from "../products/ProductsCategories";
+import { ProductsFeatures } from "../products/ProductsFeatures";
+import { useCart } from "../../app/context/CartContext";
 
 interface CategoryProps {
   categoryName: string;
@@ -12,6 +13,7 @@ interface CategoryProps {
 
 export default function ProductsCategory({ categoryName }: CategoryProps) {
   const [data, setData] = useState([]);
+  const { allProducts } = useCart();
 
   useEffect(() => {
     const fetchCategory = async (category: string) => {
@@ -30,28 +32,17 @@ export default function ProductsCategory({ categoryName }: CategoryProps) {
   const decodedCategory = decodeURIComponent(categoryName);
 
   return (
-    <div className="flex flex-col h-screen w-full bg-mainColor dark:bg-slate-500">
+    <div className="flex flex-col min-h-screen  bg-mainColor dark:bg-slate-500">
       <h1
         className={`text-center text-5xl text-[#035C41] ${oleo.className} my-12`}
       >
         {decodedCategory} Products
       </h1>
-      <div className="flex items-start">
-        <div className="ml-8">
-          <h1 className={`font-bold text-[#035C41] text-3xl ${acme.className}`}>
-            Categories
-          </h1>
-          <ul className={`flex flex-col text-xl ${adamina.className}`}>
-            <ProductsCategories />
-          </ul>
+      <div className="max-w-[1200px] mx-auto flex justify-center">
+        <ProductsFeatures productsData={allProducts} />
+        <div className="ml-6">
+          <ProductsCard data={data} />
         </div>
-        {data.length === 0 ? (
-          <p>No Products found.</p>
-        ) : (
-          <div className="flex flex-wrap justify-start">
-            <ProductsCard data={data} />
-          </div>
-        )}
       </div>
     </div>
   );

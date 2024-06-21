@@ -1,36 +1,25 @@
 "use client";
 
 import ProductsCard, { Product } from "./ProductsCard";
-import { acme, adamina, monda } from "../../app/fonts";
+import { acme, monda } from "../../app/fonts";
 
-import ProductsCategories from "./ProductsCategories";
-import ProductsSearch from "./ProductsSearch";
 import { MdAddCircleOutline } from "react-icons/md";
 import useDropdown from "../../hooks";
 import AddProduct from "./AddProduct";
 import { useAdmin } from "../../app/context/AdminContext";
-import { useState } from "react";
+import { ProductsFeatures } from "./ProductsFeatures";
 
-interface HomePageProps {
+export interface ProductsPageProps {
   productsData: Product[];
 }
 
-export default function ProductsPage({ productsData }: HomePageProps) {
+export default function ProductsPage({ productsData }: ProductsPageProps) {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
-
-  function handleOpenSearchBox() {
-    setIsOpen(!isOpen);
-  }
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const { isAdmin } = useAdmin();
 
   return (
     <div className="flex flex-col  bg-mainColor dark:bg-gray-700 relative">
-      {/* <div className="flex items-center justify-center">
-        <div className="flex items-center justify-center"></div>
-      </div> */}
       {isAdmin && (
         <>
           <div className="flex justify-end w-full mt-6">
@@ -72,25 +61,7 @@ export default function ProductsPage({ productsData }: HomePageProps) {
       </div>
       <div className="flex my-12 max-w-[1200px] mx-auto">
         <div className="">
-          <div
-            className={`flex flex-col top-32 ${!isOpen ? "sticky" : "fds "}`}
-          >
-            <ProductsSearch
-              handleOpenSearchBox={handleOpenSearchBox}
-              isOpen={isOpen}
-              productsData={productsData}
-            />
-            <div className=" mt-8 ">
-              <h1
-                className={`font-bol dark:text-mainColor text-[#035C41] text-3xl  ${acme.className} `}
-              >
-                Categories
-              </h1>
-              <ul className={`flex flex-col text-xl ${adamina.className}`}>
-                <ProductsCategories />
-              </ul>
-            </div>
-          </div>
+          <ProductsFeatures productsData={productsData} />
         </div>
         <div className="flex w-full ml-6">
           <ProductsCard data={productsData} />
