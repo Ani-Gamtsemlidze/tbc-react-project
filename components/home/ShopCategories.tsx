@@ -7,7 +7,7 @@ const ShopCategories = async () => {
   const categories = await getProductsCategories();
 
   return (
-    <div className="flex flex-col p-16 justify-center ">
+    <div className="flex flex-col p-16 justify-center max-sm:p-2  ">
       <div className="my-4">
         <h2
           className={`text-2xl font-bold text-greenColor  ${arvo.className} `}
@@ -15,12 +15,12 @@ const ShopCategories = async () => {
           Shop By Category
         </h2>
       </div>
-      <div className="flex">
+      <div className="flex justify-center flex-wrap max-sm:justify-evenly">
         {categories.map((category: any) => (
           <Link
             href={`/products/product_category/${category.name}`}
             key={category.id}
-            className=" text-[#27343A] dark:text-mainColor mr-4"
+            className=" text-[#27343A] dark:text-mainColor mr-4 max-sm:mr-0 max-sm:mb-10"
           >
             <Image
               src={category.image_url}

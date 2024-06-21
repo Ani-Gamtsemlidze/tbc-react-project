@@ -46,7 +46,7 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
     <div className="lg:m-10">
       <form
         onSubmit={handleSave}
-        className="relative border h-[600px] ml-12 border-gray-100 dark:border-darkSecondaryColor dark:bg-darkBgColor space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
+        className="relative border h-[600px] ml-12  border-gray-100 dark:border-darkSecondaryColor dark:bg-darkBgColor space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 max-sm:ml-0 shadow-xl lg:p-10"
       >
         <h1 className="mb-6 text-xl dark:text-darkTextColor font-semibold lg:text-2xl">
           Hello, {editedUser?.firstname?.toUpperCase()}

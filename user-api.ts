@@ -82,7 +82,6 @@ export async function getCategory(categoryName: string) {
   }
 }
 export async function getProductsCategory(category: string) {  
-  console.log(category, "ISCATEGORYARRAY")
   try {
     const url = `${process.env.BASE_URL}/api/get-products-category/${category}`;
     const response = await fetch(url);
@@ -390,7 +389,7 @@ export const deleteProductAdmin = async (productId: number, userId: string) => {
   });
 };
 
-export const deleteCartItem = async (userId: string, productId: number, ) => {
+export const deleteCartItem = async (userId: string, productId: number ) => {
   console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/get-cart/${userId}`, {
     cache:"no-store",
@@ -421,6 +420,15 @@ export async function changePictureAction(sub: string, picture: string) {
     body: JSON.stringify({ sub, picture }),
   });
   revalidatePath("/Profile");
+}
+
+export  const filterProducts  = async (filter1: number, filter2: number) => {
+  const response = await fetch(`${process.env.BASE_URL}/api/get-picture`, {
+    method: "POST",
+    body: JSON.stringify({ filter1, filter2}),
+  });
+  const data = await response.json();
+  return data.response;
 }
 
 

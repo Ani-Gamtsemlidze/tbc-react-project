@@ -21,7 +21,7 @@ export default function Home() {
         {/* <RandomQuoteGenerator /> */}
       </div>
       <h1
-        className={` text-7xl my-24 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
+        className={` text-7xl my-16 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
       >
         <p>Exploring</p>
         Vegan Lifestyle

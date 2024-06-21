@@ -12,9 +12,12 @@ export default function RecipeCard({ data }: any) {
     <div className="flex  flex-wrap justify-center ">
       {data &&
         data.map((recipe: Recipe) => (
-          <div key={recipe.id} className="w-[33.3%] py-0 px-2 mb-8">
+          <div
+            key={recipe.id}
+            className="w-[33.3%] max-sm:w-[49.3%] py-0 px-2 mb-8"
+          >
             <Link
-              className="w-full h-[230px] block"
+              className="w-full h-[230px] max-sm:h-[150px] block"
               href={`${process.env.BASE_URL}/recipes/${recipe.id}`}
             >
               <Image
@@ -31,7 +34,7 @@ export default function RecipeCard({ data }: any) {
                 href={`${process.env.BASE_URL}/recipes/${recipe.id}`}
                 className="text-2xl  "
               >
-                <h3 className=" max-w-[90%] text-2xl dark:text-darkTextColor underline-opening">
+                <h3 className=" max-w-[90%] text-2xl max-sm:text-sm dark:text-darkTextColor underline-opening">
                   {recipe.title}
                 </h3>
 
@@ -42,7 +45,7 @@ export default function RecipeCard({ data }: any) {
               </Link>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between ">
               <Link
                 href={`${process.env.BASE_URL}/recipes/category/${recipe.category}`}
                 className="bg-[#E895D0] dark:bg-darkSecondaryColor min-w-24 rounded-2xl px-6 mt-4 py-1  "
@@ -101,7 +104,7 @@ export default function RecipeCard({ data }: any) {
                   </div>
                 </div>
               )} */}
-              <div className=" mt-4">
+              <div className=" mt-4 max-sm:hidden">
                 <p className="text-[#27343A] dark:text-darkTextColor text-center">
                   {recipe.preparation_time}
                 </p>

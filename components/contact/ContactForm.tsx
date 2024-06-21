@@ -32,7 +32,7 @@ export default function ContactForm() {
 
   return (
     <div className="order-first col-span-4 max-w-screen-md px-8 py-10 md:order-last md:col-span-2 md:px-10 md:py-12">
-      <h2 className="mb-8 text-2xl text-greenColor dark:text-darkTextColor font-bold">
+      <h2 className="mb-8 max-sm:mb-3 text-2xl text-greenColor dark:text-darkTextColor font-bold">
         {t("getInTouch")}
       </h2>
       <p className="mt-2 mb-4 font-sans text-sm tracking-normal dark:text-darkTextColor">
@@ -126,7 +126,7 @@ export default function ContactForm() {
         </div>
         <button
           type="submit"
-          className="group flex cursor-pointer items-center rounded-xl bg-greenColor dark:bg-darkBgColor px-8 py-4 text-center font-semibold leading-tight text-white"
+          className="group flex cursor-pointer items-center rounded-xl bg-greenColor dark:bg-darkBgColor px-8 py-4 max-sm:py-1 text-center font-semibold leading-tight text-white"
         >
           Send
           <VscSend className="w-8 h-8 text-white object-cover group-hover:ml-8 ml-4 transition-all" />

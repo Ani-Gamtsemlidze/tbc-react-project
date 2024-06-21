@@ -55,7 +55,7 @@ export default function AvatarUploadPage({ setIsUpload }: any) {
     <>
       {/* {uploadBoxOpen && ( */}
       <div className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-50">
-        <div className="sm:w-[32rem] mx-auto my-10 overflow-hidden rounded-2xl bg-white shadow-lg sm:max-w-lg">
+        <div className="sm:w-[32rem] max-sm:w-[90%] mx-auto my-10 overflow-hidden rounded-2xl bg-white shadow-lg sm:max-w-lg">
           <div className="relative bg-greenColor py-6 pl-8 text-xl font-semibold uppercase tracking-wider text-white">
             Upload Image
             <svg

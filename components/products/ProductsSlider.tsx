@@ -13,12 +13,7 @@ export default function ProductsSlider() {
           disableOnInteraction: false,
         }}
         modules={[Autoplay]}
-        // navigation={true}
-        // pagination={{
-        //   dynamicBullets: true,
-        // }}
-        // modules={[Navigation]}
-        className="mySwiper products_swiper"
+        className="mySwiper products_swiper w-full"
       >
         <SwiperSlide>
           <Image

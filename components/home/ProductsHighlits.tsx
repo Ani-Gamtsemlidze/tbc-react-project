@@ -10,7 +10,7 @@ const ProductsHighlits = async () => {
   const limitedProductsData = productsData.slice(0, 6);
 
   return (
-    <div className="flex flex-col p-16 justify-center ">
+    <div className="flex flex-col p-16 max-sm:p-2 justify-center ">
       <div className="my-4 flex justify-between">
         <h2
           className={`text-2xl font-bold text-greenColor  ${arvo.className} `}
@@ -29,12 +29,12 @@ const ProductsHighlits = async () => {
           <MdArrowCircleRight className="text-xl  text-greenColor mr-4" />
         </Link>
       </div>
-      <div className="flex">
+      <div className="flex justify-center flex-wrap max-sm:justify-evenly">
         {limitedProductsData.map((data: any) => (
           <Link
             href={`${process.env.BASE_URL}/products/${data.id}`}
             key={data.id}
-            className=" text-[#27343A] dark:text-mainColor mr-4 "
+            className=" text-[#27343A] dark:text-mainColor mr-4 max-sm:mr-0 max-sm:mb-10"
           >
             <Image
               src={data.images[0]}

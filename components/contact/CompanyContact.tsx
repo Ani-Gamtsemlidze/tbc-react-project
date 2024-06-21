@@ -16,7 +16,10 @@ export interface ContactItemProps {
 
 function ContactItem({ icon, text, label, iconLink }: ContactItemProps) {
   return (
-    <Link href={iconLink} className="my-6 flex items-center text-left ">
+    <Link
+      href={iconLink}
+      className="my-6 max-sm:my-2 flex items-center text-left "
+    >
       {icon}
       <div className="cursor-pointer font-serif text-base md:text-lg ml-4">
         {text}
@@ -60,8 +63,8 @@ const CompanyContact = async () => {
   ];
 
   return (
-    <div className="col-span-4 px-8 py-10  text-gray-800 dark:text-darkTextColor md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
-      <h2 className="mb-8 text-2xl font-bold text-greenColor dark:text-darkTextColor">
+    <div className="col-span-4 px-8 py-10 max-sm:py-6 max-sm:px-4 text-gray-800 dark:text-darkTextColor md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
+      <h2 className="mb-8 max-sm:mb-3 text-2xl font-bold text-greenColor dark:text-darkTextColor">
         {t("contactUs")}
       </h2>
       <ul className="flex  flex-col justify-center">

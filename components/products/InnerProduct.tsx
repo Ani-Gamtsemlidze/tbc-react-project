@@ -102,11 +102,10 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
             <p>Exploring</p>
             Vegan Products
           </h1>
-          <div className="flex max-w-[1200px] pt-0 px-3 mx-auto pb-8">
-            <div className=" w-full max-w-[600px]">
+          <div className="flex max-sm:w-full max-sm:overflow-hidden max-w-[1200px] max-sm:flex-col max-sm:items-center pt-0 px-3 mx-auto pb-8">
+            <div className=" w-full max-w-[600px] max-sm:max-w-[100vw] ">
               <Swiper
-                spaceBetween={10}
-                navigation={false}
+                spaceBetween={0}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
@@ -178,7 +177,7 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
               </Swiper>
             </div>
             <div>
-              <div className="ml-12 ">
+              <div className="ml-12 max-sm:ml-2 ">
                 <div className=" mt-4 flex items-center">
                   <div className="bg-[#035C41] max-w-60 px-6 rounded-2xl   py-2   ">
                     <p className="text-white text-center">
@@ -232,14 +231,14 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
                   </div>
                 </div>
                 <h1
-                  className={`text-7xl font-bold  mt-8 w-[700px] text-[#035C41] leading-snug	 ${monda.className}`}
+                  className={`text-7xl font-bold  mt-8 max-sm:text-3xl text-[#035C41] leading-snug	 ${monda.className}`}
                 >
                   {innerProductData.title}
                 </h1>
                 <p className="text-2xl mt-4 ">$ {innerProductData.price}</p>
                 <p className="text-2xl mt-4 ">{innerProductData.description}</p>
               </div>
-              <div className="flex pl-12">
+              <div className="flex pl-12 max-sm:pl-0">
                 <div className="flex flex-col items-start ml-10  w-full ">
                   <div className="flex  w-full items-center justify-between">
                     <div className="my-8">
@@ -260,11 +259,6 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
                           )
                         )}
                       </ul>
-                    </div>
-                    <div className="mr-12">
-                      <p className={` text-2xl ${monda.className}`}>
-                        Nutrients: {innerProductData?.nutrients}
-                      </p>
                     </div>
                   </div>
                   <AddToCart

@@ -9,13 +9,13 @@ const RecipesOfMonth = async () => {
   const limitedRecipes = recipes.slice(0, 6);
 
   return (
-    <div className="flex flex-col p-16 justify-center ">
-      <div className="flex">
+    <div className="flex flex-col p-16 max-sm:p-2 justify-center ">
+      <div className="flex justify-center flex-wrap max-sm:justify-evenly">
         {limitedRecipes.map((data: any) => (
           <Link
             href={`${process.env.BASE_URL}/recipes/${data.id}`}
             key={data.id}
-            className=" text-[#27343A] dark:text-mainColor mr-4"
+            className=" text-[#27343A] dark:text-mainColor mr-4 max-sm:mr-0 max-sm:mb-10 "
           >
             <Image
               src={data?.images?.[0] ?? "/images/dessert.jpg"}

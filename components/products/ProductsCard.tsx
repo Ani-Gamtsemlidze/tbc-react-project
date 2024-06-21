@@ -146,7 +146,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
   };
 
   return (
-    <div className="flex flex-wrap   gap-[0.6rem]  w-full ">
+    <div className="flex flex-wrap   gap-[0.6rem] max-sm:justify-center  w-full ">
       {data &&
         data.map((product) => (
           <div

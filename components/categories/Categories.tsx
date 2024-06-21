@@ -37,11 +37,25 @@ export default function Categories() {
   return (
     <div className="flex  flex-wrap justify-start  mt-6">
       <Swiper
-        slidesPerView={4}
+        slidesPerView={3}
         spaceBetween={30}
         centeredSlides={true}
         navigation={true}
         loop={true}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 50,
+          },
+        }}
         modules={[Navigation]}
         className="mySwiper categories_swiper"
       >
@@ -53,13 +67,13 @@ export default function Categories() {
               className=" bg-[rgb(255,240,218)] w-96 "
             >
               <Image
-                className="w-[440px] h-[324px] rounded-2xl object-cover"
+                className="w-[440px] h-[324px]  max-sm:w-full rounded-2xl object-cover"
                 src={category.image}
                 width={400}
                 height={400}
                 alt="recipe image"
               />
-              <h1 className="font-bold text-2xl dark:text-mainColor text-[#27343a] uppercase mt-4">
+              <h1 className="font-bold text-2xl max-sm:text-center dark:text-mainColor text-[#27343a] uppercase mt-4">
                 {category.name}
               </h1>
             </Link>

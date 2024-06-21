@@ -26,8 +26,8 @@ export default function UserInfo({ userData }: any) {
   }
 
   return (
-    <div className="m-6 max-w-sm relative">
-      <div className="rounded-lg w-96 border bg-white dark:bg-darkBgColor dark:border-darkSecondaryColor px-4 pt-8 pb-10 shadow-lg">
+    <div className="m-6 max-w-sm relative max-sm:w-full  max-sm:m-0">
+      <div className="rounded-lg w-96 max-sm:w-full border bg-white dark:bg-darkBgColor dark:border-darkSecondaryColor px-4 pt-8 pb-10 shadow-lg">
         <div
           onClick={handleUploadPicture}
           className="relative mx-auto w-36 rounded-full"
