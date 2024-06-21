@@ -189,16 +189,16 @@ const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
                         return (
                           <div className=" relative " key={el}>
                             <div
-                              className=" absolute top-1 right-1  w-4 h-4 rounded-full bg-red-500 flex items-center justify-center  text-slate-50  cursor-pointer "
+                              className=" absolute top-1 right-1 p-2 w-4 h-4 rounded-full bg-red-500 flex items-center justify-center  text-slate-50  cursor-pointer "
                               onClick={() => handleDeleteImage(el)}
                             >
                               X
                             </div>
                             <Image
-                              className=" rounded-md "
+                              className=" rounded-md w-48 h-48 object-cover"
                               src={el}
-                              width={70}
-                              height={70}
+                              width={300}
+                              height={300}
                               alt="img"
                             />
                           </div>

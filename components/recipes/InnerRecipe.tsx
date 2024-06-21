@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { monda, oleo } from "../../app/fonts";
 
-function InnerBlog({ recipeData }: any) {
+function InnerRecipe({ recipeData }: any) {
   return (
     <div className="flex flex-col w-full bg-mainColor dark:bg-darkContentColor">
       {recipeData ? (
@@ -128,4 +128,4 @@ function InnerBlog({ recipeData }: any) {
   );
 }
 
-export { InnerBlog };
+export { InnerRecipe };

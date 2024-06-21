@@ -15,6 +15,7 @@ import {
 } from "@headlessui/react";
 import { RiMapPinUserLine } from "react-icons/ri";
 import { IoMdLogOut } from "react-icons/io";
+import { BsBox2Heart } from "react-icons/bs";
 
 export interface User {
   firstname?: string;
@@ -118,7 +119,7 @@ const HeaderProfile = () => {
                       active ? "bg-gray-200 dark:bg-slate-700" : ""
                     }`}
                   >
-                    <PiBowlFood className="text-md text-greenColor" />
+                    <BsBox2Heart className="text-md text-greenColor" />
                     <span className="text-black dark:text-white px-2 py-1 text-sm rounded-sm transition dark:hover:border-[#B85042]">
                       {t("orders")}
                     </span>

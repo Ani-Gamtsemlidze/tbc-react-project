@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { getCategory } from "../../user-api";
 import { Recipe } from "../recipes/RecipesPage";
 import RecipeCard from "../recipes/RecipeCard";
-import { acme, adamina, oleo } from "../../app/fonts";
-import AllCategories from "./AllCategories";
+import { oleo } from "../../app/fonts";
+import { UserFeatures } from "../recipes/UserFeatures";
 
 interface CategoryProps {
   categoryName: string;
@@ -40,7 +40,8 @@ export default function Category({ categoryName }: CategoryProps) {
         {categoryName} Recipes
       </h1>
       <div className="flex items-start">
-        <div className="ml-8">
+        <UserFeatures />
+        {/* <div className="ml-8">
           <h1
             className={`font-bold text-[#035C41] text-3xl  ${acme.className} `}
           >
@@ -49,12 +50,11 @@ export default function Category({ categoryName }: CategoryProps) {
           <ul className={`flex flex-col text-xl ${adamina.className}`}>
             <AllCategories />
           </ul>
-        </div>{" "}
-        {data.length === 0 ? (
-          <p>No recipes found.</p>
-        ) : (
+        </div> */}
+
+        <div>
           <RecipeCard data={data} />
-        )}
+        </div>
       </div>
     </div>
   );

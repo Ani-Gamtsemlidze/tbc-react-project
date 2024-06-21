@@ -1,5 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
-import { InnerBlog } from "../../../../../components/recipes/InnerBlog";
+import { InnerRecipe } from "../../../../../components/recipes/InnerRecipe";
 import { getRecipe } from "../../../../../user-api";
 import { Metadata } from "next";
 
@@ -18,5 +18,5 @@ export default async function Page({ params }: PageParams) {
 
   unstable_setRequestLocale(params.locale);
 
-  return <InnerBlog recipeData={recipeData[0]} />;
+  return <InnerRecipe recipeData={recipeData[0]} />;
 }

@@ -4,54 +4,9 @@ import Link from "next/link";
 import { Recipe } from "./RecipesPage";
 import { useAdmin } from "../../app/context/AdminContext";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useState } from "react";
-// import useDropdown from "../../hooks";
-// import { AiFillEdit } from "react-icons/ai";
-// import { RiDeleteBin3Fill } from "react-icons/ri";
-// import EditRecipeForm from "./EditRecipeForm";
-// import { deleteUserRecipe } from "../../user-api";
-// import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function RecipeCard({ data }: any) {
   const { isAdmin } = useAdmin();
-  // const { user } = useUser();
-
-  // const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
-
-  // const { isDropDown, handleDropDown } = useDropdown();
-  // const [showEditForm, setShowEditForm] = useState(false);
-
-  // const handleDelete = async (
-  //   e: React.MouseEvent<HTMLButtonElement>,
-  //   id: number
-  // ) => {
-  //   e.preventDefault();
-  //   await deleteUserRecipe(id, user?.sub as string);
-  // };
-
-  // const handleEditClick = (id: number, e: React.MouseEvent<HTMLDivElement>) => {
-  //   e.stopPropagation();
-  //   if (selectedRecipeId === id && isDropDown) {
-  //     setSelectedRecipeId(null);
-  //     handleDropDown();
-  //   } else {
-  //     setSelectedRecipeId(id);
-  //     if (!isDropDown) {
-  //       handleDropDown();
-  //     }
-  //   }
-  // };
-
-  // const handleEditFormOpen = (
-  //   e: React.MouseEvent<HTMLButtonElement>,
-  //   id: number
-  // ) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   setShowEditForm(true);
-  //   setSelectedRecipeId(id);
-  //   handleDropDown();
-  // };
 
   return (
     <div className="flex  flex-wrap justify-center ">
