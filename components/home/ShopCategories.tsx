@@ -4,8 +4,13 @@ import Image from "next/image";
 import { getProductsCategories } from "../../user-api";
 
 const ShopCategories = async () => {
-  const categories = await getProductsCategories();
+  let categories = [];
 
+  try {
+    categories = await getProductsCategories();
+  } catch (error) {
+    console.error("Error fetching product categories:", error);
+  }
   return (
     <div className="flex flex-col p-16 justify-center max-sm:p-2  ">
       <div className="my-4">

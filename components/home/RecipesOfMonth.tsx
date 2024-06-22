@@ -4,7 +4,13 @@ import Image from "next/image";
 import { inter } from "../../app/fonts";
 
 const RecipesOfMonth = async () => {
-  const recipes = await getRecipes();
+  let recipes = [];
+
+  try {
+    recipes = await getRecipes();
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
 
   const limitedRecipes = recipes.slice(0, 6);
 

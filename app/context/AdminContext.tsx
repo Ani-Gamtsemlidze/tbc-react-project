@@ -7,7 +7,8 @@ import React, {
   ReactNode,
 } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { getUser } from "../../user-api";
+import { filterProducts, getUser } from "../../user-api";
+import { SelectChangeEvent } from "@mui/material";
 
 // Define the UserContext type
 interface UserContextProps {
@@ -15,6 +16,9 @@ interface UserContextProps {
   isAdmin: boolean;
   isLoading: boolean;
   userdata: any;
+  handleChange: any;
+  filteredData: any;
+  price: string | number;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -23,12 +27,37 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
   const { user, isLoading } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
   const [userdata, setUserData] = useState<any[]>([]);
+  const [price, setPrice] = React.useState<string | number>("");
 
+  const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     if (user?.sub) {
       fetchUser(user.sub);
     }
   }, [user]);
+
+  const handleChange = async (event: SelectChangeEvent<typeof price>) => {
+    const selectedValue = event.target.value;
+    setPrice(selectedValue);
+
+    let filter1 = 0;
+    let filter2 = 0;
+
+    if (selectedValue === 1) {
+      filter1 = 5;
+      filter2 = 20;
+    } else if (selectedValue === 2) {
+      filter1 = 20;
+      filter2 = 50;
+    } else if (selectedValue === 3) {
+      filter1 = 50;
+      filter2 = 150;
+    }
+
+    const products = await filterProducts(filter1, filter2);
+    setFilteredData(products);
+    console.log(products, "FRONTPRODUCTS");
+  };
 
   const fetchUser = async (userId: string) => {
     if (user) {
@@ -41,7 +70,17 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, isAdmin, isLoading, userdata }}>
+    <UserContext.Provider
+      value={{
+        user,
+        isAdmin,
+        isLoading,
+        userdata,
+        handleChange,
+        filteredData,
+        price,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

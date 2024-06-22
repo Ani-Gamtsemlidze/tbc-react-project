@@ -34,6 +34,7 @@ interface ProductsCardProps {
 }
 
 export default function ProductsCard({ data }: ProductsCardProps) {
+  console.log(data, "LETSSEEDATA");
   const { user } = useUser();
   const { fetchCartData } = useCart();
   const { isAdmin } = useAdmin();

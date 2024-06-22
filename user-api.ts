@@ -30,7 +30,6 @@ export async function getRecipe(id: number) {
   }
 }
 export async function getUserRecipes(userId: string) {
-  console.log("USERID", userId)
   try {
     const url = `${process.env.BASE_URL}/api/get-user-recipe/${userId}`;
     const response = await fetch(url, {
@@ -40,7 +39,6 @@ export async function getUserRecipes(userId: string) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("USERRECIPEDATA", data)
     return data.recipes.rows;
   } catch (error) {
     console.error('Error fetching recipe:', error);
@@ -286,7 +284,6 @@ export async function editRecipeInfo(id: string, editRecipe:any) {
   }
 }
 export async function editProductInfo(id: string, editedProduct: any) {
-  console.log(id, "EDITEDPRODUCT");
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-product-info/${id}`, {
     cache:"no-store",
@@ -310,7 +307,6 @@ export async function editProductInfo(id: string, editedProduct: any) {
 }
 
 export async function getCarts(user_id: string) {
-  console.log("CARTS", user_id )
   try {
 
     const response = await fetch(`${process.env.BASE_URL}/api/get-cart/${user_id}`, {
@@ -367,7 +363,6 @@ export const deleteProducts = async (userId: string) => {
 };
 
 export const deleteUserRecipe = async (productId: number, userId: string) => {
-  console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/update-user-recipe/${userId}`, {
     cache:"no-store",
     method: "DELETE",
@@ -378,7 +373,6 @@ export const deleteUserRecipe = async (productId: number, userId: string) => {
   });
 };
 export const deleteProductAdmin = async (productId: number, userId: string) => {
-  console.log(productId, userId, "DELETEPRODUCT")
   await fetch(`${process.env.BASE_URL}/api/update-product-info/${userId}`, {
     cache:"no-store",
     method: "DELETE",
@@ -390,7 +384,6 @@ export const deleteProductAdmin = async (productId: number, userId: string) => {
 };
 
 export const deleteCartItem = async (userId: string, productId: number ) => {
-  console.log(productId)
   await fetch(`${process.env.BASE_URL}/api/get-cart/${userId}`, {
     cache:"no-store",
     method: "DELETE",
@@ -422,13 +415,24 @@ export async function changePictureAction(sub: string, picture: string) {
   revalidatePath("/Profile");
 }
 
-export  const filterProducts  = async (filter1: number, filter2: number) => {
-  const response = await fetch(`${process.env.BASE_URL}/api/get-picture`, {
-    method: "POST",
-    body: JSON.stringify({ filter1, filter2}),
-  });
-  const data = await response.json();
-  return data.response;
-}
+export const filterProducts = async (filter1: number, filter2: number) => {
+  const params = new URLSearchParams({ filter1: filter1.toString(), filter2: filter2.toString() });
+  const url = `${process.env.BASE_URL}/api/products/filter-products?${params.toString()}`;
 
+  try {
+    const response = await fetch(url, {
+      method: "GET"
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const {products} = await response.json()
+    return products?.rows;
+  } catch (error) {
+    console.error("Error fetching filtered products:", error);
+    return [];
+  }
+}
 

@@ -5,8 +5,13 @@ import { arvo, inter } from "../../app/fonts";
 import { MdArrowCircleRight } from "react-icons/md";
 
 const ProductsHighlits = async () => {
-  const productsData = await getProducts();
+  let productsData = [];
 
+  try {
+    productsData = await getProducts();
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
   const limitedProductsData = productsData.slice(0, 6);
 
   return (

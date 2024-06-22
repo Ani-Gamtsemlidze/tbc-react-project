@@ -2,16 +2,13 @@ import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
+import { useAdmin } from "../../app/context/AdminContext";
 
 export default function PriceFilter() {
-  const [price, setPrice] = React.useState<string | number>("");
   const [open, setOpen] = React.useState(false);
-  console.log(price);
 
-  const handleChange = (event: SelectChangeEvent<typeof price>) => {
-    setPrice(event.target.value);
-  };
+  const { price, handleChange } = useAdmin();
 
   const handleClose = () => {
     setOpen(false);
@@ -25,7 +22,7 @@ export default function PriceFilter() {
     <div className="">
       <FormControl className="price_input" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel className="" id="demo-controlled-open-select-label">
-          Price
+          Price Filter
         </InputLabel>
         <Select
           className=""
@@ -39,11 +36,10 @@ export default function PriceFilter() {
           onChange={handleChange}
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>All Products</em>
           </MenuItem>
-          <MenuItem value={1}>Between 5 to 20</MenuItem>
-          <MenuItem value={2}>Between 20 to 50</MenuItem>
-          <MenuItem value={3}>Between 50 to 150</MenuItem>
+          <MenuItem value={1}>Between $ 5 to $ 20</MenuItem>
+          <MenuItem value={2}>Between $ 20 to $ 50</MenuItem>
         </Select>
       </FormControl>
     </div>

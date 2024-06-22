@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <>
-      <header className=" hidden items-center shadow-custom dark:shadow-customDark bg-mainColor dark:bg-darkBgColor  py-1 px-8 sticky top-0 z-50">
+      <header className=" items-center shadow-custom dark:shadow-customDark bg-mainColor dark:bg-darkBgColor  py-1 px-8 sticky top-0 z-50">
         <div className="flex items-center w-full justify-between">
           <div className="flex">
             <Logo />

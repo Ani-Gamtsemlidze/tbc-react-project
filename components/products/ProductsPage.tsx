@@ -17,6 +17,10 @@ export default function ProductsPage({ productsData }: ProductsPageProps) {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
 
   const { isAdmin } = useAdmin();
+  const { filteredData } = useAdmin();
+  console.log(filteredData, "FILTEREDDATA");
+  console.log("Filtered Data:", filteredData);
+  console.log("Products Data:", productsData);
 
   return (
     <div className="flex flex-col  bg-mainColor dark:bg-gray-700 relative">
@@ -64,7 +68,9 @@ export default function ProductsPage({ productsData }: ProductsPageProps) {
           <ProductsFeatures productsData={productsData} />
         </div>
         <div className="flex w-full ml-6">
-          <ProductsCard data={productsData} />
+          <ProductsCard
+            data={filteredData?.length > 0 ? filteredData : productsData}
+          />
         </div>
       </div>
     </div>

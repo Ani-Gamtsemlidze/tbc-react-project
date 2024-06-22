@@ -6,7 +6,6 @@ import { oleo } from "../../fonts";
 import { ShopCategories } from "../../../components/home/ShopCategories";
 import { ProductsHighlits } from "../../../components/home/ProductsHighlits";
 import { RecipesOfMonth } from "../../../components/home/RecipesOfMonth";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Discover the Vegan Lifestyle at Veggie Vibes",

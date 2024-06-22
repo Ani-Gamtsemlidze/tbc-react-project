@@ -3,7 +3,7 @@ import ContactForm from "../../../../components/contact/ContactForm";
 import { Metadata } from "next";
 import { CompanyContact } from "../../../../components/contact/CompanyContact";
 
-interface Params {
+export interface Params {
   params: {
     locale: string;
   };
