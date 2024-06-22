@@ -10,7 +10,6 @@ import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin3Fill } from "react-icons/ri";
 import useDropdown from "../../hooks";
 import EditProductForm from "./EditProductForm";
-// import { HiMiniStar } from "react-icons/hi2";
 import {
   addRating,
   addToCart,
@@ -19,6 +18,7 @@ import {
 import BasicRating from "./Rating";
 import { deleteProductAdmin } from "../../user-api";
 import AddToCart from "./AddToCart";
+import LoginPromptModal from "./LoginPromptModal";
 
 export interface Product {
   id: number;
@@ -34,13 +34,14 @@ interface ProductsCardProps {
 }
 
 export default function ProductsCard({ data }: ProductsCardProps) {
-  console.log(data, "LETSSEEDATA");
   const { user } = useUser();
   const { fetchCartData } = useCart();
   const { isAdmin } = useAdmin();
   const { isDropDown, handleDropDown } = useDropdown();
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
   const [showEditForm, setShowEditForm] = useState(false);
+
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   const [ratings, setRatings] = useState<{
     [productId: number]: number | null;
@@ -68,7 +69,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
 
   const handleAddToCart = async (productId: number) => {
     if (!user) {
-      console.error("User not authenticated");
+      setShowLoginPrompt(true);
       return;
     }
 
@@ -253,6 +254,10 @@ export default function ProductsCard({ data }: ProductsCardProps) {
                 )}
               </div>
             </div>
+            <LoginPromptModal
+              show={showLoginPrompt}
+              onClose={() => setShowLoginPrompt(false)}
+            />
           </div>
         ))}
     </div>

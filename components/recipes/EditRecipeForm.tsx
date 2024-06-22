@@ -42,14 +42,12 @@ export default function EditRecipeForm({
     setSumiting: (d: boolean) => void
   ) => {
     console.log(errors, "errorserrorserrors");
-    // e.preventDefault();
     if (!editedRecipe) return;
     try {
       await editRecipeInfo(user?.sub as string, {
         ...data,
         id: editedRecipe.id,
       });
-      // setIsEditing(false);
       console.log("Recipe updated successfully");
       setSumiting(false);
       toast.success("edited successfully!");
@@ -63,7 +61,7 @@ export default function EditRecipeForm({
   };
 
   if (!editedRecipe) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   return (

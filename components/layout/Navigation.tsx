@@ -15,7 +15,7 @@ export default function Navigation() {
 
   return (
     <nav className="fill  ">
-      <ul className=" flex ml-8 my-3 ">
+      <ul className=" flex max-lg:flex-col max-lg:items-center ml-8 max-lg:ml-3 my-3 ">
         {navigation.map((list) => (
           <li key={list.href} className="flex items-center">
             <Link
@@ -28,7 +28,7 @@ export default function Navigation() {
 
               duration-[0.5s]
 
-              hover:text-white hover:delay-200 hover:z-10 dark:hover:text-[#E2E8F0]
+              hover:text-white hover:delay-200 hover:z-10 dark:hover:text-[#E2E8F0] max-lg:hover:bg-none max-lg:after:hidden
 
               
               ${

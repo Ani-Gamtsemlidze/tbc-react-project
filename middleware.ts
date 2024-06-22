@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@auth0/nextjs-auth0/edge";
 
 function pathProtected(pathName: string): boolean {
-  const protectedRoutes = ["/profile", "/users", "/recipes"];
+  const protectedRoutes = ["/profile", "/orders", "/myrecipes", "/checkout"];
   return protectedRoutes.some(route => pathName.startsWith(route));
 }
 

@@ -3,7 +3,7 @@ import { getUserRecipes } from "../../../../user-api";
 
 import UserRecipe from "../../../../components/recipes/UserRecipe.";
 import { oleo } from "../../../fonts";
-// import { getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await getSession();
   const user = session?.user;
-  // const t = await getTranslations("userRecipes");
+  const t = await getTranslations("userRecipes");
 
   if (!user) {
     return <div>User not logged in</div>;
@@ -27,7 +27,9 @@ export default async function Page() {
     <div className="min-h-screen bg-mainColor">
       <h1
         className={` text-5xl my-12 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
-      ></h1>
+      >
+        {t("myRecipes")}
+      </h1>
 
       <UserRecipe data={userRecipes} />
     </div>

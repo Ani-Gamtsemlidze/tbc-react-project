@@ -39,6 +39,7 @@ export default function UserRecipe({ data }: any) {
     id: number
   ) => {
     e.preventDefault();
+    handleDropDown();
     await deleteUserRecipe(id, user?.sub as string);
   };
 
@@ -54,7 +55,7 @@ export default function UserRecipe({ data }: any) {
   };
 
   return (
-    <div className="flex flex-wrap justify-start ml-36">
+    <div className=" flex-wrap  max-w-[900px]  flex justify-center">
       <UserFeatures />
       {data && data.length > 0 ? (
         data.map((recipe: Recipe) => (
@@ -62,22 +63,23 @@ export default function UserRecipe({ data }: any) {
             key={recipe.id}
             className="ml-8 border border-gray-300 px-8 py-4 rounded-lg"
           >
-            <Image
-              className="w-64 h-56 rounded-md object-cover"
-              src={recipe.images?.[0] ?? "/images/dessert.jpg"}
-              width={400}
-              height={400}
-              alt="recipe image"
-            />
+            <div className="relative h-56 w-64 mb-4 rounded-md overflow-hidden">
+              <Image
+                src={recipe.images?.[0] ?? "/images/dessert.jpg"}
+                alt="recipe image"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
 
             <div className="flex items-center justify-between">
               <div className="bg-greenColor min-w-24 rounded-2xl px-6 mt-4 py-1">
-                <p className="text-[#fff] text-center">{recipe.category}</p>
+                <p className="text-white text-center">{recipe.category}</p>
               </div>
 
               <div className="relative">
-                <Menu as="div" className="relative">
-                  <MenuButton className="w-12 h-12  border-greenColor dark:border-darkTextMain flex items-center justify-center cursor-pointer">
+                <Menu>
+                  <MenuButton className="w-12 h-12 border-greenColor dark:border-darkTextMain flex items-center justify-center cursor-pointer">
                     <HiDotsHorizontal className="text-2xl text-greenColor font-bold" />
                   </MenuButton>
                   <Transition
@@ -90,26 +92,26 @@ export default function UserRecipe({ data }: any) {
                   >
                     <MenuItems className="bg-white dark:bg-slate-800 border border-gray-200 shadow-md rounded-xl absolute top-[2.5rem] right-[-6rem] z-50 py-4 w-60 min-h-32">
                       <MenuItem>
-                        <li className="border-b border-b-gray-400 mx-3 text-[#64a643] dark:text-[#CBD5E1] flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
-                          <AiFillEdit className="text-lg" />
+                        <div className="flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
+                          <AiFillEdit className="text-lg text-[#64a643] dark:text-[#CBD5E1]" />
                           <button
                             onClick={(e) => handleEditFormOpen(e, recipe.id)}
-                            className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
+                            className="text-black dark:text-white ml-2 transition hover:text-[#B85042]"
                           >
                             Edit Recipe
                           </button>
-                        </li>
+                        </div>
                       </MenuItem>
                       <MenuItem>
-                        <li className="border-b border-b-gray-400 mx-3 text-[#B85042] dark:text-[#CBD5E1] flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
-                          <RiDeleteBin3Fill className="text-xl" />
+                        <div className="flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
+                          <RiDeleteBin3Fill className="text-xl text-[#B85042] dark:text-[#CBD5E1]" />
                           <button
                             onClick={(e) => handleDelete(e, recipe.id)}
-                            className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
+                            className="text-black dark:text-white ml-2 transition hover:text-[#B85042]"
                           >
                             Delete Recipe
                           </button>
-                        </li>
+                        </div>
                       </MenuItem>
                     </MenuItems>
                   </Transition>
@@ -117,20 +119,17 @@ export default function UserRecipe({ data }: any) {
               </div>
             </div>
 
-            <div className="mt-4 w-48">
-              <Link href={`/recipes/${recipe.id}`} className="text-2xl">
-                {recipe.title}
+            <div className="mt-4">
+              <Link href={`/recipes/${recipe.id}`}>
+                <a className="text-2xl font-bold hover:underline">
+                  {recipe.title}
+                </a>
               </Link>
             </div>
+
             {showEditForm && selectedRecipeId === recipe.id && (
-              <div
-                onClick={() => setShowEditForm(false)}
-                className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-50"
-              >
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="bg-white w-[650px] max-h-[530px] overflow-y-auto rounded-2xl fixed"
-                >
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.7)] backdrop-blur-sm">
+                <div className="bg-white w-[650px] max-h-[530px] overflow-y-auto rounded-2xl">
                   <EditRecipeForm
                     closeForm={() => setShowEditForm(false)}
                     recipeId={selectedRecipeId}
@@ -141,15 +140,14 @@ export default function UserRecipe({ data }: any) {
           </div>
         ))
       ) : (
-        <div className="flex items-center flex-col ml-16">
-          <FaLeaf className="text-xl mr-3 text-greenColor" />
-
-          <p className=" text-lg text-gray-500 break-words">
+        <div className="flex items-center flex-col">
+          <FaLeaf className="text-4xl mb-4 text-greenColor" />
+          <p className="text-lg text-gray-500 mb-2">
             It seems you haven't added any recipes yet.
           </p>
-          <span className="text-lg text-greenColor">
+          <p className="text-lg text-greenColor">
             Let's contribute to our collection of vegan recipes!
-          </span>
+          </p>
         </div>
       )}
     </div>

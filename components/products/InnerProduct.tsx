@@ -28,6 +28,7 @@ import { useCart } from "../../app/context/CartContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import AddToCart from "./AddToCart";
 import { FaLeaf } from "react-icons/fa";
+import LoginPromptModal from "./LoginPromptModal";
 
 interface InnerProductData {
   id: number;
@@ -47,6 +48,8 @@ interface InnerProductProps {
 export default function InnerProduct({ innerProductData }: InnerProductProps) {
   const { fetchCartData } = useCart();
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+
   const [averageRatings, setAverageRatings] = useState<{
     [productId: number]: number;
   }>({});
@@ -56,7 +59,6 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
     const fetchInitialAverageRatings = async () => {
       const initialAverageRatings: { [productId: number]: number } = {};
       const avgRating = await getAverageRating(innerProductData.id);
-      console.log(avgRating, "RATING");
       initialAverageRatings[innerProductData.id] = avgRating;
       setAverageRatings(initialAverageRatings);
     };
@@ -66,27 +68,20 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
 
   const handleAddToCart = async (productId: number) => {
     if (!user) {
-      console.error("User not authenticated");
+      setShowLoginPrompt(true);
       return;
     }
 
     try {
       const quantity = 1;
 
-      const result = await addToCart(user!.sub!, productId, quantity);
-      console.log("DATAID", innerProductData);
+      await addToCart(user!.sub!, productId, quantity);
       fetchCartData();
-      console.log("Product added to cart:", result);
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
   };
-  console.log(innerProductData);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  console.log(
-    typeof averageRatings[innerProductData.id],
-    averageRatings[innerProductData.id]
-  );
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -268,6 +263,10 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
               </div>
             </div>
           </div>
+          <LoginPromptModal
+            show={showLoginPrompt}
+            onClose={() => setShowLoginPrompt(false)}
+          />
         </div>
       )}
     </div>

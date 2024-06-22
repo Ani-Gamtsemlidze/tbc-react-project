@@ -37,11 +37,6 @@ export default function RecipeCard({ data }: any) {
                 <h3 className=" max-w-[90%] text-2xl max-sm:text-sm dark:text-darkTextColor underline-opening">
                   {recipe.title}
                 </h3>
-
-                {/* <p className="text-lg my-4 w-52 group relative ">
-                  <span>{recipe.title}</span>
-                  <span className="absolute -bottom-1 left-0 w-0 transition-all h-[1px] bg-greenColor group-hover:w-56"></span>
-                </p> */}
               </Link>
             </div>
 
@@ -55,61 +50,21 @@ export default function RecipeCard({ data }: any) {
                 </span>
               </Link>
               {isAdmin && (
-                <div
-                  // onClick={(e) => handleEditClick(recipe.id, e)}
-                  className="mt-4 cursor-pointer"
-                >
+                <div className="mt-4 cursor-pointer">
                   <HiDotsHorizontal className="text-2xl text-greenColor font-bold" />
                 </div>
               )}
-              <div className="relative">
-                {/* {selectedRecipeId === recipe.id && isDropDown && (
-                  <ul
-                    onClick={(e) => e.stopPropagation()}
-                    id="dropdown"
-                    className="bg-white dark:bg-slate-800 border border-greenColor shadow-md rounded absolute top-0 right-[-40px] z-50 py-4 w-52 min-h-48"
-                  >
-                    <li className="border-b border-b-gray-400 mx-3 text-[#64a643] dark:text-[#CBD5E1] flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
-                      <AiFillEdit className="text-lg" />
-                      <button
-                        onClick={(e) => handleEditFormOpen(e, recipe.id)}
-                        className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
-                      >
-                        Edit Recipe
-                      </button>
-                    </li>
-                    <li className="border-b border-b-gray-400 mx-3 text-[#B85042] dark:text-[#CBD5E1] flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 pl-4 py-2">
-                      <RiDeleteBin3Fill className="text-xl" />
-                      <button
-                        onClick={(e) => handleDelete(e, recipe.id)}
-                        className="text-black dark:text-white px-2 py-1 rounded-sm transition dark:hover:border-[#B85042]"
-                      >
-                        Delete Recipe
-                      </button>
-                    </li>
-                  </ul>
-                )} */}
-              </div>
-
-              {/* {showEditForm && selectedRecipeId === recipe.id && (
-                <div
-                  onClick={() => setShowEditForm(false)}
-                  className="bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0 w-screen right-0 z-50"
-                >
-                  <div
-                    onClick={(e) => e.stopPropagation()}
-                    className="bg-white w-[650px] max-h-[700px] overflow-y-auto rounded-2xl fixed"
-                  >
-                    <EditRecipeForm recipeId={selectedRecipeId} />
-                  </div>
-                </div>
-              )} */}
+              <div className="relative"></div>
               <div className=" mt-4 max-sm:hidden">
                 <p className="text-[#27343A] dark:text-darkTextColor text-center">
                   {recipe.preparation_time}
                 </p>
               </div>
             </div>
+            {/* <LoginPromptModal
+              show={showLoginPrompt}
+              onClose={() => setShowLoginPrompt(false)}
+            /> */}
           </div>
         ))}
     </div>

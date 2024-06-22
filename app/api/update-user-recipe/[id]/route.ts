@@ -2,10 +2,9 @@ import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 
 export const revalidate = 0;
-// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic'
 
 export async function PUT(request: NextRequest) {
-  // Extracting the id from the URL
   const userId = request.nextUrl.pathname.split("/").pop();
 
   const test = await request.json();
