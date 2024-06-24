@@ -19,16 +19,11 @@ export default function Home({ params }: Params) {
   return (
     <div className="bg-mainColor dark:bg-slate-500 ">
       <ProductsSlider />
-      <div>
-        <ShopCategories />
-      </div>
-      <div className="">
-        <ProductsHighlits />
-      </div>
-
-      <Categories />
+      <ShopCategories />
+      <ProductsHighlits />
 
       <RecipesOfMonth />
+      <Categories />
     </div>
   );
 }

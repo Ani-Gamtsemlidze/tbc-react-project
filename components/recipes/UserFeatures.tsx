@@ -9,7 +9,7 @@ const UserFeatures = () => {
   console.log(isDropDown);
   return (
     <div className="mr-4 max-lg:mb-4">
-      <div className={`flex flex-col top-32 ${isDropDown ? " ts" : "sticky"}`}>
+      <div className={`flex flex-col top-32 ${isDropDown ? " " : "sticky"}`}>
         <AddRecipeForm
           isDropDown={isDropDown}
           handleDropDown={handleDropDown}

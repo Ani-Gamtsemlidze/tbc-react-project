@@ -7,7 +7,10 @@ import { User } from "./components/profile/UserInfo";
 
 export async function getUsers(){
   
-    const response = await fetch(`${process.env.BASE_URL}/api/get-users` );
+    const response = await fetch(`${process.env.BASE_URL}/api/get-users`, 
+    {cache: "no-store"}
+    
+    );
     const data = await response.json()
 
     return data.users?.rows;
@@ -33,7 +36,7 @@ export async function getUserRecipes(userId: string) {
   try {
     const url = `${process.env.BASE_URL}/api/get-user-recipe/${userId}`;
     const response = await fetch(url, {
-      cache: "no-cache", 
+      cache: "no-store", 
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { getRecipes } from "../../user-api";
 import Image from "next/image";
-import { inter, oleo } from "../../app/fonts";
+import { arvo } from "../../app/fonts";
 import { getTranslations } from "next-intl/server";
+import { Recipe } from "../recipes/RecipesPage";
 
 const RecipesOfMonth = async () => {
   const t = await getTranslations("HomeSlider");
-  let recipes = [];
+  let recipes: Recipe[] = [];
 
   try {
     recipes = await getRecipes();
@@ -17,33 +18,52 @@ const RecipesOfMonth = async () => {
   const limitedRecipes = recipes.slice(0, 6);
 
   return (
-    <div className="flex flex-col p-16 max-sm:p-2 justify-center ">
-      <h1
-        className={` leading-snug text-7xl my-24 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
-      >
-        <p>{t("recipes")} </p>
-        {t("ofMonth")}
-      </h1>
-      <div className="flex justify-center flex-wrap max-sm:justify-evenly">
-        {limitedRecipes.map((data: any) => (
-          <Link
-            href={`${process.env.BASE_URL}/recipes/${data.id}`}
-            key={data.id}
-            className=" text-[#27343A] dark:text-mainColor mr-4 max-sm:mr-0 max-sm:mb-10 "
+    <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <div className="border-b mb-5 flex justify-between text-sm">
+        <div className="text-GreenColor flex items-center pb-2 pr-2 border-b-2 border-greenColor uppercase">
+          <h1
+            className={`text-xl font-bold text-greenColor  ${arvo.className} `}
           >
-            <Image
-              src={data?.images?.[0] ?? "/images/dessert.jpg"}
-              alt=""
-              className="w-60 h-48 object-cover rounded-xl"
-              width={300}
-              height={300}
-            />
-            <h1
-              className={`text-xl text-greenColor ${inter.className} mt-3 w-36`}
-            >
-              {data.title}
-            </h1>
-          </Link>
+            {t("ofMonth")}
+          </h1>
+        </div>
+        <Link
+          className={`text-lg flex items-center justify-center ${arvo.className}`}
+          href={`${process.env.BASE_URL}/products`}
+        >
+          See All
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        {limitedRecipes.map((data) => (
+          <div
+            key={data.id}
+            className="rounded overflow-hidden shadow-lg flex flex-col"
+          >
+            <div className="relative">
+              <Link href={`${process.env.BASE_URL}/recipes/${data.id}`}>
+                <Image
+                  src={data.images[0]}
+                  alt=""
+                  className="w-full h-48 object-cover rounded-xl"
+                  width={300}
+                  height={300}
+                />
+                <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-slate-700 opacity-25"></div>
+              </Link>
+              <Link href={`${process.env.BASE_URL}/recipes/${data.id}`}>
+                <div className="text-xs absolute top-0 right-0 bg-greenColor px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:greenColor transition duration-500 ease-in-out">
+                  Veggie Vibes 100%
+                </div>
+              </Link>
+            </div>
+            <div className="px-6 py-4 mb-auto">
+              <Link href={`${process.env.BASE_URL}/recipes/${data.id}`}>
+                {data.title}
+              </Link>
+            </div>
+          </div>
         ))}
       </div>
     </div>

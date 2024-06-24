@@ -40,14 +40,14 @@ export default function Categories() {
   return (
     <>
       <h1
-        className={` text-7xl my-24 ${oleo.className} leading-snug		 text-center dark:text-mainColor text-[#035C41]`}
+        className={` text-7xl my-8  ${oleo.className} leading-snug		 text-center dark:text-mainColor text-[#035C41]`}
       >
         <p>{t("trending")}</p>
         {t("veganRecipes")}
       </h1>
-      <div className="flex  flex-wrap justify-start  mt-6">
+      <div className="flex  flex-wrap justify-start  my-14">
         <Swiper
-          slidesPerView={3}
+          slidesPerView={4}
           spaceBetween={30}
           centeredSlides={true}
           navigation={true}

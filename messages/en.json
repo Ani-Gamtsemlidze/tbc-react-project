@@ -30,8 +30,9 @@
       "lifeStyle": "Vegan Lifestyle",
       "trending":"Trending",
       "veganRecipes":"Vegan Recipes",
-      "recipes":"Recipes",
-      "ofMonth":"of the Month"
+      "ofMonth":"Recipes of the Month",
+      "shopCategories":"Shop by Categories",
+      "veganFood": "Vegan Food Highlits"
     },
     "Footer":{
       "welcome":"Welcome to Veggie Vibes, where we celebrate vegan living. Our mission is to provide delicious, plant-based options that are not only good for you but also good for the planet.",

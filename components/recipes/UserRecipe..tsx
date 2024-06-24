@@ -65,6 +65,7 @@ export default function UserRecipe({ data }: any) {
           >
             <div className="relative h-56 w-64 mb-4 rounded-md overflow-hidden">
               <Image
+                className="w-full h-full object-cover"
                 src={recipe.images?.[0] ?? "/images/dessert.jpg"}
                 alt="recipe image"
                 layout="fill"
@@ -120,15 +121,19 @@ export default function UserRecipe({ data }: any) {
             </div>
 
             <div className="mt-4">
-              <Link href={`/recipes/${recipe.id}`}>
-                <a className="text-2xl font-bold hover:underline">
-                  {recipe.title}
-                </a>
+              <Link
+                className="text-2xl font-bold hover:underline"
+                href={`/recipes/${recipe.id}`}
+              >
+                {recipe.title}
               </Link>
             </div>
 
             {showEditForm && selectedRecipeId === recipe.id && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.7)] backdrop-blur-sm">
+              <div
+                onClick={() => setShowEditForm(!showEditForm)}
+                className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.7)] backdrop-blur-sm"
+              >
                 <div className="bg-white w-[650px] max-h-[530px] overflow-y-auto rounded-2xl">
                   <EditRecipeForm
                     closeForm={() => setShowEditForm(false)}

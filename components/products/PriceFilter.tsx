@@ -22,7 +22,7 @@ export default function PriceFilter() {
     <div className="">
       <FormControl className="price_input" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel className="" id="demo-controlled-open-select-label">
-          Price Filter
+          Price
         </InputLabel>
         <Select
           className=""

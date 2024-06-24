@@ -15,7 +15,6 @@ export default function EditRecipeForm({
   closeForm: () => void;
 }) {
   const [editedRecipe, setEditedRecipe] = useState<RecipeData | null>(null);
-  // const [isEditing, setIsEditing] = useState<boolean>(false);
 
   console.log(recipeId);
 

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { getProducts } from "../../products-api/products-api";
 import Image from "next/image";
-import { arvo, inter } from "../../app/fonts";
-import { MdArrowCircleRight } from "react-icons/md";
+import { arvo } from "../../app/fonts";
+import { getTranslations } from "next-intl/server";
+import { Product } from "../products/ProductsCard";
 
 const ProductsHighlits = async () => {
-  let productsData = [];
+  let productsData: Product[] = [];
+  const t = await getTranslations("HomeSlider");
 
   try {
     productsData = await getProducts();
@@ -15,45 +17,52 @@ const ProductsHighlits = async () => {
   const limitedProductsData = productsData.slice(0, 6);
 
   return (
-    <div className="flex flex-col p-16 max-sm:p-2 justify-center ">
-      <div className="my-4 flex justify-between">
-        <h2
-          className={`text-2xl font-bold text-greenColor  ${arvo.className} `}
-        >
-          Vegan Food Highlits
-        </h2>
+    <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <div className="border-b mb-5 flex justify-between text-sm">
+        <div className="text-GreenColor flex items-center pb-2 pr-2 border-b-2 border-greenColor uppercase">
+          <h1
+            className={`text-xl font-bold text-greenColor  ${arvo.className} `}
+          >
+            {t("veganFood")}
+          </h1>
+        </div>
         <Link
-          className="flex items-center"
+          className={`text-lg flex items-center justify-center ${arvo.className}`}
           href={`${process.env.BASE_URL}/products`}
         >
-          <span
-            className={` ${arvo.className} text-xl font-bold text-black mr-3`}
-          >
-            See All
-          </span>
-          <MdArrowCircleRight className="text-xl  text-greenColor mr-4" />
+          See All
         </Link>
       </div>
-      <div className="flex justify-center flex-wrap max-sm:justify-evenly">
-        {limitedProductsData.map((data: any) => (
-          <Link
-            href={`${process.env.BASE_URL}/products/${data.id}`}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        {limitedProductsData.map((data) => (
+          <div
             key={data.id}
-            className=" text-[#27343A] dark:text-mainColor mr-4 max-sm:mr-0 max-sm:mb-10"
+            className="rounded overflow-hidden shadow-lg flex flex-col"
           >
-            <Image
-              src={data.images[0]}
-              alt=""
-              className="w-60 h-48 object-cover rounded-xl"
-              width={300}
-              height={300}
-            />
-            <h1
-              className={`text-xl text-greenColor ${inter.className} mt-3 w-36`}
-            >
-              {data.title}
-            </h1>
-          </Link>
+            <div className="relative">
+              <Link href={`${process.env.BASE_URL}/products/${data.id}`}>
+                <Image
+                  src={data.images[0]}
+                  alt=""
+                  className="w-full h-48 object-cover rounded-xl"
+                  width={300}
+                  height={300}
+                />
+                <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-slate-700 opacity-25"></div>
+              </Link>
+              <Link href={`${process.env.BASE_URL}/products/${data.id}`}>
+                <div className="text-xs absolute top-0 right-0 bg-greenColor px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:greenColor transition duration-500 ease-in-out">
+                  Veggie Vibes 100%
+                </div>
+              </Link>
+            </div>
+            <div className="px-6 py-4 mb-auto">
+              <Link href={`${process.env.BASE_URL}/products/${data.id}`}>
+                {data.title}
+              </Link>
+            </div>
+          </div>
         ))}
       </div>
     </div>
