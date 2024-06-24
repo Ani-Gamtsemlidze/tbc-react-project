@@ -21,13 +21,13 @@ export default function ProductsCategory({ categoryName }: CategoryProps) {
   useEffect(() => {
     const fetchCategory = async (category: string) => {
       try {
+        setLoading(true);
         const categoryData = await getProductsCategory(category);
         setData(categoryData?.rows || []);
-        setLoading(true);
       } catch (error) {
-        setLoading(false);
-
         console.error("Error fetching category:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
