@@ -6,6 +6,7 @@ import RecipeCard from "./RecipeCard";
 import Loading from "../../app/[locale]/(dashboard)/recipes/loading";
 
 import { UserFeatures } from "./UserFeatures";
+import { useTranslations } from "next-intl";
 
 export interface Recipe {
   id: string;
@@ -16,9 +17,9 @@ export interface Recipe {
 }
 
 export default function RecipesPage() {
-  // const { isDropDown, handleDropDown } = useDropdown();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("Recipes");
 
   useEffect(() => {
     fetchRecipes();
@@ -39,15 +40,15 @@ export default function RecipesPage() {
   }
 
   return (
-    <div className="flex flex-col bg-mainColor dark:bg-gray-700 relative">
+    <div className="flex flex-col bg-mainColor dark:bg-darkBgColor relative">
       <div className="my-6 max-lg:my-16">
         <p className="text-center text-3xl text-[#035C41] dark:text-darkTextColor">
-          Explore
+          {t("exploring")}
         </p>
         <h1
           className={`text-center text-7xl ${acme.className} my-6 text-[#035C41] dark:text-darkTextColor`}
         >
-          All Recipes
+          {t("recipes")}
         </h1>
       </div>
 

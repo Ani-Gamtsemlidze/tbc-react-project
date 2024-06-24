@@ -26,7 +26,7 @@
     },
 
     "HomeSlider" :{
-      "exploring":"Exploring",
+      "exploring":"Explore",
       "lifeStyle": "Vegan Lifestyle",
       "trending":"Trending",
       "veganRecipes":"Vegan Recipes",
@@ -34,25 +34,54 @@
       "shopCategories":"Shop by Categories",
       "veganFood": "Vegan Food Highlits"
     },
+    "Products":{
+      "exploring":"Explore",
+      "products": "All Products",
+      "price": "Price",
+      "search":"Search For Products", 
+      "addProduct": "Add Product",
+      "addCart":"Add to Cart",
+      "categories":"Categories", 
+      "productSearch": "What would you want to search?"
+    },
+    "Recipes":{
+      "exploring":"Explore",
+      "recipes": "Vegan Recipes",
+      "search":"Search For Recipes", 
+      "addRecipe": "Add Recipe",
+      "categories":"Categories",
+    "recipeSearch": "მოძებნე სასურველი პროდუქტი"
+
+    },
     "Footer":{
       "welcome":"Welcome to Veggie Vibes, where we celebrate vegan living. Our mission is to provide delicious, plant-based options that are not only good for you but also good for the planet.",
       "address":"Address",
       "address1":"Acme Vegan Foods Inc.",
       "address2":"123 Rustaveli Street",
       "address3": "Tbilisi, Georgia 54321",
-      "contact":"Contact us"
+      "contact":"Contact us",
+    "rights": "All Rights Reserved",
+    "privacy":"Privacy Policy",
+    "terms":"Terms of Service"
+
 
     },
     "Profile":{
-      "title":"User",
-      "username":"Username",
-      "surname":"Surname",
-      "email": "Email",
-      "password":"Password",
-      "confirmPass": "Confirm Password",
-      "button": "Save Changes"
+    "hello":"Hello",
+
+      "firstName":"First Name",
+      "lastName":"Last Name",
+      "email": "Email Address",
+      "nickname":"Nickname",
+      "button": "Save Changes",
+      "edit":"Edit"
 
 
+    },
+    "UserRecipe":{
+      "noRecipe": "It seems you haven't added any recipes yet.",
+      "contribute":"Let's contribute to our collection of vegan recipes!"
+      
     },
     "Contact":{
       "contactUs":"Contact us",
@@ -92,7 +121,9 @@
       "phone":"Phone",
       "name": "Name",
       "viewReceipt":"View Receipt",
-      "noOrder": "No orders found"
+      "noOrder": "No orders found", 
+      "paid":"Paid",
+      "status":"Status"
   
     },
     "Login":{

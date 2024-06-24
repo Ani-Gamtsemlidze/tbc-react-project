@@ -4,8 +4,10 @@ import { acme, adamina } from "../../app/fonts";
 import ProductsCategories from "./ProductsCategories";
 import ProductsSearch from "./ProductsSearch";
 import { ProductsPageProps } from "./ProductsPage";
+import { useTranslations } from "next-intl";
 
 const ProductsFeatures = ({ productsData }: ProductsPageProps) => {
+  const t = useTranslations("Products");
   function handleOpenSearchBox() {
     setIsOpen(!isOpen);
   }
@@ -26,7 +28,7 @@ const ProductsFeatures = ({ productsData }: ProductsPageProps) => {
         <h1
           className={`font-bol dark:text-mainColor text-[#035C41] text-3xl  ${acme.className} `}
         >
-          Categories
+          {t("categories")}
         </h1>
         <ul className={`flex flex-col text-xl ${adamina.className}`}>
           <ProductsCategories />

@@ -21,7 +21,7 @@ export default function AllCategories() {
   };
 
   return (
-    <div className="flex flex-col justify-start  dark:bg-gray-700 mt-2">
+    <div className="flex flex-col justify-star mt-2">
       {allCategories.map((category: any) => (
         <Link
           href={`/recipes/category/${category.name}`}

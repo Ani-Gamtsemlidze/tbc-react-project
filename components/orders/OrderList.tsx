@@ -38,48 +38,76 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
   console.log(filteredOrders);
 
   return (
-    <div className="bg-mainColor  min-h-screen rounded-lg shadow-md overflow-hidden divide-y divide-gray-200">
-      <div className="max-w-[800px] mx-auto py-8 px-3 w-full">
-        {filteredOrders.map((order) => (
-          <div
-            key={order.latest_charge.id}
-            className="p-4 bord border-[12px] rounded-lg border-greenColor mb-6 "
-          >
-            <div className="flex justify-between items-center mb-2">
-              <p className="text-lg font-semibold">
-                {t("orderAmount")}: ${(order.amount / 100).toFixed(2)}
-              </p>
-              <span
-                className={`px-2 py-1 rounded ${
-                  order.latest_charge.amount_refunded > 0
-                    ? "bg-red-500 text-white"
-                    : "bg-green-500 text-white"
-                }`}
-              >
-                {order.latest_charge.amount_refunded > 0 ? "Refunded" : "Paid"}
-              </span>
-            </div>
-            <p className="text-sm text-gray-600 mb-2">
-              {t("phone")}: {order.metadata.phone || "N/A"}
-            </p>
-            <p className="text-sm text-gray-600 mb-2">
-              {t("name")}: {order.latest_charge.billing_details.name || "N/A"}
-            </p>
-            <a
-              href={order.latest_charge.receipt_url}
-              aria-label="Order Receipt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-greenColor underline "
-            >
+    <div className="flex p-16 overflow-x-auto bg-mainColor dark:bg-darkBgColor min-h-screen rounded-lg shadow-md overflow-hidden divide-y divide-gray-200">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              {t("orderAmount")}
+            </th>
+            <th scope="col" className="px-6 py-3">
+              {t("status")}
+            </th>
+            <th scope="col" className="px-6 py-3">
+              {t("phone")}
+            </th>
+            <th scope="col" className="px-6 py-3">
+              {t("name")}
+            </th>
+            <th scope="col" className="px-6 py-3">
               {t("viewReceipt")}
-            </a>
-          </div>
-        ))}
-        {filteredOrders.length === 0 && (
-          <p className="p-4 text-center text-gray-500">{t("noOrder")}</p>
-        )}
-      </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredOrders.map((order) => (
+            <tr
+              key={order.latest_charge.id}
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            >
+              <th
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                ${(order.amount / 100).toFixed(2)}
+              </th>
+              <td className="px-6 py-4">
+                <span
+                  className={`px-2 py-1 rounded ${
+                    order.latest_charge.amount_refunded > 0
+                      ? "bg-red-500 text-white dark:text-darkTextMain "
+                      : "bg-greenColor text-white dark:text-darkTextMain "
+                  }`}
+                >
+                  {order.latest_charge.amount_refunded > 0
+                    ? "Refunded"
+                    : `${t("paid")}`}
+                </span>
+              </td>
+              <td className="px-6 py-4">{order.metadata.phone || "N/A"}</td>
+              <td className="px-6 py-4">
+                {order.latest_charge.billing_details.name || "N/A"}
+              </td>
+              <td className="px-6 py-4">
+                <a
+                  href={order.latest_charge.receipt_url}
+                  aria-label="Order Receipt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-greenColor underline"
+                >
+                  {t("viewReceipt")}
+                </a>
+              </td>
+            </tr>
+          ))}
+          {filteredOrders.length === 0 && (
+            <tr>
+              <td className="p-4 text-center text-gray-500">{t("noOrder")}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

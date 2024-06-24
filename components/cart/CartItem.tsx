@@ -16,7 +16,7 @@ const CartItem = () => {
         );
         return (
           <div
-            className="flex items-center shadow py-6 w-[800px] my-8 px-6 transition hover:bg-[rgb(244,244,244)] rounded-lg"
+            className="flex items-center shadow  dark:shadow-shadowDark py-6 w-[800px] my-8 px-6 transition hover:bg-[rgb(244,244,244)] dark:hover:bg-darkSecondaryColor rounded-lg"
             key={product.id}
           >
             <div className="pr-2">
@@ -30,10 +30,12 @@ const CartItem = () => {
             </div>
             <div className="flex items-center justify-between w-full">
               <div className="pl-4 border-l">
-                <h1 className="text-[#16442a] font-bold text-xl mb-2 w-64">
+                <h1 className="text-[#16442a] dark:text-darkTextColor  font-bold text-xl mb-2 w-64">
                   {product.title}
                 </h1>
-                <p className="text-black text-xl">$ {product.price}</p>
+                <p className="text-black dark:text-darkTextColor  text-xl">
+                  $ {product.price}
+                </p>
               </div>
               <button
                 onClick={() => handleRemoveItem(product.id)}
@@ -41,7 +43,7 @@ const CartItem = () => {
               >
                 <AiTwotoneDelete />
               </button>
-              <div className="border rounded-lg w-32 py-2 flex items-center justify-between">
+              <div className="border dark:border-darkTextMain rounded-lg w-32 py-2 flex items-center justify-between">
                 <button
                   onClick={() => handleQuantityChange(product.id, -1)}
                   className="text-lg ml-3 cursor-pointer"

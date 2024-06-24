@@ -13,7 +13,7 @@ export default function ProductsSlider() {
   return (
     <div>
       <h1
-        className={` text-7xl my-16 ${oleo.className}  leading-tight text-center dark:text-mainColor text-[#035C41]`}
+        className={` text-6xl my-16 ${oleo.className}  leading-tight text-center dark:text-mainColor text-[#035C41]`}
       >
         <p>{t("exploring")}</p>
         {t("lifeStyle")}

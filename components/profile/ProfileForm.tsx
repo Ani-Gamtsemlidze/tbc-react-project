@@ -4,9 +4,11 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState, ChangeEvent, useEffect } from "react";
 import { User } from "./UserInfo";
 import { editUserInfo } from "../../user-api";
+import { useTranslations } from "next-intl";
 
 export default function ProfileForm({ userData }: { userData: User[] }) {
   const { user } = useUser();
+  const t = useTranslations("Profile");
   const userInfo = userData[0] as User;
   const [editedUser, setEditedUser] = useState<User>(userInfo || {});
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -49,12 +51,14 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
         className="relative border h-[600px] ml-12  border-gray-100 dark:border-darkSecondaryColor dark:bg-darkBgColor space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 max-sm:ml-0 shadow-xl lg:p-10"
       >
         <h1 className="mb-6 text-xl dark:text-darkTextColor font-semibold lg:text-2xl">
-          Hello, {editedUser?.firstname?.toUpperCase()}
+          {t("hello")}, {editedUser?.firstname?.toUpperCase()}
         </h1>
-
         <div className="grid gap-3 md:grid-cols-2">
           <div>
-            <label className="dark:text-darkTextColor"> First Name </label>
+            <label className="dark:text-darkTextColor">
+              {" "}
+              {t("firstName")}{" "}
+            </label>
             <input
               type="text"
               placeholder="Your Name"
@@ -69,7 +73,7 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
             />
           </div>
           <div>
-            <label className="dark:text-darkTextColor"> Last Name </label>
+            <label className="dark:text-darkTextColor"> {t("lastName")} </label>
             <input
               type="text"
               placeholder="Last  Name"
@@ -85,7 +89,7 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
           </div>
         </div>
         <div>
-          <label className="dark:text-darkTextColor"> Nickname </label>
+          <label className="dark:text-darkTextColor"> {t("nickname")} </label>
           <input
             type="text"
             placeholder="Nickname"
@@ -100,7 +104,7 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
           />
         </div>
         <div>
-          <label className="dark:text-darkTextColor"> Email Address </label>
+          <label className="dark:text-darkTextColor"> {t("email")} </label>
           <input
             type="email"
             placeholder="Info@example.com"
@@ -124,7 +128,7 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
                 : "bg-greenColor dark:bg-darkSecondaryColor"
             } text-center font-semibold text-white`}
           >
-            Edit
+            {t("edit")}
           </button>
           <button
             type="submit"
@@ -135,7 +139,7 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
                 : "bg-slate-500"
             } text-center font-semibold text-white`}
           >
-            Save Changes
+            {t("button")}
           </button>
         </div>
       </form>

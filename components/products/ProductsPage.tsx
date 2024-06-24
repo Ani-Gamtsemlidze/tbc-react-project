@@ -8,9 +8,7 @@ import useDropdown from "../../hooks";
 import AddProduct from "./AddProduct";
 import { useAdmin } from "../../app/context/AdminContext";
 import { ProductsFeatures } from "./ProductsFeatures";
-// import { ProductsSideBar } from "./ProductsSideBar";
-// import { useState } from "react";
-// import { BsFilterCircleFill } from "react-icons/bs";
+import { useTranslations } from "next-intl";
 
 export interface ProductsPageProps {
   productsData: Product[];
@@ -18,19 +16,15 @@ export interface ProductsPageProps {
 
 export default function ProductsPage({ productsData }: ProductsPageProps) {
   const { isDropDown, handleDropDown, popupRef } = useDropdown();
+  const t = useTranslations("Products");
 
   const { isAdmin } = useAdmin();
   const { filteredData } = useAdmin();
-  // const [showSidebar, setShowSidebar] = useState(false);
-
-  // const toggleSidebar = () => {
-  //   setShowSidebar(!showSidebar);
-  // };
 
   return (
     <>
       <div
-        className={`   flex flex-col  bg-mainColor dark:bg-gray-700 relative  `}
+        className={`   flex flex-col  bg-mainColor dark:bg-darkBgColor relative  `}
       >
         {isAdmin && (
           <>
@@ -62,27 +56,17 @@ export default function ProductsPage({ productsData }: ProductsPageProps) {
         <div className="flex justify-center relative ">
           <div className="mt-24 ">
             <p className="text-center  text-3xl dark:text-mainColor text-[#035C41] ">
-              Explore
+              {t("exploring")}
             </p>
             <h1
               className={`text-center text-7xl dark:text-mainColor ${acme.className} my-6 text-[#035C41]`}
             >
-              All Products
+              {t("products")}
             </h1>
           </div>
-          {/* <button
-            className="lg:hidden absolute bottom-0 right-4 z-50 p-2"
-            onClick={toggleSidebar}
-          >
-            {<BsFilterCircleFill className="text-2xl text-greenColor" />}
-          </button> */}
         </div>
         <div className="flex my-12 max-w-[1200px] mx-auto">
           <div className="">
-            {/* {showSidebar ? (
-              <ProductsSideBar />
-            ) : (
-              )} */}
             <ProductsFeatures productsData={productsData} />
           </div>
           <div className="flex w-full ml-6">

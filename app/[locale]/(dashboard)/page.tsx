@@ -17,7 +17,7 @@ export default function Home({ params }: Params) {
   unstable_setRequestLocale(params.locale);
 
   return (
-    <div className="bg-mainColor dark:bg-slate-500 ">
+    <div className="bg-mainColor dark:bg-darkBgColor ">
       <ProductsSlider />
       <ShopCategories />
       <ProductsHighlits />

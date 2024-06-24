@@ -22,7 +22,7 @@ export default function ProductsCategories() {
   };
 
   return (
-    <div className="flex flex-col justify-start  dark:bg-gray-700 mt-2">
+    <div className="flex flex-col justify-start  mt-2">
       {allCategories.map((category: any) => (
         <Link
           href={`/products/product_category/${category.name}`}

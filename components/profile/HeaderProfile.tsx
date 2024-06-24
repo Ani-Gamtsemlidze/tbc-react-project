@@ -89,7 +89,7 @@ const HeaderProfile = () => {
                       active ? "bg-gray-200 dark:bg-slate-700" : ""
                     }`}
                   >
-                    <RiMapPinUserLine className="text-lg text-greenColor" />
+                    <RiMapPinUserLine className="text-lg text-greenColor dark:text-darkTextMain" />
                     <span className="text-black dark:text-white px-2 py-1 text-sm rounded-sm transition dark:hover:border-[#B85042]">
                       {t("profile")}
                     </span>
@@ -104,7 +104,7 @@ const HeaderProfile = () => {
                       active ? "bg-gray-200 dark:bg-slate-700" : ""
                     }`}
                   >
-                    <PiBowlFood className="text-md text-greenColor" />
+                    <PiBowlFood className="text-md text-greenColor dark:text-darkTextMain" />
                     <span className="text-black dark:text-white px-2 py-1 text-sm rounded-sm transition dark:hover:border-[#B85042]">
                       {t("myRecipes")}
                     </span>
@@ -119,7 +119,7 @@ const HeaderProfile = () => {
                       active ? "bg-gray-200 dark:bg-slate-700" : ""
                     }`}
                   >
-                    <BsBox2Heart className="text-md text-greenColor" />
+                    <BsBox2Heart className="text-md text-greenColor dark:text-darkTextMain" />
                     <span className="text-black dark:text-white px-2 py-1 text-sm rounded-sm transition dark:hover:border-[#B85042]">
                       {t("orders")}
                     </span>
@@ -134,7 +134,7 @@ const HeaderProfile = () => {
                       active ? "bg-gray-200 dark:bg-slate-700" : ""
                     }`}
                   >
-                    <IoMdLogOut className="text-lg text-red-900" />
+                    <IoMdLogOut className="text-lg text-red-900 dark:text-red-600" />
                     <span className="text-black dark:text-white px-2 py-1 text-sm rounded-sm transition dark:hover:border-[#B85042]">
                       {t("logout")}
                     </span>

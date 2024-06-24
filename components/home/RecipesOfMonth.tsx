@@ -20,9 +20,9 @@ const RecipesOfMonth = async () => {
   return (
     <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
       <div className="border-b mb-5 flex justify-between text-sm">
-        <div className="text-GreenColor flex items-center pb-2 pr-2 border-b-2 border-greenColor uppercase">
+        <div className="text-GreenColor flex items-center pb-2 pr-2 border-b-2 border-greenColor dark:border-darkTextMain uppercase">
           <h1
-            className={`text-xl font-bold text-greenColor  ${arvo.className} `}
+            className={`text-xl font-bold text-greenColor dark:text-darkTextMain  ${arvo.className} `}
           >
             {t("ofMonth")}
           </h1>

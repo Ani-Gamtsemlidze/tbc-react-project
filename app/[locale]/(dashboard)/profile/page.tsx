@@ -24,7 +24,7 @@ export default async function Profile({ params }: Params) {
   const userData = await getUser(user?.sub);
 
   return (
-    <section className="flex justify-center bg-mainColor min-h-screen dark:bg-darkContentColor ">
+    <section className="flex justify-center bg-mainColor min-h-screen dark:bg-darkBgColor ">
       <div className="flex   max-lg:flex-wrap max-lg:justify-center p-3 ">
         <div className="flex max:sm:justify-center  w-96 p-4 gap-12 max-sm:w-full max-sm:p-0 max-sm:mb-6 ">
           <UserInfo userData={userData} />

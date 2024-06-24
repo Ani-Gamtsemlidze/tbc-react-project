@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import AvatarUploadPage from "../avatar/page";
+import { useTranslations } from "next-intl";
 
 export interface User {
   firstname?: string;
@@ -13,6 +14,7 @@ export interface User {
 }
 
 export default function UserInfo({ userData }: any) {
+  const t = useTranslations("Profile");
   const [isUpload, setIsUpload] = useState(false);
   const [user, setUser] = useState(userData[0] || {});
   console.log(userData[0]);
@@ -32,13 +34,11 @@ export default function UserInfo({ userData }: any) {
           onClick={handleUploadPicture}
           className="relative mx-auto w-36 rounded-full"
         >
-          {/* <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span> */}
           <Image
             src={user?.picture}
             className="rounded-full object-cover  h-40 max-w-40"
             width={400}
             height={400}
-            // quality={100}
             alt="image"
           />
           <div className="absolute cursor-pointer rounded-full top-0 left-0 inset-0 w-40 h-40 z-50 flex justify-center items-center bg-[rgb(3,92,65)] bg-opacity-40   opacity-0 transition-opacity duration-300 hover:opacity-100">
@@ -54,7 +54,7 @@ export default function UserInfo({ userData }: any) {
         </h3>
         <ul className="mt-3 divide-y rounded bg-gray-100 dark:bg-darkSecondaryColor dark:text-darkTextColor py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
           <li className="flex items-center py-3 text-sm">
-            <span>Nickname</span>
+            <span>{t("nickname")}</span>
             <span className="ml-auto">{user?.nickname}</span>
           </li>
         </ul>

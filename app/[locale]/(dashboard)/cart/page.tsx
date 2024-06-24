@@ -13,7 +13,7 @@ export default async function Page({ params }: Params) {
   unstable_setRequestLocale(params.locale);
 
   return (
-    <main className="bg-mainColor min-h-screen">
+    <main className="bg-mainColor dark:bg-darkBgColor  min-h-screen">
       <section>
         <CartPage />
       </section>

@@ -4,9 +4,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useAdmin } from "../../app/context/AdminContext";
+import { useTranslations } from "next-intl";
 
 export default function PriceFilter() {
   const [open, setOpen] = React.useState(false);
+  const t = useTranslations("Products");
 
   const { price, handleChange } = useAdmin();
 
@@ -21,8 +23,11 @@ export default function PriceFilter() {
   return (
     <div className="">
       <FormControl className="price_input" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel className="" id="demo-controlled-open-select-label">
-          Price
+        <InputLabel
+          className="dark:text-mainColor"
+          id="demo-controlled-open-select-label"
+        >
+          {t("price")}
         </InputLabel>
         <Select
           className=""
@@ -36,10 +41,10 @@ export default function PriceFilter() {
           onChange={handleChange}
         >
           <MenuItem value="">
-            <em>All Products</em>
+            <em>{t("products")}</em>
           </MenuItem>
-          <MenuItem value={1}>Between $ 5 to $ 20</MenuItem>
-          <MenuItem value={2}>Between $ 20 to $ 50</MenuItem>
+          <MenuItem value={1}> $ 5 to $ 20</MenuItem>
+          <MenuItem value={2}> $ 20 to $ 50</MenuItem>
         </Select>
       </FormControl>
     </div>

@@ -24,7 +24,7 @@ export default async function Page() {
   const userRecipes = await getUserRecipes(user?.sub);
 
   return (
-    <div className="min-h-screen bg-mainColor">
+    <div className="min-h-screen bg-mainColor dark:bg-darkBgColor">
       <h1
         className={` text-5xl my-12 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
       >

@@ -1,14 +1,11 @@
 export default function Loading() {
   return (
-    <div className="bg-mainColor h-screen flex items-center mt-3">
-      <p className="text-lg font-bold text-center">
-        {" "}
-        Please Wait... Counting unicorns in binary.
-      </p>
-      <div role="status">
+    <div className="bg-mainColor dark:bg-darkBgColor h-screen flex flex-col items-center justify-center ">
+      Please Wait... Counting unicorns in binary.
+      <div role="status" className="mt-3">
         <svg
           aria-hidden="true"
-          className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500"
+          className="inline w-8 h-8 text-gray-200 dark:text-darkTextColor animate-spin  fill-green-500"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

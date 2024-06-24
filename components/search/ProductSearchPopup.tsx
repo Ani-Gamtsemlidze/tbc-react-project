@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Product } from "../products/ProductsCard";
 import { arvo } from "../../app/fonts";
 import { LuPartyPopper } from "react-icons/lu";
+import { useTranslations } from "next-intl";
 
 export default function ProductSearchPopUp({
   isOpen,
@@ -13,6 +14,7 @@ export default function ProductSearchPopUp({
   productsData,
 }: any) {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const t = useTranslations("Products");
   const [data, setData] = useState<Product[]>([]);
   console.log(searchQuery);
 
@@ -60,21 +62,21 @@ export default function ProductSearchPopUp({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-mainColor max-w-[1000px] w-full min-h-[80vh] max-lg:min-h-[60vh] max-lg:w-[90%] overflow-y-auto rounded-2xl fixed"
+            className="bg-mainColor dark:bg-darkBgColor max-w-[1000px] w-full min-h-[80vh] max-lg:min-h-[60vh] max-lg:w-[90%] overflow-y-auto rounded-2xl fixed"
           >
             <div
               onClick={handleClose}
               className="text-[#16442a]  text-3xl relative "
             >
-              <IoMdClose className="absolute right-6 top-4 cursor-pointer" />
+              <IoMdClose className="absolute right-6 top-4 cursor-pointer  dark:text-darkTextMain" />
             </div>
             <form className="relative flex mx-12 mt-16 items-center">
               <input
-                className="transition w-full py-3 font-bold text-2xl hover:placeholder-[#16442a] focus:border-[#16442a] hover:text-[#16442a] border-b-[rgb(227,227,227] hover:border-[#1b1b1b] rounded-md  border-b cursor-pointer p-2 bg-transparent placeholder-[#16442a] focus:outline-none pl-12 text-black "
+                className="transition w-full py-3 font-bold text-2xl hover:placeholder-[#16442a]  dark:placeholder-darkTextMain focus:border-[#16442a] hover:text-[#16442a] border-b-[rgb(227,227,227] hover:border-[#1b1b1b] rounded-md  border-b dark:border-b-darkTextMain cursor-pointer p-2 bg-transparent placeholder-[#16442a] focus:outline-none pl-12 text-black dark:text-darkTextMain "
                 id="search"
                 type="text"
                 onChange={(e) => handleSearch(e)}
-                placeholder="What would you want to search?"
+                placeholder={t("productSearch")}
               />
 
               <CiSearch className="absolute top-[50%] text-xl translate-y-[-50%] left-[18px]" />
@@ -85,7 +87,7 @@ export default function ProductSearchPopUp({
                   data.map((product: any, index: number) => (
                     <Link
                       href={`/products/${product.id}`}
-                      className="flex items-center mx-12 w-full my-4 transition hover:bg-[rgb(244,244,244)] rounded-lg"
+                      className="flex items-center mx-12 w-full my-4 transition hover:bg-[rgb(244,244,244)] dark:hover:bg-darkContentColor rounded-lg"
                       key={index}
                     >
                       <div className="items-start">
@@ -97,20 +99,20 @@ export default function ProductSearchPopUp({
                           height={400}
                         />
                       </div>
-                      <h1 className="text-[#16442a] font-bold text-xl ml-4">
+                      <h1 className="text-greenColor dark:text-darkTextMain font-bold text-xl ml-4">
                         {product.title}
                       </h1>
-                      <p className="text-black text-xl border-l ml-3 pl-3">
+                      <p className="text-black dark:text-darkTextMain  text-xl border-l ml-3 pl-3">
                         {product.categories}
                       </p>
-                      <p className="text-black text-xl border-l ml-3 pl-3">
+                      <p className="text-black  dark:text-darkTextMain text-xl border-l ml-3 pl-3">
                         $ {product.price}
                       </p>
                     </Link>
                   ))
                 ) : searchQuery.length !== 0 && data.length === 0 ? (
                   <div className="flex flex-col items-center mt-4">
-                    <LuPartyPopper className="text-4xl text-greenColor mb-4" />
+                    <LuPartyPopper className="text-4xl text-greenColor dark:text-darkSecondaryColor mb-4" />
                     <p className={`text-center  ${arvo.className} text-xl`}>
                       No Vegan products here...{" "}
                     </p>

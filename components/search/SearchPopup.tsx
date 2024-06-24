@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getAllCategories, getRecipes } from "../../user-api";
+import { useTranslations } from "next-intl";
 
 interface Category {
   id: number;
@@ -44,6 +45,8 @@ export default function SearchPopup({
   const [recipesData, setRecipesData] = useState<Recipe[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const t = useTranslations("Recipes");
 
   useEffect(() => {
     fetchRecipes();
@@ -117,7 +120,7 @@ export default function SearchPopup({
                 id="search"
                 type="text"
                 onChange={(e) => handleSearch(e)}
-                placeholder="What would you like to cook?"
+                placeholder={t("recipeSearch")}
               />
               <div
                 onClick={handleOpenSearchBox}
@@ -131,7 +134,7 @@ export default function SearchPopup({
               <h3
                 className={`${oleo.className} ml-12 mt-6 mb-2 text-2xl dark:text-darkTextColor`}
               >
-                Categories
+                {t("categories")}
               </h3>
               <div className="flex flex-wrap  items-center justify-center my-4 ">
                 {searchQuery.length !== 0

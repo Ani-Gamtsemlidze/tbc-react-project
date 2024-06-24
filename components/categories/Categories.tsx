@@ -40,7 +40,7 @@ export default function Categories() {
   return (
     <>
       <h1
-        className={` text-7xl my-8  ${oleo.className} leading-snug		 text-center dark:text-mainColor text-[#035C41]`}
+        className={` text-6xl my-8  ${oleo.className} leading-snug		 text-center dark:text-mainColor text-[#035C41]`}
       >
         <p>{t("trending")}</p>
         {t("veganRecipes")}

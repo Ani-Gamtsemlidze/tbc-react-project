@@ -3,10 +3,11 @@ import useDropdown from "../../hooks";
 import AllCategories from "../categories/AllCategories";
 import { RecipesSearch } from "../search/RecipesSearch";
 import AddRecipeForm from "./AddRecipeForm";
+import { useTranslations } from "next-intl";
 
-const UserFeatures = () => {
+const UserFeatures = async () => {
+  const t = useTranslations("Recipes");
   const { isDropDown, handleDropDown } = useDropdown();
-  console.log(isDropDown);
   return (
     <div className="mr-4 max-lg:mb-4">
       <div className={`flex flex-col top-32 ${isDropDown ? " " : "sticky"}`}>
@@ -24,7 +25,7 @@ const UserFeatures = () => {
           <h1
             className={`font-bold text-[#035C41] text-3xl ${acme.className} dark:text-darkTextColor`}
           >
-            Categories
+            {t("categories")}
           </h1>
           <ul
             className={`flex flex-col text-xl ${adamina.className} dark:text-darkTextColor`}

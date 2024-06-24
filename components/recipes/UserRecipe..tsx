@@ -19,6 +19,7 @@ import {
 } from "@headlessui/react";
 import { UserFeatures } from "./UserFeatures";
 import { FaLeaf } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 export interface Recipe {
   id: number;
@@ -29,6 +30,7 @@ export interface Recipe {
 }
 
 export default function UserRecipe({ data }: any) {
+  const t = useTranslations("UserRecipe");
   const { handleDropDown } = useDropdown();
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -145,13 +147,13 @@ export default function UserRecipe({ data }: any) {
           </div>
         ))
       ) : (
-        <div className="flex items-center flex-col">
-          <FaLeaf className="text-4xl mb-4 text-greenColor" />
-          <p className="text-lg text-gray-500 mb-2">
-            It seems you haven't added any recipes yet.
+        <div className="flex items-center flex-col ml-36">
+          <FaLeaf className="text-4xl mb-4 text-greenColor dark:text-darkSecondaryColor" />
+          <p className="text-lg text-gray-500 dark:text-darkTextMain mb-2">
+            {t("noRecipe")}
           </p>
-          <p className="text-lg text-greenColor">
-            Let's contribute to our collection of vegan recipes!
+          <p className="text-lg text-greenColor dark:text-darkTextMain ">
+            {t("contribute")}
           </p>
         </div>
       )}

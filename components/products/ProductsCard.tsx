@@ -180,17 +180,17 @@ export default function ProductsCard({ data }: ProductsCardProps) {
             </Link>
             <div className="mt-4 px-5 pb-5">
               <Link href={`/products/${product.id}`}>
-                <h5 className="text-xl tracking-tight text-slate-900">
+                <h5 className="text-xl tracking-tight text-slate-900 dark:text-darkTextMain">
                   {product.title}
                 </h5>
               </Link>
-              <p className="text-dm text-slate-900 my-4">
+              <p className="text-dm text-slate-900 dark:text-darkTextMain my-4">
                 {product?.description?.slice(0, 180)}...
               </p>
 
               <div className="mt-2 mb-5 flex items-center justify-between">
                 <p>
-                  <span className="text-3xl font-bold text-slate-900">
+                  <span className="text-3xl font-bold text-slate-900 dark:text-darkTextMain">
                     ${product.price}
                   </span>
                 </p>

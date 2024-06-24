@@ -38,17 +38,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-300 ">
+    <footer className="bg-gray-300 dark:bg-darkContentColor ">
       <div className="mx-auto  max-w-[1200px] flex justify-between space-between items-start py-14 px-5 max-sm:flex-col gap-y-8 gap-x-12  md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div className="max-w-sm">
           <div className="mb-6 flex h-12 items-center space-x-2">
             <Logo />
           </div>
-          <div className="text-gray-500">{t("welcome")}</div>
+          <div className="text-gray-500 dark:text-darkTextColor">
+            {t("welcome")}
+          </div>
         </div>
         <div className="">
           <div className="mt-4 mb-2 font-medium xl:mb-4">{t("address")}</div>
-          <div className="text-gray-500">
+          <div className="text-gray-500 dark:text-darkTextColor">
             Acme Vegan Foods Inc.
             <br />
             {t("address2")}
@@ -60,7 +62,7 @@ export default function Footer() {
         <div className="">
           <div className="mt-4 mb-2 font-medium xl:mb-4">{t("contact")}</div>
           <nav aria-label="Footer Navigation" className="text-gray-500">
-            <ul className="space-y-3">
+            <ul className="space-y-3 dark:text-darkTextColor">
               {contactItems.map((item, index) => (
                 <li className="flex items-center" key={index}>
                   {item.icon}
@@ -75,35 +77,15 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        {/* <div className="">
-          <div className="mt-4 mb-2 font-medium xl:mb-4">
-            Subscribe to our Newsletter
-          </div>
-          <div className="flex flex-col">
-            <div className="mb-4">
-              <input
-                type="email"
-                className="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-greenColor"
-                placeholder="Enter your email"
-              />
-              <button className="block rounded-xl bg-greenColor px-6 py-3 font-medium text-white">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div> */}
       </div>
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 dark:bg-darkBgColor">
         <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
-          <div className="">© 2024 Veggie Vibes | All Rights Reserved</div>
-          <div className="">
-            <a className="" href="#">
-              Privacy Policy
-            </a>
-            <span>|</span>
-            <a className="" href="#">
-              Terms of Service
-            </a>
+          <div className="dark:text-darkTextColor">
+            © 2024 Veggie Vibes | {t("rights")}
+          </div>
+          <div className="dark:text-darkTextColor">
+            <span className="">{t("privacy")} | </span>
+            <span className="">{t("terms")}</span>
           </div>
         </div>
       </div>
