@@ -33,7 +33,7 @@ export default function AddRecipeForm({ isDropDown, handleDropDown }: any) {
       {user && (
         <div
           onClick={handleDropDown}
-          className="bg-[#E895D0] mb-4 dark:bg-darkTextMain justify-center w-52 dark:py-12 h-[38px] flex items-center rounded-md px-4 py-6 cursor-pointer"
+          className="bg-[#E895D0] mb-4 dark:bg-darkTextMain justify-center min-w-52  h-[38px] flex items-center rounded-md px-4 py-6 cursor-pointer"
         >
           <MdAddCircleOutline className="text-xl text-white dark:text-darkBgColor cursor-pointer" />
           <button

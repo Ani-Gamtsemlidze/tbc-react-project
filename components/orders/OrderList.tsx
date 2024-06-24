@@ -40,7 +40,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
   return (
     <div className="flex p-16 overflow-x-auto bg-mainColor dark:bg-darkBgColor min-h-screen rounded-lg shadow-md overflow-hidden divide-y divide-gray-200">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-darkSecondaryColor dark:text-darkTextColor">
           <tr>
             <th scope="col" className="px-6 py-3">
               {t("orderAmount")}
@@ -63,7 +63,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
           {filteredOrders.map((order) => (
             <tr
               key={order.latest_charge.id}
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              className="bg-white border-b dark:bg-darkContentColor dark:border-gray-700"
             >
               <th
                 scope="row"
@@ -76,7 +76,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                   className={`px-2 py-1 rounded ${
                     order.latest_charge.amount_refunded > 0
                       ? "bg-red-500 text-white dark:text-darkTextMain "
-                      : "bg-greenColor text-white dark:text-darkTextMain "
+                      : "bg-greenColor dark:bg-darkTextMain text-white "
                   }`}
                 >
                   {order.latest_charge.amount_refunded > 0
@@ -94,7 +94,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                   aria-label="Order Receipt"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-greenColor underline"
+                  className="text-greenColor dark:text-darkTextMain underline"
                 >
                   {t("viewReceipt")}
                 </a>

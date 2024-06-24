@@ -50,7 +50,20 @@
       "search":"Search For Recipes", 
       "addRecipe": "Add Recipe",
       "categories":"Categories",
-    "recipeSearch": "მოძებნე სასურველი პროდუქტი"
+    "recipeSearch": "What would you like to cook?"
+
+    },
+    "cart":{
+      "cartItems":"Cart Items",
+      "info": "Add $3.15 worth of items to your order to qualify for free shipping!",
+      "totalPrice":"Total Price      ",
+      "taxes":"Inclusive taxes. Shipping is calculated at checkout      ",
+      "viewCart":"View Cart",
+      "checkout":"Checkout",
+    "clearCart":" Clear Cart",      
+    "emptyMessage": "Your cart is empty",
+    "continueMessage":"Main Page"
+
 
     },
     "Footer":{

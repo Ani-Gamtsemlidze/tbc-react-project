@@ -1,19 +1,21 @@
 "use client";
 import Image from "next/image";
 import { monda, oleo } from "../../app/fonts";
+import { useTranslations } from "next-intl";
 
 function InnerRecipe({ recipeData }: any) {
+  const t = useTranslations("Recipes");
   return (
-    <div className="flex flex-col w-full bg-mainColor dark:bg-darkContentColor">
+    <div className="flex flex-col w-full bg-mainColor dark:bg-darkBgColor">
       {recipeData ? (
         <div className="flex flex-col">
           <h1
             className={`text-7xl my-6 ${oleo.className} text-center text-[#035C41] dark:text-darkTextColor`}
           >
-            <p>Exploring</p>
-            Vegan Recipes
+            <p>{t("exploring")}</p>
+            {t("recipes")}
           </h1>
-          <div className="flex my-12 bg-[#035C41] dark:bg-darkBgColor">
+          <div className="flex my-12 bg-[#035C41] dark:bg-darkSecondaryColor">
             <div className="max-w-[1200px] max-sm:flex-col  flex mx-auto py-8 px-0">
               <div className="hover:transform hover:scale-105 transition-transform duration-300 rounded-2xl flex  justify-center">
                 <Image
@@ -24,7 +26,7 @@ function InnerRecipe({ recipeData }: any) {
                   className="w-[390px] h-[325px] object-cover rounded-2xl max-w-[max-content] "
                 />
               </div>
-              <div className="flex flex-col items-start text-white ml-10">
+              <div className="flex flex-col items-start text-white dark:text-darkTextColor ml-10">
                 <div className="bg-[#E895D0] dark:bg-darkSecondaryColor min-w-24 rounded-2xl mt-4 py-1">
                   <p className="text-[#27343A] dark:text-darkTextColor text-center">
                     {recipeData.category}

@@ -22,7 +22,7 @@ export default function CartDropdownItems({ handleDropDown }: any) {
     handleRemoveProducts,
   } = useCart();
 
-  const t = useTranslations("CartPage");
+  const t = useTranslations("cart");
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function CartDropdownItems({ handleDropDown }: any) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="fade-animation bg-white max-w-[700px] rounded-lg min-h-[635px] top-6 right-6 z-50 absolute justify-between flex flex-col"
+          className="fade-animation bg-white dark:bg-darkSecondaryColor max-w-[700px] rounded-lg min-h-[635px] top-6 right-6 z-50 absolute justify-between flex flex-col"
         >
           {cartData.length > 0 ? (
             <div>
@@ -40,16 +40,13 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                 className={`flex justify-center flex-col border-b py-2 mx-6 ${roboto_mono.className}`}
               >
                 <div className="flex mt-8">
-                  <p className="text-2xl">Cart Items</p>
+                  <p className="text-2xl">{t("cartItems")}</p>
                   <span className="bg-greenColor text-white w-8 h-8 flex items-center justify-center rounded-full ml-4">
                     {dataQuantity}
                   </span>
                 </div>
                 <div className="mt-4">
-                  <span className="text-sm pl-1">
-                    Add <b>$3.15</b> worth of items to your order to qualify for
-                    free shipping!
-                  </span>
+                  <span className="text-sm pl-1">{t("info")}</span>
                 </div>
               </div>
               <div className="max-h-60 overflow-y-scroll">
@@ -60,7 +57,7 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                   return (
                     <div
                       key={product.id}
-                      className="flex items-center w-full my-8 px-6 transition hover:bg-[rgb(244,244,244)] rounded-lg"
+                      className="flex items-center w-full my-8 px-6 transition hover:bg-[rgb(244,244,244)] dark:hover:bg-darkContentColor rounded-lg"
                     >
                       <div className="pr-2">
                         <Image
@@ -73,10 +70,10 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                       </div>
                       <div className="flex items-center justify-between w-full">
                         <div className="pl-4 border-l">
-                          <h1 className="text-[#16442a] font-bold text-xl mb-2 w-64">
+                          <h1 className="text-[#16442a] dark:text-darkTextColor font-bold text-xl mb-2 w-64">
                             {product.title}
                           </h1>
-                          <p className="text-black text-xl">
+                          <p className="text-black dark:text-darkTextColor text-xl">
                             $ {product.price}
                           </p>
                         </div>
@@ -116,10 +113,8 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                   <div
                     className={`flex flex-col justify-start ${roboto_mono.className}`}
                   >
-                    <p className="text-2xl">Total Price</p>
-                    <span className="text-sm pl-1 mt-1">
-                      Inclusive taxes. Shipping is calculated at checkout
-                    </span>
+                    <p className="text-2xl">{t("totalPrice")}</p>
+                    <span className="text-sm pl-1 mt-1">{t("taxes")}</span>
                   </div>
                   <span className="text-xl font-bold">
                     $ {Math.floor(totalPrice)} USD
@@ -130,16 +125,16 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                   <Link
                     href={`${process.env.BASE_URL}/cart`}
                     onClick={handleDropDown}
-                    className="bg-[#145f48] text-white text-center py-3 w-80 rounded-3xl shadow-md hover:bg-green-600 transition duration-200"
+                    className="bg-[#145f48] dark:bg-darkContentColor text-white text-center py-3 w-80 rounded-3xl shadow-md hover:bg-green-600 dark:hover:bg-darkContentColor transition duration-200"
                   >
-                    View Cart
+                    {t("viewCart")}
                   </Link>
                   <button
                     onClick={checkout}
-                    className="bg-[#145f48] flex items-center justify-center py-3 w-80 ml-3 rounded-3xl shadow-md text-white hover:bg-green-600 transition duration-200"
+                    className="bg-[#145f48] dark:bg-darkContentColor flex items-center justify-center py-3 w-80 ml-3 rounded-3xl shadow-md text-white hover:bg-green-600  dark:hover:bg-darkContentColor transition duration-200"
                   >
                     <IoBagCheckOutline className="text-2xl mr-3" />
-                    Checkout
+                    {t("checkout")}
                   </button>
                 </div>
 
@@ -149,7 +144,7 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                 >
                   <button className="flex items-center rounded-lg text-white bg-gray-500 px-8 py-2 font-bold active:scale-95 hover:opacity-90 focus:ring outline-none">
                     <AiTwotoneDelete className="text-lg mr-3 text-black" />
-                    Clear Cart
+                    {t("clearCart")}
                   </button>
                 </div>
               </div>
@@ -164,7 +159,7 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                   height={300}
                   alt="empty cart"
                 />
-                <p className="text-2xl mt-2 text-center font-semibold text-gray-600">
+                <p className="text-2xl mt-2 text-center font-semibold text-gray-600 dark:text-darkTextMain">
                   {t("emptyMessage")}
                 </p>
               </div>

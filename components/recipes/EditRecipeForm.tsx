@@ -16,8 +16,6 @@ export default function EditRecipeForm({
 }) {
   const [editedRecipe, setEditedRecipe] = useState<RecipeData | null>(null);
 
-  console.log(recipeId);
-
   const { user } = useUser();
 
   useEffect(() => {

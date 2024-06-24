@@ -136,7 +136,10 @@ export default function UserRecipe({ data }: any) {
                 onClick={() => setShowEditForm(!showEditForm)}
                 className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.7)] backdrop-blur-sm"
               >
-                <div className="bg-white w-[650px] max-h-[530px] overflow-y-auto rounded-2xl">
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-white w-[650px] max-h-[530px] overflow-y-auto rounded-2xl"
+                >
                   <EditRecipeForm
                     closeForm={() => setShowEditForm(false)}
                     recipeId={selectedRecipeId}

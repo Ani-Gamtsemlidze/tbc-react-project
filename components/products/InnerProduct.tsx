@@ -88,11 +88,11 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
   };
 
   return (
-    <div className="flex flex-col  w-full  bg-mainColor dark:bg-slate-500  ">
+    <div className="flex flex-col  w-full  bg-mainColor dark:bg-darkBgColor  ">
       {innerProductData && (
         <div className="flex flex-col">
           <h1
-            className={` text-7xl my-24 ${oleo.className} text-center text-[#035C41]`}
+            className={` text-7xl my-24 ${oleo.className} text-center text-[#035C41] dark:text-darkTextMain`}
           >
             <p>Exploring</p>
             Vegan Products
@@ -174,19 +174,19 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
             <div>
               <div className="ml-12 max-sm:ml-2 ">
                 <div className=" mt-4 flex items-center">
-                  <div className="bg-[#035C41] max-w-60 px-6 rounded-2xl   py-2   ">
+                  <div className="bg-[#035C41] dark:bg-darkSecondaryColor max-w-60 px-6 rounded-2xl   py-2   ">
                     <p className="text-white text-center">
                       {innerProductData.categories}
                     </p>
                   </div>
                   <div className="relative">
                     <IoMdShare
-                      className="text-3xl ml-4 text-greenColor cursor-pointer"
+                      className="text-3xl ml-4 text-greenColor dark:text-darkSecondaryColor cursor-pointer"
                       onClick={toggleDropdown}
                     />
                     <div className="">
                       {isDropdownOpen && (
-                        <div className="absolute flex justify-center right-[50%] translate-x-[50%] mt-4 w-48 bg-white rounded-lg shadow-lg border border-gray-200 divide-y divide-gray-200 z-10">
+                        <div className="absolute flex justify-center right-[50%] translate-x-[50%] mt-4 w-48 bg-white dark:bg-darkSecondaryColor rounded-lg shadow-lg border border-gray-200 divide-y divide-gray-200 z-10">
                           <div className="p-2">
                             <FacebookShareButton
                               url={`https://example.com/products/${innerProductData.id}`}
@@ -217,7 +217,7 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
                     </div>
                   </div>
                   <div className="ml-3 flex items-center">
-                    <HiMiniStar className="text-3xl mr-2 text-greenColor" />
+                    <HiMiniStar className="text-3xl mr-2 text-greenColor dark:text-darkSecondaryColor" />
                     <p className="text-2xl text-gray-500">
                       {averageRatings[innerProductData.id] !== undefined
                         ? Number(averageRatings[innerProductData.id]).toFixed(2)
@@ -226,7 +226,7 @@ export default function InnerProduct({ innerProductData }: InnerProductProps) {
                   </div>
                 </div>
                 <h1
-                  className={`text-7xl font-bold  mt-8 max-sm:text-3xl text-[#035C41] leading-snug	 ${monda.className}`}
+                  className={`text-7xl font-bold  mt-8 max-sm:text-3xl text-[#035C41] dark:text-darkSecondaryColor leading-snug	 ${monda.className}`}
                 >
                   {innerProductData.title}
                 </h1>

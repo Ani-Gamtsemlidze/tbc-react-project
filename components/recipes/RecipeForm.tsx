@@ -42,7 +42,6 @@ const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
   }, []);
 
   const handleImageUpload = (urls: string[]) => {
-    // console.log(urls);
     setRecipeImageUrl((prev) => [...prev, ...urls]);
   };
 
@@ -77,8 +76,6 @@ const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
         servings: Yup.string().required("required"),
       })}
       onSubmit={(values, { setSubmitting, setErrors }) => {
-        // alert("error");
-
         if (!recipeImageUrl.length) {
           toast.error("please upload iamge");
           console.log("dddd");
@@ -173,7 +170,7 @@ const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
                     htmlFor="cover-photo"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Cover photo
+                    Cover photos
                   </label>
                   <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div className="text-center">

@@ -5,7 +5,7 @@ import { RecipesSearch } from "../search/RecipesSearch";
 import AddRecipeForm from "./AddRecipeForm";
 import { useTranslations } from "next-intl";
 
-const UserFeatures = async () => {
+const UserFeatures = () => {
   const t = useTranslations("Recipes");
   const { isDropDown, handleDropDown } = useDropdown();
   return (

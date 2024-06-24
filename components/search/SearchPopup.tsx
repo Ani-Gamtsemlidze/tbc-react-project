@@ -29,12 +29,12 @@ interface SearchPopupProps {
 }
 
 const images: Image = {
-  Spicy: "/images/search_categories/Spicy.jpg",
-  Quick: "/images/search_categories/Quick.jpg",
-  Dinner: "/images/search_categories/Dinner.jpg",
-  Salad: "/images/search_categories/Salad.jpg",
-  Mushrooms: "/images/search_categories/Mushrooms.jpg",
-  Soups: "/images/search_categories/Soups.jpg",
+  Spicy: "/images/search/Spicy.jpg",
+  Quick: "/images/search/Quick.jpg",
+  Dinner: "/images/search/Dinner.jpg",
+  Salad: "/images/search/Salad.jpg",
+  Mushrooms: "/images/search/Mushrooms.jpg",
+  Soups: "/images/search/Soups.jpg",
 };
 
 export default function SearchPopup({

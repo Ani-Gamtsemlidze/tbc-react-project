@@ -3,18 +3,12 @@ import React from "react";
 import { oleo } from "../../app/fonts";
 import { IoMdClose } from "react-icons/io";
 
-// import * as Yup from "yup";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 import { FormikErrors } from "formik";
-// import FormField from "../recipeForm/FormField";
-// import SelectField from "../recipeForm/SelectField";
-// import NumberInputField from "../recipeForm/NumberInputField";
-// import TextareaField from "../recipeForm/TextareaFild";
-// import UploadImages from "./UploadImages";
+
 import RecipeForm from "./RecipeForm";
 import { toast } from "react-toastify";
-// import { useTranslations } from "next-intl";
 
 export interface RecipeData {
   title: string;
@@ -87,8 +81,6 @@ export default function AddRecipe({ handleDropDown }: any) {
       handleDropDown();
       return data;
     } catch (error) {
-      console.log(error, "rrrrrrrrrrrrr");
-      // console.error("Error creating recipe:", error);
       return { success: false, error: error };
     } finally {
       setSubmitting(false);
@@ -115,7 +107,7 @@ export default function AddRecipe({ handleDropDown }: any) {
             </div>
 
             <h1
-              className={`font-bold text-4xl my-8 text-[#fff] ${oleo.className}`}
+              className={`font-bold text-4xl my-8 text-[#fff] text-center ${oleo.className}`}
             >
               Share your Favourite Recipe
             </h1>
