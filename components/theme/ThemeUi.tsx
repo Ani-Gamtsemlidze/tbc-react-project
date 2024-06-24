@@ -44,14 +44,14 @@ export default function ThemeUi({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <MenuItems className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg py-1 z-50">
+              <MenuItems className="absolute right-0   mt-2 w-48 max-lg:w-32 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg py-1 z-50">
                 <MenuItem>
                   {({ active }) => (
                     <li
                       onClick={() => {
                         handleTheme("light", "light");
                       }}
-                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 ${
+                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 max-lg:py-0 ${
                         active ? "bg-gray-200 dark:bg-slate-700" : ""
                       } ${
                         localStorage.getItem("active") === "light"
@@ -70,7 +70,7 @@ export default function ThemeUi({
                       onClick={() => {
                         handleTheme("dark", "dark");
                       }}
-                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 ${
+                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 max-lg:py-0 ${
                         active ? "bg-gray-200 dark:bg-slate-700" : ""
                       } ${
                         localStorage.getItem("active") === "dark"
@@ -89,7 +89,7 @@ export default function ThemeUi({
                       onClick={() => {
                         handleSystemTheme("system", "system");
                       }}
-                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2 ${
+                      className={`text-black dark:text-[#CBD5E1] flex items-center cursor-pointer pl-4 py-2  max-lg:py-0${
                         active ? "bg-gray-200 dark:bg-slate-700" : ""
                       } ${
                         localStorage.getItem("active") === "system"

@@ -12,7 +12,11 @@ const ProductsFeatures = ({ productsData }: ProductsPageProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className={`flex flex-col top-32 ${!isOpen ? "sticky" : "fds "}`}>
+    <div
+      className={`flex max-lg:pl-8 flex-col  top-32 max-lg:mb-4 ${
+        !isOpen ? "sticky max-lg:static" : "fds "
+      }`}
+    >
       <ProductsSearch
         handleOpenSearchBox={handleOpenSearchBox}
         isOpen={isOpen}

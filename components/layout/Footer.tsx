@@ -1,4 +1,4 @@
-// import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Logo } from "./Logo";
 import { ContactItemProps } from "../contact/CompanyContact";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { CiFacebook } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
-  // const t = useTranslations("Footer");
+  const t = useTranslations("Footer");
 
   const contactItems: ContactItemProps[] = [
     {
@@ -38,31 +38,27 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-50">
-      <div className="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
+    <footer className="bg-gray-300 ">
+      <div className="mx-auto  max-w-[1200px] flex justify-between space-between items-start py-14 px-5 max-sm:flex-col gap-y-8 gap-x-12  md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div className="max-w-sm">
           <div className="mb-6 flex h-12 items-center space-x-2">
             <Logo />
           </div>
-          <div className="text-gray-500">
-            Welcome to Veggie Vibes, where we celebrate vegan living. Our
-            mission is to provide delicious, plant-based options that are not
-            only good for you but also good for the planet.
-          </div>
+          <div className="text-gray-500">{t("welcome")}</div>
         </div>
         <div className="">
-          <div className="mt-4 mb-2 font-medium xl:mb-4">Address</div>
+          <div className="mt-4 mb-2 font-medium xl:mb-4">{t("address")}</div>
           <div className="text-gray-500">
             Acme Vegan Foods Inc.
             <br />
-            123 Rustaveli Street
+            {t("address2")}
             <br />
-            Tbilisi, Georgia 54321
+            {t("address3")}
             <br />
           </div>
         </div>
         <div className="">
-          <div className="mt-4 mb-2 font-medium xl:mb-4">Contact us</div>
+          <div className="mt-4 mb-2 font-medium xl:mb-4">{t("contact")}</div>
           <nav aria-label="Footer Navigation" className="text-gray-500">
             <ul className="space-y-3">
               {contactItems.map((item, index) => (
@@ -79,7 +75,7 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div className="">
+        {/* <div className="">
           <div className="mt-4 mb-2 font-medium xl:mb-4">
             Subscribe to our Newsletter
           </div>
@@ -95,7 +91,7 @@ export default function Footer() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="bg-gray-100">
         <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">

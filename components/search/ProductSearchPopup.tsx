@@ -60,7 +60,7 @@ export default function ProductSearchPopUp({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-mainColor max-w-[1000px] w-full min-h-[80vh] overflow-y-auto rounded-2xl fixed"
+            className="bg-mainColor max-w-[1000px] w-full min-h-[80vh] max-lg:min-h-[60vh] max-lg:w-[90%] overflow-y-auto rounded-2xl fixed"
           >
             <div
               onClick={handleClose}

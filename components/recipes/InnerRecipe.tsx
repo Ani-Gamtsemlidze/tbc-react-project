@@ -14,7 +14,7 @@ function InnerRecipe({ recipeData }: any) {
             Vegan Recipes
           </h1>
           <div className="flex my-12 bg-[#035C41] dark:bg-darkBgColor">
-            <div className="max-w-[1200px] flex mx-auto py-8 px-0">
+            <div className="max-w-[1200px] max-sm:flex-col  flex mx-auto py-8 px-0">
               <div className="hover:transform hover:scale-105 transition-transform duration-300 rounded-2xl flex  justify-center">
                 <Image
                   src={recipeData?.images?.[0] ?? "/images/dessert.jpg"}
@@ -31,7 +31,7 @@ function InnerRecipe({ recipeData }: any) {
                   </p>
                 </div>
                 <h1
-                  className={`text-5xl mt-3 font-bold mb-5 dark:text-darkTextColor w-[700px] leading-tight ${monda.className}`}
+                  className={`text-5xl mt-3 font-bold mb-5 dark:text-darkTextColor max-w-[700px] w-full leading-tight ${monda.className}`}
                 >
                   {recipeData.title}
                 </h1>
@@ -52,8 +52,8 @@ function InnerRecipe({ recipeData }: any) {
               </div>
             </div>
           </div>
-          <div className="ml-24">
-            <h1 className="text-[#035C41] dark:text-darkTextMain text-5xl w-[700px] leading-snug">
+          <div className="ml-24 max-sm:ml-8">
+            <h1 className="text-[#035C41] dark:text-darkTextMain text-5xl max-sm:text-2xl max-w-[700px] leading-snug">
               How to make these {recipeData.title}
             </h1>
             <p className="font-bold text-3xl text-[#035C41] dark:text-darkTextMain mt-10">
@@ -72,20 +72,20 @@ function InnerRecipe({ recipeData }: any) {
               )}
             </ul>
 
-            <div className="flex">
+            <div className="flex max-sm:flex-col max-sm:mt-4">
               <Image
                 src={recipeData?.images?.[1] ?? "/images/dessert.jpg"}
                 alt={recipeData.title}
                 width={384}
                 height={384}
-                className="w-96 h-96 object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
+                className="w-96 h-96  object-cover rounded hover:transform hover:scale-105 transition-transform duration-300"
               />
               <Image
                 src={recipeData?.images?.[2] ?? "/images/dessert.jpg"}
                 alt={recipeData.title}
                 width={384}
                 height={384}
-                className="w-96 h-96 object-cover rounded ml-4 hover:transform hover:scale-105 transition-transform duration-300"
+                className="w-96 h-96 object-cover rounded ml-4 max-sm:ml-0 max-sm:mt-3 hover:transform hover:scale-105 transition-transform duration-300"
               />
             </div>
             <h3 className="font-bold text-3xl text-[#035C41] dark:text-darkTextMain mt-10">

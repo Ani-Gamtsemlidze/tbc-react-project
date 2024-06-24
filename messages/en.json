@@ -24,11 +24,23 @@
 
 
     },
+
+    "HomeSlider" :{
+      "exploring":"Exploring",
+      "lifeStyle": "Vegan Lifestyle",
+      "trending":"Trending",
+      "veganRecipes":"Vegan Recipes",
+      "recipes":"Recipes",
+      "ofMonth":"of the Month"
+    },
     "Footer":{
-      "email":"Email address",
-      "subscribe": "Subscribe",
-      "terms":"Terms and Conditions",
-      "policy" : "Privacy Policy"
+      "welcome":"Welcome to Veggie Vibes, where we celebrate vegan living. Our mission is to provide delicious, plant-based options that are not only good for you but also good for the planet.",
+      "address":"Address",
+      "address1":"Acme Vegan Foods Inc.",
+      "address2":"123 Rustaveli Street",
+      "address3": "Tbilisi, Georgia 54321",
+      "contact":"Contact us"
+
     },
     "Profile":{
       "title":"User",

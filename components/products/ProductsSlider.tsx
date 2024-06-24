@@ -4,9 +4,19 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
+import { oleo } from "../../app/fonts";
+import { useTranslations } from "next-intl";
+
 export default function ProductsSlider() {
+  const t = useTranslations("HomeSlider");
   return (
     <div>
+      <h1
+        className={` text-7xl my-16 ${oleo.className} leading-snug text-center dark:text-mainColor text-[#035C41]`}
+      >
+        <p>{t("exploring")}</p>
+        {t("lifeStyle")}
+      </h1>
       <Swiper
         autoplay={{
           delay: 2500,

@@ -21,18 +21,6 @@
   border-radius: 8px;
 } 
 
-.active .tv-icon {
-  fill:#5A698F
-}
-.active .movies_icon {
-  fill: #fff;
-}
-.dark .active {
-  background: #334255;
-  color: #E2E8F0 !important;
-
-}
-
   /* .MuiFormControl-root {
   } */
 
@@ -294,9 +282,17 @@
   -moz-animation: fill 0.5s forwards;
   opacity: 1;
 }
- /* .swiper-button-next {
-  background-color: #035C41 !important;
-} */
+
+@media (max-width: 768px) {
+  .fill ul li a:hover:after {
+    z-index: auto; /* reset to default */
+    animation: none; /* remove animation */
+    -webkit-animation: none; /* remove webkit animation */
+    -moz-animation: none; /* remove moz animation */
+    opacity: 0; /* reset opacity */
+  }
+}
+
 
 .categories_swiper .swiper-button-next, .swiper-button-prev   {
   position: absolute !important;

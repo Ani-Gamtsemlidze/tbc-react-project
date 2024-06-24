@@ -105,11 +105,11 @@ export default function SearchPopup({
       {isOpen && (
         <div
           onClick={handleOpenSearchBox}
-          className=" bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed top-0  w-screen right-0 z-50 "
+          className=" bg-[rgba(0,0,0,0.7)] flex items-center justify-center h-screen fixed max-sm:p-3 top-0  w-screen right-0 z-50 "
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white dark:bg-darkBgColor w-[650px] max-h-[410px] overflow-y-auto rounded-2xl fixed"
+            className="bg-white  dark:bg-darkBgColor w-full max-w-[650px] max-h-[410px] overflow-y-auto rounded-2xl "
           >
             <form className="relative flex ml-12 mt-8 items-center">
               <input
@@ -121,7 +121,7 @@ export default function SearchPopup({
               />
               <div
                 onClick={handleOpenSearchBox}
-                className="ml-4 cursor-pointer "
+                className="ml-4 max-sm:mr-3 cursor-pointer "
               >
                 <p>close</p>
               </div>

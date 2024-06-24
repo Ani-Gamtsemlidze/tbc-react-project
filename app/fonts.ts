@@ -1,4 +1,4 @@
-import { Acme, Adamina, Arvo,Fira_Sans, Inter, Merienda, Monda, Oleo_Script, Roboto_Mono } from 'next/font/google'
+import { Acme, Adamina, Arvo,Fira_Sans, Inter, Merienda, Monda, Noto_Serif_Georgian, Oleo_Script, Roboto_Mono } from 'next/font/google'
  
 export const inter = Inter({
   subsets: ['latin'],
@@ -40,6 +40,11 @@ export const acme = Acme({
   weight:"400"
 })
 export const merienda = Merienda({
+  subsets: ['latin'],
+  display: 'swap',
+  weight:"700"
+})
+export const georgian = Noto_Serif_Georgian({
   subsets: ['latin'],
   display: 'swap',
   weight:"700"

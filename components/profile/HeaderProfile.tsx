@@ -69,7 +69,7 @@ const HeaderProfile = () => {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <MenuItems className="bg-white dark:bg-slate-800 border border-gray-200 shadow-md rounded-xl absolute top-14 right-0 z-50 py-4 w-60 min-h-60">
+          <MenuItems className="bg-white dark:bg-slate-800 border border-gray-200 shadow-md rounded-xl absolute top-14 right-0 z-50 py-4 w-60 max-lg:w-32 min-h-60">
             <div className="flex justify-center flex-col">
               <div className="flex mt-2 mx-auto">
                 <p className="text-lg">

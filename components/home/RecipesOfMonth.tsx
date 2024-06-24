@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { getRecipes } from "../../user-api";
 import Image from "next/image";
-import { inter } from "../../app/fonts";
+import { inter, oleo } from "../../app/fonts";
+import { getTranslations } from "next-intl/server";
 
 const RecipesOfMonth = async () => {
+  const t = await getTranslations("HomeSlider");
   let recipes = [];
 
   try {
@@ -16,6 +18,12 @@ const RecipesOfMonth = async () => {
 
   return (
     <div className="flex flex-col p-16 max-sm:p-2 justify-center ">
+      <h1
+        className={` leading-snug text-7xl my-24 ${oleo.className} text-center dark:text-mainColor text-[#035C41]`}
+      >
+        <p>{t("recipes")} </p>
+        {t("ofMonth")}
+      </h1>
       <div className="flex justify-center flex-wrap max-sm:justify-evenly">
         {limitedRecipes.map((data: any) => (
           <Link

@@ -9,21 +9,19 @@ import useDropdown from "../../hooks";
 import ItemBucket from "../products/ItemBucket";
 import HeaderProfile from "../profile/HeaderProfile";
 import { Logo } from "./Logo";
-import { SideBar } from "./SideBar"; // Assuming you have imported and implemented the SideBar component
+import { SideBar } from "./SideBar";
 
 export default function Header() {
   const { user } = useUser();
   const { popupRef } = useDropdown();
   const [showSidebar, setShowSidebar] = useState(false);
 
-  // Function to toggle sidebar visibility
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
   return (
     <>
-      {/* Desktop Header */}
       <header
         className={`max-lg:hidden items-center shadow-custom dark:shadow-customDark bg-mainColor dark:bg-darkBgColor py-1 px-8 sticky top-0 z-50 ${
           showSidebar ? "hidden" : ""
@@ -55,12 +53,10 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Sidebar */}
       {showSidebar && <SideBar />}
 
-      {/* Toggle Button (for mobile) */}
       <button
-        className="lg:hidden fixed top-3 right-4 z-50 p-3 bg-gray-700 rounded-full text-white"
+        className="lg:hidden fixed top-3 right-4 z-50 p-3 bg-greenColor rounded-full text-white"
         onClick={toggleSidebar}
       >
         {showSidebar ? "Close" : "Menu"}

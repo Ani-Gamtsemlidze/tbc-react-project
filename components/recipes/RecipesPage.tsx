@@ -40,7 +40,7 @@ export default function RecipesPage() {
 
   return (
     <div className="flex flex-col bg-mainColor dark:bg-gray-700 relative">
-      <div className="my-6">
+      <div className="my-6 max-lg:my-16">
         <p className="text-center text-3xl text-[#035C41] dark:text-darkTextColor">
           Explore
         </p>
@@ -51,7 +51,7 @@ export default function RecipesPage() {
         </h1>
       </div>
 
-      <div className="max-w-[1200px] mx-auto flex justify-center">
+      <div className="max-w-[1200px] max-lg:flex-col max-lg:ml-8 max-lg:items-start max-lg:mb-4 mx-auto flex justify-center">
         <UserFeatures />
 
         <RecipeCard data={data} />

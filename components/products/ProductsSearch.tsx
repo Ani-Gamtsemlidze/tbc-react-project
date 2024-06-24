@@ -15,7 +15,7 @@ export default function ProductsSearch({
     <>
       <div onClick={handleOpenSearchBox} className="mb-4 h-[50px]">
         <div className="relative  h-full">
-          <div className=" h-full flex items-center w-full transition text-sm hover:bg-#E895D0 hover:placeholder-[#16442a] hover:text-[#16442a]  border-[rgb(122,122,122)]  rounded-md  border cursor-pointer p-2 pl-10 bg-transparent placeholder-black focus:outline-none text-black ">
+          <div className=" h-full max-lg:w-[60%] flex items-center w-full transition text-sm hover:bg-#E895D0 hover:placeholder-[#16442a] hover:text-[#16442a]  border-[rgb(122,122,122)]  rounded-md  border cursor-pointer p-2 pl-10 bg-transparent placeholder-black focus:outline-none text-black ">
             Search for Products
           </div>
 
