@@ -65,7 +65,7 @@ export default function ProductsPage({ productsData }: ProductsPageProps) {
             </h1>
           </div>
         </div>
-        <div className="flex my-12 max-w-[1200px] mx-auto">
+        <div className="flex my-12 max-w-[1300px] mx-auto">
           <div className="">
             <ProductsFeatures productsData={productsData} />
           </div>

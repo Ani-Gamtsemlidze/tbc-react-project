@@ -6,6 +6,7 @@ import { oleo } from "../../app/fonts";
 import ProductsCard from "../products/ProductsCard";
 import { ProductsFeatures } from "../products/ProductsFeatures";
 import { useCart } from "../../app/context/CartContext";
+import Loading from "../../app/[locale]/loading";
 
 interface CategoryProps {
   categoryName: string;
@@ -13,6 +14,8 @@ interface CategoryProps {
 
 export default function ProductsCategory({ categoryName }: CategoryProps) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const { allProducts } = useCart();
 
   useEffect(() => {
@@ -20,7 +23,10 @@ export default function ProductsCategory({ categoryName }: CategoryProps) {
       try {
         const categoryData = await getProductsCategory(category);
         setData(categoryData?.rows || []);
+        setLoading(true);
       } catch (error) {
+        setLoading(false);
+
         console.error("Error fetching category:", error);
       }
     };
@@ -28,6 +34,10 @@ export default function ProductsCategory({ categoryName }: CategoryProps) {
     const decodedCategory = decodeURIComponent(categoryName);
     fetchCategory(decodedCategory);
   }, [categoryName]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   const decodedCategory = decodeURIComponent(categoryName);
 

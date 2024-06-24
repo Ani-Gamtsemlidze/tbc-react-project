@@ -1,7 +1,13 @@
+import { arvo } from "../fonts";
+
 export default function Loading() {
   return (
     <div className="bg-mainColor dark:bg-darkBgColor h-screen flex flex-col items-center justify-center ">
-      Please Wait... Counting unicorns in binary.
+      <h1
+        className={`text-lg ${arvo.className} text-greenColor dark:text-darkTextMain`}
+      >
+        Please Wait... Planting organic dreams for unicorns.
+      </h1>
       <div role="status" className="mt-3">
         <svg
           aria-hidden="true"
