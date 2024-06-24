@@ -75,9 +75,8 @@ export default function ProductsCard({ data }: ProductsCardProps) {
 
     try {
       const quantity = 1;
-      const result = await addToCart(user.sub!, productId, quantity);
+      await addToCart(user.sub!, productId, quantity);
       fetchCartData();
-      console.log("Product added to cart:", result);
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
@@ -90,8 +89,7 @@ export default function ProductsCard({ data }: ProductsCardProps) {
     }
 
     try {
-      const result = await addRating(user.sub!, productId, ratingValue);
-      console.log("Product rating added:", result);
+      await addRating(user.sub!, productId, ratingValue);
       setRatings((prevRatings) => ({
         ...prevRatings,
         [productId]: ratingValue,

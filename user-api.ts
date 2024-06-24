@@ -3,6 +3,29 @@
 import { revalidatePath } from "next/cache";
 import { User } from "./components/profile/UserInfo";
 
+interface EditRecipe {
+  title: string;
+  description: string;
+  ingredients: string[];
+  instructions: string;
+}
+
+interface EditRecipeResponse {
+  success: boolean;
+  message: string;
+}
+
+interface EditedProduct {
+  name?: string;
+  price?: string;
+  description?: string;
+}
+
+interface EditProductResponse {
+  success: boolean;
+  message: string;
+}
+
 
 
 export async function getUsers(){
@@ -33,6 +56,8 @@ export async function getRecipe(id: number) {
   }
 }
 export async function getUserRecipes(userId: string) {
+  revalidatePath("/myRecipes")
+
   try {
     const url = `${process.env.BASE_URL}/api/get-user-recipe/${userId}`;
     const response = await fetch(url, {
@@ -210,7 +235,7 @@ export async function editUserInfo(id: string, editUser:User) {
     throw error; 
   }
 }
-export async function editRecipeInfo(id: string, editRecipe:any) {
+export async function editRecipeInfo(id: string, editRecipe: EditRecipe): Promise<EditRecipeResponse> {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-user-recipe/${id}`, {
     cache:"no-store",
@@ -232,7 +257,7 @@ export async function editRecipeInfo(id: string, editRecipe:any) {
     throw error; 
   }
 }
-export async function editProductInfo(id: string, editedProduct: any) {
+export async function editProductInfo(id: string, editedProduct: EditedProduct): Promise<EditProductResponse> {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/update-product-info/${id}`, {
     cache:"no-store",
@@ -357,7 +382,7 @@ export async function getPicture(sub: string) {
 
 export async function changePictureAction(sub: string, picture: string) {
   await fetch(`${process.env.BASE_URL}/api/change-picture`, {
-    cache:"no-cache",
+    cache:"no-store",
     method: "PUT",
     body: JSON.stringify({ sub, picture }),
   });
@@ -367,6 +392,7 @@ export async function changePictureAction(sub: string, picture: string) {
 export const filterProducts = async (filter1: number, filter2: number) => {
   const params = new URLSearchParams({ filter1: filter1.toString(), filter2: filter2.toString() });
   const url = `${process.env.BASE_URL}/api/products/filter-products?${params.toString()}`;
+  
 
   try {
     const response = await fetch(url, {
@@ -385,3 +411,13 @@ export const filterProducts = async (filter1: number, filter2: number) => {
   }
 }
 
+export async function createRefund(charge: string) {
+  revalidatePath("/orders");
+  await fetch(`${process.env.BASE_URL}/api/order-refund`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ charge }),
+  });
+}

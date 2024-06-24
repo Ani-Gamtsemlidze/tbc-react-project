@@ -10,7 +10,20 @@ import { roboto_mono } from "../../app/fonts";
 import { useTranslations } from "next-intl";
 import { VscSend } from "react-icons/vsc";
 
-export default function CartDropdownItems({ handleDropDown }: any) {
+interface CartDropdownItemsProps {
+  handleDropDown: () => void;
+}
+
+interface ProductData {
+  id: number;
+  images: string[];
+  title: string;
+  price: number;
+}
+
+export default function CartDropdownItems({
+  handleDropDown,
+}: CartDropdownItemsProps) {
   const {
     cartData,
     productsData,
@@ -50,9 +63,9 @@ export default function CartDropdownItems({ handleDropDown }: any) {
                 </div>
               </div>
               <div className="max-h-60 overflow-y-scroll">
-                {productsData.map((product: any) => {
+                {productsData.map((product: ProductData) => {
                   const cartItem = cartData.find(
-                    (item: any) => item.product_id === product.id
+                    (item) => item.product_id === product.id
                   );
                   return (
                     <div

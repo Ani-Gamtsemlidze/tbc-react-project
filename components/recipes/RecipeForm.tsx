@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 
 interface Props {
   handleSubmit: (
-    data: any,
+    data: RecipeData,
     setErrors: any,
     setSubmitting: (d: boolean) => void
   ) => void;
@@ -78,7 +78,6 @@ const RecipeForm = ({ handleSubmit, recipeData }: Props) => {
       onSubmit={(values, { setSubmitting, setErrors }) => {
         if (!recipeImageUrl.length) {
           toast.error("please upload iamge");
-          console.log("dddd");
           setSubmitting(false);
           return;
         }

@@ -56,20 +56,16 @@ export async function PUT(request: NextRequest) {
 
     const recipe =
       await sql`SELECT * FROM recipes WHERE user_id = ${userId}  AND id = ${id}`;
-    console.log(recipe, "adad");
     return NextResponse.json({ recipe }, { status: 200 });
   } catch (error) {
-    console.log(error, "error---error");
     return NextResponse.json({ error }, { status: 500 });
   }
 }
 
 export async function DELETE(request: NextRequest) {
   const userId = request.nextUrl.pathname.split("/").pop();
-  console.log(userId);
   try {
     const { id } = await request.json();
-    console.log("userId", userId, id);
     await sql`
     DELETE FROM recipes
     WHERE user_id = ${userId}  AND id = ${id} ;

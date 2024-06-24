@@ -33,19 +33,13 @@ export default function EditRecipeForm({
     }
   };
 
-  const handleSave = async (
-    data: any,
-    errors: any,
-    setSumiting: (d: boolean) => void
-  ) => {
-    console.log(errors, "errorserrorserrors");
+  const handleSave = async (data: any, setSumiting: (d: boolean) => void) => {
     if (!editedRecipe) return;
     try {
       await editRecipeInfo(user?.sub as string, {
         ...data,
         id: editedRecipe.id,
       });
-      console.log("Recipe updated successfully");
       setSumiting(false);
       toast.success("edited successfully!");
       closeForm();

@@ -9,7 +9,6 @@ import Loading from "../../app/[locale]/loading";
 export default function EditProductForm({ productId }: { productId: number }) {
   const [editedProduct, setEditedProduct] = useState<ProductData | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  console.log(productId);
 
   const { user } = useUser();
 
@@ -38,7 +37,6 @@ export default function EditProductForm({ productId }: { productId: number }) {
     try {
       await editProductInfo(user?.sub as string, editedProduct);
       setIsEditing(false);
-      console.log("product updated successfully");
     } catch (error) {
       console.error("Error editing product:", error);
     }

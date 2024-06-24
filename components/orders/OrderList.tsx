@@ -2,6 +2,8 @@
 import React from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useTranslations } from "next-intl";
+import { createRefund } from "../../user-api";
+import { Button } from "@mui/material";
 
 interface Order {
   latest_charge: {
@@ -13,6 +15,7 @@ interface Order {
     amount: number;
     amount_refunded: number;
     receipt_url: string;
+    refunded: any;
   };
   amount: number;
   metadata: {
@@ -35,10 +38,12 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
       order.latest_charge.billing_details.email === user?.email
   );
 
-  console.log(filteredOrders);
+  const refundHandler = async (charge: string) => {
+    await createRefund(charge);
+  };
 
   return (
-    <div className="flex p-16 overflow-x-auto bg-mainColor dark:bg-darkBgColor min-h-screen rounded-lg shadow-md overflow-hidden divide-y divide-gray-200">
+    <div className="flex p-16 overflow-y-auto bg-mainColor dark:bg-darkBgColor min-h-screen rounded-lg shadow-md overflow-hidden divide-y divide-gray-200">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-darkSecondaryColor dark:text-darkTextColor">
           <tr>
@@ -57,6 +62,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
             <th scope="col" className="px-6 py-3">
               {t("viewReceipt")}
             </th>
+            <th scope="col" className="px-6 py-3 bg-transparent"></th>
           </tr>
         </thead>
         <tbody>
@@ -89,15 +95,29 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
                 {order.latest_charge.billing_details.name || "N/A"}
               </td>
               <td className="px-6 py-4">
-                <a
-                  href={order.latest_charge.receipt_url}
-                  aria-label="Order Receipt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-greenColor dark:text-darkTextMain underline"
-                >
-                  {t("viewReceipt")}
-                </a>
+                <Button variant="contained" color="success">
+                  <a
+                    href={order.latest_charge.receipt_url}
+                    aria-label="Order Receipt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white no-underline dark:text-darkTextMain"
+                  >
+                    {t("viewReceipt")}
+                  </a>
+                </Button>
+              </td>
+              <td className="px-6 py-4">
+                {!order.latest_charge.refunded && (
+                  <Button
+                    type="button"
+                    onClick={() => refundHandler(order.latest_charge.id)}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Refund
+                  </Button>
+                )}
               </td>
             </tr>
           ))}

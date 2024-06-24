@@ -2,7 +2,6 @@ import { sql } from "@vercel/postgres";
 
 export async function GET(_request: Request, { params }: { params: { id: number } }) {
     try {
-        console.log("Rating endpoint called with id:", params.id);
 
         if (!params.id) {
             return new Response("Product ID is required", { status: 400 });
@@ -14,7 +13,6 @@ export async function GET(_request: Request, { params }: { params: { id: number 
             WHERE product_id = ${params.id};
         `;
 
-        console.log("Rating query result:", result);
 
         const averageRating = result.rows[0]?.average_rating || 0;
 

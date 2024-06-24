@@ -71,7 +71,11 @@ export default function ProductsPage({ productsData }: ProductsPageProps) {
           </div>
           <div className="flex w-full ml-6">
             <ProductsCard
-              data={filteredData?.length > 0 ? filteredData : productsData}
+              data={
+                (filteredData?.length > 0
+                  ? filteredData
+                  : productsData) as Product[]
+              }
             />
           </div>
         </div>

@@ -8,7 +8,6 @@ export async function GET(request: Request) {
     const filter1 = parseFloat(searchParams.get('filter1') || '0');
     const filter2 = parseFloat(searchParams.get('filter2') || '0');
 
-    console.log(filter1, filter2, "FILTERS");
 
     const products = await sql `SELECT * FROM products
     WHERE price BETWEEN ${filter1} AND ${filter2}`;

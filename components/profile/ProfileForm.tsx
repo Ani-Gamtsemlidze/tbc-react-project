@@ -26,7 +26,6 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
 
       await editUserInfo(user.sub, editedUser);
       setIsEditing(false);
-      console.log("User updated successfully");
     } catch (error) {
       console.error("Error editing user:", error);
     }

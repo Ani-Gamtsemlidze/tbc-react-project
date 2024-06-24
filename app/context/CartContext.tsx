@@ -110,7 +110,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const handleQuantityChange = async (productId: number, change: number) => {
     const newQuantity = (quantity[productId] || 0) + change;
-    console.log(newQuantity);
     if (newQuantity >= 0) {
       try {
         const response = await updateCart(user!.sub!, productId, newQuantity);

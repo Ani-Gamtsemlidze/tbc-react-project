@@ -7,7 +7,6 @@ export async function GET(_request: Request, { params }: { params: { id: number 
 
   try {
     const recipe = await sql`SELECT * FROM recipes WHERE id = ${params.id}`;
-    // console.log("recipe", recipe);
 
     return NextResponse.json({ recipe }, { status: 200 });
   } catch (error) {

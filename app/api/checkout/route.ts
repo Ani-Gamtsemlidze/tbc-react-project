@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
- console.log(process.env.STRIPE_SECRET_KEY,"process.env.STRIPE_SECRET_KEY")
 
 
  interface Product {
@@ -18,7 +17,8 @@ interface CheckoutDataItem {
 
 const getActiveProducts = async (): Promise<Stripe.Product[]> => {
   const checkProducts = await stripe.products.list();
-  const availableProducts = checkProducts.data.filter((product: any) => product.active === true);  return availableProducts;
+  const availableProducts = checkProducts.data.filter((product: Stripe.Product) => product.active === true);  
+  return availableProducts;
 };
 
 
@@ -35,8 +35,8 @@ export const POST = async (request: NextRequest) => {
   try {
     for (const product of data) {
       const stripeProduct = activeProducts?.find(
-        (stripeProduct: any) =>
-          stripeProduct?.title?.toLowerCase() == product?.title?.toLowerCase()
+        (stripeProduct) =>
+          stripeProduct?.name?.toLowerCase() == product?.title?.toLowerCase()
       );
 
       if (stripeProduct == undefined) {
@@ -79,10 +79,8 @@ export const POST = async (request: NextRequest) => {
         });
       }
   
-    console.log(product, "stripeProduct")
   }
 
-console.log(stripeItems, "STRIPEITEMS")
 
   const session = await stripe.checkout.sessions.create({
     line_items: stripeItems,

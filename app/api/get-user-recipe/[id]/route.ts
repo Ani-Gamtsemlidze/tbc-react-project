@@ -11,7 +11,6 @@ export async function GET(
 ) {
   const { id } = params;
 
-  console.log(id, "SUB")
   try {
     const recipes = await sql`
       SELECT * FROM recipes
@@ -20,7 +19,6 @@ export async function GET(
 
     return NextResponse.json({ recipes }, { status: 200 });
   } catch (error) {
-    console.log(error, "errrr");
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

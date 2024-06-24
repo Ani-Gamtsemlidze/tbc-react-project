@@ -16,7 +16,6 @@ export default function ProductSearchPopUp({
   const [searchQuery, setSearchQuery] = useState<string>("");
   const t = useTranslations("Products");
   const [data, setData] = useState<Product[]>([]);
-  console.log(searchQuery);
 
   const debounce = useCallback(
     (func: (...args: any[]) => void, delay: number) => {

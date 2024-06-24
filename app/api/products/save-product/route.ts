@@ -12,7 +12,6 @@ export async function POST(request: Request) {
     images,
     sub
   } = await request.json();
-  console.log(ingredients, "PRODUCTTITLE")
 
   const ingredientsArray = ingredients.split('\n').filter((ingredient: string) => ingredient.trim() !== '');
   const imagesArray = images.filter((imageUrl: string) => imageUrl.trim() !== '');
@@ -37,7 +36,6 @@ export async function POST(request: Request) {
     const successMessage = "Products created successfully";
     return NextResponse.json({ products, successMessage }, { status: 200 });
   } catch (error) {
-    console.log(error, "errrrr");
     return NextResponse.json({ error }, { status: 500 });
   }
 }

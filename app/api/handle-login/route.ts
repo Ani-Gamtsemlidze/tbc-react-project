@@ -13,7 +13,6 @@ export async function GET(_request: Request) {
       const existingUser =
         await sql`SELECT * FROM users_info WHERE user_id = ${sub};`;
 
-      console.log(existingUser.rows, "LOGINUSERID");
       if (!existingUser.rows.length)
         await sql`
       INSERT INTO users_info (user_id, email, picture, firstname, lastname, nickname)
@@ -23,7 +22,6 @@ export async function GET(_request: Request) {
       return redirect(`${process.env.BASE_URL}/api/auth/login`);
     }
   } catch (error) {
-    console.log(error, "error");
     return redirect(`${process.env.BASE_URL}/api/auth/logout`);
   }
   return redirect(`${process.env.BASE_URL}`);

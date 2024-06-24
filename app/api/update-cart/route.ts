@@ -6,7 +6,6 @@ export const revalidate = 0;
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log(body.user_id, "body user id")
 
     if (body.quantity < 0) {
       return NextResponse.json(
@@ -15,15 +14,13 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Update the quantity of the product in the cart for the specific user
     await sql`
       UPDATE carts 
       SET quantity = ${body.quantity} 
       WHERE user_id = ${body.user_id} AND product_id = ${body.product_id} 
     `;
 
-    // If the quantity is zero, remove the product from the cart for the specific user
-    if (body.quantity === 0) {
+   if (body.quantity === 0) {
       await sql`
         DELETE FROM carts 
         WHERE user_id = ${body.user_id} AND product_id = ${body.product_id}
@@ -53,23 +50,6 @@ export async function PUT(request: NextRequest) {
 
 }
 
-
-// export async function DELETE (request: Request) {
-//   const body = await request.json()
-//   try {
-//     await sql`DELETE FROM carts
-//     user_id = ${body.user_id} AND product_id = ${body.product_id};
-//     `;
-//     return NextResponse.json(
-//       { msg: "Product is deleted!" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     console.log(error);
-//     return NextResponse.json({ msg: "Error!" }, { status: 400 });
-//   }
-// }
-
 export async function DELETE(request: Request) {
   const body = await request.json();
   try {
@@ -82,7 +62,6 @@ export async function DELETE(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ msg: "Error!" }, { status: 400 });
   }
 }

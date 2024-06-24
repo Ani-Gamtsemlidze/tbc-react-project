@@ -5,7 +5,11 @@ import { changePictureAction } from "../../user-api";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 
-export default function AvatarUploadPage({ setIsUpload }: any) {
+interface AvatarUploadPageProps {
+  setIsUpload: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AvatarUploadPage: React.FC<AvatarUploadPageProps> = ({ setIsUpload }) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const { user } = useUser();
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
@@ -111,7 +115,8 @@ export default function AvatarUploadPage({ setIsUpload }: any) {
           </div>
         </div>
       </div>
-      {/* )} */}
     </>
   );
-}
+};
+
+export { AvatarUploadPage };

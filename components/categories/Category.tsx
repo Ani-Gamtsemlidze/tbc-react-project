@@ -14,22 +14,21 @@ interface CategoryProps {
 
 export default function Category({ categoryName }: CategoryProps) {
   const [data, setData] = useState<Recipe[]>([]);
-  const [loading, setLoading] = useState(true); // Introduce loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCategory(categoryName);
   }, [categoryName]);
 
   const fetchCategory = async (categoryName: string) => {
-    console.log("categoryNAME", categoryName);
     try {
-      setLoading(true); // Set loading to true before fetching data
+      setLoading(true);
       const category = await getCategory(categoryName);
       setData(category.rows || []);
     } catch (error) {
       console.error("Error fetching category:", error);
     } finally {
-      setLoading(false); // Set loading to false after data is fetched or on error
+      setLoading(false);
     }
   };
 

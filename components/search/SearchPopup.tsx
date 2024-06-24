@@ -74,7 +74,6 @@ export default function SearchPopup({
 
   const debounceSearch = useCallback(
     debounce((searchQuery: string) => {
-      console.log("Debounced search query:", searchQuery);
       const filtered = recipesData?.filter((recipe: any) =>
         recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -85,7 +84,6 @@ export default function SearchPopup({
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = e.target.value;
-    console.log(searchQuery);
     setSearchQuery(searchQuery);
     debounceSearch(searchQuery);
   };

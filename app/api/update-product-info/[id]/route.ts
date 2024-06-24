@@ -60,13 +60,11 @@ export async function PUT(request: NextRequest) {
 export async function DELETE (request: NextRequest) {
   
   const userId = request.nextUrl.pathname.split("/").pop();
-  console.log(userId)
   try {
 
     const {    
       id
     } = await request.json();
-    console.log("userId", userId, id)
     await sql`
     DELETE FROM products
     WHERE sub = ${userId}  AND id = ${id} ;

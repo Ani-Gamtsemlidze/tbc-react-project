@@ -12,7 +12,6 @@ export async function GET(_request: Request, { params }: { params: { id: string 
             WHERE categories @> ARRAY[${categoryName}]::text[];`;
 
         const rows = result.rows;
-        console.log("Rows fetched:", rows);
 
         return NextResponse.json({ rows }, { status: 200 });
     } catch(error) {

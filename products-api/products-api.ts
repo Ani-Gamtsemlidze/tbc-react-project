@@ -9,7 +9,6 @@ export async function addToCart(userId: string, productId: number, quantity: num
   
     const data = await response.json();
     if (data.success) {
-      console.log('Product added to cart');
     } else {
       console.error('Failed to add product to cart:', data.error);
     }
@@ -25,7 +24,6 @@ export async function addRating(userId: string, productId: number, rating: numbe
   
     const data = await response.json();
     if (data.success) {
-      console.log('Product added to cart');
     } else {
       console.error('Failed to add product to cart:', data.error);
     }

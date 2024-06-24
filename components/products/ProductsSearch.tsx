@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-("use clieny");
 import { CiSearch } from "react-icons/ci";
 import PriceFilter from "./PriceFilter";
 import ProductSearchPopUp from "../search/ProductSearchPopup";

@@ -115,7 +115,7 @@ function InnerRecipe({ recipeData }: any) {
             </div>
             <div className="my-4 ">
               <h3 className="font-bold text-3xl text-[#035C41] dark:text-darkTextMain mt-10">
-                Storge Instructions
+                Storage Instructions
               </h3>
               <p className="dark:text-darkTextColor mt-2">
                 {recipeData.storage_instructions}

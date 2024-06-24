@@ -6,7 +6,6 @@ export const revalidate = 0;
 
 export async function POST(request: Request) {
   const { userId, products } = await request.json();
-  console.log("USERID", userId)
 
   try {
 

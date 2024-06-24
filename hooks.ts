@@ -20,11 +20,9 @@ const useDropdown = () => {
   // Handle click outside for all dropdowns
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-      console.log("Clicked outside, closing all dropdowns");
       setIsDropDown(false);
     }
     if (ulRef.current && !ulRef.current.contains(event.target as Node)) {
-      console.log("Clicked outside, closing all dropdowns");
       setIsDropDown(false);
     }
   }, []);

@@ -7,7 +7,6 @@ export async function GET(_request: Request, { params }: { params: { id: number 
 
   try {
     const product = await sql`SELECT * FROM products WHERE id = ${params.id}`;
-    console.log("product", product);
 
     return NextResponse.json({ product }, { status: 200 });
   } catch (error) {

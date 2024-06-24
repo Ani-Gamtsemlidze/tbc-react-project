@@ -7,7 +7,6 @@ export const dynamic = 'force-dynamic'
 export async function GET () {
     try {
         const recipes = await sql`SELECT * from recipes;`
-        console.log(recipes)
         return NextResponse.json({recipes}, {status:200})
     } catch(error) {
 

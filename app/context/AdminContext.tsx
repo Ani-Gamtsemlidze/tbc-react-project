@@ -6,19 +6,18 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { UserProfile, useUser } from "@auth0/nextjs-auth0/client";
 import { filterProducts, getUser } from "../../user-api";
 import { SelectChangeEvent } from "@mui/material";
 
-// Define the UserContext type
 interface UserContextProps {
-  user: any;
+  user: UserProfile | undefined;
   isAdmin: boolean;
   isLoading: boolean;
   userdata: any;
-  handleChange: any;
-  filteredData: any;
-  price: string | number;
+  handleChange: (event: SelectChangeEvent<string>) => Promise<void>;
+  filteredData: string[];
+  price: any;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -27,7 +26,7 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
   const { user, isLoading } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
   const [userdata, setUserData] = useState<any[]>([]);
-  const [price, setPrice] = React.useState<string | number>("");
+  const [price, setPrice] = React.useState<any>("");
 
   const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
@@ -56,7 +55,6 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
 
     const products = await filterProducts(filter1, filter2);
     setFilteredData(products);
-    console.log(products, "FRONTPRODUCTS");
   };
 
   const fetchUser = async (userId: string) => {

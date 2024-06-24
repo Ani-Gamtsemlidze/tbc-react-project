@@ -2,22 +2,25 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import AvatarUploadPage from "../avatar/page";
 import { useTranslations } from "next-intl";
+import { AvatarUploadPage } from "../avatar/page";
 
 export interface User {
   firstname?: string;
   lastname?: string;
   email?: string;
   nickname?: string;
-  picture?: any;
+  picture?: string;
 }
 
-export default function UserInfo({ userData }: any) {
+interface UserInfoProps {
+  userData: User[];
+}
+
+export default function UserInfo({ userData }: UserInfoProps) {
   const t = useTranslations("Profile");
   const [isUpload, setIsUpload] = useState(false);
   const [user, setUser] = useState(userData[0] || {});
-  console.log(userData[0]);
 
   useEffect(() => {
     setUser(userData[0] || {});
@@ -34,13 +37,15 @@ export default function UserInfo({ userData }: any) {
           onClick={handleUploadPicture}
           className="relative mx-auto w-36 rounded-full"
         >
-          <Image
-            src={user?.picture}
-            className="rounded-full object-cover  h-40 max-w-40"
-            width={400}
-            height={400}
-            alt="image"
-          />
+          {user?.picture && (
+            <Image
+              src={user.picture}
+              className="rounded-full object-cover  h-40 max-w-40"
+              width={400}
+              height={400}
+              alt="image"
+            />
+          )}
           <div className="absolute cursor-pointer rounded-full top-0 left-0 inset-0 w-40 h-40 z-50 flex justify-center items-center bg-[rgb(3,92,65)] bg-opacity-40   opacity-0 transition-opacity duration-300 hover:opacity-100">
             <FaCloudUploadAlt className="text-white dark:text-darkTextColor w-9 h-9" />
           </div>

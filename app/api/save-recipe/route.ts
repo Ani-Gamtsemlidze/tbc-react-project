@@ -4,7 +4,7 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 export const revalidate = 0;
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   const {
@@ -54,7 +54,6 @@ export async function POST(request: Request) {
     const successMessage = "Recipe created successfully";
     return NextResponse.json({ recipes, successMessage }, { status: 200 });
   } catch (error) {
-    console.log(error, "errrrr");
     return NextResponse.json({ error }, { status: 500 });
   }
 }

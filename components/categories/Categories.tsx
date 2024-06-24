@@ -30,7 +30,6 @@ export default function Categories() {
   const fetchCategories = async () => {
     try {
       const recipes = await getCategories();
-      console.log(recipes);
       setCategoryData(recipes);
     } catch (error) {
       console.error("Error fetching users:", error);

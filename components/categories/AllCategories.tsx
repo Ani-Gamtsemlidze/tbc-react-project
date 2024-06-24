@@ -4,8 +4,13 @@ import { getAllCategories } from "../../user-api";
 import Link from "next/link";
 import { inter } from "../../app/fonts";
 
+interface Category {
+  id: string;
+  name: string;
+}
+
 export default function AllCategories() {
-  const [allCategories, setAllCategories] = useState([]);
+  const [allCategories, setAllCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     fetchAllCategories();
@@ -22,7 +27,7 @@ export default function AllCategories() {
 
   return (
     <div className="flex flex-col justify-star mt-2">
-      {allCategories.map((category: any) => (
+      {allCategories.map((category) => (
         <Link
           href={`/recipes/category/${category.name}`}
           key={category.id}

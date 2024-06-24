@@ -22,7 +22,11 @@ export interface ProductData {
   images: string[];
 }
 
-export default function AddRecipe({ handleDropDown }: any) {
+export default function AddRecipe({
+  handleDropDown,
+}: {
+  handleDropDown: () => void;
+}) {
   const [allCategories, setAllCategories] = useState([]);
   const [recipeImages, setRecipeImages] = useState<string[]>([]);
 
@@ -39,7 +43,7 @@ export default function AddRecipe({ handleDropDown }: any) {
     }
   };
 
-  const { user }: any = useUser();
+  const { user } = useUser();
 
   const handleSubmit = async (
     values: ProductData,
@@ -66,7 +70,7 @@ export default function AddRecipe({ handleDropDown }: any) {
             ingredients,
             price,
             nutrients,
-            sub: user.sub,
+            sub: user?.sub,
             images: recipeImages,
           }),
         }
@@ -76,8 +80,7 @@ export default function AddRecipe({ handleDropDown }: any) {
         throw new Error("Failed to create recipe");
       }
 
-      const data = await response.json();
-      console.log("Recipe saved successfully:", data);
+      await response.json();
     } catch (error) {
       console.error("Error creating recipe:", error);
       setErrors({ submit: "Failed to save recipe. Please try again." });
@@ -87,7 +90,7 @@ export default function AddRecipe({ handleDropDown }: any) {
   };
 
   const handleImageUpload = (urls: string[]) => {
-    setRecipeImages(urls); // Update recipeImages state with uploaded image URLs
+    setRecipeImages(urls);
   };
 
   return (

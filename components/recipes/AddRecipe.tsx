@@ -5,8 +5,6 @@ import { IoMdClose } from "react-icons/io";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import { FormikErrors } from "formik";
-
 import RecipeForm from "./RecipeForm";
 import { toast } from "react-toastify";
 
@@ -26,13 +24,11 @@ export interface RecipeData {
 }
 
 export default function AddRecipe({ handleDropDown }: any) {
-  const { user }: any = useUser();
+  const { user } = useUser();
   const handleSubmit = async (
     values: RecipeData,
-    setErrors: (errors: FormikErrors<RecipeData>) => void,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
-    console.log(values);
     const {
       title,
       introduction,
@@ -46,7 +42,6 @@ export default function AddRecipe({ handleDropDown }: any) {
       storage_instructions,
       images,
     } = values;
-    console.log(setErrors);
 
     try {
       const response = await fetch(`${process.env.BASE_URL}/api/save-recipe`, {
@@ -66,11 +61,10 @@ export default function AddRecipe({ handleDropDown }: any) {
           tips_and_variations,
           nutritional_information,
           storage_instructions,
-          sub: user.sub,
+          sub: user?.sub,
           images,
         }),
       });
-      console.log(response, "responseresponseresponse");
 
       if (!response.ok) {
         throw new Error("Failed to create recipe");
