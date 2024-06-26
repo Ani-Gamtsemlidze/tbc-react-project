@@ -1,13 +1,12 @@
 "use client";
 
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState, ChangeEvent, useEffect } from "react";
 import { User } from "./UserInfo";
 import { editUserInfo } from "../../user-api";
 import { useTranslations } from "next-intl";
 
-export default function ProfileForm({ userData }: { userData: User[] }) {
-  const { user } = useUser();
+export default function ProfileForm({ userData, userId }: any) {
+  // const { user } = useUser();
   const t = useTranslations("Profile");
   const userInfo = userData[0] as User;
   const [editedUser, setEditedUser] = useState<User>(userInfo || {});
@@ -20,11 +19,11 @@ export default function ProfileForm({ userData }: { userData: User[] }) {
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!user || !user.sub) {
+      if (!userId) {
         throw new Error("User or user.sub is undefined");
       }
 
-      await editUserInfo(user.sub, editedUser);
+      await editUserInfo(userId, editedUser);
       setIsEditing(false);
     } catch (error) {
       console.error("Error editing user:", error);

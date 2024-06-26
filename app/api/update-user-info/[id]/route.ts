@@ -13,6 +13,7 @@ export async function PUT(request: NextRequest) {
     if (!email || !lastname) {
       throw new Error("Name or email is missing in the request body.");
     }
+    console.log(id)
 
     // Update user info in the database
  await sql`

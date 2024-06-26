@@ -31,7 +31,7 @@ export default async function Page() {
         {t("myRecipes")}
       </h1>
 
-      <UserRecipe data={userRecipes} />
+      <UserRecipe data={userRecipes} userId={user?.sub} />
     </div>
   );
 }

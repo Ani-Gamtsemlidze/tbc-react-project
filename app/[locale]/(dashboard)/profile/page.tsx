@@ -29,7 +29,7 @@ export default async function Profile({ params }: Params) {
         <div className="flex max:sm:justify-center  w-96 p-4 gap-12 max-sm:w-full max-sm:p-0 max-sm:mb-6 ">
           <UserInfo userData={userData} />
         </div>
-        <ProfileForm userData={userData} />
+        <ProfileForm userData={userData} userId={user?.sub} />
       </div>
     </section>
   );

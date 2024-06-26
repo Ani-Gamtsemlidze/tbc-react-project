@@ -8,7 +8,6 @@ import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin3Fill } from "react-icons/ri";
 import EditRecipeForm from "./EditRecipeForm";
 import { deleteUserRecipe } from "../../user-api";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 import {
   Menu,
@@ -29,12 +28,12 @@ export interface Recipe {
   title: string;
 }
 
-export default function UserRecipe({ data }: any) {
+export default function UserRecipe({ data, userId }: any) {
   const t = useTranslations("UserRecipe");
   const { handleDropDown } = useDropdown();
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
   const [showEditForm, setShowEditForm] = useState(false);
-  const { user } = useUser();
+  // const { user } = useUser();
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -42,7 +41,7 @@ export default function UserRecipe({ data }: any) {
   ) => {
     e.preventDefault();
     handleDropDown();
-    await deleteUserRecipe(id, user?.sub as string);
+    await deleteUserRecipe(id, userId as string);
   };
 
   const handleEditFormOpen = (
