@@ -48,7 +48,7 @@ export default function ProductsCategory({ categoryName }: CategoryProps) {
       >
         {decodedCategory} Products
       </h1>
-      <div className="max-w-[1200px] max-lg:block mx-auto flex justify-center">
+      <div className="max-w-[1300px] max-lg:block mx-auto flex justify-center">
         <ProductsFeatures productsData={allProducts} />
         <div className="ml-6">
           <ProductsCard data={data} />

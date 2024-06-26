@@ -39,18 +39,6 @@ const SideBar = () => {
             <LocalSwitcher />
             <ThemeSwitch />
           </li>
-
-          {/* <li className="relative flex cursor-pointer space-x-2 rounded-md py-4 px-10 text-gray-300 hover:bg-slate-600">
-            <div className="ml-4 border-l border-l-slate-600 pl-2">
-              {user ? (
-                <div ref={popupRef}>
-                  <HeaderProfile />
-                </div>
-              ) : (
-                <LoginBtn />
-              )}
-            </div>
-          </li> */}
         </ul>
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function EditProductForm({ productId }: { productId: number }) {
         setEditedProduct(singleProduct[0]);
       }
     } catch (error) {
-      console.error("Error fetching recipe:", error);
+      console.error("Error fetching Product:", error);
     }
   };
 
@@ -70,14 +70,14 @@ export default function EditProductForm({ productId }: { productId: number }) {
         className="relative border ml-12 border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
       >
         <h1 className="mb-6 text-xl font-semibold lg:text-2xl">
-          Edit Recipe: {editedProduct.title}
+          Edit Product: {editedProduct.title}
         </h1>
 
         <div>
           <label> Title </label>
           <input
             type="text"
-            placeholder="Recipe Title"
+            placeholder="Product Title"
             value={editedProduct.title}
             className={`mt-2 pl-4 h-12 w-full rounded-md bg-gray-100 px-31 ${
               !isEditing ? " text-gray-500" : "text-black"

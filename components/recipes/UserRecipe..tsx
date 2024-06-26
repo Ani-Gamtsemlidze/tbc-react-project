@@ -57,7 +57,7 @@ export default function UserRecipe({ data }: any) {
   };
 
   return (
-    <div className=" flex-wrap  max-w-[900px]  flex justify-center">
+    <div className="max-lg:flex-wrap max-lg:flex-col  flex justify-center">
       <UserFeatures />
       {data && data.length > 0 ? (
         data.map((recipe: Recipe) => (

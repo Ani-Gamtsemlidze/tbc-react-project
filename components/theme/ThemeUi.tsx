@@ -31,9 +31,9 @@ export default function ThemeUi({
           <Menu as="div" className="relative">
             <MenuButton className="inline-flex items-center gap-2 rounded-md text-sm font-semibold text-black dark:text-darkTextMain">
               {isDarkTheme ? (
-                <FiMoon className="text-2xl mt-2" />
+                <FiMoon className="text-2xl mt-2 max-sm:mt-3" />
               ) : (
-                <FiSun className="text-2xl mt-2" />
+                <FiSun className="text-2xl mt-2 max-sm:mt-3" />
               )}
             </MenuButton>
             <Transition

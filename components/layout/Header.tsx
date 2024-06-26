@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import LocalSwitcher from "../langSwitcher/LocalSwitcher";
 import ThemeSwitch from "../theme/ThemeSwitch";
@@ -10,6 +10,8 @@ import ItemBucket from "../products/ItemBucket";
 import HeaderProfile from "../profile/HeaderProfile";
 import { Logo } from "./Logo";
 import { SideBar } from "./SideBar";
+import { AiOutlineMenuFold } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
 
 export default function Header() {
   const { user } = useUser();
@@ -19,6 +21,17 @@ export default function Header() {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+
+  useEffect(() => {
+    if (showSidebar) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [showSidebar]);
 
   return (
     <>
@@ -59,7 +72,7 @@ export default function Header() {
         className="lg:hidden fixed top-3 right-4 z-50 p-3 bg-greenColor rounded-full text-white"
         onClick={toggleSidebar}
       >
-        {showSidebar ? "Close" : "Menu"}
+        {showSidebar ? <IoMdClose /> : <AiOutlineMenuFold />}
       </button>
     </>
   );
